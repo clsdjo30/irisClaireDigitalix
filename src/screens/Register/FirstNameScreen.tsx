@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View, ScrollView, SafeAreaView } from 'react-native';
-import Fontawesome from 'react-native-vector-icons';
+import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
+import { Icon } from '@rneui/base'
 import { StackScreenProps } from '@react-navigation/stack';
 import { Form, FormItem } from 'react-native-form-component';
 import { useUserStore } from '../../utils/hooks/useUserStore';
@@ -33,9 +33,13 @@ const FirstNameScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
             style={styles.control}
             textInputStyle={styles.input}
             children={
-              <View>
-                
-              </View>
+              <Icon
+                name='user'
+                type='font-awesome'
+                size={28}
+                color= {colors.palette.lightgold}
+                style={styles.icon}
+              />
             }
           />
 
@@ -51,7 +55,7 @@ const styles = StyleSheet.create({
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: colors.palette.purple300,
+    backgroundColor: colors.palette.purple600,
   },
   controls: {
     flexDirection: 'column',
@@ -71,7 +75,6 @@ const styles = StyleSheet.create({
   },
   icon: {
     marginRight: 20,
-    color: colors.palette.lightgold,
   },
   error: {
     marginTop: 20,

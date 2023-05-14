@@ -16,7 +16,7 @@ const StepOneScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
           Notre Tarot a été créé pour vous apporter les réponses à toutes vos questions et faire disparaître le doute de votre vie.
         </Text>
         <Text style={styles.secondContent}>
-          Soyez prêt à entendre la vérité sur votre avenir
+          Soyez prêt à entendre la vérité sur votre avenir super
         </Text>
         <Text style={styles.thirdContent}>
           Ici ou par la , pas de demi-mesure en matière de divination !

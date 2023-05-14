@@ -20,9 +20,13 @@ export default {
     "icon": "./assets/icons/irisClaireLogo.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash/splash-all-claire-logo.png",
+      "image": "./assets/splash/Splash002.png",
       "resizeMode": "cover"
     },
+    "platforms": [
+      "ios",
+      "android",
+    ],
     "assetBundlePatterns": [
       "**/*"
     ],
@@ -30,6 +34,7 @@ export default {
       "supportsTablet": true
     },
     "android": {
+      "package": "com.digitalix.irisclaire",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
