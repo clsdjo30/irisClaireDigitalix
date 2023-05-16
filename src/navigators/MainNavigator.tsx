@@ -13,11 +13,12 @@ import { colors } from '../theme';
 
 import HomeScreen from '../screens/Main/HomeScreen';
 import DayDrawScreen from '../screens/Main/DayDraw/DayDrawScreen';
-import TendanceResultScreen from '../screens/Main/TendanceResultScreen';
+import TendanceResultScreen from '../screens/Main/DayDraw/TendanceResultScreen';
 import ProfilScreen from '../screens/Main/Profil/ProfilScreen';
 // import IrisCreditScreen from '../screens/Main/IrisPage/IrisCreditScreen';
-// import YesDrawScreen from '../screens/Main/YesDraw/YesDrawScreen';
-// import ChooseCardScreen from '../screens/Main/YesDraw/ChooseCardScreen';
+import DomainScreen from '../screens/Main/YesDraw/DomainSreen';
+import YesDrawScreen from '../screens/Main/YesDraw/YesDrawScreen';
+import DrawOneCardScreen from '../screens/Main/YesDraw/DrawOneCardScreen';
 // import CrossDrawScreen from '../screens/Main/CrossDraw/CrossDrawScreen';
 
 const TendancceStack = createNativeStackNavigator();
@@ -60,21 +61,25 @@ function ProfilStackScreen() {
 
 
 // // NAVIGATION FOR YES DRAW
-// function YesStackScreen() {
-//   return (
-//     <YesStack.Navigator>
-//       <YesStack.Screen name="AskQuestion"
-//         component={YesDrawScreen}
-//         options={{ 
-//           headerShown: false, 
-//           }} />
-//       <YesStack.Screen name="ChooseCard"
-//         component={ChooseCardScreen}
-//         options={{ headerShown: false, }} />
+function YesStackScreen() {
+  return (
+    <YesStack.Navigator>
+      <YesStack.Screen name="Domain"
+        component={DomainScreen}
+        options={{ headerShown: false, }} />
+  
+      <YesStack.Screen name="AskQuestion"
+        component={YesDrawScreen}
+        options={{ 
+          headerShown: false, 
+          }} />
+      <YesStack.Screen name="DrawOneCard"
+        component={DrawOneCardScreen}
+        options={{ headerShown: false, }} />
 
-//     </YesStack.Navigator>
-//   )
-// }
+    </YesStack.Navigator>
+  )
+}
 
 // // NAVIGATION FOR CROSS DRAW
 // function CrossStackScreen() {
@@ -106,10 +111,10 @@ function HomeStackScreen() {
         component={HomeScreen}
         options={{ headerShown: false, }} />
 
-      {/* <HomeStack.Screen name="YesDraw"
+      <HomeStack.Screen name="YesDraw"
         component={YesStackScreen}
         options={{ headerShown: false, }} />
-      <HomeStack.Screen name="CrossDraw"
+      {/* <HomeStack.Screen name="CrossDraw"
         component={CrossStackScreen}
         options={{ headerShown: false, }} /> */}
     </HomeStack.Navigator>

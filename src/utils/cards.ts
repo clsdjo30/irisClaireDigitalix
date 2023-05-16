@@ -1,4 +1,5 @@
 interface Card {
+    id: number;
     name: string;
     pseudo: string;
     backImageUrl: any;
@@ -8,6 +9,7 @@ interface Card {
   
   const CARD_DECK = [
     {
+      id: 1,
       name: 'le bateleur',
       pseudo: "l'Iris de Magie",
       backImageUrl: require('../../assets/images/cards/back/Claire_Back_Card.png'),
@@ -19,6 +21,7 @@ interface Card {
       ]
     },
     {
+      id: 2,
       name: 'la papesse',
       pseudo: "L'Iris de Sagesse",
       backImageUrl: require('../../assets/images/cards/back/Claire_Back_Card.png'),
@@ -30,6 +33,7 @@ interface Card {
       ]
     },
     {
+      id: 3,
       name: 'l imperatrice',
       pseudo: "L'Iris de Fertilité",
       backImageUrl: require('../../assets/images/cards/back/Claire_Back_Card.png'),
@@ -41,6 +45,7 @@ interface Card {
       ]
     },
     {
+      id: 4,
       name: 'l empereur',
       pseudo: "l'Iris de Stabilité",
       backImageUrl: require('../../assets/images/cards/back/Claire_Back_Card.png'),
@@ -52,6 +57,7 @@ interface Card {
       ]
   },
   {
+      id: 5,
       name: 'le pape',
       pseudo: "l'Iris du Sage Divin",
       backImageUrl: require('../../assets/images/cards/back/Claire_Back_Card.png'),
@@ -63,6 +69,7 @@ interface Card {
       ]
   },
   {
+      id: 6,
       name: 'l amoureux',
       pseudo: "l'Iris de Tentation",
       backImageUrl: require('../../assets/images/cards/back/Claire_Back_Card.png'),
@@ -74,6 +81,7 @@ interface Card {
       ]
   },
   {
+      id: 7,
       name: 'le chariot',
       pseudo: "l'Iris de Succès",
       backImageUrl: require('../../assets/images/cards/back/Claire_Back_Card.png'),
@@ -85,6 +93,7 @@ interface Card {
       ]
   },
   {
+      id: 8,
       name: 'la justice',
       pseudo: "l'Iris de Feu",
       backImageUrl: require('../../assets/images/cards/back/Claire_Back_Card.png'),
@@ -96,6 +105,7 @@ interface Card {
       ]
   },
   {
+      id: 9,
       name: 'l hermite',
       pseudo: "l'Iris d'Introspection",
       backImageUrl: require('../../assets/images/cards/back/Claire_Back_Card.png'),
@@ -107,6 +117,7 @@ interface Card {
       ]
   },
   {
+      id: 10,
       name: 'la roue de la fortune',
       pseudo: "l'Iris de Destinée",
       backImageUrl: require('../../assets/images/cards/back/Claire_Back_Card.png'),
@@ -118,6 +129,7 @@ interface Card {
       ]
   },
   {
+      id: 11,
       name: 'la force',
       pseudo: "l'Iris de Volonté",
       backImageUrl: require('../../assets/images/cards/back/Claire_Back_Card.png'),
@@ -129,6 +141,7 @@ interface Card {
       ]
   },
   {
+      id: 12,
       name: 'le pendu',
       pseudo: "l'Iris de Patience",
       backImageUrl: require('../../assets/images/cards/back/Claire_Back_Card.png'),
@@ -140,6 +153,7 @@ interface Card {
       ]
   },
   {
+      id: 13,
       name: 'l arcane sans nom',
       pseudo: "l'Iris Big Bang",
       backImageUrl: require('../../assets/images/cards/back/Claire_Back_Card.png'),
@@ -151,6 +165,7 @@ interface Card {
       ]
   },
   {
+      id: 14,
       name: 'la temperance',
       pseudo: "l'Iris d'Equilibre",
       backImageUrl: require('../../assets/images/cards/back/Claire_Back_Card.png'),
@@ -162,6 +177,7 @@ interface Card {
       ]
   },
   {
+      id: 15,
       name: 'le diable',
       pseudo: "l'Iris de Succube",
       backImageUrl: require('../../assets/images/cards/back/Claire_Back_Card.png'),
@@ -173,6 +189,7 @@ interface Card {
       ]
   },
   {
+      id: 16,
       name: 'la maison dieu',
       pseudo: "l'Iris de la Tour de Babel",
       backImageUrl: require('../../assets/images/cards/back/Claire_Back_Card.png'),
@@ -184,6 +201,7 @@ interface Card {
       ]
   },
   {
+      id: 17,
       name: 'l etoile',
       pseudo: "l'Iris de l'Espoir",
       backImageUrl: require('../../assets/images/cards/back/Claire_Back_Card.png'),
@@ -195,6 +213,7 @@ interface Card {
       ]
   },
   {
+      id: 18,
       name: 'la lune',
       pseudo: "l'Iris des Intuitions",
       backImageUrl: require('../../assets/images/cards/back/Claire_Back_Card.png'),
@@ -206,6 +225,7 @@ interface Card {
       ]
   },
   {
+      id: 19,
       name: 'le soleil',
       pseudo: "l'Iris de Joie",
       backImageUrl: require('../../assets/images/cards/back/Claire_Back_Card.png'),
@@ -217,6 +237,7 @@ interface Card {
       ]
   },
   {
+      id: 20,
       name: 'le jugement',
       pseudo: "l'Iris de Vérité",
       backImageUrl: require('../../assets/images/cards/back/Claire_Back_Card.png'),
@@ -228,6 +249,7 @@ interface Card {
       ]
   },
   {
+      id: 21,
       name: 'le monde',
       pseudo: "l'Iris de PLénitude",
       backImageUrl: require('../../assets/images/cards/back/Claire_Back_Card.png'),
@@ -239,6 +261,7 @@ interface Card {
       ]
   },
   {
+      id: 22,
       name: 'le mat',
       pseudo: "l'Iris de l'Insouciance",
       backImageUrl: require('../../assets/images/cards/back/Claire_Back_Card.png'),

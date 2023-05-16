@@ -41,7 +41,6 @@ export default function RootNavigation() {
         // Keep the splash screen visible while we fetch resources
          await SplashScreen.preventAutoHideAsync();
         // Pre-load fonts, make any API calls you need to do here
-       
 
         await Font.loadAsync({
           mulishExtraLight,
@@ -72,6 +71,7 @@ export default function RootNavigation() {
     }
 
     prepare();
+  
   }, []);
 
   const onLayoutRootView = useCallback(async () => {
@@ -88,6 +88,8 @@ export default function RootNavigation() {
   if (!IsReady) {
     return null;
   }
+ 
 
+      
   return user ? <UserStack /> : <AuthStack />;
 }

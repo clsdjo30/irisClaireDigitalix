@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { getAuth, signOut } from 'firebase/auth';
 import { Button, Icon, Image } from '@rneui/themed';
+import { getAuth, signOut } from 'firebase/auth';
 import { useUserStore } from '../../utils/hooks/useUserStore';
+import { useUserInformation } from '../../utils/hooks/useUserInformations'; 
 import { colors } from '../../theme';
 import { StackScreenProps } from '@react-navigation/stack';
 import { LinearGradient } from 'expo-linear-gradient'
@@ -17,8 +18,11 @@ const star = require('../../../assets/icons/sparkling-gold.png')
 
 
 const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
+ 
+
+  useUserInformation();
+
   const [user, setUser] = useUserStore();
-  console.log(user)
 
   function goToYesDraw() {
     navigation.navigate('YesDraw');
@@ -60,9 +64,7 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
       <View style={styles.centerBlock}>
         <View style={styles.contentBlock}>
           {/* First Card */}
-          <LinearGradient
-            // Card Linear Gradient
-            colors={['transparent', colors.palette.purple400]}
+          <View
             style={styles.cardStyle}>
 
             <View style={styles.cardRow}>
@@ -79,19 +81,17 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
               </View>
             </View>
 
-          </LinearGradient>
+          </View>
           {/* Second Card */}
 
-          <LinearGradient
-            // Card Linear Gradient
-            colors={['transparent', colors.palette.purple400]}
+          <View
             style={styles.cardStyle}>
             <View style={styles.cardRow}>
               <View>
                 <Image source={secondQuestionEye} style={styles.imageContainerStyle}></Image>
               </View>
               <View style={styles.textView}>
-                <Text style={styles.cardTitle}>Poser une nouvelle question Détaillée</Text>
+                <Text style={styles.cardTitle}>Poser une question détaillée</Text>
               </View>
               <View style={styles.iconContainer}>
                 <TouchableOpacity style={styles.iconPosition} >
@@ -99,12 +99,10 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                 </TouchableOpacity>
               </View>
             </View>
-          </LinearGradient>
+          </View>
 
           {/* Third Card */}
-          <LinearGradient
-            // Card Linear Gradient
-            colors={['transparent', colors.palette.purple400]}
+          <View
             style={styles.cardStyle}>
             <View style={styles.cardRow}>
               <View>
@@ -119,7 +117,7 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                 </TouchableOpacity>
               </View>
             </View>
-          </LinearGradient>
+          </View>
         </View>
       </View>
       {/* START 3 ACTIONS CARD */}
@@ -150,12 +148,12 @@ const styles = StyleSheet.create({
   cardStyle: {
     width: '90%',
     height: '25%',
-    backgroundColor: colors.palette.purple100,
+    backgroundColor: colors.palette.purple600,
     borderRadius: 20,
-    borderBottomWidth: 1,
-    borderLeftWidth: 1,
-    borderLeftColor: colors.palette.pink200,
-    borderBottomColor: colors.palette.pink200,
+    borderBottomWidth: 0.4,
+    borderLeftWidth: 0.2,
+    borderLeftColor: colors.palette.ivory,
+    borderBottomColor: colors.palette.ivory,
     elevation: 10,
   },
   title: {
@@ -189,11 +187,11 @@ const styles = StyleSheet.create({
   cardTitle: {
     fontSize: 16,
     fontFamily: 'oswaldSemiBold',
-    color: colors.palette.purple600,
+    color: colors.palette.ivory,
     textAlign: 'center',
   },
   iconContainer: {
-    width: "30%",
+    width: "10%",
     height: '90%',
     borderRadius: 50,
     justifyContent: 'flex-end',
@@ -204,17 +202,17 @@ const styles = StyleSheet.create({
     height: 40,
   },
   iconPosition: {
-    width: 40,
-    height: 40,
+    width: 30,
+    height: 30,
     backgroundColor: colors.palette.pink500,
     borderRadius: 50,
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 20,
+    marginBottom: 10,
   },
   iconImage: {
-    width: 25,
-    height: 25,
+    width: 20,
+    height: 20,
   },
   headerImage: {
     width: 20,

@@ -7,9 +7,9 @@ import {
     TouchableOpacity
 } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
-import { colors } from '../../theme';
-import { useDaydrawStore } from '../../utils/hooks/useDayDrawStore';
-import CARD_DECK from '../../utils/cards';
+import { colors } from '../../../theme';
+import { useDaydrawStore } from '../../../utils/hooks/useDayDrawStore';
+import CARD_DECK from '../../../utils/cards';
 
 
 const TendanceResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
@@ -53,14 +53,14 @@ const TendanceResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) =
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: colors.tint,
+        backgroundColor: colors.palette.purple600,
         alignItems: 'center',
         justifyContent: 'center',
     },
     tendanceScreen: {
         width: "100%",
         height: "100%",
-        backgroundColor: colors.palette.purple500,
+        backgroundColor: colors.palette.purple600,
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 10,
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
         width: 170,
         height: 300,
         borderRadius: 3,
-        elevation: 10,
+        elevation: 5,
         shadowColor: colors.palette.ivory
     },
     fortuneTeller: {

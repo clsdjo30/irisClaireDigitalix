@@ -32,11 +32,11 @@ const DayDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     const card = CARD_DECK[randomCard];
     setDayDraw({ ...daydraw, daytendance: card.tendance[0], daycard: card.frontImageUrl, isdraw: true })
     navigation.navigate('TendanceResult')
+    console.log(daydraw)
   };
 
 
 
-  console.log(daydraw)
 
   return (
 
@@ -63,7 +63,7 @@ const DayDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.palette.purple300,
+    backgroundColor: colors.palette.purple600,
     alignItems: 'center',
     justifyContent: 'center',
   },
