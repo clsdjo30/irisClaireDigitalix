@@ -17,7 +17,7 @@ export default {
     "slug": "irisclairedigitalix",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icons/irisClaireLogo.png",
+    "icon": "./assets/icons/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash/Splash002.png",
@@ -36,12 +36,12 @@ export default {
     "android": {
       "package": "com.digitalix.irisclaire",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/icons/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/icons/favicon.png"
     }
   }
 }
