@@ -1,7 +1,6 @@
 import React, {  useCallback, useEffect, useState } from 'react';
 import { useAuthentication } from '../utils/hooks/useAuthentication';
 import 'react-native-gesture-handler';
-import * as SystemUI from 'expo-system-ui';
 import UserStack from './MainNavigator';
 import AuthStack from './WelcomeNavigator';
 import * as Font from 'expo-font';
@@ -42,8 +41,8 @@ export default function RootNavigation() {
         // Keep the splash screen visible while we fetch resources
          await SplashScreen.preventAutoHideAsync();
         // Pre-load fonts, make any API calls you need to do here
-        await SystemUI.getBackgroundColorAsync();
-        
+       
+
         await Font.loadAsync({
           mulishExtraLight,
           mulishLight,

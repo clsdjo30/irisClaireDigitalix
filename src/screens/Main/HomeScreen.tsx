@@ -9,7 +9,7 @@ import { LinearGradient } from 'expo-linear-gradient'
 
 const auth = getAuth();
 
-const rightArrow = require('../../../assets/fonts/caretRight.png');
+const rightArrow = require('../../../assets/icons/caretRight.png');
 const oneQuestionEye = require('../../../assets/images/tabsImage/006.png');
 const secondQuestionEye = require('../../../assets/images/tabsImage/008.png');
 const thirdQuestionEye = require('../../../assets/images/tabsImage/010.png');
@@ -180,14 +180,14 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   textView: {
-    width: '60%',
+    width: '50%',
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: 5,
   },
   cardTitle: {
-    fontSize: 14,
+    fontSize: 16,
     fontFamily: 'oswaldSemiBold',
     color: colors.palette.purple600,
     textAlign: 'center',
@@ -200,8 +200,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   imageContainerStyle: {
-    width: 70,
-    height: 70,
+    width: 40,
+    height: 40,
   },
   iconPosition: {
     width: 40,
