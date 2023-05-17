@@ -19,6 +19,7 @@ import ProfilScreen from '../screens/Main/Profil/ProfilScreen';
 import DomainScreen from '../screens/Main/YesDraw/DomainSreen';
 import YesDrawScreen from '../screens/Main/YesDraw/YesDrawScreen';
 import DrawOneCardScreen from '../screens/Main/YesDraw/DrawOneCardScreen';
+import YesDrawResultScreen from '../screens/Main/YesDraw/YesDrawResultScreen';
 // import CrossDrawScreen from '../screens/Main/CrossDraw/CrossDrawScreen';
 
 const TendancceStack = createNativeStackNavigator();
@@ -61,9 +62,12 @@ function ProfilStackScreen() {
 
 
 // // NAVIGATION FOR YES DRAW
+
 function YesStackScreen() {
   return (
-    <YesStack.Navigator>
+    <YesStack.Navigator
+    initialRouteName='Domain'
+    >
       <YesStack.Screen name="Domain"
         component={DomainScreen}
         options={{ headerShown: false, }} />
@@ -76,6 +80,10 @@ function YesStackScreen() {
       <YesStack.Screen name="DrawOneCard"
         component={DrawOneCardScreen}
         options={{ headerShown: false, }} />
+      <YesStack.Screen name="YesDrawResult"
+        component={YesDrawResultScreen}
+        options={{ headerShown: false, }} />
+
 
     </YesStack.Navigator>
   )

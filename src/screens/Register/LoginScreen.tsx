@@ -88,7 +88,7 @@ const SignInScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.palette.purple300,
+    backgroundColor: colors.palette.purple600,
     alignItems: 'center',
     justifyContent: 'center',
   },

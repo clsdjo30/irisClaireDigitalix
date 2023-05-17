@@ -6,7 +6,7 @@ import { useUserStore } from '../../utils/hooks/useUserStore';
 import { useUserInformation } from '../../utils/hooks/useUserInformations'; 
 import { colors } from '../../theme';
 import { StackScreenProps } from '@react-navigation/stack';
-import { LinearGradient } from 'expo-linear-gradient'
+import { LinearGradient } from 'expo-linear-gradient';
 
 const auth = getAuth();
 

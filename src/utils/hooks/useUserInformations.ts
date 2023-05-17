@@ -18,6 +18,7 @@ export function useUserInformation() {
 
   const fetchUser = async () => {
     const db = getFirestore();
+    const docRef = collection(db, "users");
     const querySnapshot = await getDocs(collection(db, "users"));
     querySnapshot.forEach((doc) => {
       // console.log(doc.id, " => ", doc.data());
