@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react'
 import {
     StyleSheet,
@@ -16,39 +15,35 @@ import { colors } from '../../../theme';
 import { useQuestionStore } from '../../../utils/hooks/useQuestionStore';
 import { StackScreenProps } from '@react-navigation/stack';
 import FlipCard from 'react-native-flip-card';
-import { counterEvent } from 'react-native/Libraries/Performance/Systrace';
 
 
+// Dimensions de l'écran
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = SCREEN_WIDTH * 1.5;
 const SCREEN_SCALE = Dimensions.get('window').scale;
-const SCREEN_FONT_SCALE = SCREEN_SCALE * 0.5;
+const SCREEN_FONT_SCALE = SCREEN_SCALE * 0.
 
 const DrawOneCardScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     const [value, setValue] = useQuestionStore();
     const [modalVisible, setModalVisible] = useState(false);
-    const [credit, setCredit] = useState(1);
+    const [credit, setCredit] = useState(2);
+    const [clickable, setClickable] = useState(true);
 
-    function validateWithCredit() {
+    function sendQuestion() {
         // TODO implementer la logique de validation avec credit
-        if (credit > 0) {
+        if (credit > 0 
+            && value.question != null
+            && value.choosecardname != null
+            && value.choosecardnumber != null
+            && value.choosecardpseuso != null
+            ) { 
             setCredit(credit - 1)
-            goResult()
+            navigation.navigate('YesDrawResult')
         }
         else {
-            Alert.alert(
-                "Pas assez de crédit",
-                "Vous n'avez plus de crédit pour tirer une carte",
-                [
-                    { text: "OK", onPress: () => console.log("OK Pressed") }
-                ]
-            );
+            goBuyCredit()
         }
         
-    }
-    
-    function goResult() {
-        navigation.navigate('YesDrawResult')
     }
 
     function goBuyCredit() {
@@ -60,7 +55,6 @@ const DrawOneCardScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
        })
     }
 
-    console.log(value)
     return (
         <LinearGradient
             // Card Linear Gradient
@@ -73,15 +67,24 @@ const DrawOneCardScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                     return (
                         <View key={index} style={styles.cardContainer}>
                             <FlipCard
-                                friction={10}
-                                perspective={10}
-                                flipHorizontal={false}
-                                flipVertical={true}
-                                clickable={true}
+                                friction={20}
+                                perspective={1000}
+                                flipHorizontal={true}
+                                flipVertical={false}
+                                flip={false}
+                                clickable={clickable}
                                 useNativeDriver={true}
-                                alignHeight={false}
-                                onFlipStart={() => { setValue({ ...value, choosecardname: item.name, choosecardpseuso: item.pseudo, choosecardnumber: item.id.toString() }) }}
-                                onFlipEnd={() => setModalVisible(true)}
+                                onFlipStart={() => { 
+                                    setValue({ ...value, 
+                                        choosecardname: item.name, 
+                                        choosecardpseuso: item.pseudo, 
+                                        choosecardnumber: item.id }),
+                                    setClickable(false)
+                                }}
+                                onFlipEnd={() => 
+                                    setTimeout(() => {
+                                    setModalVisible(true)}
+                                    , 800)}
                                 style={{ width: 60, height: 120, borderRadius: 10, zIndex: 10 }}
                             >
                                 <View style={{ width: 60, height: 120, borderRadius: 10, zIndex: 0 }}>
@@ -98,7 +101,8 @@ const DrawOneCardScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                     animationType="slide"
                     transparent={true}
                     visible={modalVisible}
-                    onRequestClose={goResult}>
+
+                    >
                     <View style={styles.centeredView}>
                         <View style={styles.modalView}>
                     {/* TODO implementer la logique de validation avec credit  */}
@@ -108,7 +112,7 @@ const DrawOneCardScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                             <Text style={styles.modalText}>Utilez 1 credit pour voir votre reponse</Text>
                             <Pressable
                                 style={[styles.button, styles.buttonClose]}
-                                onPress={goResult}>
+                                onPress={sendQuestion}>
                                 <Text style={styles.textStyle}>Voir votre résultat</Text>
                             </Pressable>
                             </>

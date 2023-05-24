@@ -1,5 +1,4 @@
-
-import React, { useRef } from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 import {
     StyleSheet,
     Image,
@@ -7,14 +6,15 @@ import {
     Pressable,
     Text,
     Dimensions,
+   
+
 } from 'react-native';
 import CARD_DECK from '../../../utils/cards';
 import { LinearGradient } from 'expo-linear-gradient';
 import { colors } from '../../../theme';
 import { useQuestionStore } from '../../../utils/hooks/useQuestionStore';
 import { StackScreenProps } from '@react-navigation/stack';
-
-
+import { useSimpleQuestion } from '../../../utils/hooks/useSimpleQuestion';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = SCREEN_WIDTH * 1.5;
@@ -23,24 +23,48 @@ const SCREEN_FONT_SCALE = SCREEN_SCALE * 0.5;
 
 const YesDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     const [value, setValue] = useQuestionStore();
+    const userQuestion = value.question;
+    const cardNumber = value.choosecardnumber;
+    const cardName = value.choosecardname;
+    const [cardImage, setCardImage] = useState(null);
+   
+    //   useSimpleQuestion(userQuestion, cardNumber, cardName, 500);
 
-    console.log(value)
-    function revealCard() {
-        
-    }
+    // const  displayCardImage = (cardNumber: number| null) => {
+    //     if (cardNumber != null) {
+           
+    //         return setCardImage(CARD_DECK[cardNumber].frontImageUrl);
+    //     }
+    //     else {
+    //         return null;
+    //     }
+    //   }
 
-    console.log(value)
+     
+// console.log(displayCardImage(value.choosecardnumber))
+      console.log(value);
+      console.log(value.answer);
+      console.log(value.choosecardnumber);
+
+
+
+
     return (
         <LinearGradient
             // Card Linear Gradient
             colors={[colors.palette.purple600, colors.palette.purple500]}
             style={styles.container}>
 
+
             <View style={styles.deckContainer}>
                 <Text style={styles.contentTitle}>Resultat de la question</Text>
-                
-            </View>
 
+                {/* {displayCardImage != null && <Image source={} style={{ width: 60, height: 120, borderRadius: 10, }}>{value.choosecard}</Image>} */}
+                {/* {value.answer != null && <Text style={styles.contentTitle}>{value.answer}</Text>} */}
+
+
+
+            </View>
 
 
         </LinearGradient >
@@ -89,5 +113,25 @@ const styles = StyleSheet.create({
     },
     cardDraw: {
         transform: [{ scale: 2 }],
+    },
+    validationButton: {
+        width: '100%',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: 20,
+    },
+    button: {
+        width: '80%',
+        backgroundColor: "#CBA135",
+        marginTop: 10,
+        borderRadius: 16,
+    },
+    buttonText: {
+        textAlign: "center",
+        alignItems: "center",
+        paddingVertical: 10,
+        fontFamily: "oswaldMedium",
+        fontSize: 14,
+        color: colors.palette.ivory,
     },
 })
