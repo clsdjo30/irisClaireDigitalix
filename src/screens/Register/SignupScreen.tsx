@@ -2,12 +2,12 @@ import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input, CheckBox } from '@rneui/themed';
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
-import { getFirestore, setDoc, doc } from 'firebase/firestore';
+import { firestore, setDoc, doc, createUserWithEmailAndPassword, getAuth} from '../../config/firebaseConfig'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useUserStore } from '../../utils/hooks/useUserStore';
 import { StackScreenProps } from '@react-navigation/stack';
 import { colors } from '../../theme'
+
 
 const auth = getAuth()
 
@@ -61,8 +61,8 @@ const SignInScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 const userElement = findUserElement();
 
   function saveUser(useruid: string) {
-    const db = getFirestore();
-    setDoc(doc(db, "users", useruid), {
+    const db = firestore;
+    setDoc(doc(db, "clients", useruid), {
       email: user.email,
       firstname: user.firstname,
       genre: user.genre,

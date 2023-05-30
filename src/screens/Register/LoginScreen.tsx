@@ -1,29 +1,24 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View, Image, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input } from '@rneui/themed';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StackScreenProps } from '@react-navigation/stack';
-import { FIREBASE_AUTH } from '../../config/firebaseConfig';
-import { useAuthentication } from '../../utils/hooks/useAuthentication';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import {  getAuth, signInWithEmailAndPassword, FirebaseError} from '../../config/firebaseConfig'
 import { colors } from '../../theme'
 
 
-
-
-
 const SignInScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
-  const { user } = useAuthentication();
-
-  const [error, setError] = React.useState(undefined as string | undefined);
+ 
+  const auth = getAuth();
+  const [error, setError] = React.useState<string | FirebaseError | undefined>(undefined);
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
 
   const loginUser = async () => {
     try {
-      await signInWithEmailAndPassword(FIREBASE_AUTH, email, password);
-    } catch (error) {
+      await signInWithEmailAndPassword(auth, email, password);
+    } catch (error: any) {
       if (error.code === 'auth/invalid-email' || error.code === 'auth/wrong-password') {
         setError('Your email or password was incorrect');
       } else if (error.code === 'auth/email-already-in-use') {
@@ -38,7 +33,7 @@ const SignInScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-        {error && <Text style={styles.error}>{error}</Text>}
+        {error && <Text style={styles.error}>{String(error)}</Text>}
       <View style={styles.controls}>
         <View style={styles.genderTitle}>
           <Text style={styles.contentTitle}>Connexion</Text>

@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from "react";
-import { getAuth } from 'firebase/auth';
+import React, {useEffect} from "react";
 import { useUserStore } from '../../utils/hooks/useUserStore';
-import { getFirestore, collection, getDocs } from "firebase/firestore";
+import { firestore, getAuth, getDocs, collection} from '../../config/firebaseConfig'
+
 
 const auth = getAuth();
 
@@ -17,7 +17,7 @@ export function useUserInformation() {
 
 
   const fetchUser = async () => {
-    const db = getFirestore();
+    const db = firestore;
     const docRef = collection(db, "users");
     const querySnapshot = await getDocs(collection(db, "users"));
     querySnapshot.forEach((doc) => {

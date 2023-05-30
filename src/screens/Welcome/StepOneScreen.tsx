@@ -3,10 +3,12 @@ import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
 import { colors } from '../../theme'
 
+
 const firstStep = require('../../../assets/welcome/stepOne.png');
 
 
 const StepOneScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
+ 
   return (
     <View style={styles.container}>
       <View style={styles.topContainer}>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Button, Icon, Image } from '@rneui/themed';
-import { getAuth, signOut } from 'firebase/auth';
+import { getAuth } from 'firebase/auth';
 import { useUserStore } from '../../utils/hooks/useUserStore';
 import { useUserInformation } from '../../utils/hooks/useUserInformations'; 
 import { colors } from '../../theme';
@@ -20,7 +20,9 @@ const star = require('../../../assets/icons/sparkling-gold.png')
 const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
  
 
-  useUserInformation();
+  const userInformation = useUserInformation();
+
+  console.log('userInformation', userInformation);
 
   const [user, setUser] = useUserStore();
 

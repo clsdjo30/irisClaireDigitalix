@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, SafeAreaView, Button, Platform, TextInput, TouchableOpacity, } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, Platform, TextInput, TouchableOpacity, } from 'react-native';
 import { Icon } from '@rneui/base'
 import { StackScreenProps } from '@react-navigation/stack';
 import { useUserStore } from '../../utils/hooks/useUserStore';
