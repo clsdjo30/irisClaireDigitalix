@@ -4,56 +4,33 @@ import {
   View,
   Image,
   Dimensions,
+  FlatList,
   Text,
-  Pressable
+  Pressable,
+  Animated,
+  PanResponder
 } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
 import { colors } from '../../../theme';
 import { useDaydrawStore } from '../../../utils/hooks/useDayDrawStore';
-import CARD_DECK from '../../../utils/cards';
+
 
 const { width, height } = Dimensions.get('screen');
 const CARD_WIDTH = width * 0.17;
 const CARD_HEIGHT = CARD_WIDTH * 1.5;
 
-const backCard = require('../../../../assets/images/cards/back/Claire_Back_Card.png');
+
 
 const DayDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   const [selectedCard, setSelectedCard] = useState('');
   const [tendance, setTendance] = useState('');
   const [daydraw, setDayDraw] = useDaydrawStore();
 
-
-
-
-
-  const handleDraw = () => {
-    const randomCard = Math.floor(Math.random() * CARD_DECK.length);
-    const card = CARD_DECK[randomCard];
-    setDayDraw({ ...daydraw, daytendance: card.tendance[0], daycard: card.frontImageUrl, isdraw: true })
-    navigation.navigate('TendanceResult')
-    console.log(daydraw)
-  };
-
-
-
-
   return (
 
     <View style={styles.container}>
       <View style={styles.container}>
-        <View style={styles.cardContainerTwo}>
-          <Image source={backCard} style={styles.fortuneTeller} />
-        </View>
-        <View style={styles.cardContainerThree}>
-          <Image source={backCard} style={styles.fortuneTeller} />
-        </View>
-        <View style={styles.cardContainerOne}>
-          <Pressable onPress={handleDraw}>
-            <Image source={backCard} style={styles.fortuneTeller} />
-          </Pressable>
-         
-        </View>
+            
       </View>
     </View>
 

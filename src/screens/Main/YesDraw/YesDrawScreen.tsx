@@ -30,12 +30,12 @@ const SCREEN_FONT_SCALE = SCREEN_SCALE * 0.5;
 
 const YesDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   const [value, setValue] = useQuestionStore();
-console.log(value)
 
   function goToChooseCard() {
-    
     navigation.navigate('DrawOneCard');
   }
+
+  console.log(value);
   return (
     <LinearGradient
       // Card Linear Gradient

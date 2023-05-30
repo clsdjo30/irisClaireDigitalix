@@ -31,7 +31,6 @@ const SCREEN_FONT_SCALE = SCREEN_SCALE * 0.5;
 const DomainScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     const [value, setValue] = useQuestionStore();
 
-    console.log(value)
     function goToAskQuestionCard() {
         navigation.navigate('AskQuestion');
     }
@@ -56,7 +55,7 @@ const DomainScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
         goToAskQuestionCard();
     }
 
-
+    
     return (
         <LinearGradient
             // Card Linear Gradient

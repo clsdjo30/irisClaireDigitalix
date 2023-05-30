@@ -20,7 +20,7 @@ import DomainScreen from '../screens/Main/YesDraw/DomainSreen';
 import YesDrawScreen from '../screens/Main/YesDraw/YesDrawScreen';
 import DrawOneCardScreen from '../screens/Main/YesDraw/DrawOneCardScreen';
 import YesDrawResultScreen from '../screens/Main/YesDraw/YesDrawResultScreen';
-// import CrossDrawScreen from '../screens/Main/CrossDraw/CrossDrawScreen';
+ import CrossDrawScreen from '../screens/Main/CrossDraw/CrossDrawScreen';
 
 const TendancceStack = createNativeStackNavigator();
 const ProfilStack = createNativeStackNavigator();
@@ -90,15 +90,15 @@ function YesStackScreen() {
 }
 
 // // NAVIGATION FOR CROSS DRAW
-// function CrossStackScreen() {
-//   return (
-//     <CrossStack.Navigator>
-//       <CrossStack.Screen name="AskCrossQuestion"
-//         component={CrossDrawScreen}
-//         options={{ headerShown: false, }} />
-//     </CrossStack.Navigator>
-//   )
-// }
+function CrossStackScreen() {
+  return (
+    <CrossStack.Navigator>
+      <CrossStack.Screen name="AskCrossQuestion"
+        component={CrossDrawScreen}
+        options={{ headerShown: false, }} />
+    </CrossStack.Navigator>
+  )
+}
 
 // // NAVIGATION FOR IRIS CREDIT
 // function IrisStackScreen() {
@@ -122,9 +122,9 @@ function HomeStackScreen() {
       <HomeStack.Screen name="YesDraw"
         component={YesStackScreen}
         options={{ headerShown: false, }} />
-      {/* <HomeStack.Screen name="CrossDraw"
+      <HomeStack.Screen name="CrossDraw"
         component={CrossStackScreen}
-        options={{ headerShown: false, }} /> */}
+        options={{ headerShown: false, }} />
     </HomeStack.Navigator>
   )
 }
@@ -142,7 +142,6 @@ export default function UserStack() {
         screenOptions={({ route }) => ({
           tabBarStyle: ((route) => {
             const routeName = getFocusedRouteNameFromRoute(route) ?? ""
-            console.log(routeName)
             if (routeName === 'YesDraw' || routeName === 'CrossDraw') {
               return { display: "none" }
             }
