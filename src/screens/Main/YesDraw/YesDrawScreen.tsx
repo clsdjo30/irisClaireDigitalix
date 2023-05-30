@@ -34,6 +34,8 @@ const YesDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   function goToChooseCard() {
     navigation.navigate('DrawOneCard');
   }
+
+  console.log(value);
   return (
     <LinearGradient
       // Card Linear Gradient

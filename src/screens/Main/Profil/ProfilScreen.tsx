@@ -32,8 +32,6 @@ const SCREEN_FONT_SCALE = SCREEN_SCALE * 0.5;
 
 
 const ProfilScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
-  
-  
   useUserInformation();
   const [checked, setChecked] = React.useState(false);
   const [user, setUser] = useUserStore();

@@ -6,7 +6,7 @@ import {
     Pressable,
     Text,
     Dimensions,
-   
+    ActivityIndicator
 
 } from 'react-native';
 import CARD_DECK from '../../../utils/cards';
@@ -15,6 +15,7 @@ import { colors } from '../../../theme';
 import { useQuestionStore } from '../../../utils/hooks/useQuestionStore';
 import { StackScreenProps } from '@react-navigation/stack';
 import { useSimpleQuestion } from '../../../utils/hooks/useSimpleQuestion';
+import { useFocusEffect } from '@react-navigation/native';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = SCREEN_WIDTH * 1.5;
@@ -22,32 +23,41 @@ const SCREEN_SCALE = Dimensions.get('window').scale;
 const SCREEN_FONT_SCALE = SCREEN_SCALE * 0.5;
 
 const YesDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
-    const [value, setValue] = useQuestionStore();
-    const userQuestion = value.question;
-    const cardNumber = value.choosecardnumber;
-    const cardName = value.choosecardname;
+
     const [cardImage, setCardImage] = useState(null);
-   
-    //   useSimpleQuestion(userQuestion, cardNumber, cardName, 500);
+    const [value, isLoading] = useSimpleQuestion(500);
+    const [questionInformations, setQuestionInformations] = useQuestionStore()
 
-    // const  displayCardImage = (cardNumber: number| null) => {
-    //     if (cardNumber != null) {
-           
-    //         return setCardImage(CARD_DECK[cardNumber].frontImageUrl);
-    //     }
-    //     else {
-    //         return null;
-    //     }
-    //   }
+    const getCardImage = () => {
+        return <Image style={styles.card} source={CARD_DECK[questionInformations.choosecardnumber].frontImageUrl} />;
+    };
 
-     
-// console.log(displayCardImage(value.choosecardnumber))
-      console.log(value);
-      console.log(value.answer);
-      console.log(value.choosecardnumber);
+    const getContent = () => {
+        if (isLoading) {
+            return <ActivityIndicator size="large" />
+
+        }
+        return <Text style={styles.contentTitle}>{questionInformations.answer}</Text>;
+    };
 
 
 
+    function questionClosed() {
+        setQuestionInformations({
+            ...questionInformations,
+            question: "",
+            domain: "",
+            choosecardnumber: 0,
+            choosecardname: "",
+            choosecardpseuso: "",
+            answer: ""
+        })
+        navigation.navigate('Home')
+        navigation.reset({
+            index: 0,
+            routes: [{ name: 'Home' }]
+        })
+    }
 
     return (
         <LinearGradient
@@ -57,12 +67,19 @@ const YesDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) =>
 
 
             <View style={styles.deckContainer}>
+                <View style={styles.loadingContainer}>
                 <Text style={styles.contentTitle}>Resultat de la question</Text>
+                    <View style={styles.cardContainer}>
+                        {getCardImage()}
+                    </View>
+                    {getContent()}
+                </View>
 
-                {/* {displayCardImage != null && <Image source={} style={{ width: 60, height: 120, borderRadius: 10, }}>{value.choosecard}</Image>} */}
-                {/* {value.answer != null && <Text style={styles.contentTitle}>{value.answer}</Text>} */}
-
-
+                <View style={styles.validationButton}>
+                    <Pressable style={styles.button} onPress={questionClosed}>
+                        <Text style={styles.buttonText}>Revenir à l'accueil</Text>
+                    </Pressable>
+                </View>
 
             </View>
 
@@ -86,8 +103,6 @@ const styles = StyleSheet.create({
     deckContainer: {
         width: "95%",
         height: "95%",
-        flexDirection: 'row',
-        flexWrap: 'wrap',
         justifyContent: 'center',
         alignContent: 'center',
 
@@ -101,18 +116,22 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     cardContainer: {
-        zIndex: 1,
-        width: 60,
-        height: 120,
-        margin: 5,
-        elevation: 5,
-        borderRadius: 10,
-        backgroundColor: colors.palette.purple100,
+        position: 'relative',
+        width: '100%',
+        height: '50%',
+        justifyContent: 'center',
         alignItems: 'center',
 
+
     },
-    cardDraw: {
-        transform: [{ scale: 2 }],
+    loadingContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    card: {
+        width: 120,
+        height: 240,
     },
     validationButton: {
         width: '100%',

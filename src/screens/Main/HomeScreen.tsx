@@ -28,9 +28,9 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     navigation.navigate('YesDraw');
   }
 
-  // function goToCrossDraw() {
-  //   navigation.navigate('CrossDraw');
-  // }
+  function goToCrossDraw() {
+    navigation.navigate('CrossDraw');
+  }
 
   return (
 
@@ -94,7 +94,7 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                 <Text style={styles.cardTitle}>Poser une question détaillée</Text>
               </View>
               <View style={styles.iconContainer}>
-                <TouchableOpacity style={styles.iconPosition} >
+                <TouchableOpacity style={styles.iconPosition} onPress={goToCrossDraw}>
                   <Image source={rightArrow} style={styles.iconImage}></Image>
                 </TouchableOpacity>
               </View>

@@ -55,7 +55,7 @@ const DomainScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
         goToAskQuestionCard();
     }
 
-
+    
     return (
         <LinearGradient
             // Card Linear Gradient
