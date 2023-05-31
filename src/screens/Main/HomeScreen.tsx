@@ -32,7 +32,7 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   }
 
   function goToDayDraw() {
-    navigation.navigate('DayDraw');
+    navigation.navigate('Tirage');
   }
 
   return (
