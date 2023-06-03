@@ -1,37 +1,188 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   StyleSheet,
   View,
-  Image,
   Dimensions,
-  FlatList,
+  ImageSourcePropType,
   Text,
-  Pressable,
-  Animated,
-  PanResponder
 } from 'react-native';
+import Animated, {
+  interpolate,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming
+} from 'react-native-reanimated';
+import Carousel from 'react-native-reanimated-carousel';
 import { StackScreenProps } from '@react-navigation/stack';
 import { colors } from '../../../theme';
 import { useDaydrawStore } from '../../../utils/hooks/useDayDrawStore';
-
-
-const { width, height } = Dimensions.get('screen');
-const CARD_WIDTH = width * 0.17;
-const CARD_HEIGHT = CARD_WIDTH * 1.5;
-
+import CARD_DECK from '../../../utils/cards';
+import Card from '../../../components/Card';
 
 
 const DayDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
-  const [selectedCard, setSelectedCard] = useState('');
-  const [tendance, setTendance] = useState('');
-  const [daydraw, setDayDraw] = useDaydrawStore();
+    const [selectedCard, setSelectedCard] = useState('');
+    const [tendance, setTendance] = useState('');
+    const [daydraw, setDayDraw] = useDaydrawStore();
+    
+    const PAGE_WIDTH = Dimensions.get('window').width;
+    const itemWidth = 80;
+    const centerOffset = PAGE_WIDTH / 2 - itemWidth / 2;
+    
+    const [flippedCardIndex, setFlippedCardIndex] = React.useState(-1);
+    
+      // START FLIP ANIMATION
+      const rotates = CARD_DECK.map(() => useSharedValue(0));
+  
+  //DISPLAY BACK CARD IMAGE
+  const backCard: Array<ImageSourcePropType> = CARD_DECK.map((card) => {
+      
+      return card.backImageUrl;
+    }
+    );
+    
+    //DISPLAY FRONT CARD IMAGE
+    const frontCard: ImageSourcePropType = CARD_DECK.map((card) => {
+        return card.frontImageUrl;
+    }
+    );
+
+    //START CAROUSEL ANIMATION
+    const animationStyle = React.useCallback(
+      (value: number) => {
+          "worklet";
+
+          const itemGap = interpolate(
+              value,
+              [-15, -10, -5, 0, 5, 10, 15],
+              [-30, -15, -2, 0, 2, 15, 30],
+          );
+
+          const translateX
+              = interpolate(value,
+                  [-1, 0, 1],
+                  [-itemWidth - 70, 0, itemWidth + 70])
+              + centerOffset
+              - itemGap;
+
+          const translateY = interpolate(
+              value,
+              [-1, -0.8, 0, 0.8, 1],
+              [85, 70, 55, 60, 75],
+          );
+
+
+          const rotate = interpolate(
+              value,
+              [-1, -0.7, 0, 0.7, 1],
+              [-0.3, -0.2, 0, 0.2, 0.3],
+          );
+
+
+          return {
+              transform: [
+                  { translateX },
+                  {
+                      translateY,
+                  },
+
+                  { rotate: `${rotate}rad` },
+              ],
+          };
+      },
+      [],
+  );
+
+  const handleCardChange = (index: number) => {
+      if (flippedCardIndex === -1) {
+          setFlippedCardIndex(index);
+          rotates[index].value = rotates[index].value ? 0 : 1;
+        }
+  };
+    
+  
+
 
   return (
 
     <View style={styles.container}>
-      <View style={styles.container}>
+  <Carousel
+                width={itemWidth / 1.2}
+                height={itemWidth * 8}
+                style={{
+                    width: PAGE_WIDTH,
+                    height: PAGE_WIDTH / 1,
+                    position: 'absolute',
+                    bottom: 0,
+                    
+
+                }}
+                loop
+                autoPlay={false}
+                autoPlayInterval={1000}
+                data={backCard}
+                renderItem={({ index }) => (
+                    <View style={styles.deckContainer}>
+                        {/*Back Card*/}
+                        <Animated.View
+                            style={[styles.frontcard,
+                            useAnimatedStyle(() => {
+                                const rotateValue = interpolate(
+                                    rotates[index].value, [0, 1], [0, 180],
+                                );
+                                return {
+                                    transform: [
+                                        { rotateY: withTiming(`${rotateValue}deg`, { duration: 1000 }) }
+                                    ]
+                                }
+                            })
+                            ]}>
+                            <Card
+                                onPress={() => {
+                                    {
+                                        handleCardChange(index);                                     
+                                
+                                    }
+                                }
+                                }
+                                source={backCard[index]}
+                            />
+                        </Animated.View>
+                        {/*Front Card*/}
+                        <Animated.View
+                            style={[
+                                styles.backCard,
+                                useAnimatedStyle(() => {
+                                    const rotateValue = interpolate(
+                                        rotates[index].value, [0, 1], [180, 360]
+                                    );
+                                    return {
+                                        transform: [
+                                            { rotateY: withTiming(`${rotateValue}deg`, { duration: 1000 }) }
+                                        ]
+                                    }
+                                })
+                            ]}
+                        >
+                            <Card
+                                onPress={() => {
+                                    {
+                                        handleCardChange(index);
+                                    }
+                                }}
+                                source={frontCard[index]}
+                            />
+                        </Animated.View>
+
+                    </View>
+                )}
+                customAnimation={animationStyle}
+            />
+            <View style={styles.button}>
+                <Text style={styles.buttonText}>Choisissez votre Carte</Text>
+            </View>
+                
             
-      </View>
     </View>
 
   );
@@ -40,120 +191,48 @@ const DayDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.palette.purple600,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  cardContainerOne: {
-    position: 'absolute',
-    flex: 1,
-    backgroundColor: colors.tint,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 10,
-    elevation: 10,
-
-
-  },
-  cardContainerTwo: {
-    position: 'absolute',
-    flex: 1,
-    backgroundColor: colors.tint,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 10,
-    elevation: 10,
-    transform: [{ rotate: '10deg' }],
-  },
-  cardContainerThree: {
-    position: 'absolute',
-    flex: 1,
-    backgroundColor: colors.tint,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 10,
-    elevation: 10,
-    transform: [{ rotate: '-10deg' }],
-  },
-  cardContainerFour: {
-    position: 'absolute',
-    flex: 1,
-    backgroundColor: colors.tint,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 10,
-    elevation: 10,
-    transform: [{ rotate: '5deg' }],
-  },
-  cardContainerFive: {
-    position: 'absolute',
-    flex: 1,
-    backgroundColor: colors.tint,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 10,
-    elevation: 10,
-    transform: [{ rotate: '-5deg' }],
-  },
-  fortuneTeller: {
-    width: 170,
-    height: 300,
-    resizeMode: 'contain',
-    borderRadius: 3,
-  },
-
-
-  // MODAL STYLES
-  buttonOpen: {
-    backgroundColor: colors.palette.lightgold,
-  },
-  buttonClose: {
-    backgroundColor: colors.palette.darkgold
-  },
-  textStyle: {
-    color: 'white',
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-  textTendance: {
-    textAlign: 'center',
-    fontFamily: "mulishRegular",
-    fontSize: 14,
-    color: colors.palette.ivory,
-    margin: 20,
-  },
-  modalText: {
-    fontFamily: "mulishRegular",
-    fontSize: 16,
-    color: colors.palette.ivory,
-    marginBottom: 15,
-    textAlign: 'center',
-  },
-  button: {
-    width: 300,
-    marginBottom: 10,
-    borderRadius: 16,
-    alignItems: "center",
-    paddingVertical: 5,
-  },
-  buttonText: {
-    textAlign: "center",
-    padding: 3,
-    fontFamily: "oswaldMedium",
-    fontSize: 14,
-    color: "#FFF8E7",
-  },
-  dayCardContainer: {
-    width: "100%",
-    height: "100%",
     backgroundColor: colors.palette.purple500,
     alignItems: 'center',
     justifyContent: 'center',
+   
+  },
+  deckContainer: {
+    width: 120,
+    height: 240,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
     borderRadius: 10,
-    elevation: 10,
-    margin: 20,
-    paddingVertical: 30
-  }
+    overflow: 'hidden',
+    margin: 10,
+},
+frontcard: {
+    position: "absolute",
+    backfaceVisibility: 'hidden',
+
+},
+backCard: {
+    backfaceVisibility: "hidden",
+
+},
+button: {
+    position: 'absolute',
+    bottom: -30,
+    width: 300,
+    height: 50,
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+
+},
+buttonText: {
+    textAlign: 'center',
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#000',
+}
+
 });
 
 export default DayDrawScreen;

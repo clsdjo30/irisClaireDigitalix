@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useQuestionStore } from "./useQuestionStore";
 
-const apikey = "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";
+const apikey = "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";
 
 const openai = axios.create({
   baseURL: "https://api.openai.com/v1/completions",
@@ -32,9 +32,10 @@ export const useSimpleQuestion = (
         prompt,
         model: "text-davinci-003", // "davinci" "curie" "babbage" "ada" "curie-instruct-beta" "davinci-instruct-beta"
         max_tokens: 800,
-        temperature: 0.6,
+        temperature: 0.5,
         presence_penalty: 0,
         frequency_penalty: 0,
+        top_p: 1,
       };
       try {
         const response = await openai.post("", data);

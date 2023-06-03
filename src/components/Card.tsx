@@ -1,4 +1,10 @@
-import {  Image, Dimensions, Pressable, ImageSourcePropType } from 'react-native';
+import {  
+    Image, 
+    Dimensions, 
+    Pressable, 
+    ImageSourcePropType, 
+    StyleSheet 
+} from 'react-native';
 import React from 'react';
 
 
@@ -14,10 +20,12 @@ const Card: React.FC<IProps> = ({ onPress, source}: IProps) => {
 
 
     return (
+
         <Pressable
             onPress={onPress}
-
+            style={styles.cardShadow}
         >
+            
             <Image
                 source={source}
                 style={{
@@ -31,5 +39,12 @@ const Card: React.FC<IProps> = ({ onPress, source}: IProps) => {
 };
 
 export default Card;
+
+const styles = StyleSheet.create({
+    cardShadow: {
+        shadowColor: '#fff',
+        elevation: 5,
+    },
+});
 
 

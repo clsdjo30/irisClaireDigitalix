@@ -37,37 +37,43 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
   return (
 
-    <LinearGradient
-      // Card Linear Gradient
-      colors={[colors.palette.purple600, colors.palette.purple500]}
-      style={styles.container}>
-      {/* START 3 ACTIONS CARD */}
+    <View style={styles.container}>
+
       <View style={styles.domainsContainer}>
-                
-                <Pressable style={styles.domainCard} onPress={goToYesDraw}>
-                    <Image source={yesNo} style={styles.icon} />
-                    <View style={styles.direction}>
-                        <Text style={styles.domainText}>Poser une question Simple</Text>
-                        {/* <Image source={rightArrow} style={styles.iconImage}></Image> */}
-                    </View>
-                </Pressable>
-                <Pressable style={styles.domainCard} onPress={goToCrossDraw}>
-                        <Image source={questionPlus} style={styles.icon} />
-                    <View style={styles.direction}>
-                        <Text style={styles.domainText}>Poser une question complète</Text>
-                        {/* <Image source={rightArrow} style={styles.iconImage}></Image> */}
-                    </View>
-                </Pressable>
-                <Pressable style={styles.domainCard} onPress={goToDayDraw}>
-                        <Image source={question} style={styles.icon} />
-                    <View style={styles.direction}>
-                        <Text style={styles.domainText}>Tirage du jour</Text>
-                        {/* <Image source={rightArrow} style={styles.iconImage}></Image> */}
-                        </View>
-                </Pressable>
-                
-            </View>
-    </LinearGradient>
+
+      <LinearGradient colors={[colors.palette.purple600, colors.palette.purple500]} style={styles.header}>
+      <Text style={{ color: colors.palette.lightgold, fontSize: 26, fontFamily: 'mulishBold', marginTop: 30 }}>Bonjour {user?.firstname} !</Text>
+      <Text style={{ color: colors.palette.ivory, fontSize: 20, fontFamily: 'mulishRegular', marginTop: 10 }}>Que souhaitez-vous faire aujourd'hui ?</Text>
+      </LinearGradient>
+
+        <Pressable style={styles.domainCard} onPress={goToYesDraw}>
+          <Image source={yesNo} style={styles.icon} />
+          <View style={styles.direction}>
+            <Text style={styles.domainText}>Poser une question Simple</Text>
+            {/* <Image source={rightArrow} style={styles.iconImage}></Image> */}
+          </View>
+        </Pressable>
+        <Pressable style={styles.domainCard} onPress={goToCrossDraw}>
+          <Image source={questionPlus} style={styles.icon} />
+          <View style={styles.direction}>
+            <Text style={styles.domainText}>Poser une question complète</Text>
+            {/* <Image source={rightArrow} style={styles.iconImage}></Image> */}
+          </View>
+        </Pressable>
+        <Pressable style={styles.domainCard} onPress={goToDayDraw}>
+          <Image source={question} style={styles.icon} />
+          <View style={styles.direction}>
+            <Text style={styles.domainText}>Tirage du jour</Text>
+            {/* <Image source={rightArrow} style={styles.iconImage}></Image> */}
+          </View>
+        </Pressable>
+      </View>
+
+    </View>
+
+
+
+
 
 
   );
@@ -77,7 +83,7 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.palette.outterSpace,
+    backgroundColor: colors.palette.purple600,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -87,6 +93,14 @@ const styles = StyleSheet.create({
     height: "100%",
     alignItems: "center",
     justifyContent: "center",
+  },
+  header: {
+    width: "90%",
+    height: "30%",
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 10,
+    marginBottom: 20,
   },
   domainCard: {
     width: "90%",
@@ -98,24 +112,25 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.palette.ivory,
     borderRadius: 10,
-    backgroundColor: colors.palette.purple100,
+    backgroundColor: 'rgba(198,198,231, 0.2)',
+
   },
   icon: {
     width: '35%',
     height: '70%',
-},
+  },
   domainText: {
     width: "90%",
     fontFamily: "mulishBold",
     fontSize: 18,
-    color: colors.palette.pink500,
+    color: colors.palette.ivory,
     textAlign: "center",
     marginTop: 20,
   },
   iconImage: {
     width: 30,
     height: 30,
-   
+
   },
   direction: {
     width: "60%",
@@ -127,3 +142,4 @@ const styles = StyleSheet.create({
 });
 
 export default HomeScreen;
+

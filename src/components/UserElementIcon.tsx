@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     elementImage: {
-        width: SCREEN_WIDTH * 0.2 ,
+        width: SCREEN_WIDTH * 0.3,
         height: SCREEN_HEIGHT * 0.05,
     },
     signText: {
