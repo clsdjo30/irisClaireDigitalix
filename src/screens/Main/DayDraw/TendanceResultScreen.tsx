@@ -4,7 +4,8 @@ import {
     View,
     Image,
     Text,
-    TouchableOpacity
+    TouchableOpacity, 
+    ImageSourcePropType
 } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
 import { colors } from '../../../theme';
@@ -15,11 +16,17 @@ import CARD_DECK from '../../../utils/cards';
 const TendanceResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     const [daydraw, setDayDraw] = useDaydrawStore();
     const resetTime = 120000;
-
+console.log(daydraw)
     useEffect(() => {
         if (daydraw.isdraw) {
             setTimeout(() => {
-                setDayDraw({ ...daydraw, isdraw: false });
+                setDayDraw({ ...daydraw, 
+                    isdraw: false,
+                    daycard: '',
+                    daycardimage: '' as ImageSourcePropType,
+                    daycardbackimage: '' as ImageSourcePropType,
+                    daytendance: ''
+                 });
                 navigation.navigate('Tirage');
             }, resetTime);
         }
@@ -29,12 +36,11 @@ const TendanceResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) =
 
         <View style={styles.container}>
             <View style={styles.tendanceScreen}>
-                <Text style={styles.titleStyle}> Votre tendance du jour</Text>
-
                 <View style={styles.cardContainer}>
-                    <Image source={daydraw.daycard} style={styles.fortuneTeller} />
+                    <Image source={daydraw.daycardimage as ImageSourcePropType} style={styles.fortuneTeller} />
                 </View>
                 <View style={styles.tendanceTextContainer}>
+                    <Text style={styles.cardNameTextStyle}>{daydraw.daycard}</Text>
                     <Text style={styles.textStyle}>{daydraw.daytendance}</Text>
                 </View>
 
@@ -98,7 +104,13 @@ const styles = StyleSheet.create({
         color: colors.palette.ivory,
         textAlign: 'center',
     },
-
+    cardNameTextStyle: {
+        fontFamily: "oswaldMedium",
+        fontSize: 22,
+        color: colors.palette.lightgold,
+        textAlign: 'center',
+        marginBottom: 20,
+    },
     button: {
         width: 300,
         backgroundColor: "#CBA135",

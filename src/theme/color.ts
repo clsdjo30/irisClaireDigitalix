@@ -27,7 +27,7 @@ const palette = {
   purple300: "#4F5075",
   purple400: "#4c669f",
   purple500: "#7E80C8",
-  purple600: "#232452",
+  purple600: "#3C3E8D",
 
   //SECONDARY Gold
   darkgold: "#CBA135",

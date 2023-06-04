@@ -20,9 +20,9 @@ import DomainScreen from '../screens/Main/YesDraw/DomainSreen';
 import YesDrawScreen from '../screens/Main/YesDraw/YesDrawScreen';
 import DrawOneCardScreen from '../screens/Main/YesDraw/DrawOneCardScreen';
 import YesDrawResultScreen from '../screens/Main/YesDraw/YesDrawResultScreen';
- import CrossDrawScreen from '../screens/Main/CrossDraw/CrossDrawScreen';
+import CrossDrawScreen from '../screens/Main/CrossDraw/CrossDrawScreen';
 
-const TendancceStack = createNativeStackNavigator();
+const DayDrawStack = createNativeStackNavigator();
 const ProfilStack = createNativeStackNavigator();
 const YesStack = createNativeStackNavigator();
 const CrossStack = createNativeStackNavigator();
@@ -31,13 +31,14 @@ const HomeStack = createNativeStackNavigator();
 
 
 // NAVIGATION FOR TENDANCE DU JOUR
-function TendanceStackScreen() {
+function DayDrawStackScreen() {
   return (
-    <TendancceStack.Navigator>
-      <TendancceStack.Screen name="Tirage"
+    <DayDrawStack.Navigator>
+      <DayDrawStack.Screen name="Tirage"
         component={DayDrawScreen}
         options={{ headerShown: false, }} />
-      <TendancceStack.Screen name="TendanceResult"
+
+      <DayDrawStack.Screen name="TendanceResult"
         component={TendanceResultScreen}
         options={{
           headerShown: false,
@@ -45,7 +46,7 @@ function TendanceStackScreen() {
 
         }}
       />
-    </TendancceStack.Navigator>
+    </DayDrawStack.Navigator>
   )
 }
 
@@ -66,20 +67,21 @@ function ProfilStackScreen() {
 function YesStackScreen() {
   return (
     <YesStack.Navigator
-    initialRouteName='Domain'
+      initialRouteName='Domain'
     >
       <YesStack.Screen name="Domain"
         component={DomainScreen}
         options={{ headerShown: false, }} />
-  
+
       <YesStack.Screen name="AskQuestion"
         component={YesDrawScreen}
-        options={{ 
-          headerShown: false, 
-          }} />
+        options={{
+          headerShown: false,
+        }} />
       <YesStack.Screen name="DrawOneCard"
         component={DrawOneCardScreen}
         options={{ headerShown: false, }} />
+
       <YesStack.Screen name="YesDrawResult"
         component={YesDrawResultScreen}
         options={{ headerShown: false, }} />
@@ -122,9 +124,19 @@ function HomeStackScreen() {
       <HomeStack.Screen name="YesDraw"
         component={YesStackScreen}
         options={{ headerShown: false, }} />
+
       <HomeStack.Screen name="CrossDraw"
         component={CrossStackScreen}
         options={{ headerShown: false, }} />
+
+      <HomeStack.Screen name="DayDraw"
+        component={DayDrawStackScreen}
+        options={{ headerShown: false, }} />
+
+<HomeStack.Screen name="TendanceResult"
+        component={TendanceResultScreen}
+        options={{ headerShown: false, }} />
+
     </HomeStack.Navigator>
   )
 }
@@ -142,7 +154,7 @@ export default function UserStack() {
         screenOptions={({ route }) => ({
           tabBarStyle: ((route) => {
             const routeName = getFocusedRouteNameFromRoute(route) ?? ""
-            if (routeName === 'YesDraw' || routeName === 'CrossDraw') {
+            if (routeName === 'YesDraw' || routeName === 'CrossDraw' || routeName === 'DayDraw' || routeName === 'TendanceResult') {
               return { display: "none" }
             }
             return
@@ -167,7 +179,7 @@ export default function UserStack() {
           }}
         />
 
-        <Tab.Screen
+        {/* <Tab.Screen
           name="Tendance"
           component={TendanceStackScreen}
           options={{
@@ -180,7 +192,7 @@ export default function UserStack() {
             tabBarIconStyle: { marginTop: 4 },
             tabBarActiveTintColor: colors.palette.purple600,
           }}
-        />
+        /> */}
 
         {/* <Tab.Screen
           name="Iris"
@@ -200,9 +212,9 @@ export default function UserStack() {
           options={{
             headerShown: false,
             tabBarLabel: 'Mon Compte',
-            tabBarLabelStyle: { fontSize: 14, fontFamily: 'mulishLight', color: colors.palette.ivory, paddingBottom: 6},
+            tabBarLabelStyle: { fontSize: 14, fontFamily: 'mulishLight', color: colors.palette.ivory, paddingBottom: 6 },
             tabBarIcon: () => (
-              <Icon name="user" size={28} color={colors.palette.ivory}  />
+              <Icon name="user" size={28} color={colors.palette.ivory} />
             ),
             tabBarIconStyle: { marginTop: 4 },
             tabBarActiveTintColor: colors.palette.purple600,

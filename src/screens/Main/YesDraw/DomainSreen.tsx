@@ -65,10 +65,7 @@ const DomainScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
 
     return (
-        <LinearGradient
-            // Card Linear Gradient
-            colors={[colors.palette.purple600, colors.palette.purple500]}
-            style={styles.container}>
+        <View style={styles.container}>
             <View style={styles.domainsContainer}>
                 <View>
                     <Text style={styles.contentTitle}>Choisissez votre domaine</Text>
@@ -102,7 +99,7 @@ const DomainScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                         </View>
                 </Pressable>
             </View>
-        </LinearGradient >
+        </View>
     )
 }
 
@@ -113,7 +110,7 @@ const styles = StyleSheet.create({
         flex: 1,
         width: SCREEN_WIDTH,
         height: SCREEN_HEIGHT,
-
+        backgroundColor: colors.palette.purple600,
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -143,7 +140,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: colors.palette.ivory,
         borderRadius: 10,
-        backgroundColor: colors.palette.purple100,
+        backgroundColor: 'rgba(198,198,231, 0.2)',
     },
     domainText: {
         fontFamily: "mulishBold",

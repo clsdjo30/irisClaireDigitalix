@@ -1,45 +1,31 @@
-import React, { useState } from 'react';
-import {
-    StyleSheet,
-    View,
-    Dimensions,
-    ImageSourcePropType,
-    Text,
-    Pressable
-} from 'react-native';
+import { StyleSheet, View, Text, Dimensions ,ImageSourcePropType } from 'react-native';
+import React from 'react';
 import Animated, {
     interpolate,
-    set,
     useAnimatedStyle,
     useSharedValue,
     withTiming
 } from 'react-native-reanimated';
 import Carousel from 'react-native-reanimated-carousel';
-import { StackScreenProps } from '@react-navigation/stack';
-import { colors } from '../../../theme';
-import { useDaydrawStore } from '../../../utils/hooks/useDayDrawStore';
-import CARD_DECK from '../../../utils/cards';
-import Card from '../../../components/Card';
+import CARD_DECK from '../utils/cards';
+import Card from './Card';
 
 
-const DayDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
-   
-    const [daydraw, setDayDraw] = useDaydrawStore();
-    const [showTendanceButton, setShowTendanceButton] = useState(false);
+
+
+const CardContainer = () => {
     const PAGE_WIDTH = Dimensions.get('window').width;
     const itemWidth = 80;
     const centerOffset = PAGE_WIDTH / 2 - itemWidth / 2;
 
     const [flippedCardIndex, setFlippedCardIndex] = React.useState(-1);
-    const [isLoading, setIsLoading] = React.useState(false);
 
     // START FLIP ANIMATION
     const rotates = CARD_DECK.map(() => useSharedValue(0));
 
-
-
     //DISPLAY BACK CARD IMAGE
     const backCard: Array<ImageSourcePropType> = CARD_DECK.map((card) => {
+        console.log(card.backImageUrl);
         return card.backImageUrl;
     }
     );
@@ -49,6 +35,9 @@ const DayDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
         return card.frontImageUrl;
     }
     );
+
+
+
 
     //START CAROUSEL ANIMATION
     const animationStyle = React.useCallback(
@@ -64,14 +53,14 @@ const DayDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
             const translateX
                 = interpolate(value,
                     [-1, 0, 1],
-                    [-itemWidth - 5, 0, itemWidth + 5])
+                    [-itemWidth - 70, 0, itemWidth + 70])
                 + centerOffset
                 - itemGap;
 
             const translateY = interpolate(
                 value,
-                [-1, -0.5, 0, 0.5, 1],
-                [80, 65, 70, 65, 80],
+                [-1, -0.8, 0, 0.8, 1],
+                [85, 70, 55, 60, 75],
             );
 
 
@@ -90,66 +79,38 @@ const DayDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                     },
 
                     { rotate: `${rotate}rad` },
-
-
                 ],
             };
         },
         [],
     );
 
-       // display card when click
-         // display card when click
-
-  const displayResult = () => {
-    if (flippedCardIndex !== -1) {
-        // choisir une phrase de tendance au hasard
-        const newtendance = CARD_DECK[flippedCardIndex].tendance[Math.floor(Math.random() * CARD_DECK[flippedCardIndex].tendance.length)]
-        setDayDraw({ ...daydraw, 
-            daycard: CARD_DECK[flippedCardIndex].name, 
-            daytendance: newtendance, 
-            isdraw: true });
-        
-        navigation.navigate('DayDrawResult', { card: CARD_DECK[flippedCardIndex] });
-    }
-};
-
-function goToResult() {
-    navigation.navigate('TendanceResult');
-}
-
-const handleCardChange = (index: number) => {
-  if (flippedCardIndex === -1) {
-      setFlippedCardIndex(index);
-      rotates[index].value = rotates[index].value ? 0 : 1;
-    }
-    const newtendance = CARD_DECK[index].tendance[Math.floor(Math.random() * CARD_DECK[index].tendance.length)]
-
-    setDayDraw({ ...daydraw,
-            daycard: CARD_DECK[index].name,
-            daycardimage: CARD_DECK[index].frontImageUrl,
-            daycardbackimage: CARD_DECK[index].backImageUrl,
-            daytendance: newtendance,
-            isdraw: true });
-            setTimeout(() => {
-    goToResult();
-}, 1500);
-};
-
-
-   console.log(daydraw)
+    const handleCardChange = (index: number) => {
+        if (flippedCardIndex === -1) {
+            setFlippedCardIndex(index);
+            rotates[index].value = rotates[index].value ? 0 : 1;
+          }
+    };
+    
 
     return (
+        <View style={{
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+            marginBottom: 60,
 
-        <View style={styles.container}>
+
+        }}>
             <Carousel
                 width={itemWidth / 1.2}
-                height={itemWidth * 4}
+                height={itemWidth * 8}
                 style={{
                     width: PAGE_WIDTH,
                     height: PAGE_WIDTH / 1,
                     position: 'absolute',
-                    bottom: 40,
+                    bottom: 0,
+
                 }}
                 loop
                 autoPlay={false}
@@ -174,12 +135,11 @@ const handleCardChange = (index: number) => {
                             <Card
                                 onPress={() => {
                                     {
-                                        handleCardChange(index);
-                                       
+                                        handleCardChange(index);                                     
+                                
                                     }
                                 }
                                 }
-                               
                                 source={backCard[index]}
                             />
                         </Animated.View>
@@ -194,51 +154,41 @@ const handleCardChange = (index: number) => {
                                     return {
                                         transform: [
                                             { rotateY: withTiming(`${rotateValue}deg`, { duration: 1000 }) }
-                                        ],
+                                        ]
                                     }
                                 })
                             ]}
                         >
                             <Card
-                                
                                 onPress={() => {
                                     {
                                         handleCardChange(index);
-                                       
                                     }
                                 }}
-                              
                                 source={frontCard[index]}
                             />
                         </Animated.View>
+
                     </View>
                 )}
                 customAnimation={animationStyle}
             />
-            {showTendanceButton && (
-                <Text style={styles.tendanceButtonText}>{daydraw.daytendance}</Text>
-            )}
-            <View style={styles.choiceButton}>
-                <Text style={styles.tendanceButtonText}>Choisissez votre Carte</Text>
+            <View style={styles.button}>
+                <Text style={styles.buttonText}>Choisissez votre Carte</Text>
             </View>
         </View>
-
     );
-}
+};
+
+export default CardContainer;
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: colors.palette.purple600,
-        alignItems: 'center',
-        justifyContent: 'center',
-
-    },
     deckContainer: {
-        width: 80,
-        height: 150,
+        width: 120,
+        height: 240,
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: '#fff',
         borderRadius: 10,
         overflow: 'hidden',
         margin: 10,
@@ -254,7 +204,7 @@ const styles = StyleSheet.create({
     },
     button: {
         position: 'absolute',
-        bottom: 20,
+        bottom: -30,
         width: 300,
         height: 50,
         backgroundColor: '#fff',
@@ -268,31 +218,5 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
         color: '#000',
-    },
-    tendanceButton: {
-        width: 300,
-        backgroundColor: "#CBA135",
-        marginBottom: 10,
-        borderRadius: 16,
-        alignItems: "center",
-        paddingVertical: 5,
-    },
-    choiceButton: {
-        position: 'absolute',
-        bottom: 20,
-        width: 300,
-        backgroundColor: "#CBA135",
-        marginBottom: 10,
-        borderRadius: 16,
-        alignItems: "center",
-        paddingVertical: 5,
-    },
-    tendanceButtonText: {
-        fontFamily: "oswaldRegular",
-        fontSize: 14,
-        color: colors.palette.ivory,
     }
-
 });
-
-export default DayDrawScreen;
