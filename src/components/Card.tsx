@@ -23,15 +23,16 @@ const Card: React.FC<IProps> = ({ onPress, source}: IProps) => {
 
         <Pressable
             onPress={onPress}
+            
             style={styles.cardShadow}
         >
             
             <Image
                 source={source}
                 style={{
-                    width: 180,
-                    height: 240,
-                    resizeMode: 'contain',
+                    width: 80,
+                    height: 150,
+                    resizeMode: 'cover',
                 }}
             />
         </Pressable>

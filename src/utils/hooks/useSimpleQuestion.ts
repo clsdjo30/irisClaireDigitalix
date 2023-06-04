@@ -1,8 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useQuestionStore } from "./useQuestionStore";
+import Constants from 'expo-constants';
 
-const apikey = "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";
+const apikey = Constants.manifest?.extra?.openaiId;
 
 const openai = axios.create({
   baseURL: "https://api.openai.com/v1/completions",
@@ -31,7 +32,7 @@ export const useSimpleQuestion = (
       const data = {
         prompt,
         model: "text-davinci-003", // "davinci" "curie" "babbage" "ada" "curie-instruct-beta" "davinci-instruct-beta"
-        max_tokens: 800,
+        max_tokens: 90,
         temperature: 0.5,
         presence_penalty: 0,
         frequency_penalty: 0,
