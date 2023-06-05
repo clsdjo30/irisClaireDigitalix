@@ -3,7 +3,9 @@ import { useEffect, useState } from "react";
 import { useQuestionStore } from "./useQuestionStore";
 import Constants from 'expo-constants';
 
-const apikey = Constants.manifest?.extra?.openaiId;
+const apikey = Constants.manifest?.extra?.openAiId;
+
+console.log(apikey);
 
 const openai = axios.create({
   baseURL: "https://api.openai.com/v1/completions",
