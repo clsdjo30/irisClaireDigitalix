@@ -4,8 +4,7 @@ import {
     View,
     Dimensions,
     ImageSourcePropType,
-    Text,
-    Pressable
+    Text
 } from 'react-native';
 import Animated, {
     interpolate,

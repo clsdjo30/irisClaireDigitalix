@@ -15,7 +15,7 @@ interface IProps {
 
 const Card: React.FC<IProps> = ({ onPress, source}: IProps) => {
     const PAGE_WIDTH = Dimensions.get('window').width;
-    const itemWidth = 80;
+    const itemWidth = 60;
     const centerOffset = PAGE_WIDTH / 2 - itemWidth / 2;
 
 
