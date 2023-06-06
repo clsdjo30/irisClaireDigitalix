@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
     StyleSheet,
     Image,
@@ -22,7 +22,9 @@ import FlipCard from 'react-native-flip-card';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = SCREEN_WIDTH * 1.5;
 const SCREEN_SCALE = Dimensions.get('window').scale;
-const SCREEN_FONT_SCALE = SCREEN_SCALE * 0.
+const SCREEN_FONT_SCALE = SCREEN_SCALE * 1;
+const CARD_WIDTH = 60;
+const CARD_HEIGHT = 120;
 
 const DrawOneCardScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     const [value, setValue] = useQuestionStore();
@@ -30,7 +32,9 @@ const DrawOneCardScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     const [credit, setCredit] = useState(2);
     const [clickable, setClickable] = useState(true);
     const [isCardFlipped, setIsCardFlipped] = useState(false);
+   
     
+  
 
     function sendQuestion() {
         // TODO implementer la logique de validation avec credit

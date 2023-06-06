@@ -28,9 +28,11 @@ const YesDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) =>
     const [value, isLoading] = useSimpleQuestion(500);
     const [questionInformations, setQuestionInformations] = useQuestionStore()
 
-    const getCardImage = () => {
-        return <Image style={styles.card} source={CARD_DECK[questionInformations.choosecardnumber].frontImageUrl} />;
-    };
+    console.log(questionInformations)
+
+    const choosedCard = questionInformations.choosecardnumber
+
+    console.log(choosedCard)
 
     const getContent = () => {
         if (isLoading) {
@@ -70,7 +72,11 @@ const YesDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) =>
                 <View style={styles.loadingContainer}>
                 <Text style={styles.contentTitle}>Resultat de la question</Text>
                     <View style={styles.cardContainer}>
-                        {getCardImage()}
+                  
+                    <Image
+                        style={styles.cardImage}
+                        source={choosedCard}
+                    />
                     </View>
                     {getContent()}
                 </View>
@@ -132,6 +138,11 @@ const styles = StyleSheet.create({
     card: {
         width: 120,
         height: 240,
+    },
+    cardImage: {
+        width: 120,
+        height: 240,
+        borderRadius: 10,
     },
     validationButton: {
         width: '100%',

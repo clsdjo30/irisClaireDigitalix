@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 import Animated, {
     interpolate,
-    set,
     useAnimatedStyle,
     useSharedValue,
     withTiming

@@ -1,70 +1,85 @@
-import React from 'react';
-import { FlatList, Image, TouchableOpacity, StyleSheet, View } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import {
+  FlatList,
+  Image,
+  TouchableOpacity,
+  StyleSheet,
+  View,
+  ImageSourcePropType, 
+  StatusBar
+} from 'react-native';
 import CARD_DECK from '../../../utils/cards';
+import { colors } from '../../../theme/color'
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-class CrossDraw extends React.Component {
-  state = {
-    selectedCards: [],
-    cards: [],
-  };
+const CrossDrawScreen = () => {
+  const [selectedCards, setSelectedCards] = useState<Array<any>>([]);
+  const [cards, setCards] = useState<Array<{ id: number; frontImageUrl: string; backImageUrl: string }>>([]);
 
-  componentDidMount() {
-    this.setState({ cards: this.shuffleCards(CARD_DECK) });
-  }
 
-  shuffleCards(cards) {
+  useEffect(() => {
+    setCards(shuffleCards(CARD_DECK));
+  }, []);
+
+  const shuffleCards = (cards: Array<{ id: number, frontImageUrl: string, backImageUrl: string }>) => {
     for (let i = cards.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [cards[i], cards[j]] = [cards[j], cards[i]];
     }
     return cards;
-  }
+  };
 
-  selectCard = (card) => {
-    let { selectedCards } = this.state;
+  const selectCard = (card: any) => {
     if (selectedCards.length < 4) {
-      selectedCards.push(card);
-      this.setState({ selectedCards });
+      setSelectedCards((prevSelectedCards) => [...prevSelectedCards, card]);
     }
   };
 
-  renderCard = ({ item }) => {
-    const isSelected = this.state.selectedCards.includes(item);
+
+
+  const renderCard = ({ item }: { item: { id: number; frontImageUrl: string; backImageUrl: string } }) => {
+    const isSelected = selectedCards.includes(item);
     return (
-      <TouchableOpacity onPress={() => this.selectCard(item)}>
+      <TouchableOpacity onPress={() => selectCard(item)}>
         <Image
           style={styles.cardImage}
-          source={isSelected ? item.frontImageUrl : item.backImageUrl}
+          source={isSelected ? item.frontImageUrl as ImageSourcePropType : item.backImageUrl as ImageSourcePropType}
         />
       </TouchableOpacity>
     );
   };
 
-  render() {
-    return (
-      <View style={styles.container}>
-        <FlatList
-          data={this.state.cards}
-          renderItem={this.renderCard}
-          keyExtractor={(item) => item.id.toString()}
-          numColumns={4}
-        />
-      </View>
-    );
-  }
-}
+  return (
+    <SafeAreaView style={styles.container}>
+      <FlatList
+        data={cards}
+        renderItem={renderCard}
+        keyExtractor={(item) => item.id.toString()}
+        numColumns={4}
+        columnWrapperStyle={{ justifyContent: 'center' }}
+        contentContainerStyle={styles.deckContainer}
+        centerContent={true}
+      />
+    </SafeAreaView>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    marginTop: StatusBar.currentHeight || 0,
+    marginBottom: 20,
+  },
+  deckContainer: {
+   
+   
   },
   cardImage: {
     width: 60,
     height: 120,
     resizeMode: 'cover',
+    margin: 5
   },
 });
 
-export default CrossDraw;
+export default CrossDrawScreen;

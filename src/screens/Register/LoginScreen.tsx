@@ -41,9 +41,9 @@ const SignInScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
         <Input
           placeholder='Email'
-          placeholderTextColor={'#2072AF'}
+          placeholderTextColor={colors.palette.violetClair}
           inputContainerStyle={styles.input}
-          inputStyle={{ fontSize: 14, marginLeft: 10, fontFamily: "mulishRegular", color: colors.palette.pink500 }}
+          inputStyle={{ fontSize: 14, marginLeft: 10, fontFamily: "mulishMedium", color: colors.palette.violet }}
           value={email}
           onChangeText={(text) => setEmail(text)}
           leftIcon={<Icon
@@ -55,9 +55,9 @@ const SignInScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
         <Input
           placeholder='Password'
-          placeholderTextColor={'#2072AF'}
+          placeholderTextColor={colors.palette.violetClair}
           inputContainerStyle={styles.input}
-          inputStyle={{ fontSize: 14, marginLeft: 10, fontFamily: "mulishRegular", color: colors.palette.pink500 }}
+          inputStyle={{ fontSize: 14, marginLeft: 10, fontFamily: "mulishMedium", color: colors.palette.violet }}
           value={password}
           onChangeText={(text) => setPassword(text)}
           secureTextEntry={true}
@@ -83,7 +83,7 @@ const SignInScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.palette.purple600,
+    backgroundColor: colors.palette.grayscale,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -99,12 +99,12 @@ const styles = StyleSheet.create({
   },
   icon: {
     marginLeft: 10,
-    color: '#FFD700',
+    color: colors.palette.gold,
   },
   error: {
     width: '90%', 
     textAlign: 'center',
-    backgroundColor: colors.palette.pink500,
+    backgroundColor: colors.palette.orange,
     borderRadius: 6,
     padding: 10,
     marginTop: 30,
@@ -118,8 +118,8 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     borderBottomWidth: 1,
     borderLeftWidth: 1,
-    borderLeftColor: colors.palette.darkgold,
-    borderBottomColor: colors.palette.darkgold,
+    borderLeftColor: colors.palette.violet,
+    borderBottomColor: colors.palette.violet,
   },
   validationButton: {
     width: '100%',
@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
   },
   button: {
     width: '80%',
-    backgroundColor: "#CBA135",
+    backgroundColor: colors.palette.orange,
     marginTop: 10,
     borderRadius: 16,
   },
@@ -137,9 +137,9 @@ const styles = StyleSheet.create({
     textAlign: "center",
     alignItems: "center",
     paddingVertical: 10,
-    fontFamily: "oswaldMedium",
-    fontSize: 14,
-    color: colors.palette.ivory,
+    fontFamily: "oswaldBold",
+    fontSize: 18,
+    color: colors.palette.grayscale,
   },
   genderTitle: {
     width: '100%',
@@ -148,9 +148,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   contentTitle: {
-    fontFamily: "mulishRegular",
-    fontSize: 22,
-    color: colors.text,
+    fontFamily: "mulishBold",
+    fontSize: 24,
+    color: colors.palette.violet,
     marginBottom: 20
   }
 });

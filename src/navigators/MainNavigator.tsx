@@ -160,7 +160,7 @@ export default function UserStack() {
             return
           })(route),
           tabBarBackground: () => (
-            <View style={{ width: '100%', height: '100%', backgroundColor: colors.palette.purple600 }} />
+            <View style={{ width: '100%', height: '100%', backgroundColor: colors.palette.grayscale }} />
           ),
           tabBarItemStyle: { height: 55, width: '100%', borderRadius: 20, },
         })}
@@ -171,9 +171,9 @@ export default function UserStack() {
           component={HomeStackScreen}
           options={{
             headerShown: false,
-            tabBarLabelStyle: { fontSize: 14, fontFamily: 'mulishLight', color: colors.palette.ivory, paddingBottom: 6 },
+            tabBarLabelStyle: { fontSize: 14, fontFamily: 'mulishLight', color: colors.palette.gold, paddingBottom: 6 },
             tabBarIcon: () => (
-              <Icon name="home" size={28} color={colors.palette.ivory} />
+              <Icon name="home" size={28} color={colors.palette.gold} />
             ),
             tabBarIconStyle: { marginTop: 4 },
           }}
@@ -212,9 +212,9 @@ export default function UserStack() {
           options={{
             headerShown: false,
             tabBarLabel: 'Mon Compte',
-            tabBarLabelStyle: { fontSize: 14, fontFamily: 'mulishLight', color: colors.palette.ivory, paddingBottom: 6 },
+            tabBarLabelStyle: { fontSize: 14, fontFamily: 'mulishLight', color: colors.palette.gold, paddingBottom: 6 },
             tabBarIcon: () => (
-              <Icon name="user" size={28} color={colors.palette.ivory} />
+              <Icon name="user" size={28} color={colors.palette.gold} />
             ),
             tabBarIconStyle: { marginTop: 4 },
             tabBarActiveTintColor: colors.palette.purple600,

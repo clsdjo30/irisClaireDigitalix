@@ -1,10 +1,15 @@
 // TODO: write documentation for colors and palette in own markdown file and add links from here
 
 const palette = {
+violet: "#232452",
+violetClair: "#4f5075",
+orange: "#db5447",
+grayscale: "#e7e7e4",
+  
   //GRAYSCALE
-  neutral100: "#FFF8E7",
-  neutral200: "#F4F2F1",
-  neutral300: "#D7CEC9",
+  neutral100: "#e4e4e7",
+  neutral200: "#eeeeec",
+  neutral300: "#A9A99E",
   neutral400: "#B6ACA6",
   neutral500: "#978F8A",
   neutral600: "#2072af",
@@ -27,7 +32,7 @@ const palette = {
   purple300: "#4F5075",
   purple400: "#4c669f",
   purple500: "#7E80C8",
-  purple600: "#3C3E8D",
+  purple600: "#232452",
 
   //SECONDARY Gold
   darkgold: "#CBA135",

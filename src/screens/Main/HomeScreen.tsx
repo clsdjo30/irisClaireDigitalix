@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState} from 'react';
 import {
   StyleSheet,
   Text,
@@ -28,10 +28,6 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   const [daycard, setDayCard] = useDaydrawStore();
   const userInformation = useUserInformation();
   const backCard = require('../../../assets/images/cards/back/Claire_Back_Card.png');
-
-  console.log('userInformation', userInformation);
-  console.log('daydraw', daycard);
-
   const [user, setUser] = useUserStore();
 
   function goToYesDraw() {
@@ -48,6 +44,7 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     } 
   }
 
+
   return (
 
     <View style={styles.container}>
@@ -56,8 +53,8 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
         <LinearGradient colors={
           [
-            colors.palette.purple600,
-            colors.palette.purple500
+            colors.palette.grayscale,
+            colors.palette.grayscale,
           ]
         }
           style={styles.header}
@@ -71,7 +68,7 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                 </View>
                 <View style={styles.tendanceTextContainer}>
                   <Text style={styles.tendanceText}>
-                    Allez vite découvrir la tendance de votre journée ! 🤩
+                    Allez vite découvrir la tendance de votre journée !
                   </Text>
                 </View>
               </>
@@ -90,19 +87,23 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
           </View>
         </LinearGradient>
 
-        <Pressable style={styles.domainCard} onPress={goToYesDraw}>
+        <Pressable 
+        style={[styles.domainCard, styles.violetCard]} 
+        onPress={goToYesDraw}
+        
+        >
           <Image source={yesNo} style={styles.icon} />
           <View style={styles.direction}>
             <Text style={styles.domainText}>Question Oui/Non</Text>
           </View>
         </Pressable>
-        <Pressable style={styles.domainCard} onPress={goToCrossDraw}>
+        <Pressable style={[styles.domainCard, styles.goldCard]} onPress={goToCrossDraw}>
           <Image source={questionPlus} style={styles.icon} />
           <View style={styles.direction}>
-            <Text style={styles.domainText}>Tirage Complet</Text>
+            <Text style={styles.domainGoldText}>Tirage Complet</Text>
           </View>
         </Pressable>
-        <Pressable style={styles.domainCard} onPress={goToDayDraw}>
+        <Pressable style={[styles.domainCard, styles.violetCard]} onPress={goToDayDraw}>
           <Image source={question} style={styles.icon} />
           <View style={[styles.direction]}>
             {daycard.isdraw === false ?
@@ -131,7 +132,7 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.palette.purple600,
+    backgroundColor: colors.palette.grayscale,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -145,16 +146,21 @@ const styles = StyleSheet.create({
   header: {
     width: "90%",
     height: "30%",
-    borderRadius: 10,
-    marginBottom: 20,
+    borderRadius: 10, 
+    marginBottom: 10,
+    borderBottomWidth: 0.2,
+    borderBottomColor: colors.palette.gold,
+    borderLeftWidth: 0.2,
+    borderLeftColor: colors.palette.gold,
+  elevation: 1
   },
   headerTitle: {
-    color: colors.palette.lightgold,
-    fontSize: 26,
+    color: colors.palette.violet,
+    fontSize: 30,
     fontFamily: 'mulishBold',
     textTransform: 'capitalize',
-    marginTop: 20,
-    marginLeft: 10
+    marginTop: 10,
+   textAlign: 'center',
   },
   domainCard: {
     width: "90%",
@@ -163,10 +169,23 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-around",
-    borderWidth: 1,
-    borderColor: colors.palette.ivory,
     borderRadius: 10,
-    backgroundColor: 'rgba(198,198,231, 0.2)',
+    borderBottomWidth: 1,
+    borderBottomColor: colors.palette.gold,
+    borderLeftWidth: 1,
+    borderLeftColor: colors.palette.gold,
+    elevation: 5,
+    // backgroundColor: 'rgba(198,198,231, 0.2)',
+  },
+  violetCard: {
+    backgroundColor: colors.palette.violetClair,
+  },
+  goldCard: {
+    backgroundColor: colors.palette.gold,
+    borderBottomColor: colors.palette.violet,
+    borderLeftWidth: 1,
+    borderLeftColor: colors.palette.violet,
+    elevation: 5,
   },
   icon: {
     width: '35%',
@@ -174,9 +193,17 @@ const styles = StyleSheet.create({
   },
   domainText: {
     width: "90%",
-    fontFamily: "mulishBold",
-    fontSize: 18,
-    color: colors.palette.ivory,
+    fontFamily: "mulishRegular",
+    fontSize: 20,
+    color: colors.palette.grayscale,
+    textAlign: "center",
+    marginTop: 20,
+  },
+  domainGoldText: {
+    width: "90%",
+    fontFamily: "mulishRegular",
+    fontSize: 20,
+    color: colors.palette.grayscale,
     textAlign: "center",
     marginTop: 20,
   },
@@ -196,7 +223,7 @@ const styles = StyleSheet.create({
     width: 15,
     height: 15,
     borderRadius: 50,
-    backgroundColor: colors.palette.pink500
+    backgroundColor: colors.palette.orange
   },
   iconContainerCheck: {
     justifyContent: "center",
@@ -225,15 +252,16 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   tendanceText: {
-    color: colors.palette.ivory, 
+    color: colors.palette.violet, 
     fontSize: 16, 
     fontFamily: 'mulishRegular',
+    textAlign: "center",
   },
   displayTextTendance: {
-    color: colors.palette.ivory, 
+    color: colors.palette.violet, 
     fontSize: 16, 
     fontFamily:  'mulishRegular',
-    textAlign: "justify", 
+    textAlign: "center", 
   },
   cardContainer: {
     width: 60,
