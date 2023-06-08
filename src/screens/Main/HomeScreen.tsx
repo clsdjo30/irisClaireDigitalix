@@ -172,7 +172,6 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: WIDTH *0.18,
     borderBottomRightRadius: WIDTH *0.18,
     backgroundColor: colors.palette.violet
-
   },
 
   headerTitle: {

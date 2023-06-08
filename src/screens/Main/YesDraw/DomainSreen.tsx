@@ -16,11 +16,10 @@ import { useQuestionStore } from '../../../utils/hooks/useQuestionStore';
 import { StackScreenProps } from '@react-navigation/stack';
 
 // import icons
-const love = require('../../../../assets/images/testVector/love.png');
-const money = require('../../../../assets/images/testVector/finance.png');
-const work = require('../../../../assets/images/testVector/career.png');
-const general = require('../../../../assets/images/testVector/question_plus.png');
-const rightArrow = require('../../../../assets/icons/caretRight.png');
+const love = require('../../../../assets/icons/domainIcon/heart_icon.png');
+const money = require('../../../../assets/icons/domainIcon/gold_chest.png');
+const work = require('../../../../assets/icons/domainIcon/briefcase.png');
+const general = require('../../../../assets/icons/domainIcon/general_icon.png');
 
 interface YesDrawScreenProps {
     navigation: any;
@@ -32,8 +31,6 @@ interface YesDrawScreenState {
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = SCREEN_WIDTH * 1.5;
-const SCREEN_SCALE = Dimensions.get('window').scale;
-const SCREEN_FONT_SCALE = SCREEN_SCALE * 0.5;
 
 
 const DomainScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
@@ -66,37 +63,27 @@ const DomainScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
+
+            <View style={styles.header} />
             <View style={styles.domainsContainer}>
                 <View>
-                    <Text style={styles.contentTitle}>Choisissez votre domaine</Text>
+                    <Text style={styles.contentTitle}>Choisissez votre Domaine</Text>
                 </View>
                 <Pressable style={styles.domainCard} onPress={loveChoice}>
                     <Image source={love} style={styles.icon} />
-                    <View style={styles.direction}>
-                        <Text style={styles.domainText}>Amour</Text>
-                        <Image source={rightArrow} style={styles.iconImage}></Image>
-                    </View>
+                    <Text style={styles.domainText}>Amour</Text>
                 </Pressable>
                 <Pressable style={styles.domainCard} onPress={workChoice}>
-                        <Image source={work} style={styles.icon} />
-                    <View style={styles.direction}>
-                        <Text style={styles.domainText}>Travail</Text>
-                        <Image source={rightArrow} style={styles.iconImage}></Image>
-                    </View>
+                    <Image source={work} style={styles.icon} />
+                    <Text style={styles.domainText}>Travail</Text>
                 </Pressable>
                 <Pressable style={styles.domainCard} onPress={moneyChoice}>
-                        <Image source={money} style={styles.icon} />
-                    <View style={styles.direction}>
-                        <Text style={styles.domainText}>Argent</Text>
-                        <Image source={rightArrow} style={styles.iconImage}></Image>
-                        </View>
+                    <Image source={money} style={styles.icon} />
+                    <Text style={styles.domainText}>Argent</Text>
                 </Pressable>
                 <Pressable style={styles.domainCard} onPress={generalChoice}>
-                        <Image source={general} style={styles.icon} />
-                    <View style={styles.direction}>
-                        <Text style={styles.domainText}>Général</Text>
-                        <Image source={rightArrow} style={styles.iconImage}></Image>
-                        </View>
+                    <Image source={general} style={styles.icon} />
+                    <Text style={styles.domainText}>Général</Text>
                 </Pressable>
             </View>
         </View>
@@ -110,18 +97,23 @@ const styles = StyleSheet.create({
         flex: 1,
         width: SCREEN_WIDTH,
         height: SCREEN_HEIGHT,
-        backgroundColor: colors.palette.purple600,
+        backgroundColor: colors.background,
         alignItems: 'center',
         justifyContent: 'center',
     },
-    icon: {
-        width: '50%',
-        height: '80%',
+    header: {
+        position: 'absolute',
+        top: 0,
+        width: SCREEN_WIDTH,
+        height: SCREEN_HEIGHT / 2.5,
+        borderBottomLeftRadius: SCREEN_WIDTH * 0.18,
+        borderBottomRightRadius: SCREEN_WIDTH * 0.18,
+        backgroundColor: colors.palette.violet
     },
-    input: {
-        fontFamily: 'mulishRegular',
-        color: colors.palette.blue,
-        fontSize: 14,
+    icon: {
+        width: SCREEN_WIDTH * 0.17,
+        height: SCREEN_WIDTH * 0.17,
+        marginLeft: SCREEN_WIDTH * 0.1,
     },
     // Domain Container
     domainsContainer: {
@@ -131,38 +123,27 @@ const styles = StyleSheet.create({
         justifyContent: "center",
     },
     domainCard: {
-        width: "90%",
-        height: "16%",
+        width: "70%",
+        height: "13%",
         margin: 10,
         flexDirection: "row",
         alignItems: "center",
-        justifyContent: "space-around",
+        justifyContent: "flex-start",
         borderWidth: 1,
         borderColor: colors.palette.ivory,
         borderRadius: 10,
-        backgroundColor: 'rgba(198,198,231, 0.2)',
+        backgroundColor: colors.palette.violetClair,
     },
     domainText: {
         fontFamily: "mulishBold",
-        fontSize: 26,
-        color: colors.palette.pink500,
-    },
-    iconImage: {
-        width: 30,
-        height: 30,
-        alignSelf: "flex-end",
-        marginLeft: 20,
+        fontSize: 20,
+        color: colors.palette.violet,
+        marginLeft: SCREEN_WIDTH * 0.1,
     },
     contentTitle: {
         fontFamily: "mulishBold",
         fontSize: 22,
         color: colors.palette.ivory,
-        marginBottom: 20
-    },
-    direction: {
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "space-between",
-        paddingTop: 55
+        marginBottom: 40
     },
 })
