@@ -36,7 +36,7 @@ const ProfilScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   const [checked, setChecked] = React.useState(false);
   const [user, setUser] = useUserStore();
 console.log(user);
-  const star = require('../../../../assets/icons/sparkling-gold.png')
+
   const rightArrow = require('../../../../assets/icons/caretRight.png');
 
   const userSign = user?.zodiacname;
@@ -56,9 +56,7 @@ console.log(user);
         <LinearGradient
           colors={[colors.palette.purple400, colors.palette.purple500]}
           style={styles.cardUserStyle}>
-          <View style={styles.starContainerTop}>
-            <Image source={star} style={styles.starImage} />
-          </View>
+          
           {/* Header User Information */}
           <View style={styles.headerImageContainer}>
             <Text style={styles.headerTitle}>mon compte</Text>
