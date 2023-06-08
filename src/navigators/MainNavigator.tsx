@@ -150,9 +150,10 @@ export default function UserStack() {
 
   return (
     <NavigationContainer>
-      <Tab.Navigator
+      <Tab.Navigator       
         screenOptions={({ route }) => ({
           tabBarStyle: ((route) => {
+            
             const routeName = getFocusedRouteNameFromRoute(route) ?? ""
             if (routeName === 'YesDraw' || routeName === 'CrossDraw' || routeName === 'DayDraw' || routeName === 'TendanceResult') {
               return { display: "none" }
@@ -160,10 +161,13 @@ export default function UserStack() {
             return
           })(route),
           tabBarBackground: () => (
-            <View style={{ width: '100%', height: '100%', backgroundColor: colors.palette.grayscale }} />
-          ),
-          tabBarItemStyle: { height: 55, width: '100%', borderRadius: 20, },
+            <View style={{ width: '100%', height: '100%', backgroundColor: colors.palette.ivory ,paddingTop:10, borderTopWidth: 0.5,borderTopColor: colors.palette.gold }} />
+          ), 
+          tabBarShowLabel: true,
+          tabBarActiveTintColor: colors.palette.gold,
+          tabBarInactiveTintColor: colors.palette.ivory,        
         })}
+        
 
 
       >
@@ -171,11 +175,12 @@ export default function UserStack() {
           component={HomeStackScreen}
           options={{
             headerShown: false,
-            tabBarLabelStyle: { fontSize: 14, fontFamily: 'mulishLight', color: colors.palette.gold, paddingBottom: 6 },
+            tabBarLabelStyle: { fontSize: 10, fontFamily: 'mulishLight', paddingBottom: 6 },
             tabBarIcon: () => (
-              <Icon name="home" size={28} color={colors.palette.gold} />
+              <Icon name="home" size={18} color={colors.palette.gold} />
             ),
-            tabBarIconStyle: { marginTop: 4 },
+            tabBarIconStyle: { marginTop: 2 },
+            
           }}
         />
 
@@ -212,12 +217,12 @@ export default function UserStack() {
           options={{
             headerShown: false,
             tabBarLabel: 'Mon Compte',
-            tabBarLabelStyle: { fontSize: 14, fontFamily: 'mulishLight', color: colors.palette.gold, paddingBottom: 6 },
+            tabBarLabelStyle: { fontSize: 10, fontFamily: 'mulishLight', color: colors.palette.gold, paddingBottom: 6 },
             tabBarIcon: () => (
-              <Icon name="user" size={28} color={colors.palette.gold} />
+              <Icon name="user" size={18} color={colors.palette.gold} />
             ),
             tabBarIconStyle: { marginTop: 4 },
-            tabBarActiveTintColor: colors.palette.purple600,
+            tabBarActiveTintColor: colors.palette.gold,
           }} />
 
       </Tab.Navigator>

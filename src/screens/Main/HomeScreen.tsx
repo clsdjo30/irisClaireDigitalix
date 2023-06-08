@@ -1,11 +1,12 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import {
   StyleSheet,
   Text,
   Image,
   View,
   Pressable,
-  ImageSourcePropType
+  ImageSourcePropType,
+  Dimensions
 } from 'react-native';
 import { getAuth } from 'firebase/auth';
 import { useUserStore } from '../../utils/hooks/useUserStore';
@@ -19,9 +20,13 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 const auth = getAuth();
 
 const rightArrow = require('../../../assets/icons/caretRight.png');
-const yesNo = require('../../../assets/images/testVector/yes_no.png');
+const IrisCars = require('../../../assets/images/cards/back/Claire_Back_Card.png');
+const yesNo = require('../../../assets/images/testVector/yesNo.png');
 const question = require('../../../assets/images/testVector/simple_question.png');
-const questionPlus = require('../../../assets/images/testVector/question_plus.png');
+const questionPlus = require('../../../assets/images/testVector/question_point.png');
+
+const WIDTH = Dimensions.get('window').width;
+const HEIGHT = Dimensions.get('window').height;
 
 const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
@@ -41,7 +46,7 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   function goToDayDraw() {
     if (daycard.isdraw === false) {
       navigation.navigate('DayDraw');
-    } 
+    }
   }
 
 
@@ -49,68 +54,89 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
     <View style={styles.container}>
 
+
+      <View
+        style={styles.header}
+      >
+        <Text style={styles.headerTitle}>Bonjour {user?.firstname}</Text>
+        <View style={styles.tendanceContainer}>
+          {daycard.isdraw === false ?
+            <>
+              <View style={styles.tendanceTextContainer}>
+                <Text style={styles.tendanceText}>
+                  Allez vite découvrir la tendance de votre journée !
+                </Text>
+              </View>
+            </>
+            :
+            <>
+             
+              <View style={styles.tendanceTextContainer}>
+                <Text style={styles.displayTextTendance}>
+                  {daycard.daytendance}
+                </Text>
+              </View>
+            </>
+          }
+        </View>
+      </View>
+
       <View style={styles.domainsContainer}>
-
-        <LinearGradient colors={
-          [
-            colors.palette.grayscale,
-            colors.palette.grayscale,
-          ]
-        }
-          style={styles.header}
+        <LinearGradient
+          colors={[colors.palette.violetClair,  colors.palette.violetClair]}
+          start={{ x: 0, y: 0.5 }}
+          end={{ x: 1, y: 0.5 }}
+          locations={[0.1, 0.9]}
+          style={styles.domainCard}
         >
-          <Text style={styles.headerTitle}>Bonjour {user?.firstname}</Text>
-          <View style={styles.tendanceContainer}>
-            {daycard.isdraw === false ?
-              <>
-                <View style={styles.cardContainer}>
-                  <Image source={backCard} style={styles.daydrawCard} />
-                </View>
-                <View style={styles.tendanceTextContainer}>
-                  <Text style={styles.tendanceText}>
-                    Allez vite découvrir la tendance de votre journée !
-                  </Text>
-                </View>
-              </>
-              :
-              <>
-                <View style={styles.cardContainer}>
-                  <Image source={daycard.daycardimage as ImageSourcePropType} style={styles.daydrawCard} />
-                </View>
-                <View style={styles.tendanceTextContainer}>
-                  <Text style={styles.displayTextTendance}>
-                    {daycard.daytendance}
-                  </Text>
-                </View>
-              </>
-            }
-          </View>
+          <Pressable
+            onPress={goToYesDraw}
+            style={styles.innerContainer}
+          >
+            <Image source={yesNo} style={styles.icon} />
+            <View style={styles.direction}>
+              <Text style={styles.domainText}>Question Oui/Non</Text>
+              <Text style={styles.domainTextExplain}>Recevez une réponse breve à vos questions les plus simple</Text>
+            </View>
+          </Pressable>
         </LinearGradient>
-
-        <Pressable 
-        style={[styles.domainCard, styles.violetCard]} 
-        onPress={goToYesDraw}
-        
+        {/* Card CrossDraw */}
+        <LinearGradient
+          colors={[colors.palette.violetClair,  colors.palette.violetClair]}
+          start={{ x: 0, y: 0.5 }}
+          end={{ x: 1, y: 0.5 }}
+          locations={[0.1, 0.9]}
+          style={styles.domainCard}
         >
-          <Image source={yesNo} style={styles.icon} />
-          <View style={styles.direction}>
-            <Text style={styles.domainText}>Question Oui/Non</Text>
-          </View>
-        </Pressable>
-        <Pressable style={[styles.domainCard, styles.goldCard]} onPress={goToCrossDraw}>
+        <Pressable style={styles.innerContainer} onPress={goToCrossDraw}>
           <Image source={questionPlus} style={styles.icon} />
           <View style={styles.direction}>
-            <Text style={styles.domainGoldText}>Tirage Complet</Text>
+            <Text style={styles.domainText2}>Tirage Complet</Text>
+            <Text style={styles.domainTextGoldExplain}>Vous avez de grande interogation, vous voulez ....</Text>
           </View>
         </Pressable>
-        <Pressable style={[styles.domainCard, styles.violetCard]} onPress={goToDayDraw}>
+        </LinearGradient>
+
+      {/* CARD TENDANCE DU JOUR */}
+      <LinearGradient
+         colors={[colors.palette.violetClair,  colors.palette.violetClair]}
+         start={{ x: 0, y: 0.5 }}
+         end={{ x: 1, y: 0.5 }}
+         locations={[0.1, 0.9]}
+          style={styles.domainCard}
+        >
+        <Pressable style={styles.innerContainer} onPress={goToDayDraw}>
           <Image source={question} style={styles.icon} />
           <View style={[styles.direction]}>
             {daycard.isdraw === false ?
+            <>
               <Text style={styles.domainText}>Tendance du Jour</Text>
+              <Text style={styles.domainTextExplain}>Une pensée inspirante pour éclairer votre journée !</Text>
+              </>
               :
               <Text style={styles.domainText}>Tendance du Jour</Text>
             }
+
           </View>
           <View style={styles.dayDrawAlert}>
             {daycard.isdraw === false ?
@@ -124,6 +150,7 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
             }
           </View>
         </Pressable>
+        </LinearGradient>
       </View>
     </View>
   );
@@ -132,78 +159,106 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.palette.grayscale,
+    backgroundColor: colors.background,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  // Domain Container
-  domainsContainer: {
-    width: "100%",
-    height: "100%",
-    alignItems: "center",
-    justifyContent: "center",
-  },
+
   header: {
-    width: "90%",
-    height: "30%",
-    borderRadius: 10, 
-    marginBottom: 10,
-    borderBottomWidth: 0.2,
-    borderBottomColor: colors.palette.gold,
-    borderLeftWidth: 0.2,
-    borderLeftColor: colors.palette.gold,
-  elevation: 1
+    position: 'absolute',
+    top: 0,
+    width: WIDTH,
+    height: HEIGHT / 3,
+    borderBottomLeftRadius: WIDTH *0.18,
+    borderBottomRightRadius: WIDTH *0.18,
+    backgroundColor: colors.palette.violet
+
   },
+
   headerTitle: {
-    color: colors.palette.violet,
+    color: colors.palette.golden,
     fontSize: 30,
     fontFamily: 'mulishBold',
     textTransform: 'capitalize',
-    marginTop: 10,
-   textAlign: 'center',
+    paddingTop: 20,
+    textAlign: 'center',
+  },
+
+  // Domain Container
+  domainsContainer: {
+    position: 'absolute',
+    bottom: 120,
+    width: "90%",
+    height: "55%",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "flex-start",
   },
   domainCard: {
     width: "90%",
-    height: "16%",
-    margin: 10,
+    height: "35%",
+    marginBottom: 35,
     flexDirection: "row",
+    borderRadius: 15,
+    elevation: 5,
+  },
+  innerContainer: {
+    borderRadius: 15,
+    flexDirection: "row",
+    width: "100%",
+    height: "100%",
+    marginBottom: 20,
     alignItems: "center",
-    justifyContent: "space-around",
-    borderRadius: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: colors.palette.gold,
-    borderLeftWidth: 1,
-    borderLeftColor: colors.palette.gold,
-    elevation: 5,
-    // backgroundColor: 'rgba(198,198,231, 0.2)',
+    justifyContent: "flex-start"
   },
-  violetCard: {
-    backgroundColor: colors.palette.violetClair,
-  },
-  goldCard: {
-    backgroundColor: colors.palette.gold,
-    borderBottomColor: colors.palette.violet,
-    borderLeftWidth: 1,
-    borderLeftColor: colors.palette.violet,
-    elevation: 5,
-  },
+  // taille image domain Card
   icon: {
-    width: '35%',
-    height: '70%',
+    width: '25%',
+    height: '55%',
+  },
+  //container text domain card
+  direction: {
+    width: "70%",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "space-between",
+
   },
   domainText: {
     width: "90%",
-    fontFamily: "mulishRegular",
+    fontFamily: "mulishBold",
     fontSize: 20,
-    color: colors.palette.grayscale,
+    color: colors.palette.violet,
     textAlign: "center",
-    marginTop: 20,
+    marginBottom: 10,
+  },
+  domainText2: {
+    width: "90%",
+    fontFamily: "mulishBold",
+    fontSize: 20,
+    color: colors.palette.golden,
+    textAlign: "center",
+    marginBottom: 10,
+  },
+  domainTextExplain: {
+    width: "90%",
+    fontFamily: "mulishLight",
+    fontSize: 12,
+    color: colors.palette.violet,
+    textAlign: "center",
+  },
+  domainTextGoldExplain: {
+    width: "90%",
+    fontFamily: "mulishLight",
+    fontSize: 12,
+    color: colors.palette.violet,
+    textAlign: "center",
   },
   domainGoldText: {
     width: "90%",
     fontFamily: "mulishRegular",
     fontSize: 20,
-    color: colors.palette.grayscale,
+    color: colors.palette.violet,
     textAlign: "center",
     marginTop: 20,
   },
@@ -211,12 +266,7 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
   },
-  direction: {
-    width: "60%",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
+
   iconContainer: {
     justifyContent: "center",
     alignItems: "center",
@@ -226,6 +276,9 @@ const styles = StyleSheet.create({
     backgroundColor: colors.palette.orange
   },
   iconContainerCheck: {
+    position: 'absolute',
+    right: 0,
+    top: 18,
     justifyContent: "center",
     alignItems: "center",
     width: 15,
@@ -234,14 +287,14 @@ const styles = StyleSheet.create({
     backgroundColor: 'green'
   },
   dayDrawAlert: {
-   position: 'absolute',
-    right: 25,
-    top: 50,
+    position: 'absolute',
+    right: 20,
+    top: 32,
   },
   tendanceContainer: {
     flexDirection: "row",
     width: "100%",
-    height: "70%",
+    height: "50%",
     alignItems: "center",
     justifyContent: "space-around",
   },
@@ -252,29 +305,27 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   tendanceText: {
-    color: colors.palette.violet, 
-    fontSize: 16, 
+    color: colors.palette.violet,
+    fontSize: 16,
     fontFamily: 'mulishRegular',
     textAlign: "center",
   },
   displayTextTendance: {
-    color: colors.palette.violet, 
-    fontSize: 16, 
-    fontFamily:  'mulishRegular',
-    textAlign: "center", 
+    color: colors.palette.ivory,
+    fontSize: 16,
+    fontFamily: 'mulishRegular',
+    textAlign: "center",
   },
   cardContainer: {
     width: 60,
-    height: 100,
+    height: 110,
     borderRadius: 5,
   },
   daydrawCard: {
     width: 60,
-    height: 100,
+    height: 110,
     borderRadius: 5,
   }
-
-
 });
 
 export default HomeScreen;

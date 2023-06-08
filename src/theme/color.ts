@@ -1,10 +1,12 @@
 // TODO: write documentation for colors and palette in own markdown file and add links from here
 
 const palette = {
-violet: "#232452",
-violetClair: "#4f5075",
-orange: "#db5447",
-grayscale: "#e7e7e4",
+violet: "#2F2A5A",
+violetClair: "#dcdaee",
+violetBg: "#eeedf6",
+orange: "#ff875f",
+golden: "#bc9531",
+
   
   //GRAYSCALE
   neutral100: "#e4e4e7",
@@ -32,18 +34,19 @@ grayscale: "#e7e7e4",
   purple300: "#4F5075",
   purple400: "#4c669f",
   purple500: "#7E80C8",
-  purple600: "#232452",
+  purple600: "#2F2A5A",
+  
 
   //SECONDARY Gold
   darkgold: "#CBA135",
   lightgold: "#FFE033",
 
-  ivory: "#FFF8E7",
+  ivory: "#EEEDF6",
   //ACCENT Pink
   pink200: "#FF70BF",
   pink500: "#D50075",
 
-  gold: "#cba135",
+  gold: "#BC9531",
   darkyellow: "#eedc82",
   blue: "#2072af",
 
@@ -65,7 +68,9 @@ export const colors = {
   /**
    * The default text color in many components.
    */
-  text: palette.ivory,
+  text: palette.violet,
+
+  subText: palette.golden,
   /**
    * Secondary text information.
    */
@@ -73,11 +78,11 @@ export const colors = {
   /**
    * The default color of the screen background.
    */
-  background: palette.neutral200,
+  background: palette.violetBg,
   /**
    * The default border color.
    */
-  border: palette.neutral400,
+  border: palette.violet,
   /**
    * The main tinting color.
    */
@@ -89,12 +94,12 @@ export const colors = {
   /**
    * Error messages.
    */
-  error: palette.pink500,
+  error: palette.violetBg,
   /**
    * Error Background.
    *
    */
-  errorBackground: palette.purple500,
+  errorBackground: palette.orange,
   /**
    * The icon color in `TabBar`.
    */
