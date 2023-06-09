@@ -1,16 +1,13 @@
 import React from 'react'
 import {
   StyleSheet,
-  Image,
   View,
-  TouchableOpacity,
   Text,
-  Dimensions
+  Dimensions,
+  TouchableOpacity,
 } from 'react-native';
-import { Input } from '@rneui/themed';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { Form, FormItem } from 'react-native-form-component';
-import { LinearGradient } from 'expo-linear-gradient';
+import { Input } from '@rneui/themed';
 import { colors } from '../../../theme';
 import { useQuestionStore } from '../../../utils/hooks/useQuestionStore';
 import { StackScreenProps } from '@react-navigation/stack';
@@ -30,51 +27,69 @@ const SCREEN_FONT_SCALE = SCREEN_SCALE * 0.5;
 
 const YesDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   const [value, setValue] = useQuestionStore();
+  const [errorMessage, setErrorMessage] = React.useState('');
+
+  function handleTextChange(text: string) {
+    setErrorMessage(''); // Réinitialise le message d'erreur
+    setValue({ ...value, question: text }); // Met à jour la valeur de l'input
+  }
 
   function goToChooseCard() {
+    if (value.question.length < 20) {
+      setErrorMessage('Votre question est trop courte');
+      return;
+    }
+
+    if (value.question.length > 200) {
+      setErrorMessage('Votre question est trop longue');
+      return;
+    }
+
     navigation.navigate('DrawOneCard');
   }
 
-  console.log(value);
   return (
-    <LinearGradient
-      // Card Linear Gradient
-      colors={[colors.palette.purple600, colors.palette.purple500]}
-      style={styles.container}>
-      
-        <View style={styles.blockExplain}>
-          <Text style={styles.contentTitle}> Un text pour dire comment poser sa question</Text>
-        </View>
-        <View style={styles.blockDomain}>
-          <Text style={styles.contentTitle}>Vous allez poser une question concernant le domaine : {value.domain}</Text>
-        </View>
-        <Form
-          onButtonPress={goToChooseCard}
-          buttonStyle={styles.button}
-          buttonText='Tirer votre carte'
-          buttonTextStyle={styles.buttonText}
-        >
+    <View style={styles.container}>
+      <View style={styles.header}>
+        {errorMessage !== '' && (
+          <View style={styles.errorContainer}>
+            <Text style={styles.errorText}>{errorMessage}</Text>
+          </View>
+        )}
+      </View>
+      <View style={styles.blockTitle}>
+        <Text style={styles.contentTitle}>Formulez votre question</Text>
+      </View>
 
-          <FormItem
-            placeholder='Saisissez votre question'
-            isRequired
-            multiline
-            numberOfLines={4}
-            textAlignVertical='top'
-            value={value.question}
-            onChangeText={(text) => setValue({ ...value, question: text })}
-            style={styles.control}
-            textInputStyle={styles.input}
-            children={<Icon
-              name='question-circle'
-              size={28}
-              style={styles.icon}
-            />}
-          />
-
-        </Form>
-      
-    </LinearGradient >
+      <View style={styles.formBlock}>
+        <Input
+          containerStyle={styles.containerStyle}
+          inputContainerStyle={styles.inputContainerStyle}
+          inputStyle={styles.inputStyle}
+          placeholder='Saisissez votre question'
+          placeholderTextColor={colors.palette.violet}
+          textAlignVertical='top'
+          value={value.question}
+          onChangeText={handleTextChange}
+          style={{ fontFamily: "mulishMedium" }}
+          maxLength={300}
+          multiline={true}
+          numberOfLines={5}
+          leftIcon={<Icon
+            name='question-circle'
+            size={28}
+            style={styles.icon}
+          />}
+        />
+        <View style={styles.validationButton}>
+          <TouchableOpacity style={styles.button} onPress={goToChooseCard}>
+            <Text style={styles.buttonText}>
+              Tirer ma carte
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </View >
   )
 }
 
@@ -85,64 +100,94 @@ const styles = StyleSheet.create({
     flex: 1,
     width: SCREEN_WIDTH,
     height: SCREEN_HEIGHT,
-    backgroundColor: colors.palette.outterSpace,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  //LOGOUT BUTTON
-  blockButton: {
-    marginTop: 30,
+    backgroundColor: colors.background,
     alignItems: 'center',
   },
-  button: {
-
-    backgroundColor: colors.palette.pink500,
-    marginBottom: 10,
-    borderRadius: 16,
-    justifyContent: "center",
-    alignItems: "center",
-    paddingVertical: 5,
-  },
-  buttonText: {
-    fontFamily: "oswaldRegular",
-    fontSize: 14,
-    color: colors.palette.ivory,
-    textTransform: "capitalize"
-  },
-  control: {
-    width: SCREEN_WIDTH - 40,
-    height: SCREEN_HEIGHT * 0.2,
-    marginBottom: 10,
-    flexDirection: 'row',
+  header: {
+    position: 'absolute',
+    top: 0,
+    width: SCREEN_WIDTH,
+    height: SCREEN_HEIGHT / 2,
+    borderBottomLeftRadius: SCREEN_WIDTH * 0.18,
+    borderBottomRightRadius: SCREEN_WIDTH * 0.18,
+    backgroundColor: colors.palette.violet,
     alignItems: 'center',
-    backgroundColor: colors.palette.ivory,
-    borderBottomWidth: 1,
-    borderLeftWidth: 1,
-    borderLeftColor: colors.palette.darkgold,
-    borderBottomColor: colors.palette.darkgold,
+    
   },
-  icon: {
-    marginRight: 20,
-    color: colors.palette.lightgold,
-  },
-  input: {
-    fontFamily: 'mulishRegular',
-    color: colors.palette.blue,
-    fontSize: 14,
-  },
-  blockExplain: {
-   width:"90%",
-    borderWidth:1,
-    marginBottom:30
-  },
-  blockDomain: {
-    width:"90%",
-    borderWidth:1
+  blockTitle: {
+    paddingVertical: SCREEN_HEIGHT * 0.2,
   },
   contentTitle: {
-    fontFamily: "mulishRegular",
-    fontSize: 14,
+    fontFamily: "mulishBold",
+    fontSize: 22,
     color: colors.palette.ivory,
-    marginBottom: 20
-  }
+  },
+  containerStyle: {
+    width: SCREEN_WIDTH * 0.8,
+    height: SCREEN_HEIGHT * 0.3,
+    backgroundColor: colors.palette.violetClair,
+    borderRadius: 16,
+    paddingHorizontal: 10,
+    paddingVertical: 13,
+    borderBottomWidth: 0.5,
+    borderLeftWidth: 0.5,
+    elevation: 5,
+  },
+  inputContainerStyle: {
+    borderBottomWidth: 0,
+  },
+  //ERROR
+  errorContainer: {
+    width: '80%',
+    backgroundColor: colors.palette.orange,
+    marginTop: 20,
+    borderRadius: 16,
+  },
+  errorText: {
+    textAlign: "center",
+    fontFamily: "mulishBold",
+    fontSize: 12,
+    color: colors.palette.violetClair,
+    paddingVertical: 6,
+  },
+  formBlock: {
+    position: 'absolute',
+    top: SCREEN_HEIGHT * 0.4,
+    width: SCREEN_WIDTH * 0.8,
+    height: SCREEN_HEIGHT * 0.5,
+    justifyContent: 'center',
+
+  },
+  inputStyle: {
+    fontFamily: "mulishMedium",
+
+  },
+  icon: {
+    position: 'relative',
+    bottom: 40,
+    color: colors.palette.golden,
+    marginRight: 10
+  },
+  //BUTTON
+  validationButton: {
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 40,
+  },
+  button: {
+    width: '100%',
+    backgroundColor: colors.palette.gold,
+    marginTop: 10,
+    borderRadius: 16,
+  },
+  buttonText: {
+    textAlign: "center",
+    alignItems: "center",
+    paddingVertical: 8,
+    fontFamily: "mulishBold",
+    fontSize: 18,
+    color: colors.palette.violetBg,
+  },
+
 })

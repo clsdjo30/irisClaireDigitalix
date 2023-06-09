@@ -83,7 +83,7 @@ const SignInScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.palette.grayscale,
+    backgroundColor: colors.palette.violetClair,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     fontFamily: "oswaldBold",
     fontSize: 18,
-    color: colors.palette.grayscale,
+    color: colors.palette.violetClair,
   },
   genderTitle: {
     width: '100%',

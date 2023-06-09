@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: 0,
         width: SCREEN_WIDTH,
-        height: SCREEN_HEIGHT / 2.5,
+        height: SCREEN_HEIGHT / 2,
         borderBottomLeftRadius: SCREEN_WIDTH * 0.18,
         borderBottomRightRadius: SCREEN_WIDTH * 0.18,
         backgroundColor: colors.palette.violet
@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
     },
     domainCard: {
         width: "70%",
-        height: "13%",
+        height: "10%",
         margin: 10,
         flexDirection: "row",
         alignItems: "center",
@@ -144,6 +144,6 @@ const styles = StyleSheet.create({
         fontFamily: "mulishBold",
         fontSize: 22,
         color: colors.palette.ivory,
-        marginBottom: 40
+        marginBottom: 50
     },
 })
