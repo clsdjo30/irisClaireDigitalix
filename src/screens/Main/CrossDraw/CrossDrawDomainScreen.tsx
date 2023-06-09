@@ -34,7 +34,7 @@ const CrossDrawDomainScreen: React.FC<StackScreenProps<any>> = ({ navigation }) 
     const [value, setValue] = useQuestionStore();
 
     function goToAskQuestionCard() {
-        navigation.navigate('AskQuestion');
+        navigation.navigate('AskCrossQuestion');
     }
 
     function loveChoice() {
@@ -67,20 +67,36 @@ const CrossDrawDomainScreen: React.FC<StackScreenProps<any>> = ({ navigation }) 
                     <Text style={styles.contentTitle}>Choisissez votre Domaine</Text>
                 </View>
                 <Pressable style={styles.domainCard} onPress={loveChoice}>
-                    <Image source={love} style={styles.icon} />
-                    <Text style={styles.domainText}>Amour</Text>
+                    <View style={styles.iconBlock}>
+                        <Image source={love} style={styles.icon} />
+                    </View>
+                    <View style={styles.domainTextBlockBlock}>
+                        <Text style={styles.domainText}>Amour</Text>
+                    </View>
                 </Pressable>
                 <Pressable style={styles.domainCard} onPress={workChoice}>
-                    <Image source={work} style={styles.icon} />
-                    <Text style={styles.domainText}>Travail</Text>
+                    <View style={styles.iconBlock}>
+                        <Image source={work} style={styles.icon} />
+                    </View>
+                    <View style={styles.domainTextBlockBlock}>
+                        <Text style={styles.domainText}>Travail</Text>
+                    </View>
                 </Pressable>
                 <Pressable style={styles.domainCard} onPress={moneyChoice}>
-                    <Image source={money} style={styles.icon} />
-                    <Text style={styles.domainText}>Argent</Text>
+                    <View style={styles.iconBlock}>
+                        <Image source={money} style={styles.icon} />
+                    </View>
+                    <View style={styles.domainTextBlockBlock}>
+                        <Text style={styles.domainText}>Argent</Text>
+                    </View>
                 </Pressable>
                 <Pressable style={styles.domainCard} onPress={generalChoice}>
-                    <Image source={general} style={styles.icon} />
-                    <Text style={styles.domainText}>Général</Text>
+                    <View style={styles.iconBlock}>
+                        <Image source={general} style={styles.icon} />
+                    </View>
+                    <View style={styles.domainTextBlockBlock}>
+                        <Text style={styles.domainText}>Général</Text>
+                    </View>
                 </Pressable>
             </View>
         </View>
@@ -97,47 +113,53 @@ const styles = StyleSheet.create({
         backgroundColor: colors.background,
         alignItems: 'center',
         justifyContent: 'center',
-    
     },
     header: {
-        position: 'relative',
-        width: SCREEN_WIDTH -5,
-        height: SCREEN_WIDTH * 1.4,
+        position: 'absolute',
+        top: 0,
+        width: SCREEN_WIDTH - 5,
+        height: SCREEN_HEIGHT * 0.4,
         borderBottomLeftRadius: SCREEN_WIDTH * 0.1,
         borderBottomRightRadius: SCREEN_WIDTH * 0.1,
         backgroundColor: colors.palette.violet
     },
-    icon: {
-        width: SCREEN_WIDTH * 0.17,
-        height: SCREEN_WIDTH * 0.17,
-        marginLeft: SCREEN_WIDTH * 0.1,
-    },
     // Domain Container
     domainsContainer: {
-        position: "relative",
-        top: -SCREEN_WIDTH / 1.3,
+        position: 'absolute', //Here is the trick
+        top: -50,
         width: "100%",
         height: "100%",
         alignItems: "center",
         justifyContent: "center",
     },
     domainCard: {
-        width: "70%",
+        width: "80%",
         height: "10%",
         margin: 10,
         flexDirection: "row",
         alignItems: "center",
-        justifyContent: "flex-start",
         borderWidth: 1,
         borderColor: colors.palette.ivory,
         borderRadius: 10,
         backgroundColor: colors.palette.violetClair,
     },
+    icon: {
+        width: SCREEN_WIDTH * 0.17,
+        height: SCREEN_WIDTH * 0.17,
+    },
+    iconBlock: {
+        width: '20%',
+        marginLeft: 20,
+    },
+    domainTextBlockBlock: {
+        width: '80%',
+        marginLeft: 50,
+    },
     domainText: {
         fontFamily: "mulishBold",
         fontSize: 20,
         color: colors.palette.violet,
-        marginLeft: SCREEN_WIDTH * 0.1,
+
     },
     contentTitle: {
         fontFamily: "mulishBold",
