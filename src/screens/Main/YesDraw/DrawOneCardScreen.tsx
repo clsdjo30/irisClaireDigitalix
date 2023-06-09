@@ -10,7 +10,6 @@ import {
     Alert,
 } from 'react-native';
 import CARD_DECK from '../../../utils/cards';
-import { LinearGradient } from 'expo-linear-gradient';
 import { colors } from '../../../theme';
 import { useQuestionStore } from '../../../utils/hooks/useQuestionStore';
 import { StackScreenProps } from '@react-navigation/stack';
@@ -32,9 +31,9 @@ const DrawOneCardScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     const [credit, setCredit] = useState(2);
     const [clickable, setClickable] = useState(true);
     const [isCardFlipped, setIsCardFlipped] = useState(false);
-   
-    
-  
+
+
+
 
     function sendQuestion() {
         // TODO implementer la logique de validation avec credit
@@ -50,9 +49,9 @@ const DrawOneCardScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
         else {
             goBuyCredit()
         }
-        
+
     }
-   
+
 
     function goBuyCredit() {
         navigation.navigate('Profil')
@@ -65,11 +64,8 @@ const DrawOneCardScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
     console.log(value);
     return (
-        <LinearGradient
-            // Card Linear Gradient
-            colors={[colors.palette.purple600, colors.palette.purple500]}
-            style={styles.container}>
-
+        <View style={styles.container}>
+            <View style={styles.header} />
             <View style={styles.deckContainer}>
                 <Text style={styles.contentTitle}>Concentrez-vous sur votre question et tirez votre carte</Text>
                 {CARD_DECK.map((item, index) => {
@@ -97,14 +93,14 @@ const DrawOneCardScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                                     setTimeout(() => {
                                         setModalVisible(true)
                                     }, 1000)}
-                               
+
                             >
-                                <View style={[styles.cardImage, (isCardFlipped ===true) && {zIndex: 0}]}>
+                                <View style={[styles.cardImage, (isCardFlipped === true) && { zIndex: 0 }]}>
                                     <Image source={item.backImageUrl} style={styles.cardImage} />
                                 </View>
                                 <View >
-                                    <Image source={item.frontImageUrl} 
-                                    style={ [styles.cardImage, (isCardFlipped === true) &&  styles.cardDraw, ]}  />
+                                    <Image source={item.frontImageUrl}
+                                        style={[styles.cardImage, (isCardFlipped === true) && styles.cardDraw,]} />
                                 </View>
                             </FlipCard>
                         </View>
@@ -146,7 +142,7 @@ const DrawOneCardScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
 
 
-        </LinearGradient >
+        </View >
     )
 }
 
@@ -157,10 +153,21 @@ const styles = StyleSheet.create({
         flex: 1,
         width: SCREEN_WIDTH,
         height: SCREEN_HEIGHT,
-        backgroundColor: colors.palette.outterSpace,
+        backgroundColor: colors.palette.violet,
         alignItems: 'center',
         justifyContent: 'center',
     },
+    // Header Container
+    header: {
+        position: 'absolute',
+        top: 0,
+        width: SCREEN_WIDTH,
+        height: SCREEN_HEIGHT / 2,
+        borderBottomLeftRadius: SCREEN_WIDTH * 0.18,
+        borderBottomRightRadius: SCREEN_WIDTH * 0.18,
+        backgroundColor: colors.background,
+        alignItems: 'center',
+      },
     // Domain Container
     deckContainer: {
         width: "95%",
@@ -175,7 +182,7 @@ const styles = StyleSheet.create({
     contentTitle: {
         fontFamily: "mulishRegular",
         fontSize: 18,
-        color: colors.palette.ivory,
+        color: colors.palette.violet,
         marginBottom: 10,
         textAlign: 'center',
     },
@@ -190,20 +197,20 @@ const styles = StyleSheet.create({
         alignItems: 'center',
 
     },
-    flipCardContainer:{
+    flipCardContainer: {
         display: "none"
     },
     cardImage: {
-        width: 60, 
-        height: 120, 
-        resizeMode: 'cover', 
+        width: 60,
+        height: 120,
+        resizeMode: 'cover',
         borderRadius: 10
     },
     cardDraw: {
         transform: [
             { scale: 1.3 },
-            
-           
+
+
         ],
         zIndex: 999,
     },
