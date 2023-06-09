@@ -21,6 +21,7 @@ import YesDrawScreen from '../screens/Main/YesDraw/YesDrawScreen';
 import DrawOneCardScreen from '../screens/Main/YesDraw/DrawOneCardScreen';
 import YesDrawResultScreen from '../screens/Main/YesDraw/YesDrawResultScreen';
 import CrossDrawScreen from '../screens/Main/CrossDraw/CrossDrawScreen';
+import CrossDrawDomainScreen from '../screens/Main/CrossDraw/CrossDrawDomainScreen';
 
 const DayDrawStack = createNativeStackNavigator();
 const ProfilStack = createNativeStackNavigator();
@@ -94,7 +95,12 @@ function YesStackScreen() {
 // // NAVIGATION FOR CROSS DRAW
 function CrossStackScreen() {
   return (
-    <CrossStack.Navigator>
+    <CrossStack.Navigator
+      initialRouteName='ChooseDomain'
+    >
+      <CrossStack.Screen name="ChooseDomain"
+        component={CrossDrawDomainScreen}
+        options={{ headerShown: false, }} />
       <CrossStack.Screen name="AskCrossQuestion"
         component={CrossDrawScreen}
         options={{ headerShown: false, }} />
