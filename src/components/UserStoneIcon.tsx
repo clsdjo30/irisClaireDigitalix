@@ -47,11 +47,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     stoneImage: {
-      width: SCREEN_WIDTH * 0.1 ,
-      height: SCREEN_HEIGHT * 0.09,
+      width: 70,
+      height: 70,
       },
     signText: {
-        color: colors.palette.ivory,
+        color: colors.palette.violet,
         fontSize: 13,
         fontFamily: 'mulishLight',
         textTransform: 'capitalize',

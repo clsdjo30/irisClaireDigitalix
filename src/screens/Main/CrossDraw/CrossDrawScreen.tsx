@@ -91,6 +91,7 @@ const [selectedCardIndex, setSelectedCardIndex] = useState<number | null>(null);
 
   return (
     <SafeAreaView style={styles.container}>
+      <View style={styles.header} />
       <View style={styles.deckContainer}>
         <View style={styles.titleText}>
           <Text style={styles.title}>
@@ -154,8 +155,17 @@ const [selectedCardIndex, setSelectedCardIndex] = useState<number | null>(null);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.palette.grayscale
+    backgroundColor: colors.palette.violet
   },
+  header: {
+    position: 'absolute',
+    top: 0,
+    width: SCREEN_WIDTH - 5,
+    height: SCREEN_HEIGHT * 0.4,
+    borderBottomLeftRadius: SCREEN_WIDTH * 0.1,
+    borderBottomRightRadius: SCREEN_WIDTH * 0.1,
+    backgroundColor: colors.background
+},
   titleText: {
     width: "90%",
     height: "10%",

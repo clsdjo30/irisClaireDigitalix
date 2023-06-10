@@ -45,11 +45,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     astroImage: {
-        width: SCREEN_WIDTH * 0.1 ,
-        height: SCREEN_HEIGHT * 0.09,
+        width: 60,
+        height: 60,
     },
     signText: {
-        color: colors.palette.ivory,
+        paddingTop: 10,
+        color: colors.palette.violet,
         fontSize:  SCREEN_FONT_SCALE +12,
         fontFamily: 'mulishLight',
     },
