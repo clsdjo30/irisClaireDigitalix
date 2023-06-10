@@ -45,7 +45,7 @@ const CrossDrawQuestionScreen: React.FC<StackScreenProps<any>> = ({ navigation }
       return;
     }
 
-    navigation.navigate('DrawOneCard');
+    navigation.navigate('DrawCard');
   }
 
   return (
