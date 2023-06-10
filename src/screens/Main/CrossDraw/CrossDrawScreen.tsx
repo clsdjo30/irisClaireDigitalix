@@ -19,7 +19,9 @@ import CARD_DECK from '../../../utils/cards';
 import { colors } from '../../../theme/color'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StackScreenProps } from '@react-navigation/stack';
-
+import {
+  useCrossQuestionStore
+} from '../../../utils/hooks/useCrossQuestionStore';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = SCREEN_WIDTH * 1.5;
 
@@ -31,7 +33,7 @@ type CardProps = {
   style?: ViewStyle
 }
 // Le composant FlipCard est responsable de l'affichage d'une seule carte et de la gestion de son état "flip".
-const FlipCard: React.FC<CardProps> = ({ frontImageUrl, backImageUrl, onFlip, style}) => {
+const FlipCard: React.FC<CardProps> = ({ frontImageUrl, backImageUrl, onFlip, style }) => {
   // On utilise useState pour gérer l'état "flip" de la carte.
   const [isFlipped, setIsFlipped] = useState(false);
   // On utilise useSharedValue de react-native-reanimated pour animer le flip de la carte.
@@ -44,8 +46,8 @@ const FlipCard: React.FC<CardProps> = ({ frontImageUrl, backImageUrl, onFlip, st
     if (!isFlipped) { // only allow flipping to front side
       setIsFlipped(true);
       flip.value = withTiming(180, { duration: 1500 });
-      up.value = withTiming(-200, { duration: 1500 }, () => { up.value = withTiming(0, { duration: 1000 })});
-      scale.value = withTiming(2, { duration: 1500 }, () => { scale.value = withTiming(1, { duration: 1000 })});
+      up.value = withTiming(-200, { duration: 1500 }, () => { up.value = withTiming(0, { duration: 1000 }) });
+      scale.value = withTiming(2, { duration: 1500 }, () => { scale.value = withTiming(1, { duration: 1000 }) });
       if (onFlip) { // make sure onFlip is not undefined before calling it
         onFlip();
       }
@@ -58,9 +60,9 @@ const FlipCard: React.FC<CardProps> = ({ frontImageUrl, backImageUrl, onFlip, st
       // On anime la propriété rotateY pour créer l'effet de flip.
       transform: [
         { rotateY: `${flip.value}deg` },
-        { perspective: 1000},
+        { perspective: 1000 },
         { translateY: up.value },
-        {scale: scale.value  }
+        { scale: scale.value }
       ]
     };
   });
@@ -76,8 +78,10 @@ const FlipCard: React.FC<CardProps> = ({ frontImageUrl, backImageUrl, onFlip, st
 
 
 const CrossDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
+  // on stocke les informations du tirage en croix
+  const [value, setValue] = useCrossQuestionStore();
   // Ajoutez un nouvel état pour suivre la carte actuellement sélectionnée
-const [selectedCardIndex, setSelectedCardIndex] = useState<number | null>(null);
+  const [selectedCardIndex, setSelectedCardIndex] = useState<number | null>(null);
 
   const [selectedCards, setSelectedCards] = useState(0);
   const [modalVisible, setModalVisible] = useState(false);
@@ -88,7 +92,7 @@ const [selectedCardIndex, setSelectedCardIndex] = useState<number | null>(null);
     setSelectedCards(selectedCards + 1);
     setSelectedCardIndex(index);
   };
-
+console.log("CrossQuestionStore", value);
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header} />
@@ -105,7 +109,7 @@ const [selectedCardIndex, setSelectedCardIndex] = useState<number | null>(null);
             frontImageUrl={card.frontImageUrl}
             backImageUrl={card.backImageUrl}
             onFlip={selectedCards < 3 ? () => handleCardFlip(index) : () => setModalVisible(true)}
-            style={{ zIndex: selectedCardIndex === index ? 1000 : 0 }} 
+            style={{ zIndex: selectedCardIndex === index ? 1000 : 0 }}
           />
         ))}
 
@@ -165,7 +169,7 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: SCREEN_WIDTH * 0.1,
     borderBottomRightRadius: SCREEN_WIDTH * 0.1,
     backgroundColor: colors.background
-},
+  },
   titleText: {
     width: "90%",
     height: "10%",

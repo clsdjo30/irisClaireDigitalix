@@ -9,7 +9,7 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input } from '@rneui/themed';
 import { colors } from '../../../theme';
-import { useQuestionStore } from '../../../utils/hooks/useQuestionStore';
+import { useCrossQuestionStore } from '../../../utils/hooks/useCrossQuestionStore';
 import { StackScreenProps } from '@react-navigation/stack';
 
 interface YesDrawScreenProps {
@@ -26,7 +26,7 @@ const SCREEN_SCALE = Dimensions.get('window').scale;
 const SCREEN_FONT_SCALE = SCREEN_SCALE * 0.5;
 
 const CrossDrawQuestionScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
-  const [value, setValue] = useQuestionStore();
+  const [value, setValue] = useCrossQuestionStore();
   const [errorMessage, setErrorMessage] = React.useState('');
 
   function handleTextChange(text: string) {
@@ -47,7 +47,8 @@ const CrossDrawQuestionScreen: React.FC<StackScreenProps<any>> = ({ navigation }
 
     navigation.navigate('DrawCard');
   }
-
+  console.log("crossQuestion", value)
+  console.log("Question", value.question)
   return (
     <View style={styles.container}>
       <View style={styles.header}>

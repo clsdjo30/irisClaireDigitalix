@@ -1,6 +1,6 @@
 import { GlobalStore, isNumber } from "react-native-global-state-hooks";
 
-const QuestionStore = new GlobalStore({
+const CrossQuestionStore = new GlobalStore({
   domain: "",
   question: "",
   choosecard: "",
@@ -23,4 +23,4 @@ const QuestionStore = new GlobalStore({
   isanswered: false,
 });
 
-export const useQuestionStore = QuestionStore.getHook();
+export const useCrossQuestionStore = CrossQuestionStore.getHook();
