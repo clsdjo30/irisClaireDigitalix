@@ -1,47 +1,148 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef, RefObject } from 'react';
 import {
-    StyleSheet,
-    Image,
-    View,
-    Pressable,
-    Text,
-    Dimensions,
-    Modal,
-    Alert,
+  Image,
+  Pressable,
+  StyleSheet,
+  View,
+  ImageSourcePropType,
+  Dimensions,
+  Text,
+  Modal,
+  ViewStyle
 } from 'react-native';
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
 import CARD_DECK from '../../../utils/cards';
-import { colors } from '../../../theme';
-import { useQuestionStore } from '../../../utils/hooks/useQuestionStore';
+import { colors } from '../../../theme/color'
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { StackScreenProps } from '@react-navigation/stack';
-import FlipCard from 'react-native-flip-card';
-
-
-
-// Dimensions de l'écran
+import {
+  useQuestionStore
+} from '../../../utils/hooks/useQuestionStore';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = SCREEN_WIDTH * 1.5;
-const SCREEN_SCALE = Dimensions.get('window').scale;
-const SCREEN_FONT_SCALE = SCREEN_SCALE * 1;
-const CARD_WIDTH = 60;
-const CARD_HEIGHT = 120;
+
+// On définit un type pour les props de notre composant FlipCard. Ces props incluent deux images: l'image de face et l'image de dos de la carte.
+type CardProps = {
+  frontImageUrl: Array<ImageSourcePropType>,
+  backImageUrl: Array<ImageSourcePropType>,
+  onFlip?: () => void,
+  style?: ViewStyle
+}
+// Le composant FlipCard est responsable de l'affichage d'une seule carte et de la gestion de son état "flip".
+const FlipCard: React.FC<CardProps> = ({ frontImageUrl, backImageUrl, onFlip, style }) => {
+  // On utilise useState pour gérer l'état "flip" de la carte.
+  const [isFlipped, setIsFlipped] = useState(false);
+  const [isCardFlipped, setIsCardFlipped] = useState(false);
+  const frontImageRef = useRef<Image>(null);
+  const backImageRef = useRef<Image>(null);
+  // On utilise useSharedValue de react-native-reanimated pour animer le flip de la carte.
+  const flip = useSharedValue(0);
+  const scale = useSharedValue(1);
+  const up = useSharedValue(0);
+  const left = useSharedValue(0);
+
+  useEffect(() => {
+    if (isCardFlipped) {
+      frontImageRef.current?.setNativeProps({ style: { transform: [{ scaleX: -1 }] } });
+      backImageRef.current?.setNativeProps({ style: { transform: [{ scaleX: -1 }] } });
+    } else {
+      frontImageRef.current?.setNativeProps({ style: { transform: [{ scaleX: 1 }] } });
+      backImageRef.current?.setNativeProps({ style: { transform: [{ scaleX: 1 }] } });
+    }
+  }, [isCardFlipped]);
+
+  // La fonction flipCard inverse l'état flip de la carte et déclenche l'animation.
+  const flipCard = () => {
+    if (!isFlipped) { // only allow flipping to front side
+      setIsFlipped(true);
+      flip.value = withTiming(180, { duration: 1200 });
+      scale.value = withTiming(2, { duration: 1200 }, () => { scale.value = withTiming(1, { duration: 1200 }) });
+      left.value = withTiming(-30, { duration: 1200 }, () => { left.value = withTiming(0, { duration: 1200 }) });
+      up.value = withTiming(-80, { duration: 1200 }, () => { up.value = withTiming(0, { duration: 1200 }) });
+      if (onFlip) { // make sure onFlip is not undefined before calling it
+        onFlip();
+      }
+    }
+  };
+
+  // On utilise useAnimatedStyle pour créer des styles animés pour la carte.
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      // On anime la propriété rotateY pour créer l'effet de flip.
+      transform: [
+        { translateX: left.value },
+        { translateY: up.value },
+        { rotateY: `${flip.value}deg` },
+        { scale: scale.value },
+        { perspective: 1000 },
+      ]
+    };
+  });
+
+  return (
+    <Pressable onPress={flipCard}>
+      <Animated.View style={[styles.cardImage, animatedStyle, style]}>
+        <Image
+          ref={isFlipped ? backImageRef : frontImageRef}
+          source={isFlipped ? frontImageUrl as ImageSourcePropType : backImageUrl as ImageSourcePropType}
+          style={styles.image}
+          onLoad={() => {
+            frontImageRef.current?.setNativeProps({ style: { transform: [{ scaleX: isFlipped ? -1 : 1 }] } });
+            backImageRef.current?.setNativeProps({ style: { transform: [{ scaleX: isFlipped ? -1 : 1 }] } });
+          }}
+        />
+      </Animated.View>
+    </Pressable>
+  );
+};
+
 
 const DrawOneCardScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
-    const [value, setValue] = useQuestionStore();
-    const [modalVisible, setModalVisible] = useState(false);
-    const [credit, setCredit] = useState(2);
-    const [clickable, setClickable] = useState(true);
-    const [isCardFlipped, setIsCardFlipped] = useState(false);
+  // on stocke les informations du tirage en croix
+  const [value, setValue] = useQuestionStore();
+  // Ajoutez un nouvel état pour suivre la carte actuellement sélectionnée
+  const [selectedCardIndex, setSelectedCardIndex] = useState<number | null>(null);
+
+  const [selectedCards, setSelectedCards] = useState(0);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [credit, setCredit] = useState(10);
 
 
 
 
+  // On utilise useEffect pour détecter quand l'utilisateur a retourné les 4 cartes.
+  const handleCardFlip = (index: number) => {
+
+    if (selectedCards === 0) {
+      setValue({
+        ...value,
+        choosecardnumber: CARD_DECK[index].id,
+        choosecardname: CARD_DECK[index].name,
+        choosecardpseudo: CARD_DECK[index].pseudo,
+      });
+      setSelectedCards(selectedCards + 1);
+      setSelectedCardIndex(index);
+      setTimeout(() => {
+      setModalVisible(true);
+      }, 1000);
+    };
+    
+    }
+    console.log(selectedCards);
+    function gotToResult() {
+      navigation.navigate('DrawResult');
+    }
     function sendQuestion() {
         // TODO implementer la logique de validation avec credit
         if (credit > 0
             && value.question != null
             && value.choosecardname != null
             && value.choosecardnumber != null
-            && value.choosecardpseuso != null
+            && value.choosecardpseudo != null
         ) {
             setCredit(credit - 1)
             navigation.navigate('YesDrawResult')
@@ -49,9 +150,7 @@ const DrawOneCardScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
         else {
             goBuyCredit()
         }
-
     }
-
 
     function goBuyCredit() {
         navigation.navigate('Profil')
@@ -62,197 +161,164 @@ const DrawOneCardScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
         })
     }
 
-    console.log(value);
     return (
-        <View style={styles.container}>
-            <View style={styles.header} />
-            <View style={styles.deckContainer}>
-                <Text style={styles.contentTitle}>Concentrez-vous sur votre question et tirez votre carte</Text>
-                {CARD_DECK.map((item, index) => {
-                    return (
-                        <View key={index} style={styles.cardContainer}>
-                            <FlipCard
-                                friction={20}
-                                perspective={1000}
-                                flipHorizontal={true}
-                                flipVertical={false}
-                                flip={false}
-                                clickable={clickable}
-                                useNativeDriver={true}
-                                onFlipStart={() => {
-                                    setValue({
-                                        ...value,
-                                        choosecardnumber: item.id,
-                                        choosecardname: item.name,
-                                        choosecardpseuso: item.pseudo
-                                    }),
-                                        setClickable(false),
-                                        setIsCardFlipped(true)
-                                }}
-                                onFlipEnd={() =>
-                                    setTimeout(() => {
-                                        setModalVisible(true)
-                                    }, 1000)}
+      <SafeAreaView style={styles.container}>
+        <View style={styles.header} />
+        <View style={styles.deckContainer}>
+          <View style={styles.titleText}>
+            <Text style={styles.title}>
+              Concentrez-vous sur votre question et tirer 4 cartes !
+            </Text>
+          </View>
 
-                            >
-                                <View style={[styles.cardImage, (isCardFlipped === true) && { zIndex: 0 }]}>
-                                    <Image source={item.backImageUrl} style={styles.cardImage} />
-                                </View>
-                                <View >
-                                    <Image source={item.frontImageUrl}
-                                        style={[styles.cardImage, (isCardFlipped === true) && styles.cardDraw,]} />
-                                </View>
-                            </FlipCard>
-                        </View>
-                    )
-                })}
-                <Modal
-                    animationType="slide"
-                    transparent={true}
-                    visible={modalVisible}
+          {CARD_DECK.map((card, index) => (
+            <FlipCard
+              key={index}
+              frontImageUrl={card.frontImageUrl}
+              backImageUrl={card.backImageUrl}
+              onFlip={() => { handleCardFlip(index) }}
+              style={{ zIndex: selectedCardIndex === index ? 1000 : 0 }}
+            />
+          ))}
 
-                >
-                    <View style={styles.centeredView}>
-                        <View style={styles.modalView}>
-                            {/* TODO implementer la logique de validation avec credit  */}
-                            {credit > 0
-                                ?
-                                <>
-                                    <Text style={styles.modalText}>Utilez 1 credit pour voir votre reponse</Text>
-                                    <Pressable
-                                        style={[styles.button, styles.buttonClose]}
-                                        onPress={sendQuestion}>
-                                        <Text style={styles.textStyle}>Voir votre résultat</Text>
-                                    </Pressable>
-                                </>
-                                :
-                                <>
-                                    <Text style={styles.modalText}>Vous n'avez plus de credit disponible </Text>
-                                    <Pressable
-                                        style={[styles.button, styles.buttonClose]}
-                                        onPress={goBuyCredit}>
-                                        <Text style={styles.textStyle}>Acheter des credits</Text>
-                                    </Pressable>
-                                </>
-                            }
-                        </View>
-                    </View>
-                </Modal>
+          {/* Display Modal when all cards are flipped */}
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={modalVisible}
+
+          >
+            <View style={styles.centeredView}>
+              <View style={styles.modalView}>
+                {/* TODO implementer la logique de validation avec credit  */}
+                {credit > 0
+                  ?
+                  <>
+                    <Text style={styles.modalText}>Utilez 1 credit pour voir votre reponse</Text>
+                    <Pressable
+                      style={[styles.button, styles.buttonClose]}
+                      onPress={() => {
+                        setModalVisible(!modalVisible);
+                        setCredit(credit - 1);
+                        sendQuestion();
+                      }}
+                    >
+                      <Text style={styles.textStyle}>Voir votre résultat</Text>
+                    </Pressable>
+                  </>
+                  :
+                  <>
+                    <Text style={styles.modalText}>Vous n'avez plus de credit disponible </Text>
+                    <Pressable
+                      style={[styles.button, styles.buttonClose]}
+                    >
+                      <Text style={styles.textStyle}>Acheter des credits</Text>
+                    </Pressable>
+                  </>
+                }
+              </View>
             </View>
+          </Modal>
 
+        </View>
+      </SafeAreaView>
+    );
+  };
 
-
-        </View >
-    )
-}
-
-export default DrawOneCardScreen;
-
-const styles = StyleSheet.create({
+  const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        width: SCREEN_WIDTH,
-        height: SCREEN_HEIGHT,
-        backgroundColor: colors.palette.violet,
-        alignItems: 'center',
-        justifyContent: 'center',
+      flex: 1,
+      backgroundColor: colors.palette.violet
     },
-    // Header Container
     header: {
-        position: 'absolute',
-        top: 0,
-        width: SCREEN_WIDTH,
-        height: SCREEN_HEIGHT / 2,
-        borderBottomLeftRadius: SCREEN_WIDTH * 0.18,
-        borderBottomRightRadius: SCREEN_WIDTH * 0.18,
-        backgroundColor: colors.background,
-        alignItems: 'center',
-      },
-    // Domain Container
+      position: 'absolute',
+      top: 0,
+      width: SCREEN_WIDTH - 5,
+      height: SCREEN_HEIGHT * 0.4,
+      borderBottomLeftRadius: SCREEN_WIDTH * 0.1,
+      borderBottomRightRadius: SCREEN_WIDTH * 0.1,
+      backgroundColor: colors.background
+    },
+    titleText: {
+      width: "90%",
+      height: "10%",
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    title: {
+      marginTop: 10,
+      textAlign: 'center',
+      fontFamily: 'MulishRegular',
+      fontSize: 18,
+      color: colors.palette.violet,
+    },
     deckContainer: {
-        width: "95%",
-        height: "95%",
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        justifyContent: 'center',
-        alignContent: 'center',
-
-
-    },
-    contentTitle: {
-        fontFamily: "mulishRegular",
-        fontSize: 18,
-        color: colors.palette.violet,
-        marginBottom: 10,
-        textAlign: 'center',
-    },
-    cardContainer: {
-        zIndex: 1,
-        width: 60,
-        height: 120,
-        margin: 5,
-        elevation: 5,
-        borderRadius: 10,
-        backgroundColor: colors.palette.purple100,
-        alignItems: 'center',
-
-    },
-    flipCardContainer: {
-        display: "none"
+      height: "80%",
+      flex: 1,
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      justifyContent: 'center',
+      alignItems: 'center',
     },
     cardImage: {
-        width: 60,
-        height: 120,
-        resizeMode: 'cover',
-        borderRadius: 10
+      width: SCREEN_WIDTH / 6,
+      height: SCREEN_HEIGHT / 5,
+      margin: 5,
+      justifyContent: 'center',
+      zIndex: 0,
+      borderRadius: 10,
+      elevation: 3,
+      shadowColor: colors.palette.violetClair,
     },
-    cardDraw: {
-        transform: [
-            { scale: 1.3 },
+    image: {
+      width: SCREEN_WIDTH / 6,
+      height: SCREEN_HEIGHT / 5,
+      resizeMode: 'cover',
+      borderRadius: 6,
 
-
-        ],
-        zIndex: 999,
     },
+    // Modal Style
     centeredView: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: 22,
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginTop: 22,
     },
     modalView: {
-        margin: 20,
-        backgroundColor: 'white',
-        borderRadius: 20,
-        padding: 35,
-        alignItems: 'center',
-        shadowColor: '#000',
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 4,
-        elevation: 5,
+      margin: 20,
+      backgroundColor: 'white',
+      borderRadius: 20,
+      padding: 35,
+      alignItems: 'center',
+      shadowColor: '#000',
+      shadowOffset: {
+        width: 0,
+        height: 2,
+      },
+      shadowOpacity: 0.25,
+      shadowRadius: 4,
+      elevation: 5,
     },
     button: {
-        borderRadius: 20,
-        padding: 10,
-        elevation: 2,
+      borderRadius: 20,
+      padding: 10,
+      elevation: 2,
     },
     buttonOpen: {
-        backgroundColor: '#F194FF',
+      backgroundColor: '#F194FF',
     },
     buttonClose: {
-        backgroundColor: '#2196F3',
+      backgroundColor: '#2196F3',
     },
     textStyle: {
-        color: 'white',
-        fontWeight: 'bold',
-        textAlign: 'center',
+      color: 'white',
+      fontWeight: 'bold',
+      textAlign: 'center',
     },
     modalText: {
-        marginBottom: 15,
-        textAlign: 'center',
+      marginBottom: 15,
+      textAlign: 'center',
     },
-})
+  });
+
+  export default DrawOneCardScreen;

@@ -7,7 +7,7 @@ const QuestionStore = new GlobalStore({
   isanswered: false,
   choosecard: "",
   choosecardname: "",
-  choosecardpseuso: "",
+  choosecardpseudo: "",
   choosecardnumber: 0 
 });
 
