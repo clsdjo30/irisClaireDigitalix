@@ -1,0 +1,282 @@
+import React, { useRef, useEffect, useState } from 'react'
+import {
+    StyleSheet,
+    Image,
+    View,
+    Pressable,
+    Text,
+    Dimensions,
+    ScrollView,
+    ActivityIndicator
+
+} from 'react-native';
+import CARD_DECK from '../../../utils/cards';
+import { colors } from '../../../theme';
+import { useCrossQuestionStore } from '../../../utils/hooks/useCrossQuestionStore';
+import { StackScreenProps } from '@react-navigation/stack';
+// import { useSimpleQuestion } from '../../../utils/hooks/useSimpleQuestion';
+import { useFocusEffect } from '@react-navigation/native';
+
+const SCREEN_WIDTH = Dimensions.get('window').width;
+const SCREEN_HEIGHT = SCREEN_WIDTH * 1.5;
+const SCREEN_SCALE = Dimensions.get('window').scale;
+const SCREEN_FONT_SCALE = SCREEN_SCALE * 0.5;
+
+const CrossDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
+
+    const [cardImage, setCardImage] = useState(null);
+    // const [value, isLoading] = useSimpleQuestion(500);
+    const [questionInformations, setQuestionInformations] = useCrossQuestionStore()
+
+    console.log('Valeur de QuestionStore', questionInformations)
+
+
+    const firstCard = CARD_DECK.find(card => card.id === questionInformations.choosecardnumber);
+    const secondCard = CARD_DECK.find(card => card.id === questionInformations.choosecardtwonumber);
+    const thirdCard = CARD_DECK.find(card => card.id === questionInformations.choosecardthreenumber);
+    const fourthCard = CARD_DECK.find(card => card.id === questionInformations.choosecardfournumber);
+
+
+
+    // const getContent = () => {
+    //     if (isLoading) {
+    //         return <ActivityIndicator size="large" />
+
+    //     }
+    //     return <Text style={styles.contentTitle}>{questionInformations.answer}</Text>;
+    // };
+
+
+
+    function questionClosed() {
+        setQuestionInformations({
+            ...questionInformations,
+            question: "",
+            domain: "",
+            answer: "",
+            choosecardnumber: 0,
+            choosecardtwonumber: 0,
+            choosecardthreenumber: 0,
+            choosecardfournumber: 0,
+            choosecardname: "",
+            choosecardtwoname: "",
+            choosecardthreename: "",
+            choosecardfourname: "",
+            choosecardpseudo: "",
+            choosecardtwopseudo: "",
+            choosecardthreepseudo: "",
+            choosecardfourpseudo: "",
+        })
+        navigation.navigate('Home')
+        navigation.reset({
+            index: 0,
+            routes: [{ name: 'Home' }]
+        })
+    }
+
+    return (
+        <View style={styles.container}>
+
+            <View style={styles.header} />
+            <View style={styles.deckContainer}>
+                <View style={styles.loadingContainer}>
+                    <View style={styles.headerContainer}>
+                        <Text style={styles.contentTitle}>Votre Tirage</Text>
+                        <View style={styles.cardContainer}>
+                            <View>
+                                <Image
+                                    style={styles.cardImage}
+                                    source={firstCard?.frontImageUrl}
+                                />
+                                <Text style={styles.pseudoTitle}>{firstCard?.pseudo}</Text>
+                            </View>
+                            <View>
+                                <Image
+                                    style={styles.cardImage}
+                                    source={secondCard?.frontImageUrl}
+                                />
+                                <Text style={styles.pseudoTitle}>{secondCard?.pseudo}</Text>
+                            </View>
+                            <View>
+                                <Image
+                                    style={styles.cardImage}
+                                    source={thirdCard?.frontImageUrl}
+                                />
+                                <Text style={styles.pseudoTitle}>{thirdCard?.pseudo}</Text>
+                            </View>
+
+                            <View>
+                                <Image
+                                    style={styles.cardImage}
+                                    source={fourthCard?.frontImageUrl}
+                                />
+                                <Text style={styles.pseudoTitle}>{fourthCard?.pseudo}</Text>
+                            </View>
+                        </View>
+                    </View>
+                    <ScrollView style={styles.resultView}>
+                        <View style={styles.questionRow}>
+                        <Text style={styles.questionTitle}>Votre question :</Text>
+                        <Text style={styles.questionText}>{questionInformations.question}</Text>
+                        </View>
+
+                        <Text style={styles.answerTitle}>Votre réponse: </Text>
+                        <Text style={styles.answerText}>
+                            Software Engineer with a drive for building highly scalable and performant web applications. Heavily interested in module federation, micro frontends, state machines, TDD, and system designs. Big on web performance and optimization, advanced component design patterns, a11y, SSR, SSG Incremental Static Regeneration (ISR), and state management. Expert at crafting highly reusable Typescript-heavy component libraries. An advocate of TypeScript and industry best practices. I regularly author meaningful technical content ✍🏽.Software Engineer with a drive for building highly scalable and performant web applications. Heavily interested in module federation, micro frontends, state machines, TDD, and system designs. Big on web performance and optimization, advanced component design patterns, a11y, SSR, SSG Incremental Static Regeneration (ISR), and state management. Expert at crafting highly reusable Typescript-heavy component libraries. An advocate of TypeScript and industry best practices. I regularly author meaningful technical content ✍🏽.Software Engineer with a drive for building highly scalable and performant web applications. Heavily interested in module federation, micro frontends, state machines, TDD, and system designs. Big on web performance and optimization, advanced component design patterns, a11y, SSR, SSG Incremental Static Regeneration (ISR), and state management. Expert at crafting highly reusable Typescript-heavy component libraries. An advocate of TypeScript and industry best practices. I regularly author meaningful technical content ✍🏽.Software Engineer with a drive for building highly scalable and performant web applications. Heavily interested in module federation, micro frontends, state machines, TDD, and system designs. Big on web performance and optimization, advanced component design patterns, a11y, SSR, SSG Incremental Static Regeneration (ISR), and state management. Expert at crafting highly reusable Typescript-heavy component libraries. An advocate of TypeScript and industry best practices. I regularly author meaningful technical content ✍🏽.Software Engineer with a drive for building highly scalable and performant web applications. Heavily interested in module federation, micro frontends, state machines, TDD, and system designs. Big on web performance and optimization, advanced component design patterns, a11y, SSR, SSG Incremental Static Regeneration (ISR), and state management. Expert at crafting highly reusable Typescript-heavy component libraries. An advocate of TypeScript and industry best practices. I regularly author meaningful technical content ✍🏽.Software Engineer with a drive for building highly scalable and performant web applications. Heavily interested in module federation, micro frontends, state machines, TDD, and system designs. Big on web performance and optimization, advanced component design patterns, a11y, SSR, SSG Incremental Static Regeneration (ISR), and state management. Expert at crafting highly reusable Typescript-heavy component libraries. An advocate of TypeScript and industry best practices. I regularly author meaningful technical content ✍🏽.Software Engineer with a drive for building highly scalable and performant web applications. Heavily interested in module federation, micro frontends, state machines, TDD, and system designs. Big on web performance and optimization, advanced component design patterns, a11y, SSR, SSG Incremental Static Regeneration (ISR), and state management. Expert at crafting highly reusable Typescript-heavy component libraries. An advocate of TypeScript and industry best practices. I regularly author meaningful technical content ✍🏽.Software Engineer with a drive for building highly scalable and performant web applications. Heavily interested in module federation, micro frontends, state machines, TDD, and system designs. Big on web performance and optimization, advanced component design patterns, a11y, SSR, SSG Incremental Static Regeneration (ISR), and state management. Expert at crafting highly reusable Typescript-heavy component libraries. An advocate of TypeScript and industry best practices. I regularly author meaningful technical content ✍🏽.Software Engineer with a drive for building highly scalable and performant web applications. Heavily interested in module federation, micro frontends, state machines, TDD, and system designs. Big on web performance and optimization, advanced component design patterns, a11y, SSR, SSG Incremental Static Regeneration (ISR), and state management. Expert at crafting highly reusable Typescript-heavy component libraries. An advocate of TypeScript and industry best practices. I regularly author meaningful technical content ✍🏽.Software Engineer with a drive for building highly scalable and performant web applications. Heavily interested in module federation, micro frontends, state machines, TDD, and system designs. Big on web performance and optimization, advanced component design patterns, a11y, SSR, SSG Incremental Static Regeneration (ISR), and state management. Expert at crafting highly reusable Typescript-heavy component libraries. An advocate of TypeScript and industry best practices. I regularly author meaningful technical content ✍🏽.
+
+                        </Text>
+                    </ScrollView>
+                    {/* {getContent()} */}
+                </View>
+
+                <View style={styles.validationButton}>
+                    <Pressable style={styles.button} onPress={questionClosed}>
+                        <Text style={styles.buttonText}>Revenir à l'accueil</Text>
+                    </Pressable>
+                </View>
+
+            </View>
+
+
+        </View >
+    )
+}
+
+export default CrossDrawResultScreen;
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        width: SCREEN_WIDTH,
+        height: SCREEN_HEIGHT,
+        backgroundColor: colors.palette.violetBg,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    header: {
+        position: 'absolute',
+        top: 0,
+        width: SCREEN_WIDTH - 5,
+        height: SCREEN_HEIGHT * 0.4,
+        borderBottomLeftRadius: SCREEN_WIDTH * 0.1,
+        borderBottomRightRadius: SCREEN_WIDTH * 0.1,
+        backgroundColor: colors.palette.violet
+    },
+    headerContainer: {
+        position: 'absolute',
+        top: 0,
+    },
+    // Domain Container
+    deckContainer: {
+        width: "95%",
+        height: "95%",
+        justifyContent: 'center',
+        alignContent: 'center',
+    },
+    contentTitle: {
+        fontFamily: "mulishRegular",
+        fontSize: 14 * SCREEN_FONT_SCALE,
+        color: colors.palette.ivory,
+        textAlign: 'center',
+    },
+    cardContainer: {
+        position: 'relative',
+        top: 50,
+        width: '100%',
+        height: '50%',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+    },
+    loadingContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    card: {
+        width: 70,
+        height: 130,
+    },
+    cardImage: {
+        width: 70,
+        height: 130,
+        borderRadius: 10,
+    },
+    pseudoTitle: {
+        fontFamily: "oswaldMedium",
+        fontSize: 10,
+        color: colors.palette.ivory,
+        textAlign: 'center',
+    },
+    resultView: {
+        position: 'absolute',
+        bottom: 0,
+        width: '100%',
+        height: '65%',
+        backgroundColor: colors.palette.violetClair,
+        borderRadius: 16,
+        elevation: 3,
+    },
+    questionRow: {
+        width: '90%',
+        flexDirection: 'row',
+        alignItems: 'flex-start',
+        marginHorizontal: 10,
+        marginTop: 10,
+    },
+    questionTitle: {
+        fontFamily: "oswaldMedium",
+        fontSize: 16,
+        color: colors.palette.violet,
+        textDecorationColor: colors.palette.violet,
+        textDecorationLine: 'underline',
+    },
+    questionText: {
+        width: '70%',
+        flexWrap: 'wrap',
+        marginHorizontal: 10,
+        fontFamily: "mulishRegular",
+        fontSize: 16,
+        color: colors.palette.violet,
+        marginTop: 3,
+    },
+    answerTitle: {
+        alignItems: "center",
+        paddingVertical: 10,
+        marginLeft: 10,
+        fontFamily: "oswaldMedium",
+        fontSize: 16,
+        color: colors.palette.violet,
+        textDecorationColor: colors.palette.violet,
+        textDecorationLine: 'underline',
+    },
+    answerText: {
+        width: '95%',
+        marginHorizontal: 10,
+        fontFamily: "mulishRegular",
+        fontSize: 16,
+        color: colors.palette.violet,
+        textAlign: 'justify',
+    },
+    validationButton: {
+        width: '100%',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: 20,
+        elevation: 5,
+    },
+    button: {
+        width: '80%',
+        backgroundColor: "#CBA135",
+        marginTop: 10,
+        borderRadius: 16,
+    },
+    buttonText: {
+        textAlign: "center",
+        alignItems: "center",
+        paddingVertical: 10,
+        fontFamily: "oswaldMedium",
+        fontSize: 14,
+        color: colors.palette.ivory,
+    },
+})

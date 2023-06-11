@@ -23,6 +23,7 @@ import YesDrawResultScreen from '../screens/Main/YesDraw/YesDrawResultScreen';
 import CrossDrawScreen from '../screens/Main/CrossDraw/CrossDrawScreen';
 import CrossDrawDomainScreen from '../screens/Main/CrossDraw/CrossDrawDomainScreen';
 import CrossDrawQuestionScreen from '../screens/Main/CrossDraw/CrossDrawQuestionScreen';
+import CrossDrawResultScreen from '../screens/Main/CrossDraw/CrossDrawResultScreen';
 
 const DayDrawStack = createNativeStackNavigator();
 const ProfilStack = createNativeStackNavigator();
@@ -107,6 +108,9 @@ function CrossStackScreen() {
         options={{ headerShown: false, }} />
       <CrossStack.Screen name="DrawCard"
         component={CrossDrawScreen}
+        options={{ headerShown: false, }} />
+        <CrossStack.Screen name="DrawResult"
+        component={CrossDrawResultScreen}
         options={{ headerShown: false, }} />
     </CrossStack.Navigator>
   )
