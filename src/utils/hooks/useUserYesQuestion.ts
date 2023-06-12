@@ -5,7 +5,7 @@ import { firestore, getAuth, getDocs, collection} from '../../config/firebaseCon
 
 const auth = getAuth();
 
-export function useUserInformation() {
+export function useUserYesQuestion() {
  
   const [simpleQuestion, setSimpleQuestion] = useQuestionStore();
   const currentUser = auth.currentUser;

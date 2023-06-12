@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import {
     StyleSheet,
     Image,
@@ -6,18 +6,15 @@ import {
     Pressable,
     Text,
     Dimensions,
-    ActivityIndicator
-
+    ActivityIndicator,
 } from 'react-native';
 import CARD_DECK from '../../../utils/cards';
 import { colors } from '../../../theme';
 import { useQuestionStore } from '../../../utils/hooks/useQuestionStore';
 import { StackScreenProps } from '@react-navigation/stack';
 import { useSimpleQuestion } from '../../../utils/hooks/useSimpleQuestion';
-
-import { setDoc, doc } from "firebase/firestore";
-import { firestore, getAuth, Firestore} from "../../../config/firebaseConfig";
-
+import { setDoc, doc, collection } from 'firebase/firestore';
+import { firestore, getAuth } from '../../../config/firebaseConfig';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = SCREEN_WIDTH * 1.5;
@@ -25,35 +22,44 @@ const SCREEN_SCALE = Dimensions.get('window').scale;
 const SCREEN_FONT_SCALE = SCREEN_SCALE * 0.5;
 
 const auth = getAuth();
+const db = firestore;
 
 const YesDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
-
     const [cardImage, setCardImage] = useState(null);
     const [value, isLoading] = useSimpleQuestion(500);
     const [questionInformations, setQuestionInformations] = useQuestionStore();
     const currentUser = auth.currentUser;
     const userID = currentUser ? currentUser.uid : null;
-
-    const choosedCard = CARD_DECK.find((card) => card.id === questionInformations.choosecardnumber);
-
-
-
-    // lorsque la reponse est donnée, on enregistre la question, le domaine, la carte tirée et la reponse dans la base de donnée
-function saveQuestion(useruid: string | null) {
-    const db: Firestore = firestore;
-    if (!useruid) {
-      console.error("User ID is null");
-      return;
-    }
-    const questionRef = doc(db, "yesQuestion", useruid);
     
-    setDoc(questionRef, {
-      question: questionInformations.question,
-      domain: questionInformations.domain,
-      cardpseudo: questionInformations.choosecardpseudo,
-      answer: questionInformations.answer,
-    });
-  }
+    console.log(userID);
+    
+    const choosedCard = CARD_DECK.find((card) => card.id === questionInformations.choosecardnumber);
+    
+    
+    
+    function saveQuestion(useruid: string | any ) {
+        const db = firestore;
+        if (!useruid) {
+            console.error("User ID is null");
+            return;
+        }
+        const usersCollectionRef = collection(db, 'users');
+        const userQuestionsCollectionRef = collection(usersCollectionRef, useruid, 'yesquestions');
+        const questionRef = doc(userQuestionsCollectionRef);
+
+        setDoc(questionRef, {
+            domain: questionInformations.domain,
+            question: questionInformations.question,
+            cardpseudo: questionInformations.choosecardpseudo,
+            answer: questionInformations.answer,
+        })
+        .then(() => console.log('Question saved successfully!'))
+        .catch((error) => console.error('Error saving question:', error));
+        questionClosed();
+    }
+
+   
+
     const getContent = () => {
         if (isLoading) {
             return (
@@ -63,32 +69,27 @@ function saveQuestion(useruid: string | null) {
                         L'Iris Claire se concentre sur votre tirage
                     </Text>
                 </View>
-            )
-
+            );
         }
-        saveQuestion(userID);
+
         return <Text style={styles.answerText}>{questionInformations.answer}</Text>;
     };
-
-   
-
-console.log(questionInformations)
 
     function questionClosed() {
         setQuestionInformations({
             ...questionInformations,
-            question: "",
-            domain: "",
+            question: '',
+            domain: '',
             choosecardnumber: 0,
-            choosecardname: "",
-            choosecardpseudo: "",
-            answer: ""
-        })
-        navigation.navigate('Home')
+            choosecardname: '',
+            choosecardpseudo: '',
+            answer: '',
+        });
+        navigation.navigate('Home');
         navigation.reset({
             index: 0,
-            routes: [{ name: 'Home' }]
-        })
+            routes: [{ name: 'Home' }],
+        });
     }
 
     return (
@@ -116,25 +117,19 @@ console.log(questionInformations)
                         </View>
 
                         <Text style={styles.answerTitle}>Votre réponse: </Text>
-                        <Text style={styles.answerText}>
-                            {getContent()}
-
-                        </Text>
+                        <Text style={styles.answerText}>{getContent()}</Text>
                     </View>
                 </View>
 
                 <View style={styles.validationButton}>
-                    <Pressable style={styles.button} onPress={questionClosed}>
+                    <Pressable style={styles.button} onPress={() => saveQuestion(userID)}>
                         <Text style={styles.buttonText}>Revenir à l'accueil</Text>
                     </Pressable>
                 </View>
-
             </View>
-
-
         </View>
-    )
-}
+    );
+};
 
 export default YesDrawResultScreen;
 
@@ -154,7 +149,7 @@ const styles = StyleSheet.create({
         height: SCREEN_HEIGHT * 0.4,
         borderBottomLeftRadius: SCREEN_WIDTH * 0.1,
         borderBottomRightRadius: SCREEN_WIDTH * 0.1,
-        backgroundColor: colors.palette.violet
+        backgroundColor: colors.palette.violet,
     },
     headerContainer: {
         position: 'absolute',
@@ -162,13 +157,13 @@ const styles = StyleSheet.create({
     },
     // Domain Container
     deckContainer: {
-        width: "95%",
-        height: "95%",
+        width: '95%',
+        height: '95%',
         justifyContent: 'center',
         alignContent: 'center',
     },
     contentTitle: {
-        fontFamily: "mulishRegular",
+        fontFamily: 'mulishRegular',
         fontSize: 14 * SCREEN_FONT_SCALE,
         color: colors.palette.ivory,
         textAlign: 'center',
@@ -197,7 +192,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
     },
     pseudoTitle: {
-        fontFamily: "oswaldMedium",
+        fontFamily: 'oswaldMedium',
         fontSize: 10,
         color: colors.palette.ivory,
         textAlign: 'center',
@@ -219,7 +214,7 @@ const styles = StyleSheet.create({
         marginTop: 10,
     },
     questionTitle: {
-        fontFamily: "oswaldMedium",
+        fontFamily: 'oswaldMedium',
         fontSize: 16,
         color: colors.palette.violet,
         textDecorationColor: colors.palette.violet,
@@ -229,16 +224,16 @@ const styles = StyleSheet.create({
         width: '70%',
         flexWrap: 'wrap',
         marginHorizontal: 10,
-        fontFamily: "mulishRegular",
+        fontFamily: 'mulishRegular',
         fontSize: 16,
         color: colors.palette.violet,
         marginTop: 3,
     },
     answerTitle: {
-        alignItems: "center",
+        alignItems: 'center',
         paddingVertical: 10,
         marginLeft: 10,
-        fontFamily: "oswaldMedium",
+        fontFamily: 'oswaldMedium',
         fontSize: 16,
         color: colors.palette.violet,
         textDecorationColor: colors.palette.violet,
@@ -247,7 +242,7 @@ const styles = StyleSheet.create({
     answerText: {
         width: '95%',
         marginHorizontal: 10,
-        fontFamily: "mulishRegular",
+        fontFamily: 'mulishRegular',
         fontSize: 16,
         color: colors.palette.violet,
         textAlign: 'justify',
@@ -261,15 +256,15 @@ const styles = StyleSheet.create({
     },
     button: {
         width: '80%',
-        backgroundColor: "#CBA135",
+        backgroundColor: '#CBA135',
         marginTop: 10,
         borderRadius: 16,
     },
     buttonText: {
-        textAlign: "center",
-        alignItems: "center",
+        textAlign: 'center',
+        alignItems: 'center',
         paddingVertical: 10,
-        fontFamily: "oswaldMedium",
+        fontFamily: 'oswaldMedium',
         fontSize: 14,
         color: colors.palette.ivory,
     },
@@ -283,4 +278,4 @@ const styles = StyleSheet.create({
     indicator: {
         marginBottom: 20,
     },
-})
+});
