@@ -152,8 +152,8 @@ const styles = StyleSheet.create({
     paddingVertical: 6,
   },
   formBlock: {
-    position: 'absolute',
-    top: SCREEN_HEIGHT * 0.4,
+    position: 'relative',
+    top: -SCREEN_HEIGHT * 0.15,
     width: SCREEN_WIDTH * 0.8,
     height: SCREEN_HEIGHT * 0.5,
     justifyContent: 'center',
@@ -172,9 +172,9 @@ const styles = StyleSheet.create({
   //BUTTON
   validationButton: {
     width: '100%',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     justifyContent: 'center',
-    marginTop: 40,
+    marginTop: 20,
   },
   button: {
     width: '100%',
