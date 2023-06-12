@@ -14,7 +14,7 @@ import CARD_DECK from '../../../utils/cards';
 import { colors } from '../../../theme';
 import { useCrossQuestionStore } from '../../../utils/hooks/useCrossQuestionStore';
 import { StackScreenProps } from '@react-navigation/stack';
-// import { useSimpleQuestion } from '../../../utils/hooks/useSimpleQuestion';
+import { useCrossQuestion } from '../../../utils/hooks/useCrossQuestion';
 import { useFocusEffect } from '@react-navigation/native';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -25,7 +25,7 @@ const SCREEN_FONT_SCALE = SCREEN_SCALE * 0.5;
 const CrossDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
     const [cardImage, setCardImage] = useState(null);
-    // const [value, isLoading] = useSimpleQuestion(500);
+     const [value, isLoading] = useCrossQuestion(1000);
     const [questionInformations, setQuestionInformations] = useCrossQuestionStore()
 
     console.log('Valeur de QuestionStore', questionInformations)
@@ -38,13 +38,20 @@ const CrossDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) 
 
 
 
-    // const getContent = () => {
-    //     if (isLoading) {
-    //         return <ActivityIndicator size="large" />
+    const getContent = () => {
+        if (isLoading) {
+            return (
+                <View style={styles.indicatorWrapper}>
+                    <ActivityIndicator size="large" color={colors.palette.orange} style={styles.indicator} />
+                    <Text style={styles.answerText}>
+                        L'Iris Claire se concentre sur votre tirage
+                    </Text>
+                </View>
+            )
 
-    //     }
-    //     return <Text style={styles.contentTitle}>{questionInformations.answer}</Text>;
-    // };
+        }
+        return <Text style={styles.answerText}>{questionInformations.answer}</Text>;
+    };
 
 
 
@@ -122,11 +129,9 @@ const CrossDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) 
 
                         <Text style={styles.answerTitle}>Votre réponse: </Text>
                         <Text style={styles.answerText}>
-                            Software Engineer with a drive for building highly scalable and performant web applications. Heavily interested in module federation, micro frontends, state machines, TDD, and system designs. Big on web performance and optimization, advanced component design patterns, a11y, SSR, SSG Incremental Static Regeneration (ISR), and state management. Expert at crafting highly reusable Typescript-heavy component libraries. An advocate of TypeScript and industry best practices. I regularly author meaningful technical content ✍🏽.Software Engineer with a drive for building highly scalable and performant web applications. Heavily interested in module federation, micro frontends, state machines, TDD, and system designs. Big on web performance and optimization, advanced component design patterns, a11y, SSR, SSG Incremental Static Regeneration (ISR), and state management. Expert at crafting highly reusable Typescript-heavy component libraries. An advocate of TypeScript and industry best practices. I regularly author meaningful technical content ✍🏽.Software Engineer with a drive for building highly scalable and performant web applications. Heavily interested in module federation, micro frontends, state machines, TDD, and system designs. Big on web performance and optimization, advanced component design patterns, a11y, SSR, SSG Incremental Static Regeneration (ISR), and state management. Expert at crafting highly reusable Typescript-heavy component libraries. An advocate of TypeScript and industry best practices. I regularly author meaningful technical content ✍🏽.Software Engineer with a drive for building highly scalable and performant web applications. Heavily interested in module federation, micro frontends, state machines, TDD, and system designs. Big on web performance and optimization, advanced component design patterns, a11y, SSR, SSG Incremental Static Regeneration (ISR), and state management. Expert at crafting highly reusable Typescript-heavy component libraries. An advocate of TypeScript and industry best practices. I regularly author meaningful technical content ✍🏽.Software Engineer with a drive for building highly scalable and performant web applications. Heavily interested in module federation, micro frontends, state machines, TDD, and system designs. Big on web performance and optimization, advanced component design patterns, a11y, SSR, SSG Incremental Static Regeneration (ISR), and state management. Expert at crafting highly reusable Typescript-heavy component libraries. An advocate of TypeScript and industry best practices. I regularly author meaningful technical content ✍🏽.Software Engineer with a drive for building highly scalable and performant web applications. Heavily interested in module federation, micro frontends, state machines, TDD, and system designs. Big on web performance and optimization, advanced component design patterns, a11y, SSR, SSG Incremental Static Regeneration (ISR), and state management. Expert at crafting highly reusable Typescript-heavy component libraries. An advocate of TypeScript and industry best practices. I regularly author meaningful technical content ✍🏽.Software Engineer with a drive for building highly scalable and performant web applications. Heavily interested in module federation, micro frontends, state machines, TDD, and system designs. Big on web performance and optimization, advanced component design patterns, a11y, SSR, SSG Incremental Static Regeneration (ISR), and state management. Expert at crafting highly reusable Typescript-heavy component libraries. An advocate of TypeScript and industry best practices. I regularly author meaningful technical content ✍🏽.Software Engineer with a drive for building highly scalable and performant web applications. Heavily interested in module federation, micro frontends, state machines, TDD, and system designs. Big on web performance and optimization, advanced component design patterns, a11y, SSR, SSG Incremental Static Regeneration (ISR), and state management. Expert at crafting highly reusable Typescript-heavy component libraries. An advocate of TypeScript and industry best practices. I regularly author meaningful technical content ✍🏽.Software Engineer with a drive for building highly scalable and performant web applications. Heavily interested in module federation, micro frontends, state machines, TDD, and system designs. Big on web performance and optimization, advanced component design patterns, a11y, SSR, SSG Incremental Static Regeneration (ISR), and state management. Expert at crafting highly reusable Typescript-heavy component libraries. An advocate of TypeScript and industry best practices. I regularly author meaningful technical content ✍🏽.Software Engineer with a drive for building highly scalable and performant web applications. Heavily interested in module federation, micro frontends, state machines, TDD, and system designs. Big on web performance and optimization, advanced component design patterns, a11y, SSR, SSG Incremental Static Regeneration (ISR), and state management. Expert at crafting highly reusable Typescript-heavy component libraries. An advocate of TypeScript and industry best practices. I regularly author meaningful technical content ✍🏽.
-
+                        {getContent()}
                         </Text>
                     </ScrollView>
-                    {/* {getContent()} */}
                 </View>
 
                 <View style={styles.validationButton}>
@@ -278,5 +283,15 @@ const styles = StyleSheet.create({
         fontFamily: "oswaldMedium",
         fontSize: 14,
         color: colors.palette.ivory,
+    },
+    //Loader
+    indicatorWrapper: {
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingTop: 20,
+    },
+    indicator: {
+        marginBottom: 20,
     },
 })
