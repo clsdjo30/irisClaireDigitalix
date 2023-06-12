@@ -1,11 +1,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useQuestionStore } from "./useQuestionStore";
-import Constants from 'expo-constants';
+import Constants from "expo-constants";
 
 const apikey = Constants.manifest?.extra?.openAiId;
 
-console.log(apikey);
 
 const openai = axios.create({
   baseURL: "https://api.openai.com/v1/completions",
@@ -15,19 +14,16 @@ const openai = axios.create({
   },
 });
 
-export const useSimpleQuestion = (
-  delay: number
-) => {
+export const useSimpleQuestion = (delay: number) => {
   const [value, setValue] = useQuestionStore();
   const [isLoading, setIsLoading] = useState(false);
   const userQuestion = value.question;
-    const cardNumber = value.choosecardnumber;
-    const cardName = value.choosecardname;
-    const cardPseudo = value.choosecardpseudo;
+  const cardNumber = value.choosecardnumber;
+  const cardName = value.choosecardname;
+  const cardPseudo = value.choosecardpseudo;
 
   useEffect(() => {
     let timeoutId: NodeJS.Timeout | null = null;
-
     const fetchAIReply = async () => {
       setIsLoading(true);
       const prompt = `Tu es FortuneTellerGpt, un expert en interpretation de tirage du tarot de marseille. En utilisant tes connaissances dans les tarots de marseille et des livres de Florian Parisse, donne une première réponse par oui ou non et développe ta réponse en une phrase pertinente et courte en remplaçant le "cardName" de la carte qui te sera donnée par le "cardPseudo".Rédige la réponse à la question : ${userQuestion} le numéro de l'arcane tirée est : ${cardNumber}, son nom est: ${cardName} et son pseudo est : ${cardPseudo}`;
@@ -54,7 +50,6 @@ export const useSimpleQuestion = (
         setIsLoading(false);
       }
     };
-    
 
     const delayedFetch = () => {
       if (timeoutId) {

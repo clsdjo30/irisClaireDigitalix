@@ -15,24 +15,45 @@ import { useQuestionStore } from '../../../utils/hooks/useQuestionStore';
 import { StackScreenProps } from '@react-navigation/stack';
 import { useSimpleQuestion } from '../../../utils/hooks/useSimpleQuestion';
 
+import { setDoc, doc } from "firebase/firestore";
+import { firestore, getAuth, Firestore} from "../../../config/firebaseConfig";
+
+
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = SCREEN_WIDTH * 1.5;
 const SCREEN_SCALE = Dimensions.get('window').scale;
 const SCREEN_FONT_SCALE = SCREEN_SCALE * 0.5;
 
+const auth = getAuth();
 
 const YesDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
     const [cardImage, setCardImage] = useState(null);
     const [value, isLoading] = useSimpleQuestion(500);
-    const [questionInformations, setQuestionInformations] = useQuestionStore()
-
-
+    const [questionInformations, setQuestionInformations] = useQuestionStore();
+    const currentUser = auth.currentUser;
+    const userID = currentUser ? currentUser.uid : null;
 
     const choosedCard = CARD_DECK.find((card) => card.id === questionInformations.choosecardnumber);
 
 
 
+    // lorsque la reponse est donnée, on enregistre la question, le domaine, la carte tirée et la reponse dans la base de donnée
+function saveQuestion(useruid: string | null) {
+    const db: Firestore = firestore;
+    if (!useruid) {
+      console.error("User ID is null");
+      return;
+    }
+    const questionRef = doc(db, "yesQuestion", useruid);
+    
+    setDoc(questionRef, {
+      question: questionInformations.question,
+      domain: questionInformations.domain,
+      cardpseudo: questionInformations.choosecardpseudo,
+      answer: questionInformations.answer,
+    });
+  }
     const getContent = () => {
         if (isLoading) {
             return (
@@ -45,10 +66,13 @@ const YesDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) =>
             )
 
         }
+        saveQuestion(userID);
         return <Text style={styles.answerText}>{questionInformations.answer}</Text>;
     };
 
+   
 
+console.log(questionInformations)
 
     function questionClosed() {
         setQuestionInformations({
