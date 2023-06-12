@@ -90,6 +90,14 @@ const ProfilScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
           <View style={styles.blockParam}>
             <TouchableOpacity
               style={styles.paramRow}
+              onPress={() => navigation.navigate('MyQuestions')}>
+              <Text style={styles.switchText}>Mes Questions</Text>
+              <Image source={rightArrow} style={styles.iconImage} />
+            </TouchableOpacity>
+          </View>
+          <View style={styles.blockParam}>
+            <TouchableOpacity
+              style={styles.paramRow}
               onPress={() => navigation.navigate('FirstName')}>
               <Text style={styles.switchText}>Modifier mes informations</Text>
               <Image source={rightArrow} style={styles.iconImage} />

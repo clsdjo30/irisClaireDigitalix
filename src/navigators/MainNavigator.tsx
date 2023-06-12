@@ -15,6 +15,7 @@ import HomeScreen from '../screens/Main/HomeScreen';
 import DayDrawScreen from '../screens/Main/DayDraw/DayDrawScreen';
 import TendanceResultScreen from '../screens/Main/DayDraw/TendanceResultScreen';
 import ProfilScreen from '../screens/Main/Profil/ProfilScreen';
+import SaveQuestionScreen from '../screens/Main/Profil/SaveQuestionScreen';
 // import IrisCreditScreen from '../screens/Main/IrisPage/IrisCreditScreen';
 import DomainScreen from '../screens/Main/YesDraw/DomainSreen';
 import YesDrawScreen from '../screens/Main/YesDraw/YesDrawScreen';
@@ -59,6 +60,9 @@ function ProfilStackScreen() {
     <ProfilStack.Navigator>
       <ProfilStack.Screen name="Settings"
         component={ProfilScreen}
+        options={{ headerShown: false, }} />
+        <ProfilStack.Screen name="MyQuestions"
+        component={SaveQuestionScreen}
         options={{ headerShown: false, }} />
     </ProfilStack.Navigator>
   )
