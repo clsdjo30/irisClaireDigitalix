@@ -158,7 +158,7 @@ const CrossDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
       setSelectedCardIndex(index);
       setTimeout(() => {
       setModalVisible(true);
-      }, 1000);
+      }, 1500);
     };
     
     }

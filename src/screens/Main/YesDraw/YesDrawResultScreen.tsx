@@ -10,17 +10,16 @@ import {
 
 } from 'react-native';
 import CARD_DECK from '../../../utils/cards';
-import { LinearGradient } from 'expo-linear-gradient';
 import { colors } from '../../../theme';
 import { useQuestionStore } from '../../../utils/hooks/useQuestionStore';
 import { StackScreenProps } from '@react-navigation/stack';
 import { useSimpleQuestion } from '../../../utils/hooks/useSimpleQuestion';
-import { useFocusEffect } from '@react-navigation/native';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = SCREEN_WIDTH * 1.5;
 const SCREEN_SCALE = Dimensions.get('window').scale;
 const SCREEN_FONT_SCALE = SCREEN_SCALE * 0.5;
+
 
 const YesDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
@@ -28,18 +27,25 @@ const YesDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) =>
     const [value, isLoading] = useSimpleQuestion(500);
     const [questionInformations, setQuestionInformations] = useQuestionStore()
 
-    console.log(questionInformations)
 
-    const choosedCard = questionInformations.choosecardnumber
 
-    console.log(choosedCard)
+    const choosedCard = CARD_DECK.find((card) => card.id === questionInformations.choosecardnumber);
+
+
 
     const getContent = () => {
         if (isLoading) {
-            return <ActivityIndicator size="large" />
+            return (
+                <View style={styles.indicatorWrapper}>
+                    <ActivityIndicator size="large" color={colors.palette.orange} style={styles.indicator} />
+                    <Text style={styles.answerText}>
+                        L'Iris Claire se concentre sur votre tirage
+                    </Text>
+                </View>
+            )
 
         }
-        return <Text style={styles.contentTitle}>{questionInformations.answer}</Text>;
+        return <Text style={styles.answerText}>{questionInformations.answer}</Text>;
     };
 
 
@@ -51,7 +57,7 @@ const YesDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) =>
             domain: "",
             choosecardnumber: 0,
             choosecardname: "",
-            choosecardpseuso: "",
+            choosecardpseudo: "",
             answer: ""
         })
         navigation.navigate('Home')
@@ -62,23 +68,35 @@ const YesDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) =>
     }
 
     return (
-        <LinearGradient
-            // Card Linear Gradient
-            colors={[colors.palette.purple600, colors.palette.purple500]}
-            style={styles.container}>
-
+        <View style={styles.container}>
+            <View style={styles.header} />
 
             <View style={styles.deckContainer}>
                 <View style={styles.loadingContainer}>
-                <Text style={styles.contentTitle}>Resultat de la question</Text>
-                    <View style={styles.cardContainer}>
-                  
-                    <Image
-                        style={styles.cardImage}
-                        source={choosedCard}
-                    />
+                    <View style={styles.headerContainer}>
+                        <Text style={styles.contentTitle}>Votre Tirage</Text>
+                        <View style={styles.cardContainer}>
+                            <View>
+                                <Image
+                                    style={styles.cardImage}
+                                    source={choosedCard?.frontImageUrl}
+                                />
+                                <Text style={styles.pseudoTitle}>{choosedCard?.pseudo}</Text>
+                            </View>
+                        </View>
                     </View>
-                    {getContent()}
+                    <View style={styles.resultView}>
+                        <View style={styles.questionRow}>
+                            <Text style={styles.questionTitle}>Votre question :</Text>
+                            <Text style={styles.questionText}>{questionInformations.question}</Text>
+                        </View>
+
+                        <Text style={styles.answerTitle}>Votre réponse: </Text>
+                        <Text style={styles.answerText}>
+                            {getContent()}
+
+                        </Text>
+                    </View>
                 </View>
 
                 <View style={styles.validationButton}>
@@ -90,7 +108,7 @@ const YesDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) =>
             </View>
 
 
-        </LinearGradient >
+        </View>
     )
 }
 
@@ -101,9 +119,22 @@ const styles = StyleSheet.create({
         flex: 1,
         width: SCREEN_WIDTH,
         height: SCREEN_HEIGHT,
-        backgroundColor: colors.palette.outterSpace,
+        backgroundColor: colors.background,
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    header: {
+        position: 'absolute',
+        top: 0,
+        width: SCREEN_WIDTH - 5,
+        height: SCREEN_HEIGHT * 0.4,
+        borderBottomLeftRadius: SCREEN_WIDTH * 0.1,
+        borderBottomRightRadius: SCREEN_WIDTH * 0.1,
+        backgroundColor: colors.palette.violet
+    },
+    headerContainer: {
+        position: 'absolute',
+        top: 0,
     },
     // Domain Container
     deckContainer: {
@@ -111,24 +142,21 @@ const styles = StyleSheet.create({
         height: "95%",
         justifyContent: 'center',
         alignContent: 'center',
-
-
     },
     contentTitle: {
         fontFamily: "mulishRegular",
         fontSize: 14 * SCREEN_FONT_SCALE,
         color: colors.palette.ivory,
-        marginBottom: 10,
         textAlign: 'center',
     },
     cardContainer: {
         position: 'relative',
+        top: 50,
         width: '100%',
         height: '50%',
-        justifyContent: 'center',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
         alignItems: 'center',
-
-
     },
     loadingContainer: {
         flex: 1,
@@ -136,19 +164,76 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     card: {
-        width: 120,
-        height: 240,
+        width: 70,
+        height: 130,
     },
     cardImage: {
-        width: 120,
-        height: 240,
+        width: 70,
+        height: 130,
         borderRadius: 10,
+    },
+    pseudoTitle: {
+        fontFamily: "oswaldMedium",
+        fontSize: 10,
+        color: colors.palette.ivory,
+        textAlign: 'center',
+    },
+    resultView: {
+        position: 'absolute',
+        bottom: 0,
+        width: '100%',
+        height: '65%',
+        backgroundColor: colors.palette.violetClair,
+        borderRadius: 16,
+        elevation: 3,
+    },
+    questionRow: {
+        width: '90%',
+        flexDirection: 'row',
+        alignItems: 'flex-start',
+        marginHorizontal: 10,
+        marginTop: 10,
+    },
+    questionTitle: {
+        fontFamily: "oswaldMedium",
+        fontSize: 16,
+        color: colors.palette.violet,
+        textDecorationColor: colors.palette.violet,
+        textDecorationLine: 'underline',
+    },
+    questionText: {
+        width: '70%',
+        flexWrap: 'wrap',
+        marginHorizontal: 10,
+        fontFamily: "mulishRegular",
+        fontSize: 16,
+        color: colors.palette.violet,
+        marginTop: 3,
+    },
+    answerTitle: {
+        alignItems: "center",
+        paddingVertical: 10,
+        marginLeft: 10,
+        fontFamily: "oswaldMedium",
+        fontSize: 16,
+        color: colors.palette.violet,
+        textDecorationColor: colors.palette.violet,
+        textDecorationLine: 'underline',
+    },
+    answerText: {
+        width: '95%',
+        marginHorizontal: 10,
+        fontFamily: "mulishRegular",
+        fontSize: 16,
+        color: colors.palette.violet,
+        textAlign: 'justify',
     },
     validationButton: {
         width: '100%',
         alignItems: 'center',
         justifyContent: 'center',
         marginTop: 20,
+        elevation: 5,
     },
     button: {
         width: '80%',
@@ -163,5 +248,15 @@ const styles = StyleSheet.create({
         fontFamily: "oswaldMedium",
         fontSize: 14,
         color: colors.palette.ivory,
+    },
+    //Loader
+    indicatorWrapper: {
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingTop: 20,
+    },
+    indicator: {
+        marginBottom: 20,
     },
 })

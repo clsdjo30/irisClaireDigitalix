@@ -23,7 +23,7 @@ export const useSimpleQuestion = (
   const userQuestion = value.question;
     const cardNumber = value.choosecardnumber;
     const cardName = value.choosecardname;
-    const cardPseudo = value.choosecardpseuso;
+    const cardPseudo = value.choosecardpseudo;
 
   useEffect(() => {
     let timeoutId: NodeJS.Timeout | null = null;
