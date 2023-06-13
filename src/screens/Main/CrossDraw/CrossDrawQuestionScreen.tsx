@@ -9,7 +9,7 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input } from '@rneui/themed';
 import { colors } from '../../../theme';
-import { useQuestionStore } from '../../../utils/hooks/useQuestionStore';
+import { useCrossQuestionStore } from '../../../utils/hooks/useCrossQuestionStore';
 import { StackScreenProps } from '@react-navigation/stack';
 
 interface YesDrawScreenProps {
@@ -25,8 +25,8 @@ const SCREEN_HEIGHT = SCREEN_WIDTH * 1.5;
 const SCREEN_SCALE = Dimensions.get('window').scale;
 const SCREEN_FONT_SCALE = SCREEN_SCALE * 0.5;
 
-const YesDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
-  const [value, setValue] = useQuestionStore();
+const CrossDrawQuestionScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
+  const [value, setValue] = useCrossQuestionStore();
   const [errorMessage, setErrorMessage] = React.useState('');
 
   function handleTextChange(text: string) {
@@ -45,9 +45,10 @@ const YesDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
       return;
     }
 
-    navigation.navigate('DrawOneCard');
+    navigation.navigate('DrawCard');
   }
-
+  console.log("crossQuestion", value)
+  console.log("Question", value.question)
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -93,7 +94,7 @@ const YesDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   )
 }
 
-export default YesDrawScreen
+export default CrossDrawQuestionScreen;
 
 const styles = StyleSheet.create({
   container: {

@@ -61,13 +61,15 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
+        marginTop: -5,
     },
     elementImage: {
-        width: SCREEN_WIDTH * 0.3,
-        height: SCREEN_HEIGHT * 0.05,
+        width: 70,
+        height: 70,
     },
     signText: {
-        color: colors.palette.ivory,
+        paddingTop: 5,
+        color: colors.palette.violet,
         fontSize: 13,
         fontFamily: 'mulishLight',
         textTransform: 'capitalize',

@@ -10,7 +10,7 @@ const FirstNameScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   const [user, setUser] = useUserStore()
 
 
-  console.log(user.firstname)
+  //console.log(user.firstname)
   return (
     <SafeAreaView style={styles.container}>
 

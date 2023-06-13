@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState } from 'react'
 import {
     StyleSheet,
     Image,
@@ -6,13 +6,15 @@ import {
     Pressable,
     Text,
     Dimensions,
-    ActivityIndicator,
+    ScrollView,
+    ActivityIndicator
+
 } from 'react-native';
 import CARD_DECK from '../../../utils/cards';
 import { colors } from '../../../theme';
-import { useQuestionStore } from '../../../utils/hooks/useQuestionStore';
 import { StackScreenProps } from '@react-navigation/stack';
-import { useSimpleQuestion } from '../../../utils/hooks/useSimpleQuestion';
+import { useCrossQuestionStore } from '../../../utils/hooks/useCrossQuestionStore';
+import { useCrossQuestion } from '../../../utils/hooks/useCrossQuestion';
 import { setDoc, doc, collection } from 'firebase/firestore';
 import { firestore, getAuth } from '../../../config/firebaseConfig';
 
@@ -23,41 +25,45 @@ const SCREEN_FONT_SCALE = SCREEN_SCALE * 0.5;
 
 const auth = getAuth();
 
-const YesDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
+const CrossDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
+
     const [cardImage, setCardImage] = useState(null);
-    const [value, isLoading] = useSimpleQuestion(500);
-    const [questionInformations, setQuestionInformations] = useQuestionStore();
+    const [value, isLoading] = useCrossQuestion(1000);
+    const [questionInformations, setQuestionInformations] = useCrossQuestionStore()
     const currentUser = auth.currentUser;
     const userID = currentUser ? currentUser.uid : null;
-    
-    //console.log(userID);
-    
-    const choosedCard = CARD_DECK.find((card) => card.id === questionInformations.choosecardnumber);
-    
-    
-    
-    function saveQuestion(useruid: string | any ) {
+
+    console.log('Valeur de QuestionStore', questionInformations)
+
+
+    const firstCard = CARD_DECK.find(card => card.id === questionInformations.choosecardnumber);
+    const secondCard = CARD_DECK.find(card => card.id === questionInformations.choosecardtwonumber);
+    const thirdCard = CARD_DECK.find(card => card.id === questionInformations.choosecardthreenumber);
+    const fourthCard = CARD_DECK.find(card => card.id === questionInformations.choosecardfournumber);
+
+    function saveCrossQuestion(useruid: string | any) {
         const db = firestore;
         if (!useruid) {
             console.error("User ID is null");
             return;
         }
         const usersCollectionRef = collection(db, 'users');
-        const userQuestionsCollectionRef = collection(usersCollectionRef, useruid, 'yesquestions');
+        const userQuestionsCollectionRef = collection(usersCollectionRef, useruid, 'crossquestions');
         const questionRef = doc(userQuestionsCollectionRef);
 
         setDoc(questionRef, {
             domain: questionInformations.domain,
             question: questionInformations.question,
-            cardpseudo: questionInformations.choosecardpseudo,
+            cardpseudoone: questionInformations.choosecardpseudo,
+            cardpseudotwo: questionInformations.choosecardtwopseudo,
+            cardpseudothree: questionInformations.choosecardthreepseudo,
+            cardpseudofour: questionInformations.choosecardfourpseudo,
             answer: questionInformations.answer,
         })
-        .then(() => console.log('Question saved successfully!'))
-        .catch((error) => console.error('Error saving question:', error));
+            .then(() => console.log('Question saved successfully!'))
+            .catch((error) => console.error('Error saving question:', error));
         questionClosed();
     }
-
-   
 
     const getContent = () => {
         if (isLoading) {
@@ -68,33 +74,44 @@ const YesDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) =>
                         L'Iris Claire se concentre sur votre tirage
                     </Text>
                 </View>
-            );
-        }
+            )
 
+        }
         return <Text style={styles.answerText}>{questionInformations.answer}</Text>;
     };
+
+
 
     function questionClosed() {
         setQuestionInformations({
             ...questionInformations,
-            question: '',
-            domain: '',
+            question: "",
+            domain: "",
+            answer: "",
             choosecardnumber: 0,
-            choosecardname: '',
-            choosecardpseudo: '',
-            answer: '',
-        });
-        navigation.navigate('Home');
+            choosecardtwonumber: 0,
+            choosecardthreenumber: 0,
+            choosecardfournumber: 0,
+            choosecardname: "",
+            choosecardtwoname: "",
+            choosecardthreename: "",
+            choosecardfourname: "",
+            choosecardpseudo: "",
+            choosecardtwopseudo: "",
+            choosecardthreepseudo: "",
+            choosecardfourpseudo: "",
+        })
+        navigation.navigate('Home')
         navigation.reset({
             index: 0,
-            routes: [{ name: 'Home' }],
-        });
+            routes: [{ name: 'Home' }]
+        })
     }
 
     return (
         <View style={styles.container}>
-            <View style={styles.header} />
 
+            <View style={styles.header} />
             <View style={styles.deckContainer}>
                 <View style={styles.loadingContainer}>
                     <View style={styles.headerContainer}>
@@ -103,41 +120,68 @@ const YesDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) =>
                             <View>
                                 <Image
                                     style={styles.cardImage}
-                                    source={choosedCard?.frontImageUrl}
+                                    source={firstCard?.frontImageUrl}
                                 />
-                                <Text style={styles.pseudoTitle}>{choosedCard?.pseudo}</Text>
+                                <Text style={styles.pseudoTitle}>{firstCard?.pseudo}</Text>
+                            </View>
+                            <View>
+                                <Image
+                                    style={styles.cardImage}
+                                    source={secondCard?.frontImageUrl}
+                                />
+                                <Text style={styles.pseudoTitle}>{secondCard?.pseudo}</Text>
+                            </View>
+                            <View>
+                                <Image
+                                    style={styles.cardImage}
+                                    source={thirdCard?.frontImageUrl}
+                                />
+                                <Text style={styles.pseudoTitle}>{thirdCard?.pseudo}</Text>
+                            </View>
+
+                            <View>
+                                <Image
+                                    style={styles.cardImage}
+                                    source={fourthCard?.frontImageUrl}
+                                />
+                                <Text style={styles.pseudoTitle}>{fourthCard?.pseudo}</Text>
                             </View>
                         </View>
                     </View>
-                    <View style={styles.resultView}>
+                    <ScrollView style={styles.resultView}>
                         <View style={styles.questionRow}>
                             <Text style={styles.questionTitle}>Votre question :</Text>
                             <Text style={styles.questionText}>{questionInformations.question}</Text>
                         </View>
 
                         <Text style={styles.answerTitle}>Votre réponse: </Text>
-                        <Text style={styles.answerText}>{getContent()}</Text>
-                    </View>
+                        <Text style={styles.answerText}>
+                            {getContent()}
+                        </Text>
+                    </ScrollView>
                 </View>
 
                 <View style={styles.validationButton}>
-                    <Pressable style={styles.button} onPress={() => saveQuestion(userID)}>
+                    <Pressable style={styles.button} onPress={() => saveCrossQuestion(userID)}>
                         <Text style={styles.buttonText}>Revenir à l'accueil</Text>
                     </Pressable>
                 </View>
-            </View>
-        </View>
-    );
-};
 
-export default YesDrawResultScreen;
+            </View>
+
+
+        </View >
+    )
+}
+
+export default CrossDrawResultScreen;
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         width: SCREEN_WIDTH,
         height: SCREEN_HEIGHT,
-        backgroundColor: colors.background,
+        backgroundColor: colors.palette.violetBg,
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -148,7 +192,7 @@ const styles = StyleSheet.create({
         height: SCREEN_HEIGHT * 0.4,
         borderBottomLeftRadius: SCREEN_WIDTH * 0.1,
         borderBottomRightRadius: SCREEN_WIDTH * 0.1,
-        backgroundColor: colors.palette.violet,
+        backgroundColor: colors.palette.violet
     },
     headerContainer: {
         position: 'absolute',
@@ -156,13 +200,13 @@ const styles = StyleSheet.create({
     },
     // Domain Container
     deckContainer: {
-        width: '95%',
-        height: '95%',
+        width: "95%",
+        height: "95%",
         justifyContent: 'center',
         alignContent: 'center',
     },
     contentTitle: {
-        fontFamily: 'mulishRegular',
+        fontFamily: "mulishRegular",
         fontSize: 14 * SCREEN_FONT_SCALE,
         color: colors.palette.ivory,
         textAlign: 'center',
@@ -191,7 +235,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
     },
     pseudoTitle: {
-        fontFamily: 'oswaldMedium',
+        fontFamily: "oswaldMedium",
         fontSize: 10,
         color: colors.palette.ivory,
         textAlign: 'center',
@@ -213,7 +257,7 @@ const styles = StyleSheet.create({
         marginTop: 10,
     },
     questionTitle: {
-        fontFamily: 'oswaldMedium',
+        fontFamily: "oswaldMedium",
         fontSize: 16,
         color: colors.palette.violet,
         textDecorationColor: colors.palette.violet,
@@ -223,16 +267,16 @@ const styles = StyleSheet.create({
         width: '70%',
         flexWrap: 'wrap',
         marginHorizontal: 10,
-        fontFamily: 'mulishRegular',
+        fontFamily: "mulishRegular",
         fontSize: 16,
         color: colors.palette.violet,
         marginTop: 3,
     },
     answerTitle: {
-        alignItems: 'center',
+        alignItems: "center",
         paddingVertical: 10,
         marginLeft: 10,
-        fontFamily: 'oswaldMedium',
+        fontFamily: "oswaldMedium",
         fontSize: 16,
         color: colors.palette.violet,
         textDecorationColor: colors.palette.violet,
@@ -241,7 +285,7 @@ const styles = StyleSheet.create({
     answerText: {
         width: '95%',
         marginHorizontal: 10,
-        fontFamily: 'mulishRegular',
+        fontFamily: "mulishRegular",
         fontSize: 16,
         color: colors.palette.violet,
         textAlign: 'justify',
@@ -255,15 +299,15 @@ const styles = StyleSheet.create({
     },
     button: {
         width: '80%',
-        backgroundColor: '#CBA135',
+        backgroundColor: "#CBA135",
         marginTop: 10,
         borderRadius: 16,
     },
     buttonText: {
-        textAlign: 'center',
-        alignItems: 'center',
+        textAlign: "center",
+        alignItems: "center",
         paddingVertical: 10,
-        fontFamily: 'oswaldMedium',
+        fontFamily: "oswaldMedium",
         fontSize: 14,
         color: colors.palette.ivory,
     },
@@ -277,4 +321,4 @@ const styles = StyleSheet.create({
     indicator: {
         marginBottom: 20,
     },
-});
+})

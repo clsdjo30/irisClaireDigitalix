@@ -17,9 +17,7 @@ export default function AuthStack() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        
-       
+      <Stack.Navigator>       
         <Stack.Screen name="StepOne" component={StepOneScreen} options={{headerShown: false}}/>
         <Stack.Screen name="StepTwo" component={StepTwoScreen} options={{headerShown: false}}/>
         <Stack.Screen name="FirstName" component={FirstName} options={{headerShown: false}}/>

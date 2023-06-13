@@ -15,12 +15,16 @@ import HomeScreen from '../screens/Main/HomeScreen';
 import DayDrawScreen from '../screens/Main/DayDraw/DayDrawScreen';
 import TendanceResultScreen from '../screens/Main/DayDraw/TendanceResultScreen';
 import ProfilScreen from '../screens/Main/Profil/ProfilScreen';
+import SaveQuestionScreen from '../screens/Main/Profil/SaveQuestionScreen';
 // import IrisCreditScreen from '../screens/Main/IrisPage/IrisCreditScreen';
 import DomainScreen from '../screens/Main/YesDraw/DomainSreen';
 import YesDrawScreen from '../screens/Main/YesDraw/YesDrawScreen';
 import DrawOneCardScreen from '../screens/Main/YesDraw/DrawOneCardScreen';
 import YesDrawResultScreen from '../screens/Main/YesDraw/YesDrawResultScreen';
 import CrossDrawScreen from '../screens/Main/CrossDraw/CrossDrawScreen';
+import CrossDrawDomainScreen from '../screens/Main/CrossDraw/CrossDrawDomainScreen';
+import CrossDrawQuestionScreen from '../screens/Main/CrossDraw/CrossDrawQuestionScreen';
+import CrossDrawResultScreen from '../screens/Main/CrossDraw/CrossDrawResultScreen';
 
 const DayDrawStack = createNativeStackNavigator();
 const ProfilStack = createNativeStackNavigator();
@@ -56,6 +60,9 @@ function ProfilStackScreen() {
     <ProfilStack.Navigator>
       <ProfilStack.Screen name="Settings"
         component={ProfilScreen}
+        options={{ headerShown: false, }} />
+        <ProfilStack.Screen name="MyQuestions"
+        component={SaveQuestionScreen}
         options={{ headerShown: false, }} />
     </ProfilStack.Navigator>
   )
@@ -94,9 +101,20 @@ function YesStackScreen() {
 // // NAVIGATION FOR CROSS DRAW
 function CrossStackScreen() {
   return (
-    <CrossStack.Navigator>
-      <CrossStack.Screen name="AskCrossQuestion"
+    <CrossStack.Navigator
+      initialRouteName='ChooseDomain'
+    >
+      <CrossStack.Screen name="ChooseDomain"
+        component={CrossDrawDomainScreen}
+        options={{ headerShown: false, }} />
+        <CrossStack.Screen name="AskCrossQuestion"
+        component={CrossDrawQuestionScreen}
+        options={{ headerShown: false, }} />
+      <CrossStack.Screen name="DrawCard"
         component={CrossDrawScreen}
+        options={{ headerShown: false, }} />
+        <CrossStack.Screen name="DrawResult"
+        component={CrossDrawResultScreen}
         options={{ headerShown: false, }} />
     </CrossStack.Navigator>
   )

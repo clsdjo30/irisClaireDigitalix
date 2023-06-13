@@ -8,11 +8,8 @@ import {
     Text,
     Dimensions
 } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import { Form, FormItem } from 'react-native-form-component';
-import { LinearGradient } from 'expo-linear-gradient';
 import { colors } from '../../../theme';
-import { useQuestionStore } from '../../../utils/hooks/useQuestionStore';
+import { useCrossQuestionStore } from '../../../utils/hooks/useCrossQuestionStore';
 import { StackScreenProps } from '@react-navigation/stack';
 
 // import icons
@@ -33,11 +30,11 @@ const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = SCREEN_WIDTH * 1.5;
 
 
-const DomainScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
-    const [value, setValue] = useQuestionStore();
+const CrossDrawDomainScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
+    const [value, setValue] = useCrossQuestionStore();
 
     function goToAskQuestionCard() {
-        navigation.navigate('AskQuestion');
+        navigation.navigate('AskCrossQuestion');
     }
 
     function loveChoice() {
@@ -60,7 +57,7 @@ const DomainScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
         goToAskQuestionCard();
     }
 
-
+console.log("crossQuestion", value)
     return (
         <View style={styles.container}>
 
@@ -106,12 +103,12 @@ const DomainScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     )
 }
 
-export default DomainScreen;
+export default CrossDrawDomainScreen;
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        width: SCREEN_WIDTH ,
+        width: SCREEN_WIDTH,
         height: SCREEN_HEIGHT,
         backgroundColor: colors.background,
         alignItems: 'center',
@@ -120,7 +117,7 @@ const styles = StyleSheet.create({
     header: {
         position: 'absolute',
         top: 0,
-        width: SCREEN_WIDTH -5,
+        width: SCREEN_WIDTH - 5,
         height: SCREEN_HEIGHT * 0.4,
         borderBottomLeftRadius: SCREEN_WIDTH * 0.1,
         borderBottomRightRadius: SCREEN_WIDTH * 0.1,
@@ -162,6 +159,7 @@ const styles = StyleSheet.create({
         fontFamily: "mulishBold",
         fontSize: 20,
         color: colors.palette.violet,
+
     },
     contentTitle: {
         fontFamily: "mulishBold",

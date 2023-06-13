@@ -62,7 +62,7 @@ const userElement = findUserElement();
 
   function saveUser(useruid: string) {
     const db = firestore;
-    setDoc(doc(db, "clients", useruid), {
+    setDoc(doc(db, "users", useruid), {
       email: user.email,
       firstname: user.firstname,
       genre: user.genre,

@@ -35,7 +35,7 @@ const ProfilScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   useUserInformation();
   const [checked, setChecked] = React.useState(false);
   const [user, setUser] = useUserStore();
-console.log(user);
+
 
   const rightArrow = require('../../../../assets/icons/caretRight.png');
 
@@ -43,39 +43,35 @@ console.log(user);
   const userStone = user?.stone;
   const userElement = user?.element;
 
-console.log(user);
+
 
   return (
     <SafeAreaView style={styles.container}>
-      <LinearGradient
-      // Card Linear Gradient
-        colors={[colors.palette.purple600, colors.palette.purple500]}
-        style={styles.containerGradient}>
 
-        {/* START USER CARD */}
-        <LinearGradient
-          colors={[colors.palette.purple400, colors.palette.purple500]}
-          style={styles.cardUserStyle}>
-          
-          {/* Header User Information */}
-          <View style={styles.headerImageContainer}>
-            <Text style={styles.headerTitle}>mon compte</Text>
-          </View>
-          {/* User Astro information*/}
-          <View style={styles.headerUnderlineTop}>
-            <Text style={styles.headerSubTitle}>{user?.firstname}</Text>
-            <Text style={styles.textEmail}>{user?.email}</Text>
-          </View>
-          <View style={styles.headerUnderline}>
-            {UserStoneIcon(userStone, user?.stone)}
-            {UserSignIcon(userSign, user?.zodiacname)}
-            {UserElementIcon(userElement, user?.element)}
-          </View>
-        </LinearGradient>
-        {/* END USER CARD */}
+      <View style={styles.header} />
+      {/* START USER CARD */}
+      <View style={styles.userCard}>
+        <View style={styles.headerUnderlineTop}>
+          {UserStoneIcon(userStone, user?.stone)}
+          {UserSignIcon(userSign, user?.zodiacname)}
+          {UserElementIcon(userElement, user?.element)}
+        </View>
+        {/* Header User Information */}
+
+        <Text style={styles.headerTitle}>mon compte</Text>
+
+        {/* User Astro information*/}
+        <View style={styles.headerUnderline}>
+          <Text style={styles.headerSubTitle}>{user?.firstname}</Text>
+          <Text style={styles.textEmail}>{user?.email}</Text>
+        </View>
+      </View>
+
+      {/* END USER CARD */}
 
 
-        <View style={styles.paramContent}>
+      <View style={styles.paramContent}>
+        <View style={styles.blockSwitch}>
           <View style={styles.switchParam}>
             <Text style={styles.switchText}>Notifications</Text>
             <Switch
@@ -90,51 +86,60 @@ console.log(user);
               onValueChange={(value) => setChecked(value)}
             />
           </View>
+        </View>
 
-          <View style={styles.paramsList}>
-            <View style={styles.blockParam}>
-              <TouchableOpacity
-                style={styles.paramRow}
-                onPress={() => navigation.navigate('FirstName')}>
-                <Text style={styles.switchText}>Modifier mes informations</Text>
-                <Image source={rightArrow} style={styles.iconImage} />
-              </TouchableOpacity>
-            </View>
-            <View style={styles.blockParam}>
-              <TouchableOpacity
-                style={styles.paramRow}
-                onPress={() => navigation.navigate('FirstName')}>
-                <Text style={styles.switchText}>Laissez un avis</Text>
-                <Image source={rightArrow} style={styles.iconImage} />
-              </TouchableOpacity>
-            </View>
-            <View style={styles.blockParam}>
-              <TouchableOpacity
-                style={styles.paramRow}
-                onPress={() => navigation.navigate('FirstName')}>
-                <Text style={styles.switchText}>Aide</Text>
-                <Image source={rightArrow} style={styles.iconImage} />
-              </TouchableOpacity>
-            </View>
-            <View style={styles.blockParam}>
-              <TouchableOpacity
-                style={styles.paramRow}
-                onPress={() => navigation.navigate('FirstName')}>
-                <Text style={styles.switchText}>A Propos</Text>
-                <Image source={rightArrow} style={styles.iconImage} />
-              </TouchableOpacity>
-            </View>
-
-          </View>
-          <View style={styles.blockButton}>
-            <TouchableOpacity style={styles.button} onPress={() => auth.signOut()}>
-              <Text style={styles.buttonText}>
-                se déconnecter
-              </Text>
+        <View style={styles.paramsList}>
+          <View style={styles.blockParam}>
+            <TouchableOpacity
+              style={styles.paramRow}
+              onPress={() => navigation.navigate('MyQuestions')}>
+              <Text style={styles.switchText}>Mes Questions</Text>
+              <Image source={rightArrow} style={styles.iconImage} />
             </TouchableOpacity>
           </View>
+          <View style={styles.blockParam}>
+            <TouchableOpacity
+              style={styles.paramRow}
+              onPress={() => navigation.navigate('FirstName')}>
+              <Text style={styles.switchText}>Modifier mes informations</Text>
+              <Image source={rightArrow} style={styles.iconImage} />
+            </TouchableOpacity>
+          </View>
+          <View style={styles.blockParam}>
+            <TouchableOpacity
+              style={styles.paramRow}
+              onPress={() => navigation.navigate('FirstName')}>
+              <Text style={styles.switchText}>Laissez un avis</Text>
+              <Image source={rightArrow} style={styles.iconImage} />
+            </TouchableOpacity>
+          </View>
+          <View style={styles.blockParam}>
+            <TouchableOpacity
+              style={styles.paramRow}
+              onPress={() => navigation.navigate('FirstName')}>
+              <Text style={styles.switchText}>Aide</Text>
+              <Image source={rightArrow} style={styles.iconImage} />
+            </TouchableOpacity>
+          </View>
+          <View style={styles.blockParam}>
+            <TouchableOpacity
+              style={styles.paramRow}
+              onPress={() => navigation.navigate('FirstName')}>
+              <Text style={styles.switchText}>A Propos</Text>
+              <Image source={rightArrow} style={styles.iconImage} />
+            </TouchableOpacity>
+          </View>
+
         </View>
-      </LinearGradient>
+        <View style={styles.blockButton}>
+          <TouchableOpacity style={styles.button} onPress={() => auth.signOut()}>
+            <Text style={styles.buttonText}>
+              se déconnecter
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+
     </SafeAreaView>
   )
 }
@@ -142,24 +147,28 @@ console.log(user);
 export default ProfilScreen
 
 const styles = StyleSheet.create({
-  
+
   container: {
     flex: 1,
     height: SCREEN_HEIGHT,
     width: SCREEN_WIDTH,
-    backgroundColor: colors.palette.purple600,
+    backgroundColor: colors.palette.violet,
     justifyContent: 'center',
     alignItems: 'center'
   },
-  containerGradient: {
-    flex: 1,
-    width: SCREEN_WIDTH ,
-    height: SCREEN_HEIGHT,
-    alignItems: 'center',
-    justifyContent: 'center'
+  header: {
+    position: 'absolute',
+    top: 0,
+    width: SCREEN_WIDTH - 5,
+    height: SCREEN_HEIGHT * 0.4,
+    borderBottomLeftRadius: SCREEN_WIDTH * 0.1,
+    borderBottomRightRadius: SCREEN_WIDTH * 0.1,
+    backgroundColor: colors.background
   },
   paramContent: {
-    width:  SCREEN_WIDTH / 1.12
+    position: 'absolute',
+    bottom: 0,
+    width: SCREEN_WIDTH / 1.12
   },
   textHeading: {
     color: colors.palette.darkgold,
@@ -170,9 +179,12 @@ const styles = StyleSheet.create({
   textStyle: {
     color: colors.palette.ivory,
     fontFamily: 'mulishLight',
-    fontSize: SCREEN_FONT_SCALE ,
+    fontSize: SCREEN_FONT_SCALE,
   },
   //SWITCH PARAM
+  blockSwitch: {
+    marginBottom: SCREEN_HEIGHT / 10,
+  },
   switchParam: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -203,11 +215,12 @@ const styles = StyleSheet.create({
   },
   //LIST PARAMS
   paramsList: {
-   
+    marginBottom: SCREEN_HEIGHT / 20
   },
   blockParam: {
     paddingVertical: SCREEN_HEIGHT / 50,
     borderBottomWidth: 0.5,
+    borderBottomColor: colors.palette.violetClair
   },
   paramRow: {
     flexDirection: 'row',
@@ -218,34 +231,26 @@ const styles = StyleSheet.create({
     width: 20,
     height: 20,
   },
-  //START OFUSER CARD INFORMATION
+  //START O FUSER CARD INFORMATION
+  userCard: {
+    position: 'absolute',
+    top: 0,
+
+  },
   cardUserStyle: {
     width: SCREEN_WIDTH / 1.1,
     height: SCREEN_HEIGHT * 0.345,
-    backgroundColor: colors.palette.purple200,
-    borderRadius: 10,
-    borderBottomWidth: 0.9,
-    borderRightWidth: 0.9,
-    borderRightColor: colors.palette.lightgold,
-    borderBottomColor: colors.palette.lightgold,
-    elevation: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginVertical: SCREEN_HEIGHT * 0.05,
-  },
-  headerImageContainer: {
-    flexDirection: 'row',
-    marginTop: 10,
-    marginBottom: 3
   },
   headerTitle: {
     color: colors.palette.darkgold,
-    fontSize: SCREEN_FONT_SCALE + 18,
+    fontSize: SCREEN_FONT_SCALE + 25,
     fontFamily: 'oswaldLight',
     textTransform: 'capitalize',
+    textAlign: 'center',
+    marginTop: SCREEN_HEIGHT / 50,
   },
   headerSubTitle: {
-    color: colors.palette.ivory,
+    color: colors.palette.violet,
     fontSize: SCREEN_FONT_SCALE + 16,
     fontFamily: 'oswaldBold',
     textTransform: 'capitalize',
@@ -257,34 +262,20 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
+    marginTop: SCREEN_HEIGHT / 50,
   },
   headerUnderlineTop: {
     flexDirection: 'row',
-    justifyContent: 'space-evenly',
+    justifyContent: 'space-between',
     alignItems: 'center',
     width: SCREEN_WIDTH / 1.2,
     paddingVertical: SCREEN_HEIGHT / 50,
     borderBottomWidth: 0.5,
   },
   textEmail: {
-    color: colors.palette.ivory,
+    color: colors.palette.violet,
     fontFamily: 'mulishLight',
     fontSize: 16,
-    
-  },
-  // css pour placer les etoiles dans la carte user information
-  starImage: {
-    width: SCREEN_WIDTH / 15,
-    height: SCREEN_HEIGHT / 30,
-  },
-  starContainerTop: {
-    position: 'absolute',
-    left: 10,
-    top: 10
-  },
-  starContainerBottom: {
-    position: 'absolute',
-    right: 10,
-    bottom: 10
+
   },
 })

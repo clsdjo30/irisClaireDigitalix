@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   StyleSheet,
   Text,
   Image,
   View,
   Pressable,
-  ImageSourcePropType,
   Dimensions
 } from 'react-native';
 import { getAuth } from 'firebase/auth';
@@ -19,20 +18,16 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 const auth = getAuth();
 
-const rightArrow = require('../../../assets/icons/caretRight.png');
-const IrisCars = require('../../../assets/images/cards/back/Claire_Back_Card.png');
 const yesNo = require('../../../assets/images/testVector/yesNo.png');
 const question = require('../../../assets/images/testVector/simple_question.png');
 const questionPlus = require('../../../assets/images/testVector/question_point.png');
 
-const WIDTH = Dimensions.get('window').width;
-const HEIGHT = Dimensions.get('window').height;
+const SCREEN_WIDTH = Dimensions.get('window').width;
 
 const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
   const [daycard, setDayCard] = useDaydrawStore();
   const userInformation = useUserInformation();
-  const backCard = require('../../../assets/images/cards/back/Claire_Back_Card.png');
   const [user, setUser] = useUserStore();
 
   function goToYesDraw() {
@@ -55,9 +50,7 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     <View style={styles.container}>
 
 
-      <View
-        style={styles.header}
-      >
+      <View style={styles.header}/> 
         <Text style={styles.headerTitle}>Bonjour {user?.firstname}</Text>
         <View style={styles.tendanceContainer}>
           {daycard.isdraw === false ?
@@ -70,7 +63,7 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
             </>
             :
             <>
-             
+
               <View style={styles.tendanceTextContainer}>
                 <Text style={styles.displayTextTendance}>
                   {daycard.daytendance}
@@ -79,11 +72,12 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
             </>
           }
         </View>
-      </View>
+      
+
 
       <View style={styles.domainsContainer}>
         <LinearGradient
-          colors={[colors.palette.violetClair,  colors.palette.violetClair]}
+          colors={[colors.palette.violetClair, colors.palette.violetClair]}
           start={{ x: 0, y: 0.5 }}
           end={{ x: 1, y: 0.5 }}
           locations={[0.1, 0.9]}
@@ -102,56 +96,57 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
         </LinearGradient>
         {/* Card CrossDraw */}
         <LinearGradient
-          colors={[colors.palette.violetClair,  colors.palette.violetClair]}
+          colors={[colors.palette.violetClair, colors.palette.violetClair]}
           start={{ x: 0, y: 0.5 }}
           end={{ x: 1, y: 0.5 }}
           locations={[0.1, 0.9]}
           style={styles.domainCard}
         >
-        <Pressable style={styles.innerContainer} onPress={goToCrossDraw}>
-          <Image source={questionPlus} style={styles.icon} />
-          <View style={styles.direction}>
-            <Text style={styles.domainText2}>Tirage Complet</Text>
-            <Text style={styles.domainTextGoldExplain}>Vous avez de grande interogation, vous voulez ....</Text>
-          </View>
-        </Pressable>
+          <Pressable style={styles.innerContainer} onPress={goToCrossDraw}>
+            <Image source={questionPlus} style={styles.icon} />
+            <View style={styles.direction}>
+              <Text style={styles.domainText2}>Tirage Complet</Text>
+              <Text style={styles.domainTextGoldExplain}>Vous avez de grande interogation, vous voulez ....</Text>
+            </View>
+          </Pressable>
         </LinearGradient>
 
-      {/* CARD TENDANCE DU JOUR */}
-      <LinearGradient
-         colors={[colors.palette.violetClair,  colors.palette.violetClair]}
-         start={{ x: 0, y: 0.5 }}
-         end={{ x: 1, y: 0.5 }}
-         locations={[0.1, 0.9]}
+        {/* CARD TENDANCE DU JOUR */}
+        <LinearGradient
+          colors={[colors.palette.violetClair, colors.palette.violetClair]}
+          start={{ x: 0, y: 0.5 }}
+          end={{ x: 1, y: 0.5 }}
+          locations={[0.1, 0.9]}
           style={styles.domainCard}
         >
-        <Pressable style={styles.innerContainer} onPress={goToDayDraw}>
-          <Image source={question} style={styles.icon} />
-          <View style={[styles.direction]}>
-            {daycard.isdraw === false ?
-            <>
-              <Text style={styles.domainText}>Tendance du Jour</Text>
-              <Text style={styles.domainTextExplain}>Une pensée inspirante pour éclairer votre journée !</Text>
-              </>
-              :
-              <Text style={styles.domainText}>Tendance du Jour</Text>
-            }
+          <Pressable style={styles.innerContainer} onPress={goToDayDraw}>
+            <Image source={question} style={styles.icon} />
+            <View style={[styles.direction]}>
+              {daycard.isdraw === false ?
+                <>
+                  <Text style={styles.domainText}>Tendance du Jour</Text>
+                  <Text style={styles.domainTextExplain}>Une pensée inspirante pour éclairer votre journée !</Text>
+                </>
+                :
+                <Text style={styles.domainText}>Tendance du Jour</Text>
+              }
 
-          </View>
-          <View style={styles.dayDrawAlert}>
-            {daycard.isdraw === false ?
-              <View style={styles.iconContainer}>
-                <Icon name="exclamation" size={10} color={colors.palette.ivory} />
-              </View>
-              :
-              <View style={styles.iconContainerCheck}>
-                <Icon name="check" size={10} color={colors.palette.ivory} />
-              </View>
-            }
-          </View>
-        </Pressable>
+            </View>
+            <View style={styles.dayDrawAlert}>
+              {daycard.isdraw === false ?
+                <View style={styles.iconContainer}>
+                  <Icon name="exclamation" size={10} color={colors.palette.ivory} />
+                </View>
+                :
+                <View style={styles.iconContainerCheck}>
+                  <Icon name="check" size={10} color={colors.palette.ivory} />
+                </View>
+              }
+            </View>
+          </Pressable>
         </LinearGradient>
       </View>
+
     </View>
   );
 }
@@ -167,31 +162,27 @@ const styles = StyleSheet.create({
   header: {
     position: 'absolute',
     top: 0,
-    width: WIDTH,
-    height: HEIGHT / 3,
-    borderBottomLeftRadius: WIDTH *0.18,
-    borderBottomRightRadius: WIDTH *0.18,
+    width: SCREEN_WIDTH - 5,
+    height: SCREEN_WIDTH * 0.6,
+    borderBottomLeftRadius: SCREEN_WIDTH * 0.1,
+    borderBottomRightRadius: SCREEN_WIDTH * 0.1,
     backgroundColor: colors.palette.violet
   },
-
   headerTitle: {
+    position: 'absolute',
+    top: 0,
     color: colors.palette.golden,
     fontSize: 30,
     fontFamily: 'mulishBold',
     textTransform: 'capitalize',
-    paddingTop: 20,
     textAlign: 'center',
+    marginTop:20,
   },
 
   // Domain Container
   domainsContainer: {
-    position: 'absolute',
-    bottom: 120,
-    width: "90%",
-    height: "55%",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "flex-start",
+   position: 'absolute',
+   alignItems: 'center',
   },
   domainCard: {
     width: "90%",
@@ -291,26 +282,26 @@ const styles = StyleSheet.create({
     top: 32,
   },
   tendanceContainer: {
-    flexDirection: "row",
-    width: "100%",
-    height: "50%",
-    alignItems: "center",
-    justifyContent: "space-around",
+    position: 'absolute',
+    alignItems: 'center',
+    top: -40,
+    width: "90%",
+    height: "35%",
   },
   tendanceTextContainer: {
-    width: "70%",
+    width: "90%",
     height: "100%",
-    alignItems: "flex-start",
+    marginTop: 30,
     justifyContent: "center",
   },
   tendanceText: {
-    color: colors.palette.violet,
+    color: colors.palette.violetBg,
     fontSize: 16,
     fontFamily: 'mulishRegular',
     textAlign: "center",
   },
   displayTextTendance: {
-    color: colors.palette.ivory,
+    color: colors.palette.violetBg,
     fontSize: 16,
     fontFamily: 'mulishRegular',
     textAlign: "center",

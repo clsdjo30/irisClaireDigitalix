@@ -19,12 +19,13 @@ import { useDaydrawStore } from '../../../utils/hooks/useDayDrawStore';
 import CARD_DECK from '../../../utils/cards';
 import Card from '../../../components/Card';
 
+const PAGE_WIDTH = Dimensions.get('window').width;
+const PAGE_HEIGHT = Dimensions.get('window').height;
 
 const DayDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
-   
+
     const [daydraw, setDayDraw] = useDaydrawStore();
     const [showTendanceButton, setShowTendanceButton] = useState(false);
-    const PAGE_WIDTH = Dimensions.get('window').width;
     const itemWidth = 80;
     const centerOffset = PAGE_WIDTH / 2 - itemWidth / 2;
 
@@ -69,7 +70,7 @@ const DayDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
             const translateY = interpolate(
                 value,
                 [-1, -0.5, 0, 0.5, 1],
-                [80, 65, 70, 65, 80],
+                [90, 65, 70, 65, 80],
             );
 
 
@@ -96,50 +97,60 @@ const DayDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
         [],
     );
 
-       // display card when click
-         // display card when click
+    // display card when click
+    // display card when click
 
-  const displayResult = () => {
-    if (flippedCardIndex !== -1) {
-        // choisir une phrase de tendance au hasard
-        const newtendance = CARD_DECK[flippedCardIndex].tendance[Math.floor(Math.random() * CARD_DECK[flippedCardIndex].tendance.length)]
-        setDayDraw({ ...daydraw, 
-            daycard: CARD_DECK[flippedCardIndex].name, 
-            daytendance: newtendance, 
-            isdraw: true });
-        
-        navigation.navigate('DayDrawResult', { card: CARD_DECK[flippedCardIndex] });
+    const displayResult = () => {
+        if (flippedCardIndex !== -1) {
+            // choisir une phrase de tendance au hasard
+            const newtendance = CARD_DECK[flippedCardIndex].tendance[Math.floor(Math.random() * CARD_DECK[flippedCardIndex].tendance.length)]
+            setDayDraw({
+                ...daydraw,
+                daycard: CARD_DECK[flippedCardIndex].name,
+                daytendance: newtendance,
+                isdraw: true
+            });
+
+            navigation.navigate('DayDrawResult', { card: CARD_DECK[flippedCardIndex] });
+        }
+    };
+
+    function goToResult() {
+        navigation.navigate('TendanceResult');
     }
-};
 
-function goToResult() {
-    navigation.navigate('TendanceResult');
-}
+    const handleCardChange = (index: number) => {
+        if (flippedCardIndex === -1) {
+            setFlippedCardIndex(index);
+            rotates[index].value = rotates[index].value ? 0 : 1;
+        }
+        const newtendance = CARD_DECK[index].tendance[Math.floor(Math.random() * CARD_DECK[index].tendance.length)]
 
-const handleCardChange = (index: number) => {
-  if (flippedCardIndex === -1) {
-      setFlippedCardIndex(index);
-      rotates[index].value = rotates[index].value ? 0 : 1;
-    }
-    const newtendance = CARD_DECK[index].tendance[Math.floor(Math.random() * CARD_DECK[index].tendance.length)]
-
-    setDayDraw({ ...daydraw,
+        setDayDraw({
+            ...daydraw,
             daycard: CARD_DECK[index].name,
             daycardimage: CARD_DECK[index].frontImageUrl,
             daycardbackimage: CARD_DECK[index].backImageUrl,
             daytendance: newtendance,
-            isdraw: true });
-            setTimeout(() => {
-    goToResult();
-}, 1500);
-};
+            isdraw: true
+        });
+        setTimeout(() => {
+            goToResult();
+        }, 1500);
+    };
 
 
-   console.log(daydraw)
+    console.log(daydraw)
 
     return (
 
         <View style={styles.container}>
+
+            <View style={styles.header} />
+            <View style={styles.titleContainer}>
+                <Text style={styles.title}>Tirage du jour</Text>
+            </View>
+
             <Carousel
                 width={itemWidth / 1.2}
                 height={itemWidth * 4}
@@ -173,11 +184,11 @@ const handleCardChange = (index: number) => {
                                 onPress={() => {
                                     {
                                         handleCardChange(index);
-                                       
+
                                     }
                                 }
                                 }
-                               
+
                                 source={backCard[index]}
                             />
                         </Animated.View>
@@ -198,14 +209,14 @@ const handleCardChange = (index: number) => {
                             ]}
                         >
                             <Card
-                                
+
                                 onPress={() => {
                                     {
                                         handleCardChange(index);
-                                       
+
                                     }
                                 }}
-                              
+
                                 source={frontCard[index]}
                             />
                         </Animated.View>
@@ -227,10 +238,32 @@ const handleCardChange = (index: number) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: colors.palette.purple600,
+        backgroundColor: colors.background,
         alignItems: 'center',
         justifyContent: 'center',
 
+    },
+    header: {
+        position: 'absolute',
+        top: 0,
+        width: PAGE_WIDTH - 5,
+        height: PAGE_HEIGHT * 0.4,
+        borderBottomLeftRadius: PAGE_WIDTH * 0.1,
+        borderBottomRightRadius: PAGE_WIDTH * 0.1,
+        backgroundColor: colors.palette.violet
+    },
+    titleContainer: {
+        position: 'absolute',
+        top: 0,
+        width: PAGE_WIDTH - 5,
+        height: PAGE_HEIGHT * 0.4,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    title: {
+        fontSize: 30,
+        fontWeight: 'bold',
+        color: colors.palette.white,
     },
     deckContainer: {
         width: 80,
