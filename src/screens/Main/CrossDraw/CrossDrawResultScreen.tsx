@@ -12,21 +12,26 @@ import {
 } from 'react-native';
 import CARD_DECK from '../../../utils/cards';
 import { colors } from '../../../theme';
-import { useCrossQuestionStore } from '../../../utils/hooks/useCrossQuestionStore';
 import { StackScreenProps } from '@react-navigation/stack';
+import { useCrossQuestionStore } from '../../../utils/hooks/useCrossQuestionStore';
 import { useCrossQuestion } from '../../../utils/hooks/useCrossQuestion';
-import { useFocusEffect } from '@react-navigation/native';
+import { setDoc, doc, collection } from 'firebase/firestore';
+import { firestore, getAuth } from '../../../config/firebaseConfig';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = SCREEN_WIDTH * 1.5;
 const SCREEN_SCALE = Dimensions.get('window').scale;
 const SCREEN_FONT_SCALE = SCREEN_SCALE * 0.5;
 
+const auth = getAuth();
+
 const CrossDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
     const [cardImage, setCardImage] = useState(null);
-     const [value, isLoading] = useCrossQuestion(1000);
+    const [value, isLoading] = useCrossQuestion(1000);
     const [questionInformations, setQuestionInformations] = useCrossQuestionStore()
+    const currentUser = auth.currentUser;
+    const userID = currentUser ? currentUser.uid : null;
 
     console.log('Valeur de QuestionStore', questionInformations)
 
@@ -36,7 +41,29 @@ const CrossDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) 
     const thirdCard = CARD_DECK.find(card => card.id === questionInformations.choosecardthreenumber);
     const fourthCard = CARD_DECK.find(card => card.id === questionInformations.choosecardfournumber);
 
+    function saveCrossQuestion(useruid: string | any) {
+        const db = firestore;
+        if (!useruid) {
+            console.error("User ID is null");
+            return;
+        }
+        const usersCollectionRef = collection(db, 'users');
+        const userQuestionsCollectionRef = collection(usersCollectionRef, useruid, 'crossquestions');
+        const questionRef = doc(userQuestionsCollectionRef);
 
+        setDoc(questionRef, {
+            domain: questionInformations.domain,
+            question: questionInformations.question,
+            cardpseudoone: questionInformations.choosecardpseudo,
+            cardpseudotwo: questionInformations.choosecardtwopseudo,
+            cardpseudothree: questionInformations.choosecardthreepseudo,
+            cardpseudofour: questionInformations.choosecardfourpseudo,
+            answer: questionInformations.answer,
+        })
+            .then(() => console.log('Question saved successfully!'))
+            .catch((error) => console.error('Error saving question:', error));
+        questionClosed();
+    }
 
     const getContent = () => {
         if (isLoading) {
@@ -123,19 +150,19 @@ const CrossDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) 
                     </View>
                     <ScrollView style={styles.resultView}>
                         <View style={styles.questionRow}>
-                        <Text style={styles.questionTitle}>Votre question :</Text>
-                        <Text style={styles.questionText}>{questionInformations.question}</Text>
+                            <Text style={styles.questionTitle}>Votre question :</Text>
+                            <Text style={styles.questionText}>{questionInformations.question}</Text>
                         </View>
 
                         <Text style={styles.answerTitle}>Votre réponse: </Text>
                         <Text style={styles.answerText}>
-                        {getContent()}
+                            {getContent()}
                         </Text>
                     </ScrollView>
                 </View>
 
                 <View style={styles.validationButton}>
-                    <Pressable style={styles.button} onPress={questionClosed}>
+                    <Pressable style={styles.button} onPress={() => saveCrossQuestion(userID)}>
                         <Text style={styles.buttonText}>Revenir à l'accueil</Text>
                     </Pressable>
                 </View>

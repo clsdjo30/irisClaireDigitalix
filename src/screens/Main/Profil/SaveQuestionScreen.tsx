@@ -6,12 +6,11 @@ import {
     Text,
     Dimensions,
     FlatList,
-    ScrollView
 } from 'react-native';
 import { colors } from '../../../theme';
-import { useQuestionStore } from '../../../utils/hooks/useQuestionStore';
 import { StackScreenProps } from '@react-navigation/stack';
 import { useUserYesQuestion } from '../../../utils/hooks/useUserYesQuestion';
+import { useUserCrossQuestion } from '../../../utils/hooks/useUserCrossQuestion';
 import { getAuth } from 'firebase/auth';
 import { ListItem, Tab, TabView } from '@rneui/themed';
 
@@ -22,28 +21,47 @@ interface Question {
     answer: string;
 }
 
+interface CrossQuestion {
+    question: string;
+    cardpseudoone: string;
+    cardpseudotwo: string;
+    cardpseudothree: string;
+    cardpseudofour: string;
+    domain: string;
+    answer: string;
+}
+
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = SCREEN_WIDTH * 1.5;
 const auth = getAuth();
 
 const SaveQuestionScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
+    // Use expandedState for each ListItem.Accordion
+    // Use expandedState for each ListItem.Accordion
+    const [yesNoExpandedState, setYesNoExpandedState] = React.useState<string | null>(null);
+    const [crossQuestionExpandedState, setCrossQuestionExpandedState] = React.useState<string | null>(null);
+
+    const [index, setIndex] = React.useState(0);
+    // Get the current user ID
     const currentUser = auth.currentUser;
     const userID = currentUser ? currentUser.uid : null;
+
+    // Get the Yes questions from the database
     const { questions } = useUserYesQuestion(userID);
-    // Use expandedState for each ListItem.Accordion
-    const [expandedState, setExpandedState] = React.useState<string | null>(null);
-    const [index, setIndex] = React.useState(0);
+    // console.log('Questions :', questions)
+    // Get the Cross questions from the database
+    const { crossQuestions } = useUserCrossQuestion(userID);
+    console.log('Cross Questions :', crossQuestions);
 
-    console.log('Questions :', questions)
 
-    // Function to render each item in FlatList
-    const renderItem = ({ item, index }: { item: Question, index: number }) => {
+    // Function to render each item of the Yes Question in FlatList
+    const renderYesQuestion = ({ item, index }: { item: Question, index: number }) => {
 
         // Convert the index to string
         const indexStr = index.toString();
 
         // Determine whether the current item is expanded
-        const isExpanded = expandedState === indexStr;
+        const isExpanded = yesNoExpandedState === indexStr;
 
         return (
             <>
@@ -58,10 +76,10 @@ const SaveQuestionScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => 
                     isExpanded={isExpanded}
                     onPress={() => {
                         // Toggle between expanded and collapsed state
-                        setExpandedState(isExpanded ? null : indexStr);
+                        setYesNoExpandedState(isExpanded ? null : indexStr);
                     }}
                 >
-                    <ListItem containerStyle={{backgroundColor:colors.palette.violetBg}}>
+                    <ListItem containerStyle={{ backgroundColor: colors.palette.violetBg }}>
                         <ListItem.Content>
                             <ListItem.Title style={styles.irisTitle}>{item.choosecardpseudo}</ListItem.Title>
                             <ListItem.Subtitle style={styles.cardTitle}>{item.answer}</ListItem.Subtitle>
@@ -73,10 +91,51 @@ const SaveQuestionScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => 
                 </ListItem.Accordion>
             </>
         );
-
-
     }
 
+    // Function to render each item of the Cross Question in FlatList
+    const renderCrossQuestion = ({ item, index }: { item: CrossQuestion, index: number }) => {
+
+        // Convert the index to string
+        const indexStr = index.toString();
+
+        // Determine whether the current item is expanded
+        const isExpanded = crossQuestionExpandedState === indexStr;
+
+        return (
+            <>
+                <ListItem.Accordion
+                    containerStyle={{ backgroundColor: colors.palette.violetClair }}
+                    content={
+                        <ListItem.Content>
+                            <ListItem.Subtitle style={styles.cardSubitle}>{item.domain}</ListItem.Subtitle>
+                            <ListItem.Title style={styles.cardTitle}>{item.question}</ListItem.Title>
+                        </ListItem.Content>
+                    }
+                    isExpanded={isExpanded}
+                    onPress={() => {
+                        // Toggle between expanded and collapsed state
+                        setCrossQuestionExpandedState(isExpanded ? null : indexStr);
+                    }}
+                >
+                    <ListItem containerStyle={{ backgroundColor: colors.palette.violetBg }}>
+                        <ListItem.Content>
+                            <ListItem.Title style={styles.irisTitle}>
+                                {item.cardpseudoone},
+                                {item.cardpseudotwo},
+                                {item.cardpseudothree},
+                                {item.cardpseudofour}
+                            </ListItem.Title>
+                            <ListItem.Subtitle style={styles.cardTitle}>{item.answer}</ListItem.Subtitle>
+                        </ListItem.Content>
+                    </ListItem>
+
+
+
+                </ListItem.Accordion>
+            </>
+        );
+    }
     return (
         <View style={styles.container}>
             <View style={styles.header} />
@@ -85,57 +144,57 @@ const SaveQuestionScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => 
                 <Text style={styles.contentExplain}>Retrouvez ici toutes les reponses aux question que vous avez posé à l'Iris Claire</Text>
             </View>
             <View style={styles.explainContainer}>
-                <Tab 
-                value={index} 
-                onChange={setIndex} 
-                dense
+                <Tab
+                    value={index}
+                    onChange={setIndex}
+                    dense
                 >
-                    <Tab.Item 
-                    title='Oui/Non'
-                    style={styles.questionType}
+                    <Tab.Item
+                        title='Oui/Non'
+                        style={styles.questionType}
                     />
-                    <Tab.Item 
-                    title='Tirage Complet'
-                    style={styles.questionType}
+                    <Tab.Item
+                        title='Tirage Complet'
+                        style={styles.questionType}
                     />
                 </Tab>
-                    
-                <TabView 
-                value={index}
-                 onChange={setIndex} 
-                 containerStyle={{height: '100%', width: '100%'}}
-                 animationType="spring">
-                    <TabView.Item style={{ backgroundColor: colors.palette.violetClair, width: '100%' }}>
-                    <FlatList
-                    data={questions}
-                    renderItem={renderItem}
-                    keyExtractor={(item, index) => index.toString()}
 
-                />
+                <TabView
+                    value={index}
+                    onChange={setIndex}
+                    containerStyle={{ height: '100%', width: '100%' }}
+                    animationType="spring">
+                    <TabView.Item style={{ backgroundColor: colors.palette.violetClair, width: '100%' }}>
+                        <FlatList
+                            data={questions}
+                            renderItem={renderYesQuestion}
+                            keyExtractor={(item, index) => index.toString()}
+
+                        />
                     </TabView.Item>
                     <TabView.Item style={{ backgroundColor: colors.palette.violetClair, width: '100%' }}>
-                    <FlatList
-                    data={questions}
-                    renderItem={renderItem}
-                    keyExtractor={(item, index) => index.toString()}
+                        <FlatList
+                            data={crossQuestions}
+                            renderItem={renderCrossQuestion}
+                            keyExtractor={(item, index) => index.toString()}
 
-                />
+                        />
                     </TabView.Item>
                 </TabView>
-            
-            {/* <View style={styles.yesNo}>
-                <FlatList
-                    data={questions}
-                    renderItem={renderItem}
-                    keyExtractor={(item, index) => index.toString()}
 
-                />
-            </View> */}
+                {/* <View style={styles.yesNo}>
+                    <FlatList
+                        data={questions}
+                        renderItem={renderItem}
+                        keyExtractor={(item, index) => index.toString()}
 
-
+                    />
+                </View> */}
 
 
-        </View>
+
+
+            </View>
         </View >
     )
 }

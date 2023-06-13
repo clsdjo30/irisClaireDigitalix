@@ -22,7 +22,6 @@ const SCREEN_SCALE = Dimensions.get('window').scale;
 const SCREEN_FONT_SCALE = SCREEN_SCALE * 0.5;
 
 const auth = getAuth();
-const db = firestore;
 
 const YesDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     const [cardImage, setCardImage] = useState(null);
