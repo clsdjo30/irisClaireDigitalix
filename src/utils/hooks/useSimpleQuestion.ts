@@ -44,7 +44,7 @@ export const useSimpleQuestion = (delay: number) => {
         }
         setValue({ ...value, answer: reply });
         setIsLoading(false);
-        console.log(reply);
+        //console.log(reply);
       } catch (error) {
         console.error("Error Fetching AI reply", error);
         setIsLoading(false);
@@ -67,6 +67,6 @@ export const useSimpleQuestion = (delay: number) => {
       }
     };
   }, [userQuestion, delay]);
-  console.log(value);
+  //console.log(value);
   return [value, isLoading];
 };

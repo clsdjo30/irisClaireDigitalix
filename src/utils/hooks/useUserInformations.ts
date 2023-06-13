@@ -18,7 +18,6 @@ export function useUserInformation() {
 
   const fetchUser = async () => {
     const db = firestore;
-    const docRef = collection(db, "users");
     const querySnapshot = await getDocs(collection(db, "users"));
     querySnapshot.forEach((doc) => {
       // console.log(doc.id, " => ", doc.data());

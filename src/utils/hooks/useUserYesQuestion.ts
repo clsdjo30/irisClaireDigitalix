@@ -1,44 +1,63 @@
-import React, {useEffect} from "react";
-import { useQuestionStore } from "./useQuestionStore";
-import { firestore, getAuth, getDocs, collection} from '../../config/firebaseConfig'
-
+import { useEffect, useState } from "react";
+import {
+  getAuth,
+  firestore,
+  collection,
+  Firestore,
+  query,
+  getDocs,
+  doc,
+} from "../../config/firebaseConfig";
 
 const auth = getAuth();
 
-export function useUserYesQuestion() {
- 
-  const [simpleQuestion, setSimpleQuestion] = useQuestionStore();
-  const currentUser = auth.currentUser;
-  const userID = currentUser ? currentUser.uid : null;
-
-  useEffect(() => {
-    fetchUserYesQuestion();
-
-  }, []);
-
-
-  const fetchUserYesQuestion = async () => {
-    const db = firestore;
-    const querySnapshot = await getDocs(collection(db, "yesQuestion"));
-    querySnapshot.forEach((doc) => {
-      // console.log(doc.id, " => ", doc.data());
-      if (userID === doc.id) {
-        setSimpleQuestion({
-          ...simpleQuestion,
-            question: doc.data().question,
-            domain: doc.data().domain,
-            answer: doc.data().answer,
-            choosecardpseudo: doc.data().choosecardpseudo,
-          
-        })
-        // console.log(doc.data())
-      }
-    });
-  }
-
-  return {
-    simpleQuestion,
-  };
+interface Question {
+  question: string;
+  choosecardpseudo: string;
+  domain: string;
+  answer: string;
 }
 
+export function useUserYesQuestion(userID: string | null) {
+  const [questions, setQuestions] = useState<Question[]>([]);
 
+  useEffect(() => {
+    if (userID) {
+      fetchUserYesQuestion();
+    }
+  }, [userID]);
+
+  const fetchUserYesQuestion = async () => {
+    try {
+      const db = firestore;
+      if (!userID) {
+        console.error("User ID is null");
+        return;
+      }
+
+      const usersCollectionRef = collection(db, "users");
+      const userQuestionsCollectionRef = collection(
+        usersCollectionRef,
+        userID,
+        "yesquestions"
+      );
+
+      const querySnapshot = await getDocs(userQuestionsCollectionRef);
+
+      const questions: Question[] = querySnapshot.docs.map(doc => ({
+        question: doc.data().question,
+        choosecardpseudo: doc.data().cardpseudo,
+        domain: doc.data().domain,
+        answer: doc.data().answer,
+      }));
+
+      setQuestions(questions);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  return {
+    questions,
+  };
+}

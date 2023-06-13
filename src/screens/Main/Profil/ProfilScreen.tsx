@@ -35,7 +35,7 @@ const ProfilScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   useUserInformation();
   const [checked, setChecked] = React.useState(false);
   const [user, setUser] = useUserStore();
-  console.log(user);
+
 
   const rightArrow = require('../../../../assets/icons/caretRight.png');
 
@@ -43,7 +43,7 @@ const ProfilScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   const userStone = user?.stone;
   const userElement = user?.element;
 
-  console.log(user);
+ 
 
   return (
     <SafeAreaView style={styles.container}>

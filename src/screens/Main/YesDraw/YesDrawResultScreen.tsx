@@ -31,7 +31,7 @@ const YesDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) =>
     const currentUser = auth.currentUser;
     const userID = currentUser ? currentUser.uid : null;
     
-    console.log(userID);
+    //console.log(userID);
     
     const choosedCard = CARD_DECK.find((card) => card.id === questionInformations.choosecardnumber);
     

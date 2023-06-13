@@ -41,7 +41,7 @@ export const useCrossQuestion = (
 
     const fetchAIReply = async () => {
       setIsLoading(true);
-      const prompt = `Je suis FortuneTellerGpt, un expert en interprétation de tirage du tarot de marseille. En utilisant mes connaissances dans les tarots de marseille et des livres de Florian Parisse, je vais interpréter le tirage en croix qui suit pour répondre à la question : '${userQuestion}', qui porte sur le domaine de la '${domain}'. Les cartes tirées sont : la première carte est le numéro '${cardNumber}', son nom est '${cardName}' et son pseudo est '${cardPseudo}', la seconde carte est le numéro '${cardTwoNumber}', son nom est '${cardTwoName}' et son pseudo est '${cardTwoPseudo}', la troisième carte est le numéro '${cardThreeNumber}', son nom est '${cardThreeName}' et son pseudo est '${cardThreePseudo}', et la quatrième carte est le numéro '${cardFourNumber}', son nom est '${cardFourName}' et son pseudo est '${cardFourPseudo}'.`;
+      const prompt = `Tu es FortuneTellerGpt, un expert en interprétation de tirage du tarot de marseille. En utilisant tes connaissances dans les tarots de marseille et des livres de Florian Parisse, je veux que tu interprete le tirage en croix qui suit va suivre. Q: '${userQuestion}', qui porte sur le domaine de la '${domain}'. Les cartes tirées sont : première carte, numéro '${cardNumber}', nom:'${cardName}', pseudo: '${cardPseudo}'. Seconde carte,  numéro: '${cardTwoNumber}', nom: '${cardTwoName}', pseudo:  '${cardTwoPseudo}'. Troisième carte, numéro: '${cardThreeNumber}', nom: '${cardThreeName}', pseudo: '${cardThreePseudo}'. Quatrième carte, numéro: '${cardFourNumber}', nom: '${cardFourName}', pseudo: '${cardFourPseudo}'. Je souhaite obtenir une réponse détaillée sur l'évolution de ma carrière professionnelle. Je voudrais que la réponse soit dans le style d'une consultation de voyant, en utilisant des phrases qui décrivent des événements plutôt que d'analyser des cartes individuelles. Pouvez-vous me donner des indications sur les tendances et les opportunités à venir`;
       const data = {
         prompt,
         model: "text-davinci-003", // "davinci" "curie" "babbage" "ada" "curie-instruct-beta" "davinci-instruct-beta"
@@ -59,7 +59,7 @@ export const useCrossQuestion = (
         }
         setValue({ ...value, answer: reply });
         setIsLoading(false);
-        console.log(reply);
+        //console.log(reply);
       } catch (error) {
         console.error("Error Fetching AI reply", error);
         setIsLoading(false);
@@ -83,6 +83,6 @@ export const useCrossQuestion = (
       }
     };
   }, [userQuestion, delay]);
-  console.log(value);
+  //console.log(value);
   return [value, isLoading];
 };
