@@ -43,7 +43,7 @@ const ProfilScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   const userStone = user?.stone;
   const userElement = user?.element;
 
- 
+
 
   return (
     <SafeAreaView style={styles.container}>
@@ -71,19 +71,21 @@ const ProfilScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
 
       <View style={styles.paramContent}>
-        <View style={styles.switchParam}>
-          <Text style={styles.switchText}>Notifications</Text>
-          <Switch
-            value={checked}
-            onValueChange={(value) => setChecked(value)}
-          />
-        </View>
-        <View style={styles.switchParam}>
-          <Text style={styles.switchText}>Recevoir nos offre</Text>
-          <Switch
-            value={checked}
-            onValueChange={(value) => setChecked(value)}
-          />
+        <View style={styles.blockSwitch}>
+          <View style={styles.switchParam}>
+            <Text style={styles.switchText}>Notifications</Text>
+            <Switch
+              value={checked}
+              onValueChange={(value) => setChecked(value)}
+            />
+          </View>
+          <View style={styles.switchParam}>
+            <Text style={styles.switchText}>Recevoir nos offre</Text>
+            <Switch
+              value={checked}
+              onValueChange={(value) => setChecked(value)}
+            />
+          </View>
         </View>
 
         <View style={styles.paramsList}>
@@ -180,6 +182,9 @@ const styles = StyleSheet.create({
     fontSize: SCREEN_FONT_SCALE,
   },
   //SWITCH PARAM
+  blockSwitch: {
+    marginBottom: SCREEN_HEIGHT / 10,
+  },
   switchParam: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -210,7 +215,7 @@ const styles = StyleSheet.create({
   },
   //LIST PARAMS
   paramsList: {
-
+    marginBottom: SCREEN_HEIGHT / 20
   },
   blockParam: {
     paddingVertical: SCREEN_HEIGHT / 50,
