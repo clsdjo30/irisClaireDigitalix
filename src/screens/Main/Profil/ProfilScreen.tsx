@@ -51,19 +51,19 @@ const ProfilScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
       <View style={styles.header} />
       {/* START USER CARD */}
       <View style={styles.userCard}>
-        {/* Header User Information */}
-        <View style={styles.headerImageContainer}>
-          <Text style={styles.headerTitle}>mon compte</Text>
-        </View>
-        {/* User Astro information*/}
         <View style={styles.headerUnderlineTop}>
-          <Text style={styles.headerSubTitle}>{user?.firstname}</Text>
-          <Text style={styles.textEmail}>{user?.email}</Text>
-        </View>
-        <View style={styles.headerUnderline}>
           {UserStoneIcon(userStone, user?.stone)}
           {UserSignIcon(userSign, user?.zodiacname)}
           {UserElementIcon(userElement, user?.element)}
+        </View>
+        {/* Header User Information */}
+
+        <Text style={styles.headerTitle}>mon compte</Text>
+
+        {/* User Astro information*/}
+        <View style={styles.headerUnderline}>
+          <Text style={styles.headerSubTitle}>{user?.firstname}</Text>
+          <Text style={styles.textEmail}>{user?.email}</Text>
         </View>
       </View>
 
@@ -241,16 +241,13 @@ const styles = StyleSheet.create({
     width: SCREEN_WIDTH / 1.1,
     height: SCREEN_HEIGHT * 0.345,
   },
-  headerImageContainer: {
-    flexDirection: 'row',
-    marginTop: 10,
-    marginBottom: 3
-  },
   headerTitle: {
     color: colors.palette.darkgold,
-    fontSize: SCREEN_FONT_SCALE + 18,
+    fontSize: SCREEN_FONT_SCALE + 25,
     fontFamily: 'oswaldLight',
     textTransform: 'capitalize',
+    textAlign: 'center',
+    marginTop: SCREEN_HEIGHT / 50,
   },
   headerSubTitle: {
     color: colors.palette.violet,
@@ -263,13 +260,13 @@ const styles = StyleSheet.create({
     paddingVertical: SCREEN_HEIGHT / 80,
     paddingBottom: SCREEN_HEIGHT * 0.04,
     flexDirection: 'row',
-    justifyContent: 'space-evenly',
+    justifyContent: 'space-around',
     alignItems: 'center',
     marginTop: SCREEN_HEIGHT / 50,
   },
   headerUnderlineTop: {
     flexDirection: 'row',
-    justifyContent: 'space-evenly',
+    justifyContent: 'space-between',
     alignItems: 'center',
     width: SCREEN_WIDTH / 1.2,
     paddingVertical: SCREEN_HEIGHT / 50,

@@ -48,6 +48,7 @@ const SaveQuestionScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => 
         return (
             <>
                 <ListItem.Accordion
+                    containerStyle={{ backgroundColor: colors.palette.violetClair }}
                     content={
                         <ListItem.Content>
                             <ListItem.Subtitle style={styles.cardSubitle}>{item.domain}</ListItem.Subtitle>
@@ -60,7 +61,7 @@ const SaveQuestionScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => 
                         setExpandedState(isExpanded ? null : indexStr);
                     }}
                 >
-                    <ListItem>
+                    <ListItem containerStyle={{backgroundColor:colors.palette.violetBg}}>
                         <ListItem.Content>
                             <ListItem.Title style={styles.irisTitle}>{item.choosecardpseudo}</ListItem.Title>
                             <ListItem.Subtitle style={styles.cardTitle}>{item.answer}</ListItem.Subtitle>
