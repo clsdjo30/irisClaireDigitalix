@@ -59,6 +59,7 @@
     "@types/react": "~18.0.14",
     "@types/react-native-flip-card": "^3.5.2",
     "firebase-mock": "^2.3.2",
+    "jest-mock-axios": "^4.7.2",
     "typescript": "^4.9.4"
   },
   "private": true
