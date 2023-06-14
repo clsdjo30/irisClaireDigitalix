@@ -5,7 +5,14 @@
     "start": "expo start --dev-client",
     "android": "expo run:android",
     "ios": "expo run:ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "test": "jest"
+  },
+  "jest": {
+    "preset": "jest-expo",
+    "transformIgnorePatterns": [
+      "node_modules/(?!(@react-native|react-native|react-native-flip-card|react-native-form-component|react-native-reanimated|react-native-reanimated-carousel|react-native-safe-area-context|react-native-screens|react-native-vector-icons|expo-linear-gradient|expo-font|expo-splash-screen|expo-status-bar|expo-system-ui|expo-updates|expo-dev-client|expo|@expo|@expo-google-fonts|@expo-google-fonts|@react-native-community/datetimepicker|@react-navigation/bottom-tabs|@react-navigation/native|@react-navigation/native-stack|@react-navigation/stack|@rneui/base|@rneui/themed|axios|dotenv|firebase|jest|jest-expo|mobx-react-lite|openai|zodiac-signs)/)"
+    ]
   },
   "dependencies": {
     "@expo-google-fonts/mulish": "^0.2.3",
@@ -28,6 +35,8 @@
     "expo-system-ui": "~2.2.1",
     "expo-updates": "~0.16.4",
     "firebase": "^9.21.0",
+    "jest": "^29.2.1",
+    "jest-expo": "^48.0.2",
     "mobx-react-lite": "^3.4.3",
     "openai": "^3.2.1",
     "react": "18.2.0",
@@ -45,6 +54,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
+    "@testing-library/react-native": "^12.1.2",
     "@types/react": "~18.0.14",
     "@types/react-native-flip-card": "^3.5.2",
     "typescript": "^4.9.4"
