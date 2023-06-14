@@ -5,18 +5,20 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {
   View,
-  Image,
+  Image
 } from 'react-native';
 import { colors } from '../theme';
 
-
+import homeIcon from '../../assets/icons/moon.png';
+import profilIcon from '../../assets/icons/account.png';
+import irisIcon from '../../assets/icons/iris.png';
 
 import HomeScreen from '../screens/Main/HomeScreen';
 import DayDrawScreen from '../screens/Main/DayDraw/DayDrawScreen';
 import TendanceResultScreen from '../screens/Main/DayDraw/TendanceResultScreen';
 import ProfilScreen from '../screens/Main/Profil/ProfilScreen';
 import SaveQuestionScreen from '../screens/Main/Profil/SaveQuestionScreen';
-// import IrisCreditScreen from '../screens/Main/IrisPage/IrisCreditScreen';
+import BuyIrisScreen from '../screens/Main/IrisPage/BuyIrisScreen';
 import DomainScreen from '../screens/Main/YesDraw/DomainSreen';
 import YesDrawScreen from '../screens/Main/YesDraw/YesDrawScreen';
 import DrawOneCardScreen from '../screens/Main/YesDraw/DrawOneCardScreen';
@@ -47,7 +49,6 @@ function DayDrawStackScreen() {
         options={{
           headerShown: false,
           animation: "slide_from_bottom",
-
         }}
       />
     </DayDrawStack.Navigator>
@@ -120,16 +121,16 @@ function CrossStackScreen() {
   )
 }
 
-// // NAVIGATION FOR IRIS CREDIT
-// function IrisStackScreen() {
-//   return (
-//     <IrisStack.Navigator>
-//       <IrisStack.Screen name="IrisCredit"
-//         component={IrisCreditScreen}
-//         options={{ headerShown: false, }} />
-//     </IrisStack.Navigator>
-//   )
-// }
+// NAVIGATION FOR IRIS CREDIT
+function IrisStackScreen() {
+  return (
+    <IrisStack.Navigator>
+      <IrisStack.Screen name="BuyIris"
+        component={BuyIrisScreen}
+        options={{ headerShown: false, }} />
+    </IrisStack.Navigator>
+  )
+}
 
 // // NAVIGATION FOR HOME with 2 nested navigation
 function HomeStackScreen() {
@@ -169,7 +170,7 @@ export default function UserStack() {
   return (
     <NavigationContainer>
       <Tab.Navigator       
-        screenOptions={({ route }) => ({
+        screenOptions={({ route}) => ({
           tabBarStyle: ((route) => {
             
             const routeName = getFocusedRouteNameFromRoute(route) ?? ""
@@ -179,68 +180,50 @@ export default function UserStack() {
             return
           })(route),
           tabBarBackground: () => (
-            <View style={{ width: '100%', height: '100%', backgroundColor: colors.palette.ivory ,paddingTop:10, borderTopWidth: 0.5,borderTopColor: colors.palette.gold }} />
+            <View style={{ width: '100%', height: '100%', backgroundColor: colors.palette.violetBg ,paddingTop:10, borderTopWidth: 0.5,borderTopColor: colors.palette.gold }} />
           ), 
-          tabBarShowLabel: true,
-          tabBarActiveTintColor: colors.palette.gold,
-          tabBarInactiveTintColor: colors.palette.ivory,        
+          tabBarShowLabel: false,  
+          tabBarActiveTintColor: colors.palette.violet,
+          focused: true,     
         })}
         
 
 
       >
-        <Tab.Screen name="IrisClaire"
-          component={HomeStackScreen}
-          options={{
-            headerShown: false,
-            tabBarLabelStyle: { fontSize: 10, fontFamily: 'mulishLight', paddingBottom: 6 },
-            tabBarIcon: () => (
-              <Icon name="home" size={18} color={colors.palette.gold} />
-            ),
-            tabBarIconStyle: { marginTop: 2 },
-            
-          }}
-        />
+        <Tab.Screen
+  name="IrisClaire"
+  component={HomeStackScreen}
+  options={{
+    headerShown: false,
+    tabBarShowLabel: false,
+    tabBarIcon: ({ focused }) => (
+      <Image source={homeIcon} style={{width: 30, height: 30, tintColor: focused ? colors.palette.violet : colors.palette.golden}}/>
+    )
+  }}
+/>
 
-        {/* <Tab.Screen
-          name="Tendance"
-          component={TendanceStackScreen}
-          options={{
-            headerShown: false,
-            tabBarLabel: 'Tendance du jour',
-            tabBarLabelStyle: { fontSize: 14, fontFamily: 'mulishLight', color: colors.palette.ivory, paddingBottom: 6 },
-            tabBarIcon: () => (
-              <Icon name="star" size={28} color={colors.palette.ivory} />
-            ),
-            tabBarIconStyle: { marginTop: 4 },
-            tabBarActiveTintColor: colors.palette.purple600,
-          }}
-        /> */}
-
-        {/* <Tab.Screen
-          name="Iris"
-          component={IrisStackScreen}
-          options={{
-            headerShown: false,
-            tabBarLabel: 'Boutique',
-            tabBarLabelStyle: { fontSize: 8, fontFamily: 'mulishLight', color: colors.palette.ivory, paddingBottom: 6},
-            tabBarIcon: () => (
-              <Icon name="cart-plus" size={28} color={colors.palette.ivory}  />
-            )
-          }} /> */}
+        <Tab.Screen
+        name="Iris"
+        component={IrisStackScreen}
+        options={{
+          headerShown: false,
+          tabBarShowLabel: false,
+          tabBarIcon: ({ focused }) => (
+            <Image source={irisIcon} style={{width: 25, height: 25, tintColor: focused ? colors.palette.violet : colors.palette.golden}}/>
+          ),
+          tabBarActiveTintColor: colors.palette.violet,
+        }}
+      />
 
         <Tab.Screen
           name="Profil"
           component={ProfilStackScreen}
           options={{
-            headerShown: false,
-            tabBarLabel: 'Mon Compte',
-            tabBarLabelStyle: { fontSize: 10, fontFamily: 'mulishLight', color: colors.palette.gold, paddingBottom: 6 },
-            tabBarIcon: () => (
-              <Icon name="user" size={18} color={colors.palette.gold} />
+            headerShown: false, tabBarShowLabel: false,
+            tabBarIcon: ({ focused }) => (
+              <Image source={profilIcon} style={{width: 30, height: 30, tintColor: focused ? colors.palette.violet : colors.palette.golden}}/>
             ),
-            tabBarIconStyle: { marginTop: 4 },
-            tabBarActiveTintColor: colors.palette.gold,
+            tabBarActiveTintColor: colors.palette.violet,
           }} />
 
       </Tab.Navigator>
