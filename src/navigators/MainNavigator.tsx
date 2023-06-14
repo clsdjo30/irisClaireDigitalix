@@ -180,7 +180,7 @@ export default function UserStack() {
             return
           })(route),
           tabBarBackground: () => (
-            <View style={{ width: '100%', height: '100%', backgroundColor: colors.palette.violetClair ,paddingTop:10, borderTopWidth: 0.5,borderTopColor: colors.palette.gold }} />
+            <View style={{ width: '100%', height: '100%', backgroundColor: colors.palette.violetBg ,paddingTop:10, borderTopWidth: 0.5,borderTopColor: colors.palette.gold }} />
           ), 
           tabBarShowLabel: false,  
           tabBarActiveTintColor: colors.palette.violet,
@@ -209,7 +209,7 @@ export default function UserStack() {
           headerShown: false,
           tabBarShowLabel: false,
           tabBarIcon: ({ focused }) => (
-            <Image source={irisIcon} style={{width: 30, height: 30, tintColor: focused ? colors.palette.violet : colors.palette.golden}}/>
+            <Image source={irisIcon} style={{width: 25, height: 25, tintColor: focused ? colors.palette.violet : colors.palette.golden}}/>
           ),
           tabBarActiveTintColor: colors.palette.violet,
         }}
