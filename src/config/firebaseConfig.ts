@@ -25,8 +25,3 @@ const firestore = getFirestore(firebase.getApp());
 export { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, firestore, query,where, setDoc, doc, getDoc, DocumentData, CollectionReference, getDocs, collection, signOut, FirebaseError, Firestore };
 
 export default firebase;
-
-
-
-
-
