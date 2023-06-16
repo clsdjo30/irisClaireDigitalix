@@ -1,11 +1,12 @@
 {
-  "extends": "expo/tsconfig.base",
-  "compilerOptions": {
-    "strict": true
-  },
-  "include": [
-    "images.d.ts",
-    "./**/*.ts",
-    "./**/*.tsx"
-  ]
-}
+    "extends": "expo/tsconfig.base",
+    "compilerOptions": {
+      "strict": true
+    },
+    "include": [
+      "images.d.ts",
+      "./**/*.ts",
+      "./**/*.tsx"
+    ]
+  }
+  
