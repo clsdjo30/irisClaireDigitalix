@@ -4,7 +4,7 @@ const palette = {
 violet: "#2F2A5A",
 violetClair: "#dcdaee",
 violetBg: "#eeedf6",
-orange: "#ff875f",
+orange: "#FF7648",
 golden: "#bc9531",
 
   

@@ -1,30 +1,30 @@
-import { ImageURISource } from "react-native";
 
-interface IStepper {
-    key:number;
-    title: string;
-    description: string;
-    image: ImageURISource
-}
 
-const STEPPER: IStepper[] = [
+
+const STEPPER = [
     {
-        key: 1,
-        title: "Welcome to the app",
-        description: "This is the description of the app",
-        image: require("../assets/images/1.png")
+        key: "1",
+        title: "Envie de réponses instantanées à vos questions ?",
+        description: "Recevez des reponses instantanée à toutes vos interogations",
+        image: require("../../assets/welcome/iris_claire.png")
     },
     {
-        key: 2,
-        title: "Welcome to the app",
-        description: "This is the description of the app",
-        image: require("../assets/images/2.png")
+        key: "2",
+        title: "Des Question sur votre vie sentimentale",
+        description: "Des Question sur votre vie sentimentale",
+        image: require("../../assets/welcome/love.png")
     },
     {
-        key: 3,
-        title: "Welcome to the app",
-        description: "This is the description of the app",
-        image: require("../assets/images/3.png")
+        key: "3",
+        title: "Des Question sur votre vie professionnelle",
+        description: " Des Question sur votre vie professionnelle",
+        image: require("../../assets/welcome/work.png")
+    },
+    {
+        key: "",
+        title: "Iris vous connait mieux que vous même",
+        description: "Iris vous connait mieux que vous même",
+        image: require("../../assets/welcome/all_know_eye.png")
     },
 ]
 
