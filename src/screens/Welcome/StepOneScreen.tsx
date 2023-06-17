@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
-import { colors } from '../../theme'
+import { colors } from '../../theme';
 
 
 const firstStep = require('../../../assets/welcome/stepOne.png');
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
   topContainer: {
     width: '100%',
     flex: 1,
-    backgroundColor: colors.palette.purple600,
+    backgroundColor: colors.palette.violetBg,
     alignItems: 'center',
     justifyContent: 'center',
   },
