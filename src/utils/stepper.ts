@@ -1,5 +1,10 @@
 
-
+interface IStepper {
+    key: string;
+    title: string;
+    description: string;
+    image: any;
+}
 
 const STEPPER = [
     {

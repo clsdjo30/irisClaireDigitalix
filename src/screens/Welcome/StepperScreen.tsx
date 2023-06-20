@@ -1,111 +1,22 @@
+import React from 'react';
 import {
     StyleSheet,
     Text,
     View,
-    FlatList,
     Animated,
     Image,
     Dimensions,
-    Pressable
 } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
-import React from 'react';
 import STEPPER from '../../utils/stepper';
 import { colors } from '../../theme';
+import NavigationButotn from '../../components/NavigationButton';
+import Backdrop from '../../components/animation/Backdrop';
+import Indicator from '../../components/animation/Indicator';
+import Square from '../../components/animation/Square';
 
 const { width, height } = Dimensions.get('screen');
-const bgs = ['#423C7F', '#857FC3', '#564DA3', '#423C7F'];
 
-const Backdrop = ({ scrollx }) => {
-    const bg = scrollx.interpolate({
-        inputRange: bgs.map((_, i) => i * width),
-        outputRange: bgs.map((bg) => bg)
-    })
-    return (
-        <Animated.View
-            style={[StyleSheet.absoluteFillObject, {
-                backgroundColor: bg
-            }]}
-        />
-    )
-}
-
-const Square = ({ scrollx }) => {
-    const YOLO = Animated.modulo(
-        Animated.divide(
-            Animated.modulo(scrollx, width),
-            new Animated.Value(width)
-        ),
-        1
-    )
-    const rotate = YOLO.interpolate({
-        inputRange: [0, 0.5, 1],
-        outputRange: ['40deg', '0deg', '40deg']
-    })
-    const translateX = YOLO.interpolate({
-        inputRange: [0, 0.5, 1],
-        outputRange: [0, -height, 0]
-    })
-    return (
-        <Animated.View
-            style={{
-                width: height,
-                height: height,
-                backgroundColor: colors.palette.violet,
-                borderRadius: 86,
-                position: 'absolute',
-                top: -height * 0.65,
-                left: -height * 0.3,
-                transform: [{
-                    rotate
-                },
-                {
-                    translateX
-                }
-                ]
-            }}
-        />
-    )
-}
-
-const Indicator = ({ srollx }) => {
-    return (
-        <View style={{ position: 'absolute', bottom: 150, flexDirection: 'row' }}>
-            {STEPPER.map((_, i) => {
-                const inputRange = [(i - 1) * width, i * width, (i + 1) * width];
-                const scale = srollx.interpolate({
-                    inputRange,
-                    outputRange: [0.8, 1.4, 0.8],
-                    extrapolate: 'clamp'
-                })
-                const opacity = srollx.interpolate({
-                    inputRange,
-                    outputRange: [0.4, 0.8, 0.4],
-                    extrapolate: 'clamp'
-                })
-                return (
-                    <Animated.View
-                        key={`indicator-${i}`}
-                        style={{
-
-                            height: 10,
-                            width: 10,
-                            borderRadius: 5,
-                            backgroundColor: colors.palette.violetBg,
-                            opacity,
-                            margin: 10,
-                            transform: [
-                                {
-                                    scale
-                                }
-                            ]
-                        }}
-                    />
-                )
-            })}
-        </View>
-    )
-}
 
 const StepperScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     const scrollx = React.useRef(new Animated.Value(0)).current;
@@ -166,18 +77,16 @@ const StepperScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                 }
                 }
             />
-            <Indicator srollx={scrollx} />
+            <Indicator scrollx={scrollx} />
             <View style={styles.blockButton}>
-                <Pressable style={styles.button} onPress={() => navigation.navigate('FirstName')}>
-                    <Text style={styles.buttonText}>
-                        S'inscrire
-                    </Text>
-                </Pressable>
-                <Pressable style={styles.button} onPress={() => navigation.navigate('Login')}>
-                    <Text style={styles.buttonText}>
-                        Se Connecter
-                    </Text>
-                </Pressable>
+                <NavigationButotn
+                    title="S'inscrire"
+                    onPress={() => navigation.navigate('FirstName')}
+                />
+                <NavigationButotn
+                    title="Se Connecter"
+                    onPress={() => navigation.navigate('Login')}
+                />
             </View>
         </View>
     )
@@ -195,18 +104,5 @@ const styles = StyleSheet.create({
     blockButton: {
         position: 'absolute',
         bottom: 30,
-    },
-    button: {
-        width: 300,
-        backgroundColor: colors.palette.orange,
-        marginBottom: 10,
-        borderRadius: 16,
-        alignItems: "center",
-        paddingVertical: 5,
-    },
-    buttonText: {
-        fontFamily: "mulishBold",
-        fontSize: 14,
-        color: colors.palette.violetClair,
     },
 })

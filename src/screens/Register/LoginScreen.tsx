@@ -1,15 +1,27 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View, Image, Alert } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Dimensions
+} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input } from '@rneui/themed';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StackScreenProps } from '@react-navigation/stack';
-import {  getAuth, signInWithEmailAndPassword, FirebaseError} from '../../config/firebaseConfig'
-import { colors } from '../../theme'
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  FirebaseError
+} from '../../config/firebaseConfig'
+import { colors } from '../../theme';
+import NavigationButotn from '../../components/NavigationButton';
+
+const { width, height } = Dimensions.get('screen');
 
 
 const SignInScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
- 
+
   const auth = getAuth();
   const [error, setError] = React.useState<string | FirebaseError | undefined>(undefined);
   const [email, setEmail] = React.useState('');
@@ -33,7 +45,7 @@ const SignInScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-        {error && <Text style={styles.error}>{String(error)}</Text>}
+      {error && <Text style={styles.error}>{String(error)}</Text>}
       <View style={styles.controls}>
         <View style={styles.genderTitle}>
           <Text style={styles.contentTitle}>Connexion</Text>
@@ -67,14 +79,12 @@ const SignInScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
             style={styles.icon}
           />}
         />
-        <View style={styles.validationButton}>
-          <TouchableOpacity style={styles.button} onPress={loginUser}>
-            <Text style={styles.buttonText}>
-              Se Connecter
-            </Text>
-          </TouchableOpacity>
-        </View>
+
       </View>
+        <View style={styles.button}>
+          <NavigationButotn title="Connexion" onPress={loginUser} />
+        </View>
+
 
     </SafeAreaView>
   );
@@ -83,26 +93,22 @@ const SignInScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.palette.violetClair,
+    backgroundColor: colors.palette.violet,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  logo: {
-    width: 120,
-    height: 120,
   },
   controls: {
     flex: 1,
     alignItems: 'flex-start',
     justifyContent: 'center',
-    width: '90%',
+    width: width,
   },
   icon: {
     marginLeft: 10,
     color: colors.palette.gold,
   },
   error: {
-    width: '90%', 
+    width: width - 40,
     textAlign: 'center',
     backgroundColor: colors.palette.orange,
     borderRadius: 6,
@@ -110,7 +116,7 @@ const styles = StyleSheet.create({
     marginTop: 30,
     fontSize: 12,
     color: colors.palette.ivory,
-   
+
   },
   input: {
     backgroundColor: colors.palette.ivory,
@@ -121,26 +127,6 @@ const styles = StyleSheet.create({
     borderLeftColor: colors.palette.violet,
     borderBottomColor: colors.palette.violet,
   },
-  validationButton: {
-    width: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 20,
-  },
-  button: {
-    width: '80%',
-    backgroundColor: colors.palette.orange,
-    marginTop: 10,
-    borderRadius: 16,
-  },
-  buttonText: {
-    textAlign: "center",
-    alignItems: "center",
-    paddingVertical: 10,
-    fontFamily: "oswaldBold",
-    fontSize: 18,
-    color: colors.palette.violetClair,
-  },
   genderTitle: {
     width: '100%',
     flexDirection: 'row',
@@ -150,8 +136,16 @@ const styles = StyleSheet.create({
   contentTitle: {
     fontFamily: "mulishBold",
     fontSize: 24,
-    color: colors.palette.violet,
+    color: colors.palette.violetBg,
     marginBottom: 20
+  },
+  button: {
+    position: 'absolute',
+    bottom: 100,
+    width: width -40,
+    justifyContent: 'center',
+    alignItems: 'center',
+
   }
 });
 
