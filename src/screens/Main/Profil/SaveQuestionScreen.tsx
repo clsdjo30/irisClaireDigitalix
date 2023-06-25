@@ -27,6 +27,7 @@ interface CrossQuestion {
     cardpseudotwo: string;
     cardpseudothree: string;
     cardpseudofour: string;
+    cardpseudofive: string;
     domain: string;
     answer: string;
 }
@@ -121,10 +122,7 @@ const SaveQuestionScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => 
                     <ListItem containerStyle={{ backgroundColor: colors.palette.violetBg }}>
                         <ListItem.Content>
                             <ListItem.Title style={styles.irisTitle}>
-                                {item.cardpseudoone},
-                                {item.cardpseudotwo},
-                                {item.cardpseudothree},
-                                {item.cardpseudofour}
+                                {item.cardpseudoone}, {item.cardpseudotwo}, {item.cardpseudothree}, {item.cardpseudofour}, {item.cardpseudofive}
                             </ListItem.Title>
                             <ListItem.Subtitle style={styles.cardTitle}>{item.answer}</ListItem.Subtitle>
                         </ListItem.Content>
@@ -181,19 +179,6 @@ const SaveQuestionScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => 
                         />
                     </TabView.Item>
                 </TabView>
-
-                {/* <View style={styles.yesNo}>
-                    <FlatList
-                        data={questions}
-                        renderItem={renderItem}
-                        keyExtractor={(item, index) => index.toString()}
-
-                    />
-                </View> */}
-
-
-
-
             </View>
         </View >
     )
@@ -282,5 +267,6 @@ const styles = StyleSheet.create({
         fontSize: 14,
         color: colors.palette.violet,
         textTransform: 'capitalize',
+        marginBottom: 10
     }
 })

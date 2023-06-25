@@ -58,7 +58,7 @@ const CrossDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) 
             cardpseudotwo: questionInformations.choosecardtwopseudo,
             cardpseudothree: questionInformations.choosecardthreepseudo,
             cardpseudofour: questionInformations.choosecardfourpseudo,
-            cardpseudofive: questionInformations.choosecardfivename,
+            cardpseudofive: questionInformations.choosecardfivepseudo,
             answer: questionInformations.answer,
         })
             .then(() => console.log('Question saved successfully!'))
