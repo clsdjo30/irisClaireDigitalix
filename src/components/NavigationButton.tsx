@@ -4,22 +4,29 @@ import { colors } from '../theme';
 
 const { width, height } = Dimensions.get('screen');
 
-const NavigationButotn: React.FC<{ title: string, onPress: () => void }> = ({ title, onPress }) => {
-    return (
-        <Pressable style={styles.button} onPress={onPress}>
-            <Text style={styles.buttonText}>
-                {title}
-            </Text>
-        </Pressable>
-    );
+type NavigationButtonProps = {
+    title: string;
+    onPress: () => void;
+    width?: number;
+    color?: string;
+    backgroundColor?: string;
+  };
+
+const NavigationButotn: React.FC<NavigationButtonProps>  = ({ title, onPress, width, color, backgroundColor }) => {
+    const buttonStyle = [styles.button, { width, backgroundColor }];
+    const textStyle = [styles.buttonText, { color }];
+
+  return (
+    <Pressable style={buttonStyle} onPress={onPress}>
+      <Text style={textStyle}>{title}</Text>
+    </Pressable>
+  );
 }
 
 export default NavigationButotn;
 
 const styles = StyleSheet.create({
     button: {
-        width: width -20 ,
-        backgroundColor: colors.palette.orange,
         marginBottom: 10,
         borderRadius: 16,
         alignItems: "center",
@@ -28,6 +35,5 @@ const styles = StyleSheet.create({
     buttonText: {
         fontFamily: "mulishBold",
         fontSize: 14,
-        color: colors.palette.violetBg,
     },
 });

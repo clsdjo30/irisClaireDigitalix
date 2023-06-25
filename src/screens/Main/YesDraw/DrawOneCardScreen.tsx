@@ -16,7 +16,8 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import CARD_DECK from '../../../utils/cards';
-import { colors } from '../../../theme/color'
+import { colors } from '../../../theme/color';
+import CustomModal from '../../../components/reusable/CustomModal';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StackScreenProps } from '@react-navigation/stack';
 import {
@@ -109,11 +110,9 @@ const DrawOneCardScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
   const [selectedCards, setSelectedCards] = useState(0);
   const [modalVisible, setModalVisible] = useState(false);
-  const [credit, setCredit] = useState(10);
+  const [credit, setCredit] = useState(0);
 
-
-
-
+  
   // On utilise useEffect pour détecter quand l'utilisateur a retourné les 4 cartes.
   const handleCardFlip = (index: number) => {
 
@@ -132,10 +131,15 @@ const DrawOneCardScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     };
     
     }
-    console.log(selectedCards);
+   // l'user à valider son credit.
     function gotToResult() {
       navigation.navigate('DrawResult');
     }
+   // l'user ne valide pas son credit
+    function cancelModal() {
+      navigation.navigate('Home');
+    }
+
     function sendQuestion() {
         // TODO implementer la logique de validation avec credit
         if (credit > 0
@@ -153,7 +157,7 @@ const DrawOneCardScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     }
 
     function goBuyCredit() {
-        navigation.navigate('Profil')
+        navigation.navigate('Iris')
         //reinitialise la navigation de YesStack
         navigation.reset({
             index: 0,
@@ -182,43 +186,19 @@ const DrawOneCardScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
           ))}
 
           {/* Display Modal when all cards are flipped */}
-          <Modal
-            animationType="slide"
-            transparent={true}
+         <CustomModal
             visible={modalVisible}
-
-          >
-            <View style={styles.centeredView}>
-              <View style={styles.modalView}>
-                {/* TODO implementer la logique de validation avec credit  */}
-                {credit > 0
-                  ?
-                  <>
-                    <Text style={styles.modalText}>Utilez 1 credit pour voir votre reponse</Text>
-                    <Pressable
-                      style={[styles.button, styles.buttonClose]}
-                      onPress={() => {
-                        setModalVisible(!modalVisible);
-                        setCredit(credit - 1);
-                        sendQuestion();
-                      }}
-                    >
-                      <Text style={styles.textStyle}>Voir votre résultat</Text>
-                    </Pressable>
-                  </>
-                  :
-                  <>
-                    <Text style={styles.modalText}>Vous n'avez plus de credit disponible </Text>
-                    <Pressable
-                      style={[styles.button, styles.buttonClose]}
-                    >
-                      <Text style={styles.textStyle}>Acheter des credits</Text>
-                    </Pressable>
-                  </>
-                }
-              </View>
-            </View>
-          </Modal>
+            credit={credit}
+            onValidate={() => {
+              setModalVisible(!modalVisible);
+              setCredit(credit - 1);
+              sendQuestion();
+            }}
+            onCancel={cancelModal}
+            onBuyCredit={() => {
+              goBuyCredit();
+            }}
+          />
 
         </View>
       </SafeAreaView>
