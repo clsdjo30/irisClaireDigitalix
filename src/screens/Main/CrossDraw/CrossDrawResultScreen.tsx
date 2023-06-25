@@ -58,6 +58,7 @@ const CrossDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) 
             cardpseudotwo: questionInformations.choosecardtwopseudo,
             cardpseudothree: questionInformations.choosecardthreepseudo,
             cardpseudofour: questionInformations.choosecardfourpseudo,
+            cardpseudofive: questionInformations.choosecardfivename,
             answer: questionInformations.answer,
         })
             .then(() => console.log('Question saved successfully!'))
@@ -92,14 +93,17 @@ const CrossDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) 
             choosecardtwonumber: 0,
             choosecardthreenumber: 0,
             choosecardfournumber: 0,
+            choosecardfivenumber: 0,
             choosecardname: "",
             choosecardtwoname: "",
             choosecardthreename: "",
             choosecardfourname: "",
+            choosecardfivename: "",
             choosecardpseudo: "",
             choosecardtwopseudo: "",
             choosecardthreepseudo: "",
             choosecardfourpseudo: "",
+            choosecardfivepseudo: "",
         })
         navigation.navigate('Home')
         navigation.reset({

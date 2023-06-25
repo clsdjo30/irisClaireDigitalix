@@ -153,7 +153,21 @@ const CrossDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
         choosecardfournumber: CARD_DECK[index].id,
         choosecardfourname: CARD_DECK[index].name,
         choosecardfourpseudo: CARD_DECK[index].pseudo,
-      });
+      })
+      setSelectedCards(selectedCards + 1);
+      setSelectedCardIndex(index);
+      
+    }
+    if (selectedCards === 4) {
+      setValue({
+        ...value,
+        choosecardfivenumber: CARD_DECK[index].id,
+        choosecardfivename: CARD_DECK[index].name,
+        choosecardfivepseudo: CARD_DECK[index].pseudo,
+      }
+      
+      );
+      
       setSelectedCards(selectedCards + 1);
       setSelectedCardIndex(index);
       setTimeout(() => {

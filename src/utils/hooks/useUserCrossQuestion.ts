@@ -18,6 +18,7 @@ interface Question {
   cardpseudotwo: string;
   cardpseudothree: string;
   cardpseudofour: string;
+  cardpseudofive: string;
   answer: string;
 }
 
@@ -55,6 +56,7 @@ export function useUserCrossQuestion(userID: string | null) {
         cardpseudotwo: doc.data().cardpseudotwo,
         cardpseudothree: doc.data().cardpseudothree,
         cardpseudofour: doc.data().cardpseudofour,
+        cardpseudofive: doc.data().cardpseudofive,
 
       }));
 

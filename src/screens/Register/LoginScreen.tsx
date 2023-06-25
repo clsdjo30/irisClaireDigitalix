@@ -68,7 +68,7 @@ const SignInScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
         <Input
           placeholder='Password'
           placeholderTextColor={colors.palette.violetClair}
-          inputContainerStyle={styles.input}
+          inputContainerStyle={[styles.input, { marginBottom: 60}]}
           inputStyle={{ fontSize: 14, marginLeft: 10, fontFamily: "mulishMedium", color: colors.palette.violet }}
           value={password}
           onChangeText={(text) => setPassword(text)}
