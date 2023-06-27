@@ -1,10 +1,12 @@
 import React from 'react';
-import { StyleSheet, View, SafeAreaView, Text } from 'react-native';
+import { StyleSheet, View, SafeAreaView, Text, Dimensions } from 'react-native';
 import { Icon } from '@rneui/base'
 import { StackScreenProps } from '@react-navigation/stack';
 import { Form, Picker } from 'react-native-form-component';
 import { useUserStore } from '../../utils/hooks/useUserStore';
 import { colors } from '../../theme'
+
+const width = Dimensions.get('window').width;
 
 
 
@@ -25,6 +27,8 @@ const GenreScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                     buttonStyle={styles.button}
                     buttonText="Suivant"
                     buttonTextStyle={styles.buttonText}
+                style={{width: width * 0.85, alignItems: 'center'}}
+            
                 >
                     <Picker
                         items={[
@@ -37,7 +41,7 @@ const GenreScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                         pickerIcon={<Icon
                             name='venus-mars'
                             type='font-awesome'
-                            color= {colors.palette.lightgold}
+                            color={colors.palette.pink200}
                             size={28}
                             style={styles.icon}
                         />}
@@ -80,11 +84,12 @@ const styles = StyleSheet.create({
     },
     button: {
         position: 'relative',
-        top: 50,
-        width: 300,
-        backgroundColor: "#CBA135",
-        marginTop: 10,
+        width: width * 0.85,
+        height: 30,
+        backgroundColor: colors.palette.orange,
+        marginTop: 30,
         borderRadius: 16,
+        paddingVertical: 5,
     },
     policy: {
         width: 300,
@@ -93,7 +98,7 @@ const styles = StyleSheet.create({
         marginLeft: -20
     },
     genderTitle: {
-        width: 300,
+        width: width * 0.8,
         flexDirection: 'row',
     },
     genderSub: {
@@ -111,8 +116,7 @@ const styles = StyleSheet.create({
     },
     bottomDivider: {
         marginTop: 1,
-        width: 280,
-        borderColor: '#7e1f86',
+        borderColor: colors.palette.pink200,
         borderWidth: 1,
         marginBottom: 20,
     },
@@ -122,9 +126,10 @@ const styles = StyleSheet.create({
         marginTop: 40,
     },
     control: {
-        width: 285,
+        width: width * 0.85,
+        height: 60,
         borderBottomWidth: 1,
-        marginBottom: 10,
+        marginBottom: 20,
         flexDirection: 'row',
         alignItems: 'center',
         backgroundColor: colors.palette.ivory,
@@ -133,11 +138,9 @@ const styles = StyleSheet.create({
         borderBottomColor: colors.palette.darkgold,
     },
     buttonText: {
-        textAlign: "center",
-        padding: 3,
-        fontFamily: "oswaldMedium",
+        fontFamily: "mulishBold",
         fontSize: 14,
-        color: colors.palette.ivory,
+        color: colors.palette.violetBg
     },
     input: {
         fontFamily: 'mulishRegular',
@@ -145,15 +148,16 @@ const styles = StyleSheet.create({
         fontSize: 17,
     },
     inputText: {
+        
         fontFamily: 'mulishRegular',
-        color: colors.palette.blue,
+        color: colors.palette.purple200,
         fontSize: 14,
         marginLeft: 14,
     },
     contentTitle: {
         fontFamily: "mulishRegular",
         fontSize: 18,
-        color: colors.text,
+        color: colors.palette.violetBg,
         marginBottom: 20
     },
 });

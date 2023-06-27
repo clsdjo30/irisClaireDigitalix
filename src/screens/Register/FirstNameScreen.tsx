@@ -1,51 +1,52 @@
 import React from 'react';
-import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
-import { Icon } from '@rneui/base'
+import { StyleSheet, Text, View,Dimensions } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { Input } from '@rneui/base'
 import { StackScreenProps } from '@react-navigation/stack';
-import { Form, FormItem } from 'react-native-form-component';
 import { useUserStore } from '../../utils/hooks/useUserStore';
-import { colors } from '../../theme'
+import { colors } from '../../theme';
+import NavigationButton from '../../components/NavigationButton';
+
+const width = Dimensions.get('window').width;
+
 
 const FirstNameScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   const [user, setUser] = useUserStore()
 
-
+  console.log(user)
   //console.log(user.firstname)
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
 
       <View style={styles.controls}>
         <View style={styles.genderTitle}>
           <Text style={styles.contentTitle}>Quelle est votre prénom ?</Text>
         </View>
-        <Form
-          onButtonPress={() => navigation.navigate('Genre', { user: user })}
-          buttonStyle={styles.button}
-          buttonText='Suivant'
-          buttonTextStyle={styles.buttonText}
-        >
-
-          <FormItem
-            placeholder='Saisissez votre prénom'
-            isRequired
+        <View style={styles.inputView}>
+          <Input
             value={user.firstname}
+            placeholder='Saisissez votre prénom'
+            placeholderTextColor={colors.palette.purple200}
+            inputContainerStyle={styles.input}
+            inputStyle={styles.inputStyle}
             onChangeText={(text) => setUser({ ...user, firstname: text })}
-            style={styles.control}
-            textInputStyle={styles.input}
-            children={
-              <Icon
-                name='user'
-                type='font-awesome'
-                size={28}
-                color= {colors.palette.lightgold}
-                style={styles.icon}
-              />
-            }
+            leftIcon={<Icon
+              name='user'
+              size={28}
+              style={styles.icon}
+            />}
           />
+        </View>
+        <NavigationButton
+          color={colors.palette.violetBg}
+          backgroundColor={colors.palette.orange}
+          width={width * 0.85}
+          title="Suivant"
+          onPress={() => navigation.navigate('Genre', { user: user })}
+        />
 
-        </Form>
       </View>
-    </SafeAreaView >
+    </View >
   );
 }
 
@@ -62,55 +63,28 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 40,
   },
-  control: {
-    width: 300,
-    marginBottom: 10,
-    flexDirection: 'row',
-    alignItems: 'center',
+  inputView: {
+    width: width * 0.9, 
+    marginBottom: 20
+  },
+  input: {
     backgroundColor: colors.palette.ivory,
+    padding: 3,
+    borderRadius: 6,
     borderBottomWidth: 1,
     borderLeftWidth: 1,
     borderLeftColor: colors.palette.darkgold,
     borderBottomColor: colors.palette.darkgold,
   },
+  inputStyle: {
+    fontSize: 14, 
+    marginLeft: 10, 
+    fontFamily: "mulishRegular", 
+    color: colors.palette.violet
+  },
   icon: {
-    marginRight: 20,
-  },
-  error: {
-    marginTop: 20,
-    padding: 20,
-    backgroundColor: '#D54826FF',
-    borderRadius: 10,
-    width: "95%",
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  textError: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  button: {
-    fontFamily: 'oswaldBold',
-    fontSize: 24,
-    position: 'relative',
-    top: 50,
-    width: 300,
-    backgroundColor: colors.gold,
-    marginTop: 10,
-    borderRadius: 16,
-  },
-  buttonText: {
-    textAlign: "center",
-    padding: 3,
-    fontFamily: "oswaldMedium",
-    fontSize: 14,
-    color: colors.palette.ivory,
-  },
-  input: {
-    fontFamily: 'mulishRegular',
-    color: colors.palette.blue,
-    fontSize: 14,
+    marginLeft: 10,
+    color: colors.palette.golden,
   },
   genderTitle: {
     width: 300,
@@ -119,7 +93,7 @@ const styles = StyleSheet.create({
   contentTitle: {
     fontFamily: "mulishRegular",
     fontSize: 18,
-    color: colors.text,
+    color: colors.palette.violetClair,
     marginBottom: 20
   }
 

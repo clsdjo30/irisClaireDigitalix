@@ -53,7 +53,7 @@ const SignInScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
         <Input
           placeholder='Email'
-          placeholderTextColor={colors.palette.violetClair}
+          placeholderTextColor={colors.palette.purple200}
           inputContainerStyle={styles.input}
           inputStyle={{ fontSize: 14, marginLeft: 10, fontFamily: "mulishMedium", color: colors.palette.violet }}
           value={email}
@@ -67,7 +67,7 @@ const SignInScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
         <Input
           placeholder='Password'
-          placeholderTextColor={colors.palette.violetClair}
+          placeholderTextColor={colors.palette.purple200}
           inputContainerStyle={[styles.input, { marginBottom: 60}]}
           inputStyle={{ fontSize: 14, marginLeft: 10, fontFamily: "mulishMedium", color: colors.palette.violet }}
           value={password}
@@ -82,7 +82,11 @@ const SignInScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
       </View>
         <View style={styles.button}>
-          <NavigationButotn title="Connexion" onPress={loginUser} />
+          <NavigationButotn 
+          width={width -30}
+          backgroundColor={colors.palette.orange}
+          title="Connexion" 
+          onPress={loginUser} />
         </View>
 
 
@@ -102,6 +106,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     justifyContent: 'center',
     width: width,
+    marginBottom: 60,
   },
   icon: {
     marginLeft: 10,

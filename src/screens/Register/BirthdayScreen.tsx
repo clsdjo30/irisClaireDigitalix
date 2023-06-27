@@ -1,17 +1,19 @@
 import React from 'react';
-import { StyleSheet, Text, View, SafeAreaView, Platform, TextInput, TouchableOpacity, } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, Platform, TextInput, Dimensions, Pressable} from 'react-native';
 import { Icon } from '@rneui/base'
 import { StackScreenProps } from '@react-navigation/stack';
 import { useUserStore } from '../../utils/hooks/useUserStore';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { colors } from '../../theme'
+import { colors } from '../../theme';
+import NavigationButton from '../../components/NavigationButton';
+const width = Dimensions.get('window').width; 
 
 
 const BirthdayScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
     const [user, setUser] = useUserStore();
     const [date, setDate] = React.useState(new Date());
-    const [mode, setMode] = React.useState('date');
+    const [mode, setMode] = React.useState<'date'>('date');
     const [show, setShow] = React.useState(false);
 
     const onChange = (event: any, selectedDate: any) => {
@@ -21,10 +23,13 @@ const BirthdayScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
         setUser({ ...user, birthday: currentDate.toLocaleDateString() })
     };
 
-    const showMode = (currentMode: React.SetStateAction<string>) => {
-        
+    const showMode = (currentMode: "date" | ((prevState: "date") => "date")) => {
         setShow(true);
-        setMode(currentMode);
+        if (typeof currentMode === 'string') {
+            setMode(currentMode);
+        } else {
+            setMode(currentMode(mode));
+        }
     };
 
     const showDatepicker = () => {
@@ -39,19 +44,19 @@ const BirthdayScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
             <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
 
                 <View >
-                    <TouchableOpacity onPress={showDatepicker} style={styles.control}>
-                        <Icon 
-                        name="birthday-cake" 
-                        type='font-awesome'
-                        size={28} 
-                        color= {colors.palette.lightgold}
-                        style={styles.icon} 
+                    <Pressable onPress={showDatepicker} style={styles.control}>
+                        <Icon
+                            name="birthday-cake"
+                            type='font-awesome'
+                            size={20}
+                            color={colors.palette.golden}
+                            style={styles.icon}
                         />
                         <TextInput
                             style={styles.input}
                             onFocus={showDatepicker}
                             placeholder="Date de naissance"
-                            placeholderTextColor={'#8ca0d7'}
+                            placeholderTextColor={colors.palette.purple200}
                             value={user.birthday}
                             editable={false}
                         />
@@ -65,10 +70,18 @@ const BirthdayScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                                 onChange={onChange}
                             />)}
 
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Sign Up')}>
-                        <Text style={styles.buttonText}>Suivant</Text>
-                    </TouchableOpacity>
+                    </Pressable>
+                    
+                    <View style={styles.button}>
+                    <NavigationButton
+                        color={colors.palette.violetBg}
+                        backgroundColor={colors.palette.orange}
+                        width={width / 1.3}
+                        title="S'inscrire"
+                        onPress={() => navigation.navigate('Sign Up')}
+                    />
+                        
+                    </View>
                 </View>
             </View>
         </SafeAreaView>
@@ -88,19 +101,14 @@ const styles = StyleSheet.create({
         backgroundColor: colors.palette.purple600,
     },
     button: {
-        position: 'relative',
-        top: 50,
-        width: 300,
-        backgroundColor: "#CBA135",
-        marginTop: 10,
-        borderRadius: 16,
+        marginTop: 60,
     },
     buttonText: {
         textAlign: "center",
         padding: 3,
         fontFamily: "oswaldMedium",
         fontSize: 14,
-        color: colors.palette.ivory,
+        color: colors.palette.violetBg,
     },
     input: {
         color: '#8ca0d7',
@@ -112,22 +120,22 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         paddingBottom: 10,
-        backgroundColor: colors.palette.ivory,
+        backgroundColor: colors.palette.violetBg,
         borderRadius: 10,
         padding: 10,
         borderBottomWidth: 1,
         borderLeftWidth: 1,
-        borderLeftColor: colors.palette.darkgold,
-        borderBottomColor: colors.palette.darkgold,
+        borderLeftColor: colors.palette.golden,
+        borderBottomColor: colors.palette.golden,
     },
     icon: {
         marginRight: 20,
-        color: '#FFD700',
+        color: colors.palette.orange,
     },
     contentTitle: {
         fontFamily: "mulishRegular",
         fontSize: 18,
-        color: colors.text,
+        color: colors.palette.violetBg,
         marginBottom: 20
     },
 });

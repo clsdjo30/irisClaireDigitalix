@@ -10,7 +10,7 @@ import {
 import { StackScreenProps } from '@react-navigation/stack';
 import STEPPER from '../../utils/stepper';
 import { colors } from '../../theme';
-import NavigationButotn from '../../components/NavigationButton';
+import NavigationButton from '../../components/NavigationButton';
 import Backdrop from '../../components/animation/Backdrop';
 import Indicator from '../../components/animation/Indicator';
 import Square from '../../components/animation/Square';
@@ -48,7 +48,7 @@ const StepperScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                                         height: width / 1.5,
                                         resizeMode: "contain",
                                         borderRadius: 16,
-                                        marginBottom:90,
+                                        marginBottom: 90,
                                     }}
                                 />
                             </View>
@@ -79,11 +79,17 @@ const StepperScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
             />
             <Indicator scrollx={scrollx} />
             <View style={styles.blockButton}>
-                <NavigationButotn
+                <NavigationButton
+                    color={colors.palette.violetBg}
+                    backgroundColor={colors.palette.orange}
+                    width={width / 1.3}
                     title="S'inscrire"
                     onPress={() => navigation.navigate('FirstName')}
                 />
-                <NavigationButotn
+                <NavigationButton
+                    color={colors.palette.violet}
+                    backgroundColor={colors.palette.violetClair}
+                    width={width / 1.3}
                     title="Se Connecter"
                     onPress={() => navigation.navigate('Login')}
                 />

@@ -1,12 +1,15 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Dimensions} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input, CheckBox } from '@rneui/themed';
-import { firestore, setDoc, doc, createUserWithEmailAndPassword, getAuth} from '../../config/firebaseConfig'
+import { firestore, setDoc, doc, createUserWithEmailAndPassword, getAuth } from '../../config/firebaseConfig'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useUserStore } from '../../utils/hooks/useUserStore';
 import { StackScreenProps } from '@react-navigation/stack';
-import { colors } from '../../theme'
+import { colors } from '../../theme';
+import NavigationButton from '../../components/NavigationButton';
+
+const { width } = Dimensions.get('screen');
 
 
 const auth = getAuth()
@@ -58,7 +61,7 @@ const SignInScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     }
   }
 
-const userElement = findUserElement();
+  const userElement = findUserElement();
 
   function saveUser(useruid: string) {
     const db = firestore;
@@ -152,16 +155,22 @@ const userElement = findUserElement();
             onPress={isAgree}
             center={true}
             checkedColor={colors.palette.pink500}
-            containerStyle={{ backgroundColor: colors.palette.purple600 }}
+            containerStyle={{ backgroundColor: colors.palette.violet, borderColor: colors.palette.violet, }}
           />
           <Text style={styles.policy}>
             J'accepte les conditions générales d'utilisation
           </Text>
         </View>
         <View style={styles.validationButton}>
-          <TouchableOpacity style={styles.button} onPress={signIn}>
-            <Text style={styles.buttonText}>Commencer a poser vos questions</Text>
-          </TouchableOpacity>
+          <NavigationButton
+            width={width / 1.2}
+            backgroundColor={colors.palette.orange}
+            color={colors.palette.violetBg}
+            title="Commencer a poser vos questions"
+            onPress={signIn}
+
+          />
+        
         </View>
       </View>
     </SafeAreaView>
@@ -234,9 +243,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: "center",
     fontFamily: "mulishRegularItalic",
-    fontSize: 10,
-    color: colors.text,
-    marginLeft: -10,
+    fontSize: 11,
+    color: colors.palette.violetBg,
+    marginLeft: -6,
 
 
   },
@@ -253,7 +262,7 @@ const styles = StyleSheet.create({
   contentTitle: {
     fontFamily: "mulishRegular",
     fontSize: 18,
-    color: colors.text,
+    color: colors.palette.violetBg,
     marginBottom: 20
   }
 });
