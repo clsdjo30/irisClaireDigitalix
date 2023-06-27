@@ -18,7 +18,8 @@ export default {
     "slug": "irisclairedigitalix",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icons/icon.png",
+    "icon": "./assets/icons/iris_002.png",
+    "scheme": "com.digitalix.irisclaire",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash/Splash002.png",
@@ -39,8 +40,9 @@ export default {
     },
     "android": {
       "package": "com.digitalix.irisclaire",
+      "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/icons/adaptive-icon.png",
+        "foregroundImage": "./assets/icons/iris_002.png",
         "backgroundColor": "#ffffff"
       }
     },

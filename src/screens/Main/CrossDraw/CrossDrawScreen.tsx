@@ -110,7 +110,7 @@ const CrossDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
   const [selectedCards, setSelectedCards] = useState(0);
   const [modalVisible, setModalVisible] = useState(false);
-  const [credit, setCredit] = useState(0);
+  const [credit, setCredit] = useState(1);
 
 
 
@@ -199,7 +199,7 @@ const CrossDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
       <View style={styles.deckContainer}>
         <View style={styles.titleText}>
           <Text style={styles.title}>
-            Concentrez-vous sur votre question et tirer 4 cartes !
+            Concentrez-vous sur votre question et tirer 5 cartes !
           </Text>
         </View>
 

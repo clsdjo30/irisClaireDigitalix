@@ -1,10 +1,13 @@
-import React, {  useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useAuthentication } from '../utils/hooks/useAuthentication';
 import 'react-native-gesture-handler';
 import UserStack from './MainNavigator';
 import AuthStack from './WelcomeNavigator';
 import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
+import * as Notifications from 'expo-notifications';
+import { useNotifications } from '../utils/hooks/useNotifications';
+
 
 import {
   Mulish_200ExtraLight as mulishExtraLight,
@@ -16,7 +19,7 @@ import {
   Mulish_800ExtraBold as mulishExtraBold,
   Mulish_900Black as mulishBlack,
   Mulish_400Regular_Italic as mulishRegularItalic,
-  
+
 } from '@expo-google-fonts/mulish';
 
 import {
@@ -33,13 +36,22 @@ import {
 export default function RootNavigation() {
   const { user } = useAuthentication();
   const [IsReady, SetIsReady] = useState(false);
- 
+  const { registerForPushNotificationsAsync, handleNotificationResponse } = useNotifications();
 
   useEffect(() => {
+    registerForPushNotificationsAsync();
+    Notifications.setNotificationHandler({
+      handleNotification: async () => ({
+        shouldShowAlert: true,
+        shouldPlaySound: false,
+        shouldSetBadge: true,
+      }),
+
+    });
     async function prepare() {
       try {
         // Keep the splash screen visible while we fetch resources
-         await SplashScreen.preventAutoHideAsync();
+        await SplashScreen.preventAutoHideAsync();
         // Pre-load fonts, make any API calls you need to do here
 
         await Font.loadAsync({
@@ -59,6 +71,16 @@ export default function RootNavigation() {
           oswaldSemiBold,
           oswaldBold
         });
+        const responseListener =
+          Notifications.addNotificationResponseReceivedListener(
+            handleNotificationResponse
+          );
+
+        return () => {
+          if (responseListener)
+            Notifications.removeNotificationSubscription(responseListener);
+        };
+
         // Artificially delay for two seconds to simulate a slow loading
         // experience. Please remove this if you copy and paste the code!
         await new Promise(resolve => setTimeout(resolve, 2000));
@@ -71,7 +93,7 @@ export default function RootNavigation() {
     }
 
     prepare();
-  
+
   }, []);
 
   const onLayoutRootView = useCallback(async () => {
@@ -88,8 +110,8 @@ export default function RootNavigation() {
   if (!IsReady) {
     return null;
   }
- 
 
-      
+
+
   return user ? <UserStack /> : <AuthStack />;
 }

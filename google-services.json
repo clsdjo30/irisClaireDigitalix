@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "871628020051",
+    "project_id": "fir-2e362",
+    "storage_bucket": "fir-2e362.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:871628020051:android:6d379a77494eebd71b29a6",
+        "android_client_info": {
+          "package_name": "com.digitalix.irisclaire"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "871628020051-ncfbv48lel7sfj85d4t2f45j53715qta.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAsUEkUskE5_fIG9-qZz89-CxZsSyqhyIs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "871628020051-ncfbv48lel7sfj85d4t2f45j53715qta.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
