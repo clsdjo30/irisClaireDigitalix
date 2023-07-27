@@ -106,7 +106,7 @@ const DayDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
             const newtendance = CARD_DECK[flippedCardIndex].tendance[Math.floor(Math.random() * CARD_DECK[flippedCardIndex].tendance.length)]
             setDayDraw({
                 ...daydraw,
-                daycard: CARD_DECK[flippedCardIndex].name,
+                daycard: CARD_DECK[flippedCardIndex].pseudo,
                 daytendance: newtendance,
                 isdraw: true
             });
@@ -128,7 +128,7 @@ const DayDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
         setDayDraw({
             ...daydraw,
-            daycard: CARD_DECK[index].name,
+            daycard: CARD_DECK[index].pseudo,
             daycardimage: CARD_DECK[index].frontImageUrl,
             daycardbackimage: CARD_DECK[index].backImageUrl,
             daytendance: newtendance,

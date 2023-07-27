@@ -1,8 +1,11 @@
 import React from 'react';
 import { View, Image, Text, StyleSheet , Dimensions} from 'react-native';
 import { colors } from '../theme';
-import { useUserStore } from '../utils/hooks/useUserStore';
 
+interface UserElementIconProps {
+    userElement: string | null;
+    name: string | null;
+}
 
 const air = require('../../assets/icons/elements/air.png');
 const earth = require('../../assets/icons/elements/earth.png');
@@ -10,11 +13,9 @@ const fire = require('../../assets/icons/elements/fire.png');
 const water = require('../../assets/icons/elements/water.png');
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
-const SCREEN_HEIGHT = SCREEN_WIDTH * 1.5;
 const SCREEN_SCALE = Dimensions.get('window').scale;
-const SCREEN_FONT_SCALE = SCREEN_SCALE * 0.5;
 
-const UserSignIcon = (userElement: string, name: string) => {
+const UserElementIcon: React.FC<UserElementIconProps> = ({userElement, name}) => {
 
 
     if (userElement === 'air' ) {
@@ -53,6 +54,8 @@ const UserSignIcon = (userElement: string, name: string) => {
             </View>
         );
     };
+
+    return null;
 };
 
 
@@ -76,4 +79,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default UserSignIcon;
+export default UserElementIcon;

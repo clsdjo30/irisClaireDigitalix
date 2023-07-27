@@ -1,12 +1,12 @@
 
-interface IStepper {
+export interface IStepper {
     key: string;
     title: string;
     description: string;
     image: any;
 }
 
-const STEPPER = [
+const STEPPER: IStepper[]  = [
     {
         key: "1",
         title: "Envie de réponses instantanées à vos questions ?",
@@ -26,11 +26,11 @@ const STEPPER = [
         image: require("../../assets/welcome/work.png")
     },
     {
-        key: "",
+        key: "4",
         title: "Iris vous connait mieux que vous même",
         description: "Iris vous connait mieux que vous même",
         image: require("../../assets/welcome/all_know_eye.png")
     },
 ]
 
-export default STEPPER;
+export default  STEPPER;

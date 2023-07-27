@@ -12,11 +12,8 @@ const width = Dimensions.get('window').width;
 
 const FirstNameScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   const [user, setUser] = useUserStore()
-
-  console.log(user)
-  //console.log(user.firstname)
   return (
-    <View style={styles.container}>
+    <View testID='first-name-screen' style={styles.container}>
 
       <View style={styles.controls}>
         <View style={styles.genderTitle}>

@@ -2,6 +2,11 @@ import React from 'react';
 import { View, Image, Text, StyleSheet, Dimensions } from 'react-native';
 import { colors } from '../theme';
 
+interface UserSignIconProps {
+    userSign: string | null;
+    name: string | null;
+}
+
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = SCREEN_WIDTH * 1.5;
 const SCREEN_SCALE = Dimensions.get('window').scale;
@@ -22,14 +27,14 @@ const ASTRO_ICON = [
     { virgo: require('../../assets/icons/astroSign/virgo.png') },
 ];
 
-const UserSignIcon = (userSign: string, name: string) => {
-    const astroIcon = ASTRO_ICON.find((item) => item.hasOwnProperty(userSign.toLowerCase()));
+const UserSignIcon: React.FC<UserSignIconProps> = ({ userSign, name }) => {
+    const astroIcon = userSign ? ASTRO_ICON.find((item) => item.hasOwnProperty(userSign.toLowerCase())) : null;
 
     if (astroIcon) {
         return (
             <View style={styles.blockSign}>
-                <Image source={Object.values(astroIcon)[0]} style={styles.astroImage} />
-                <Text style={styles.signText}>{name}</Text>
+                <Image testID='astro-image' source={Object.values(astroIcon)[0]} style={styles.astroImage} />
+                {name && <Text testID='sign-name' style={styles.signText}>{name}</Text>}
             </View>
         );
     }

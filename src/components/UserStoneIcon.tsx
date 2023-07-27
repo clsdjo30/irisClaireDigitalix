@@ -2,6 +2,10 @@ import React from 'react';
 import { View, Image, Text, StyleSheet, Dimensions } from 'react-native';
 import { colors } from '../theme';
 
+interface UserStoneIconProps {
+  userStone: string | null;
+  name: string | null;
+}
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = SCREEN_WIDTH * 1.5;
@@ -25,14 +29,14 @@ const STONE_ICON = [
   ];
 
  
-  const UserStoneIcon = (userStone: string, name: string) => {
-    const stoneIcon = STONE_ICON.find((item) => item.hasOwnProperty(userStone.toLowerCase()));
+  const UserStoneIcon: React.FC<UserStoneIconProps> = ({userStone, name}) => {
+    const stoneIcon = userStone ? STONE_ICON.find((item) => item.hasOwnProperty(userStone.toLowerCase())) : null;
     const stone = userStone;
     if (stoneIcon) {
       return (
         <View style={styles.blockSign}>
-          <Image source={Object.values(stoneIcon)[0]} style={styles.stoneImage} />
-          <Text style={styles.signText}>{name} </Text>
+          <Image testID="stone-image" source={Object.values(stoneIcon)[0]} style={styles.stoneImage} />
+          {name && <Text testID="stone-name" style={styles.signText}>{name} </Text>}
         </View>
       );
     }

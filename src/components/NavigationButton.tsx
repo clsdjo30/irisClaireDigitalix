@@ -9,15 +9,16 @@ type NavigationButtonProps = {
     onPress: () => void;
     width?: number;
     color?: string;
-    backgroundColor?: string;
+  backgroundColor?: string;
+    testID?: string;
   };
 
-const NavigationButotn: React.FC<NavigationButtonProps>  = ({ title, onPress, width, color, backgroundColor }) => {
+const NavigationButotn: React.FC<NavigationButtonProps>  = ({ title, onPress, width, color, backgroundColor, testID }) => {
     const buttonStyle = [styles.button, { width, backgroundColor }];
     const textStyle = [styles.buttonText, { color }];
 
   return (
-    <Pressable style={buttonStyle} onPress={onPress}>
+    <Pressable style={buttonStyle} onPress={onPress} testID={testID}>
       <Text style={textStyle}>{title}</Text>
     </Pressable>
   );

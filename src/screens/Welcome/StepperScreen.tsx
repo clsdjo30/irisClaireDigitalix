@@ -22,7 +22,7 @@ const StepperScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     const scrollx = React.useRef(new Animated.Value(0)).current;
 
     return (
-        <View style={styles.container}>
+        <View testID='stepper-screen' style={styles.container}>
             <Backdrop scrollx={scrollx} />
             <Square scrollx={scrollx} />
             <Animated.FlatList
@@ -80,6 +80,7 @@ const StepperScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
             <Indicator scrollx={scrollx} />
             <View style={styles.blockButton}>
                 <NavigationButton
+                    testID='s-inscrire-button'
                     color={colors.palette.violetBg}
                     backgroundColor={colors.palette.orange}
                     width={width / 1.3}
@@ -87,6 +88,7 @@ const StepperScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                     onPress={() => navigation.navigate('FirstName')}
                 />
                 <NavigationButton
+                    testID='se-connecter-button'
                     color={colors.palette.violet}
                     backgroundColor={colors.palette.violetClair}
                     width={width / 1.3}

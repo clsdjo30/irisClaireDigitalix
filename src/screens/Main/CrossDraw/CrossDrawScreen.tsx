@@ -235,7 +235,7 @@ const CrossDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.palette.violet
+    backgroundColor: colors.palette.purple100
   },
   header: {
     position: 'absolute',
@@ -244,7 +244,7 @@ const styles = StyleSheet.create({
     height: SCREEN_HEIGHT * 0.4,
     borderBottomLeftRadius: SCREEN_WIDTH * 0.1,
     borderBottomRightRadius: SCREEN_WIDTH * 0.1,
-    backgroundColor: colors.background
+    backgroundColor: colors.palette.purple600
   },
   titleText: {
     width: "90%",
@@ -257,7 +257,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontFamily: 'MulishRegular',
     fontSize: 18,
-    color: colors.palette.violet,
+    color: colors.palette.violetBg,
   },
   deckContainer: {
     height: "80%",

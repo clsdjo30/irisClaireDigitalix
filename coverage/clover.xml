@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1690346461022" clover="3.2.0">
+  <project timestamp="1690346461022" name="All files">
+    <metrics statements="136" coveredstatements="133" conditionals="20" coveredconditionals="17" methods="17" coveredmethods="17" elements="173" coveredelements="167" complexity="0" loc="136" ncloc="136" packages="12" files="69" classes="69"/>
+    <package name="assets.icons.astroSign">
+      <metrics statements="12" coveredstatements="12" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="aquarius.png" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\assets\icons\astroSign\aquarius.png">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+      </file>
+      <file name="aries.png" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\assets\icons\astroSign\aries.png">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+      </file>
+      <file name="cancer.png" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\assets\icons\astroSign\cancer.png">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+      </file>
+      <file name="capricorn.png" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\assets\icons\astroSign\capricorn.png">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+      </file>
+      <file name="gemini.png" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\assets\icons\astroSign\gemini.png">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+      </file>
+      <file name="leo.png" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\assets\icons\astroSign\leo.png">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+      </file>
+      <file name="libra.png" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\assets\icons\astroSign\libra.png">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+      </file>
+      <file name="pisces.png" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\assets\icons\astroSign\pisces.png">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+      </file>
+      <file name="sagittarius.png" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\assets\icons\astroSign\sagittarius.png">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+      </file>
+      <file name="scorpio.png" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\assets\icons\astroSign\scorpio.png">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+      </file>
+      <file name="taurus.png" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\assets\icons\astroSign\taurus.png">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+      </file>
+      <file name="virgo.png" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\assets\icons\astroSign\virgo.png">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="assets.icons.elements">
+      <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="air.png" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\assets\icons\elements\air.png">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+      </file>
+      <file name="earth.png" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\assets\icons\elements\earth.png">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+      </file>
+      <file name="fire.png" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\assets\icons\elements\fire.png">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+      </file>
+      <file name="water.png" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\assets\icons\elements\water.png">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="assets.icons.stones">
+      <metrics statements="12" coveredstatements="12" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="agate.png" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\assets\icons\stones\agate.png">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+      </file>
+      <file name="amethyst.png" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\assets\icons\stones\amethyst.png">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+      </file>
+      <file name="beryl.png" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\assets\icons\stones\beryl.png">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+      </file>
+      <file name="camelian.png" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\assets\icons\stones\camelian.png">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+      </file>
+      <file name="chrysolite.png" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\assets\icons\stones\chrysolite.png">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+      </file>
+      <file name="emerald.png" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\assets\icons\stones\emerald.png">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+      </file>
+      <file name="garnet.png" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\assets\icons\stones\garnet.png">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+      </file>
+      <file name="heliotrope.png" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\assets\icons\stones\heliotrope.png">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+      </file>
+      <file name="onyx.png" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\assets\icons\stones\onyx.png">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+      </file>
+      <file name="ruby.png" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\assets\icons\stones\ruby.png">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+      </file>
+      <file name="sapphire.png" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\assets\icons\stones\sapphire.png">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+      </file>
+      <file name="topaz.png" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\assets\icons\stones\topaz.png">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="assets.images.cards.back">
+      <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="Card_Back_001.png" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\assets\images\cards\back\Card_Back_001.png">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="assets.images.cards.front">
+      <metrics statements="22" coveredstatements="22" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="1-le-bateleur.png" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\assets\images\cards\front\1-le-bateleur.png">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+      </file>
+      <file name="10-la-roue-de-fortune.png" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\assets\images\cards\front\10-la-roue-de-fortune.png">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+      </file>
+      <file name="11-la-force.png" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\assets\images\cards\front\11-la-force.png">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+      </file>
+      <file name="12-le-pendu.png" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\assets\images\cards\front\12-le-pendu.png">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+      </file>
+      <file name="13-l-arcane-sans-nom.png" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\assets\images\cards\front\13-l-arcane-sans-nom.png">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+      </file>
+      <file name="14-la-temperance.png" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\assets\images\cards\front\14-la-temperance.png">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+      </file>
+      <file name="15-le-diable.png" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\assets\images\cards\front\15-le-diable.png">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+      </file>
+      <file name="16-la-maison-dieu.png" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\assets\images\cards\front\16-la-maison-dieu.png">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+      </file>
+      <file name="17-l-etoile.png" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\assets\images\cards\front\17-l-etoile.png">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+      </file>
+      <file name="18-la-lune.png" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\assets\images\cards\front\18-la-lune.png">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+      </file>
+      <file name="19-le-soleil.png" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\assets\images\cards\front\19-le-soleil.png">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+      </file>
+      <file name="2-la-papesse.png" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\assets\images\cards\front\2-la-papesse.png">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+      </file>
+      <file name="20-le-jugement.png" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\assets\images\cards\front\20-le-jugement.png">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+      </file>
+      <file name="21-le-monde.png" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\assets\images\cards\front\21-le-monde.png">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+      </file>
+      <file name="22-le-mat.png" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\assets\images\cards\front\22-le-mat.png">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+      </file>
+      <file name="3-l-imperatrice.png" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\assets\images\cards\front\3-l-imperatrice.png">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+      </file>
+      <file name="4-l-empereur.png" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\assets\images\cards\front\4-l-empereur.png">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+      </file>
+      <file name="5-le-pape.png" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\assets\images\cards\front\5-le-pape.png">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+      </file>
+      <file name="6-l-amoureux.png" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\assets\images\cards\front\6-l-amoureux.png">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+      </file>
+      <file name="7-le-chariot.png" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\assets\images\cards\front\7-le-chariot.png">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+      </file>
+      <file name="8-la-justice.png" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\assets\images\cards\front\8-la-justice.png">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+      </file>
+      <file name="9-l-hermite.png" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\assets\images\cards\front\9-l-hermite.png">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="assets.welcome">
+      <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="all_know_eye.png" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\assets\welcome\all_know_eye.png">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="2" type="stmt"/>
+      </file>
+      <file name="iris_claire.png" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\assets\welcome\iris_claire.png">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="2" type="stmt"/>
+      </file>
+      <file name="love.png" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\assets\welcome\love.png">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="2" type="stmt"/>
+      </file>
+      <file name="work.png" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\assets\welcome\work.png">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components">
+      <metrics statements="46" coveredstatements="43" conditionals="20" coveredconditionals="17" methods="6" coveredmethods="6"/>
+      <file name="NavigationButton.tsx" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\src\components\NavigationButton.tsx">
+        <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="17" count="8" type="stmt"/>
+        <line num="18" count="8" type="stmt"/>
+        <line num="20" count="8" type="stmt"/>
+        <line num="29" count="1" type="stmt"/>
+      </file>
+      <file name="UserElementIcon.tsx" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\src\components\UserElementIcon.tsx">
+        <metrics statements="17" coveredstatements="14" conditionals="8" coveredconditionals="5" methods="1" coveredmethods="1"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="21" count="6" type="cond" truecount="2" falsecount="0"/>
+        <line num="23" count="3" type="stmt"/>
+        <line num="31" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="40" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="41" count="0" type="stmt"/>
+        <line num="49" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="50" count="0" type="stmt"/>
+        <line num="58" count="3" type="stmt"/>
+        <line num="62" count="1" type="stmt"/>
+      </file>
+      <file name="UserSignIcon.tsx" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\src\components\UserSignIcon.tsx">
+        <metrics statements="11" coveredstatements="11" conditionals="6" coveredconditionals="6" methods="2" coveredmethods="2"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="30" count="1" type="stmt"/>
+        <line num="31" count="94" type="cond" truecount="2" falsecount="0"/>
+        <line num="33" count="21" type="cond" truecount="2" falsecount="0"/>
+        <line num="34" count="14" type="stmt"/>
+        <line num="42" count="7" type="stmt"/>
+        <line num="46" count="1" type="stmt"/>
+      </file>
+      <file name="UserStoneIcon.tsx" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\src\components\UserStoneIcon.tsx">
+        <metrics statements="12" coveredstatements="12" conditionals="6" coveredconditionals="6" methods="2" coveredmethods="2"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="32" count="1" type="stmt"/>
+        <line num="33" count="15" type="cond" truecount="2" falsecount="0"/>
+        <line num="34" count="6" type="stmt"/>
+        <line num="35" count="6" type="cond" truecount="2" falsecount="0"/>
+        <line num="36" count="3" type="stmt"/>
+        <line num="43" count="3" type="stmt"/>
+        <line num="47" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components.animation">
+      <metrics statements="19" coveredstatements="19" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="6"/>
+      <file name="Backdrop.tsx" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\src\components\animation\Backdrop.tsx">
+        <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+        <line num="5" count="2" type="stmt"/>
+        <line num="11" count="2" type="stmt"/>
+        <line num="12" count="5" type="stmt"/>
+        <line num="13" count="20" type="stmt"/>
+        <line num="14" count="20" type="stmt"/>
+        <line num="16" count="5" type="stmt"/>
+      </file>
+      <file name="Indicator.tsx" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\src\components\animation\Indicator.tsx">
+        <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="6" count="2" type="stmt"/>
+        <line num="13" count="2" type="stmt"/>
+        <line num="14" count="5" type="stmt"/>
+        <line num="17" count="20" type="stmt"/>
+        <line num="18" count="20" type="stmt"/>
+        <line num="23" count="20" type="stmt"/>
+        <line num="28" count="20" type="stmt"/>
+      </file>
+      <file name="Square.tsx" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\src\components\animation\Square.tsx">
+        <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="4" count="2" type="stmt"/>
+        <line num="10" count="2" type="stmt"/>
+        <line num="11" count="5" type="stmt"/>
+        <line num="18" count="5" type="stmt"/>
+        <line num="22" count="5" type="stmt"/>
+        <line num="26" count="5" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.screens.Welcome">
+      <metrics statements="9" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="5"/>
+      <file name="StepperScreen.tsx" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\src\screens\Welcome\StepperScreen.tsx">
+        <metrics statements="9" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="5"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="22" count="4" type="stmt"/>
+        <line num="24" count="4" type="stmt"/>
+        <line num="30" count="16" type="stmt"/>
+        <line num="41" count="16" type="stmt"/>
+        <line num="88" count="1" type="stmt"/>
+        <line num="96" count="1" type="stmt"/>
+        <line num="105" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.theme">
+      <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="color.ts" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\src\theme\color.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="3" count="8" type="stmt"/>
+        <line num="57" count="8" type="stmt"/>
+      </file>
+      <file name="index.ts" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\src\theme\index.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="onboardingColor.ts" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\src\theme\onboardingColor.ts">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="7" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.utils">
+      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="cards.ts" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\src\utils\cards.ts">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="10" count="1" type="stmt"/>
+      </file>
+      <file name="stepper.ts" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\src\utils\stepper.ts">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="9" count="3" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.utils.hooks">
+      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="useUserStore.ts" path="C:\Users\leser\REACT_ NATIVE\IRIS_CLAIRE\irisClaireDigitalix\src\utils\hooks\useUserStore.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>
