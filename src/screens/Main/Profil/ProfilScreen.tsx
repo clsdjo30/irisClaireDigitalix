@@ -12,8 +12,8 @@ import { colors } from '../../../theme';
 import { LinearGradient } from 'expo-linear-gradient'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StackScreenProps } from '@react-navigation/stack';
-import { useUserStore } from '../../../utils/hooks/useUserStore';
-import { useUserInformation } from '../../../utils/hooks/useUserInformations';
+import { useUserStore } from '../../../hooks/useUserStore';
+import { useUserInformation } from '../../../hooks/useUserInformations';
 import { getAuth } from 'firebase/auth';
 import UserSignIcon from '../../../components/UserSignIcon';
 import UserStoneIcon from '../../../components/UserStoneIcon';

@@ -9,8 +9,8 @@ import {
 } from 'react-native';
 import { colors } from '../../../theme';
 import { StackScreenProps } from '@react-navigation/stack';
-import { useUserYesQuestion } from '../../../utils/hooks/useUserYesQuestion';
-import { useUserCrossQuestion } from '../../../utils/hooks/useUserCrossQuestion';
+import { useUserYesQuestion } from '../../../hooks/useUserYesQuestion';
+import { useUserCrossQuestion } from '../../../hooks/useUserCrossQuestion';
 import { getAuth } from 'firebase/auth';
 import { ListItem, Tab, TabView } from '@rneui/themed';
 

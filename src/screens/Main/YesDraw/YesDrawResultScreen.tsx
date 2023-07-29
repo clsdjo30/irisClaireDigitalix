@@ -8,11 +8,11 @@ import {
     Dimensions,
     ActivityIndicator,
 } from 'react-native';
-import CARD_DECK from '../../../utils/cards';
+import CARD_DECK from '../../../data/cards';
 import { colors } from '../../../theme';
-import { useQuestionStore } from '../../../utils/hooks/useQuestionStore';
+import { useQuestionStore } from '../../../hooks/useQuestionStore';
 import { StackScreenProps } from '@react-navigation/stack';
-import { useSimpleQuestion } from '../../../utils/hooks/useSimpleQuestion';
+import { useSimpleQuestion } from '../../../hooks/useSimpleQuestion';
 import { setDoc, doc, collection } from 'firebase/firestore';
 import { firestore, getAuth } from '../../../config/firebaseConfig';
 
@@ -29,14 +29,14 @@ const YesDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) =>
     const [questionInformations, setQuestionInformations] = useQuestionStore();
     const currentUser = auth.currentUser;
     const userID = currentUser ? currentUser.uid : null;
-    
+
     //console.log(userID);
-    
+
     const choosedCard = CARD_DECK.find((card) => card.id === questionInformations.choosecardnumber);
-    
-    
-    
-    function saveQuestion(useruid: string | any ) {
+
+
+
+    function saveQuestion(useruid: string | any) {
         const db = firestore;
         if (!useruid) {
             console.error("User ID is null");
@@ -52,12 +52,12 @@ const YesDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) =>
             cardpseudo: questionInformations.choosecardpseudo,
             answer: questionInformations.answer,
         })
-        .then(() => console.log('Question saved successfully!'))
-        .catch((error) => console.error('Error saving question:', error));
+            .then(() => console.log('Question saved successfully!'))
+            .catch((error) => console.error('Error saving question:', error));
         questionClosed();
     }
 
-   
+
 
     const getContent = () => {
         if (isLoading) {

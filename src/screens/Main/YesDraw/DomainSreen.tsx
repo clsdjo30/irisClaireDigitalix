@@ -12,7 +12,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { Form, FormItem } from 'react-native-form-component';
 import { LinearGradient } from 'expo-linear-gradient';
 import { colors } from '../../../theme';
-import { useQuestionStore } from '../../../utils/hooks/useQuestionStore';
+import { useQuestionStore } from '../../../hooks/useQuestionStore';
 import { StackScreenProps } from '@react-navigation/stack';
 
 // import icons
@@ -111,7 +111,7 @@ export default DomainScreen;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        width: SCREEN_WIDTH ,
+        width: SCREEN_WIDTH,
         height: SCREEN_HEIGHT,
         backgroundColor: colors.background,
         alignItems: 'center',
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
     header: {
         position: 'absolute',
         top: 0,
-        width: SCREEN_WIDTH -5,
+        width: SCREEN_WIDTH - 5,
         height: SCREEN_HEIGHT * 0.4,
         borderBottomLeftRadius: SCREEN_WIDTH * 0.1,
         borderBottomRightRadius: SCREEN_WIDTH * 0.1,

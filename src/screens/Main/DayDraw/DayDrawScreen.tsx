@@ -15,8 +15,8 @@ import Animated, {
 import Carousel from 'react-native-reanimated-carousel';
 import { StackScreenProps } from '@react-navigation/stack';
 import { colors } from '../../../theme';
-import { useDaydrawStore } from '../../../utils/hooks/useDayDrawStore';
-import CARD_DECK from '../../../utils/cards';
+import { useDaydrawStore } from '../../../hooks/useDayDrawStore';
+import CARD_DECK from '../../../data/cards';
 import Card from '../../../components/Card';
 
 const PAGE_WIDTH = Dimensions.get('window').width;

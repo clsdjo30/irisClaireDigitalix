@@ -1,7 +1,11 @@
-import React, {useEffect} from "react";
-import { useUserStore } from '../../utils/hooks/useUserStore';
-import { firestore, getAuth, getDocs, collection} from '../../config/firebaseConfig'
-
+import React, { useEffect } from "react";
+import { useUserStore } from "./useUserStore";
+import {
+  firestore,
+  getAuth,
+  getDocs,
+  collection,
+} from "../config/firebaseConfig";
 
 const auth = getAuth();
 
@@ -12,9 +16,7 @@ export function useUserInformation() {
 
   useEffect(() => {
     fetchUser();
-
   }, []);
-
 
   const fetchUser = async () => {
     const db = firestore;
@@ -31,16 +33,14 @@ export function useUserInformation() {
           stone: doc.data().stone,
           symbol: doc.data().symbol,
           genre: doc.data().genre,
-          element: doc.data().element
-        })
+          element: doc.data().element,
+        });
         // console.log(doc.data())
       }
     });
-  }
+  };
 
   return {
     user,
   };
 }
-
-

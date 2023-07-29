@@ -1,7 +1,5 @@
 import { renderHook, act } from "@testing-library/react-hooks";
-import { useUserStore } from "../../../src/utils/hooks/useUserStore"; 
-
-
+import { useUserStore } from "../../../src/hooks/useUserStore";
 
 describe("useUserStore", () => {
   it("should update the store values correctly", () => {

@@ -8,7 +8,7 @@ import {
     Dimensions,
 } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
-import STEPPER from '../../utils/stepper';
+import STEPPER from '../../data/stepper';
 import { colors } from '../../theme';
 import NavigationButton from '../../components/NavigationButton';
 import Backdrop from '../../components/animation/Backdrop';

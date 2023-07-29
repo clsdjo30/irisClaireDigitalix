@@ -7,7 +7,7 @@ import Animated, {
     withTiming
 } from 'react-native-reanimated';
 import Carousel from 'react-native-reanimated-carousel';
-import CARD_DECK from '../utils/cards';
+import CARD_DECK from '../data/cards';
 import Card from './Card';
 
 

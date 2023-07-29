@@ -9,7 +9,7 @@ import {
     Dimensions
 } from 'react-native';
 import { colors } from '../../../theme';
-import { useCrossQuestionStore } from '../../../utils/hooks/useCrossQuestionStore';
+import { useCrossQuestionStore } from '../../../hooks/useCrossQuestionStore';
 import { StackScreenProps } from '@react-navigation/stack';
 
 // import icons
@@ -57,7 +57,7 @@ const CrossDrawDomainScreen: React.FC<StackScreenProps<any>> = ({ navigation }) 
         goToAskQuestionCard();
     }
 
-console.log("crossQuestion", value)
+    console.log("crossQuestion", value)
     return (
         <View style={styles.container}>
 

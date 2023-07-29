@@ -3,7 +3,7 @@ import { StyleSheet, View, SafeAreaView, Text, Dimensions } from 'react-native';
 import { Icon } from '@rneui/base'
 import { StackScreenProps } from '@react-navigation/stack';
 import { Form, Picker } from 'react-native-form-component';
-import { useUserStore } from '../../utils/hooks/useUserStore';
+import { useUserStore } from '../../hooks/useUserStore';
 import { colors } from '../../theme'
 
 const width = Dimensions.get('window').width;
@@ -25,8 +25,8 @@ const GenreScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                     buttonStyle={styles.button}
                     buttonText="Suivant"
                     buttonTextStyle={styles.buttonText}
-                style={{width: width * 0.85, alignItems: 'center'}}
-            
+                    style={{ width: width * 0.85, alignItems: 'center' }}
+
                 >
                     <Picker
                         items={[
@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
         fontSize: 17,
     },
     inputText: {
-        
+
         fontFamily: 'mulishRegular',
         color: colors.palette.purple200,
         fontSize: 14,

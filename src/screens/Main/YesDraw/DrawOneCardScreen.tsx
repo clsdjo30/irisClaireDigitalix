@@ -15,14 +15,14 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
-import CARD_DECK from '../../../utils/cards';
+import CARD_DECK from '../../../data/cards';
 import { colors } from '../../../theme/color';
 import CustomModal from '../../../components/reusable/CustomModal';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StackScreenProps } from '@react-navigation/stack';
 import {
   useQuestionStore
-} from '../../../utils/hooks/useQuestionStore';
+} from '../../../hooks/useQuestionStore';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = SCREEN_WIDTH * 1.5;
 
@@ -112,7 +112,7 @@ const DrawOneCardScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [credit, setCredit] = useState(0);
 
-  
+
   // On utilise useEffect pour détecter quand l'utilisateur a retourné les 4 cartes.
   const handleCardFlip = (index: number) => {
 
@@ -126,179 +126,179 @@ const DrawOneCardScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
       setSelectedCards(selectedCards + 1);
       setSelectedCardIndex(index);
       setTimeout(() => {
-      setModalVisible(true);
+        setModalVisible(true);
       }, 2000);
     };
-    
+
+  }
+  // l'user à valider son credit.
+  function gotToResult() {
+    navigation.navigate('DrawResult');
+  }
+  // l'user ne valide pas son credit
+  function cancelModal() {
+    navigation.navigate('Home');
+  }
+
+  function sendQuestion() {
+    // TODO implementer la logique de validation avec credit
+    if (credit > 0
+      && value.question != null
+      && value.choosecardname != null
+      && value.choosecardnumber != null
+      && value.choosecardpseudo != null
+    ) {
+      setCredit(credit - 1)
+      navigation.navigate('YesDrawResult')
     }
-   // l'user à valider son credit.
-    function gotToResult() {
-      navigation.navigate('DrawResult');
+    else {
+      goBuyCredit()
     }
-   // l'user ne valide pas son credit
-    function cancelModal() {
-      navigation.navigate('Home');
-    }
+  }
 
-    function sendQuestion() {
-        // TODO implementer la logique de validation avec credit
-        if (credit > 0
-            && value.question != null
-            && value.choosecardname != null
-            && value.choosecardnumber != null
-            && value.choosecardpseudo != null
-        ) {
-            setCredit(credit - 1)
-            navigation.navigate('YesDrawResult')
-        }
-        else {
-            goBuyCredit()
-        }
-    }
+  function goBuyCredit() {
+    navigation.navigate('Iris')
+    //reinitialise la navigation de YesStack
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'Home' }]
+    })
+  }
 
-    function goBuyCredit() {
-        navigation.navigate('Iris')
-        //reinitialise la navigation de YesStack
-        navigation.reset({
-            index: 0,
-            routes: [{ name: 'Home' }]
-        })
-    }
-
-    return (
-      <SafeAreaView style={styles.container}>
-        <View style={styles.header} />
-        <View style={styles.deckContainer}>
-          <View style={styles.titleText}>
-            <Text style={styles.title}>
-              Concentrez-vous sur votre question et tirer 4 cartes !
-            </Text>
-          </View>
-
-          {CARD_DECK.map((card, index) => (
-            <FlipCard
-              key={index}
-              frontImageUrl={card.frontImageUrl}
-              backImageUrl={card.backImageUrl}
-              onFlip={() => { handleCardFlip(index) }}
-              style={{ zIndex: selectedCardIndex === index ? 1000 : 0 }}
-            />
-          ))}
-
-          {/* Display Modal when all cards are flipped */}
-         <CustomModal
-            visible={modalVisible}
-            credit={credit}
-            onValidate={() => {
-              setModalVisible(!modalVisible);
-              setCredit(credit - 1);
-              sendQuestion();
-            }}
-            onCancel={cancelModal}
-            onBuyCredit={() => {
-              goBuyCredit();
-            }}
-          />
-
+  return (
+    <SafeAreaView style={styles.container}>
+      <View style={styles.header} />
+      <View style={styles.deckContainer}>
+        <View style={styles.titleText}>
+          <Text style={styles.title}>
+            Concentrez-vous sur votre question et tirer 4 cartes !
+          </Text>
         </View>
-      </SafeAreaView>
-    );
-  };
 
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: colors.palette.violet
-    },
-    header: {
-      position: 'absolute',
-      top: 0,
-      width: SCREEN_WIDTH - 5,
-      height: SCREEN_HEIGHT * 0.4,
-      borderBottomLeftRadius: SCREEN_WIDTH * 0.1,
-      borderBottomRightRadius: SCREEN_WIDTH * 0.1,
-      backgroundColor: colors.background
-    },
-    titleText: {
-      width: "90%",
-      height: "10%",
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    title: {
-      marginTop: 10,
-      textAlign: 'center',
-      fontFamily: 'MulishRegular',
-      fontSize: 18,
-      color: colors.palette.violet,
-    },
-    deckContainer: {
-      height: "80%",
-      flex: 1,
-      flexDirection: 'row',
-      flexWrap: 'wrap',
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    cardImage: {
-      width: SCREEN_WIDTH / 6,
-      height: SCREEN_HEIGHT / 5,
-      margin: 5,
-      justifyContent: 'center',
-      zIndex: 0,
-      borderRadius: 10,
-      elevation: 3,
-      shadowColor: colors.palette.violetClair,
-    },
-    image: {
-      width: SCREEN_WIDTH / 6,
-      height: SCREEN_HEIGHT / 5,
-      resizeMode: 'cover',
-      borderRadius: 6,
+        {CARD_DECK.map((card, index) => (
+          <FlipCard
+            key={index}
+            frontImageUrl={card.frontImageUrl}
+            backImageUrl={card.backImageUrl}
+            onFlip={() => { handleCardFlip(index) }}
+            style={{ zIndex: selectedCardIndex === index ? 1000 : 0 }}
+          />
+        ))}
 
-    },
-    // Modal Style
-    centeredView: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      marginTop: 22,
-    },
-    modalView: {
-      margin: 20,
-      backgroundColor: 'white',
-      borderRadius: 20,
-      padding: 35,
-      alignItems: 'center',
-      shadowColor: '#000',
-      shadowOffset: {
-        width: 0,
-        height: 2,
-      },
-      shadowOpacity: 0.25,
-      shadowRadius: 4,
-      elevation: 5,
-    },
-    button: {
-      borderRadius: 20,
-      padding: 10,
-      elevation: 2,
-    },
-    buttonOpen: {
-      backgroundColor: '#F194FF',
-    },
-    buttonClose: {
-      backgroundColor: '#2196F3',
-    },
-    textStyle: {
-      color: 'white',
-      fontWeight: 'bold',
-      textAlign: 'center',
-    },
-    modalText: {
-      marginBottom: 15,
-      textAlign: 'center',
-    },
-  });
+        {/* Display Modal when all cards are flipped */}
+        <CustomModal
+          visible={modalVisible}
+          credit={credit}
+          onValidate={() => {
+            setModalVisible(!modalVisible);
+            setCredit(credit - 1);
+            sendQuestion();
+          }}
+          onCancel={cancelModal}
+          onBuyCredit={() => {
+            goBuyCredit();
+          }}
+        />
 
-  export default DrawOneCardScreen;
+      </View>
+    </SafeAreaView>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.palette.violet
+  },
+  header: {
+    position: 'absolute',
+    top: 0,
+    width: SCREEN_WIDTH - 5,
+    height: SCREEN_HEIGHT * 0.4,
+    borderBottomLeftRadius: SCREEN_WIDTH * 0.1,
+    borderBottomRightRadius: SCREEN_WIDTH * 0.1,
+    backgroundColor: colors.background
+  },
+  titleText: {
+    width: "90%",
+    height: "10%",
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  title: {
+    marginTop: 10,
+    textAlign: 'center',
+    fontFamily: 'MulishRegular',
+    fontSize: 18,
+    color: colors.palette.violet,
+  },
+  deckContainer: {
+    height: "80%",
+    flex: 1,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  cardImage: {
+    width: SCREEN_WIDTH / 6,
+    height: SCREEN_HEIGHT / 5,
+    margin: 5,
+    justifyContent: 'center',
+    zIndex: 0,
+    borderRadius: 10,
+    elevation: 3,
+    shadowColor: colors.palette.violetClair,
+  },
+  image: {
+    width: SCREEN_WIDTH / 6,
+    height: SCREEN_HEIGHT / 5,
+    resizeMode: 'cover',
+    borderRadius: 6,
+
+  },
+  // Modal Style
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 35,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  button: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+  },
+  buttonOpen: {
+    backgroundColor: '#F194FF',
+  },
+  buttonClose: {
+    backgroundColor: '#2196F3',
+  },
+  textStyle: {
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: 'center',
+  },
+});
+
+export default DrawOneCardScreen;

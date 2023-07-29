@@ -1,5 +1,5 @@
 import { renderHook, act } from "@testing-library/react-hooks";
-import { useAuthentication } from "../../../src/utils/hooks/useAuthentication"; 
+import { useAuthentication } from "../../../src/hooks/useAuthentication";
 import { getAuth, onAuthStateChanged, User } from "firebase/auth";
 
 jest.mock("firebase/auth", () => ({
