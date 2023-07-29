@@ -1,8 +1,5 @@
 import React from 'react';
-import { Pressable, Text, StyleSheet, Dimensions} from 'react-native';
-import { colors } from '../theme';
-
-const { width, height } = Dimensions.get('screen');
+import { Pressable, Text, StyleSheet } from 'react-native';
 
 type NavigationButtonProps = {
     title: string;

@@ -13,12 +13,10 @@ const width = Dimensions.get('window').width;
 const GenreScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     const [user, setUser] = useUserStore()
 
-
-    //console.log(user)
     return (
         <SafeAreaView style={styles.container}>
 
-            <View style={styles.controls}>
+            <View testID='genre-screen' style={styles.controls}>
                 <View style={styles.genderTitle}>
                     <Text style={styles.contentTitle}>Vous êtes : </Text>
                 </View>

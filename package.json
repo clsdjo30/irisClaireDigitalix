@@ -11,8 +11,9 @@
   "jest": {
     "preset": "jest-expo",
     "verbose": true,
+    "resetMocks": true,
     "transformIgnorePatterns": [
-      "node_modules/(?!((jest-)?react-native(-.*)?|@react-native(-community)?|@react-navigation|@rneui?|expo?|react-native-vector-icons)/)"
+        "node_modules/(?!((jest-)?react-native(-.*)?|@react-native(-community)?|@react-navigation|@rneui?|react-native-vector-icons?|@firebase?|firebase?|expo-constants|expo-modules-core)/)"
     ],
     "transform": {
       "^.+\\.(js|ts|tsx)$": "babel-jest"
