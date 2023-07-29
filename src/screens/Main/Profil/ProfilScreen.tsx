@@ -52,9 +52,10 @@ const ProfilScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
       {/* START USER CARD */}
       <View style={styles.userCard}>
         <View style={styles.headerUnderlineTop}>
-          {UserStoneIcon(userStone, user?.stone)}
-          {UserSignIcon(userSign, user?.zodiacname)}
-          {UserElementIcon(userElement, user?.element)}
+          {UserStoneIcon({userStone:userStone, name:user?.stone})}
+          {UserSignIcon({userSign:userSign, name:user?.zodiacname})}
+          {UserElementIcon({ userElement: userElement, name: user?.element })}
+
         </View>
         {/* Header User Information */}
 
