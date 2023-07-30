@@ -23,7 +23,7 @@ const CardChoices: React.FC<CardChoicesProps> =({ iconSource, onPress, title, ex
             onPress={onPress}
             style={styles.innerContainer}
         >
-            <Image source={iconSource} style={styles.icon} />
+            <Image source={iconSource} style={styles.icon} testID="card-icon"/>
             <View style={styles.direction}>
                 <Text style={styles.domainText}>{title}</Text>
                 <Text style={styles.domainTextExplain}>{explanation}</Text>

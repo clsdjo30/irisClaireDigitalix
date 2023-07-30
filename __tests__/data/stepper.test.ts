@@ -1,4 +1,4 @@
-import STEPPER, { IStepper } from "../../src/utils/stepper";
+import STEPPER, { IStepper } from "../../src/data/stepper";
 
 
 // Mock the 'require' function for image loading

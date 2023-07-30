@@ -1,32 +1,54 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Image, Pressable } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { colors } from '../theme';
 import { styles } from '../screens/Main/HomeScreen.styles';
+import { goToDayDraw } from '../utils/NavigationFunctions';
 
-interface DayCardProps {
-    isDraw: boolean;
-    dayTendance: string;
+interface DayTendanceCardProps {
+    navigation: { navigate: (arg0: string) => void; };
+    daycard: { isdraw: boolean; };
 }
 
-const DayCard: React.FC<DayCardProps> = ({ isDraw, dayTendance }) => (
-    <View style={styles.tendanceContainer}>
-        {isDraw === false ?
-            <>
-                <View style={styles.tendanceTextContainer}>
-                    <Text style={styles.tendanceText}>
-                        Allez vite découvrir la tendance de votre journée !
-                    </Text>
-                </View>
-            </>
-            :
-            <>
-                <View style={styles.tendanceTextContainer}>
-                    <Text style={styles.displayTextTendance}>
-                        {dayTendance}
-                    </Text>
-                </View>
-            </>
-        }
-    </View>
-);
+const DayTendanceCard: React.FC<DayTendanceCardProps> = ({ navigation, daycard }) => {
+    const question = require('../../assets/images/testVector/yesNo.png');
 
-export default DayCard;
+    return (
+        <LinearGradient
+            colors={[colors.palette.violetClair, colors.palette.violetClair]}
+            start={{ x: 0, y: 0.5 }}
+            end={{ x: 1, y: 0.5 }}
+            locations={[0.1, 0.9]}
+            style={styles.domainCard}
+        >
+            <Pressable style={styles.innerContainer} onPress={() => goToDayDraw(navigation, daycard)} testID="day-tendance-card">
+                <Image source={question} style={styles.icon} />
+                <View style={[styles.direction]}>
+                    {daycard.isdraw === false ?
+                        <>
+                            <Text style={styles.domainText}>Tendance du Jour</Text>
+                            <Text style={styles.domainTextExplain}>Une pensée inspirante pour éclairer votre journée !</Text>
+                        </>
+                        :
+                        <Text style={styles.domainText}>Tendance du Jour</Text>
+                    }
+
+                </View>
+                <View style={styles.dayDrawAlert}>
+                    {daycard.isdraw === false ?
+                        <View style={styles.iconContainer}>
+                            <Icon name="exclamation" size={10} color={colors.palette.ivory} testID="exclamation-icon" />
+                        </View>
+                        :
+                        <View style={styles.iconContainerCheck}>
+                            <Icon name="check" size={10} color={colors.palette.ivory} testID="check-icon" />
+                        </View>
+                    }
+                </View>
+            </Pressable>
+        </LinearGradient>
+    );
+}
+
+export default DayTendanceCard;

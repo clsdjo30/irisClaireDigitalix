@@ -1,4 +1,4 @@
-import CARD_DECK from "../../src/utils/cards";
+import CARD_DECK from "../../src/data/cards";
 
 describe("CARD_DECK", () => {
   it("should be an array", () => {
