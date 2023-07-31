@@ -1,5 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react-native';
+import renderer from 'react-test-renderer';
 
 import HomeScreen from '../../../src/screens/Main/HomeScreen';
 
@@ -35,6 +36,11 @@ jest.mock('firebase/auth', () => {
 });
 
 describe('HomeScreen', () => {
+    it('renders correctly', () => {
+        const tree = renderer.create(<HomeScreen navigation={mockNavigation} route={mockRoute} />).toJSON();
+        expect(tree).toMatchSnapshot();
+    });
+
     it('should display the greeting', () => {
         const { getByText } = render(<HomeScreen navigation={mockNavigation} route={mockRoute} />);
 
