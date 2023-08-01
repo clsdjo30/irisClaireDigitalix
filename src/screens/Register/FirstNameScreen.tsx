@@ -1,9 +1,9 @@
 import React from 'react';
-import { StyleSheet, Text, View,Dimensions } from 'react-native';
+import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input } from '@rneui/base'
 import { StackScreenProps } from '@react-navigation/stack';
-import { useUserStore } from '../../utils/hooks/useUserStore';
+import { useUserStore } from '../../hooks/useUserStore';
 import { colors } from '../../theme';
 import NavigationButton from '../../components/NavigationButton';
 
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     marginTop: 40,
   },
   inputView: {
-    width: width * 0.9, 
+    width: width * 0.9,
     marginBottom: 20
   },
   input: {
@@ -74,9 +74,9 @@ const styles = StyleSheet.create({
     borderBottomColor: colors.palette.darkgold,
   },
   inputStyle: {
-    fontSize: 14, 
-    marginLeft: 10, 
-    fontFamily: "mulishRegular", 
+    fontSize: 14,
+    marginLeft: 10,
+    fontFamily: "mulishRegular",
     color: colors.palette.violet
   },
   icon: {

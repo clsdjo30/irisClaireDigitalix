@@ -1,10 +1,10 @@
 import React from 'react';
-import { StyleSheet, Text, View, Dimensions} from 'react-native';
+import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input, CheckBox } from '@rneui/themed';
 import { firestore, setDoc, doc, createUserWithEmailAndPassword, getAuth } from '../../config/firebaseConfig'
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useUserStore } from '../../utils/hooks/useUserStore';
+import { useUserStore } from '../../hooks/useUserStore';
 import { StackScreenProps } from '@react-navigation/stack';
 import { colors } from '../../theme';
 import NavigationButton from '../../components/NavigationButton';
@@ -170,7 +170,7 @@ const SignInScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
             onPress={signIn}
 
           />
-        
+
         </View>
       </View>
     </SafeAreaView>

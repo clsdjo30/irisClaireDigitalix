@@ -15,13 +15,13 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
-import CARD_DECK from '../../../utils/cards';
+import CARD_DECK from '../../../data/cards';
 import { colors } from '../../../theme/color'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StackScreenProps } from '@react-navigation/stack';
 import {
   useCrossQuestionStore
-} from '../../../utils/hooks/useCrossQuestionStore';
+} from '../../../hooks/useCrossQuestionStore';
 import CustomModal from '../../../components/reusable/CustomModal';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = SCREEN_WIDTH * 1.5;

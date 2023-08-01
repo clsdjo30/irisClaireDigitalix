@@ -4,29 +4,30 @@ import {
     View,
     Image,
     Text,
-    TouchableOpacity, 
+    TouchableOpacity,
     ImageSourcePropType
 } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
 import { colors } from '../../../theme';
-import { useDaydrawStore } from '../../../utils/hooks/useDayDrawStore';
-import CARD_DECK from '../../../utils/cards';
+import { useDaydrawStore } from '../../../hooks/useDayDrawStore';
+import CARD_DECK from '../../../data/cards';
 
 
 const TendanceResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     const [daydraw, setDayDraw] = useDaydrawStore();
     const resetTime = 120000;
-console.log(daydraw)
+    console.log(daydraw)
     useEffect(() => {
         if (daydraw.isdraw) {
             setTimeout(() => {
-                setDayDraw({ ...daydraw, 
+                setDayDraw({
+                    ...daydraw,
                     isdraw: false,
                     daycard: '',
                     daycardimage: '' as ImageSourcePropType,
                     daycardbackimage: '' as ImageSourcePropType,
                     daytendance: ''
-                 });
+                });
                 navigation.navigate('Tirage');
             }, resetTime);
         }
@@ -119,12 +120,12 @@ const styles = StyleSheet.create({
         borderRadius: 16,
         alignItems: "center",
         paddingVertical: 5,
-      },
-      buttonText: {
+    },
+    buttonText: {
         fontFamily: "oswaldMedium",
         fontSize: 14,
         color: colors.palette.ivory,
-      },
+    },
 });
 
 export default TendanceResultScreen;

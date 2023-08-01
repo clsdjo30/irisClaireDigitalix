@@ -12,8 +12,8 @@ import { colors } from '../../../theme';
 import { LinearGradient } from 'expo-linear-gradient'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StackScreenProps } from '@react-navigation/stack';
-import { useUserStore } from '../../../utils/hooks/useUserStore';
-import { useUserInformation } from '../../../utils/hooks/useUserInformations';
+import { useUserStore } from '../../../hooks/useUserStore';
+import { useUserInformation } from '../../../hooks/useUserInformations';
 import { getAuth } from 'firebase/auth';
 import UserSignIcon from '../../../components/UserSignIcon';
 import UserStoneIcon from '../../../components/UserStoneIcon';
@@ -52,9 +52,10 @@ const ProfilScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
       {/* START USER CARD */}
       <View style={styles.userCard}>
         <View style={styles.headerUnderlineTop}>
-          {UserStoneIcon(userStone, user?.stone)}
-          {UserSignIcon(userSign, user?.zodiacname)}
-          {UserElementIcon(userElement, user?.element)}
+          {UserStoneIcon({userStone:userStone, name:user?.stone})}
+          {UserSignIcon({userSign:userSign, name:user?.zodiacname})}
+          {UserElementIcon({ userElement: userElement, name: user?.element })}
+
         </View>
         {/* Header User Information */}
 

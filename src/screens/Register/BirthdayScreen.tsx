@@ -1,12 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, View, SafeAreaView, Platform, TextInput, Dimensions, Pressable} from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, Platform, TextInput, Dimensions, Pressable } from 'react-native';
 import { Icon } from '@rneui/base'
 import { StackScreenProps } from '@react-navigation/stack';
-import { useUserStore } from '../../utils/hooks/useUserStore';
+import { useUserStore } from '../../hooks/useUserStore';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { colors } from '../../theme';
 import NavigationButton from '../../components/NavigationButton';
-const width = Dimensions.get('window').width; 
+const width = Dimensions.get('window').width;
 
 
 const BirthdayScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
@@ -71,16 +71,16 @@ const BirthdayScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                             />)}
 
                     </Pressable>
-                    
+
                     <View style={styles.button}>
-                    <NavigationButton
-                        color={colors.palette.violetBg}
-                        backgroundColor={colors.palette.orange}
-                        width={width / 1.3}
-                        title="S'inscrire"
-                        onPress={() => navigation.navigate('Sign Up')}
-                    />
-                        
+                        <NavigationButton
+                            color={colors.palette.violetBg}
+                            backgroundColor={colors.palette.orange}
+                            width={width / 1.3}
+                            title="S'inscrire"
+                            onPress={() => navigation.navigate('Sign Up')}
+                        />
+
                     </View>
                 </View>
             </View>

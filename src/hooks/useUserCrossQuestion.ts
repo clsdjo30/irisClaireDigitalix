@@ -7,19 +7,23 @@ import {
   query,
   getDocs,
   doc,
-} from "../../config/firebaseConfig";
+} from "../config/firebaseConfig";
 
 const auth = getAuth();
 
 interface Question {
   question: string;
-  choosecardpseudo: string;
   domain: string;
+  cardpseudoone: string;
+  cardpseudotwo: string;
+  cardpseudothree: string;
+  cardpseudofour: string;
+  cardpseudofive: string;
   answer: string;
 }
 
-export function useUserYesQuestion(userID: string | null) {
-  const [questions, setQuestions] = useState<Question[]>([]);
+export function useUserCrossQuestion(userID: string | null) {
+  const [crossQuestions, setCrossQuestions] = useState<Question[]>([]);
 
   useEffect(() => {
     if (userID) {
@@ -39,25 +43,29 @@ export function useUserYesQuestion(userID: string | null) {
       const userQuestionsCollectionRef = collection(
         usersCollectionRef,
         userID,
-        "yesquestions"
+        "crossquestions"
       );
 
       const querySnapshot = await getDocs(userQuestionsCollectionRef);
 
-      const questions: Question[] = querySnapshot.docs.map(doc => ({
+      const questions: Question[] = querySnapshot.docs.map((doc) => ({
         question: doc.data().question,
-        choosecardpseudo: doc.data().cardpseudo,
         domain: doc.data().domain,
         answer: doc.data().answer,
+        cardpseudoone: doc.data().cardpseudoone,
+        cardpseudotwo: doc.data().cardpseudotwo,
+        cardpseudothree: doc.data().cardpseudothree,
+        cardpseudofour: doc.data().cardpseudofour,
+        cardpseudofive: doc.data().cardpseudofive,
       }));
 
-      setQuestions(questions);
+      setCrossQuestions(questions);
     } catch (error) {
       console.log(error);
     }
   };
 
   return {
-    questions,
+    crossQuestions,
   };
 }

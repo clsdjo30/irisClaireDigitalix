@@ -3,7 +3,7 @@ import { StyleSheet, View, SafeAreaView, Text, Dimensions } from 'react-native';
 import { Icon } from '@rneui/base'
 import { StackScreenProps } from '@react-navigation/stack';
 import { Form, Picker } from 'react-native-form-component';
-import { useUserStore } from '../../utils/hooks/useUserStore';
+import { useUserStore } from '../../hooks/useUserStore';
 import { colors } from '../../theme'
 
 const width = Dimensions.get('window').width;
@@ -13,12 +13,10 @@ const width = Dimensions.get('window').width;
 const GenreScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     const [user, setUser] = useUserStore()
 
-
-    //console.log(user)
     return (
         <SafeAreaView style={styles.container}>
 
-            <View style={styles.controls}>
+            <View testID='genre-screen' style={styles.controls}>
                 <View style={styles.genderTitle}>
                     <Text style={styles.contentTitle}>Vous êtes : </Text>
                 </View>
@@ -27,8 +25,8 @@ const GenreScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                     buttonStyle={styles.button}
                     buttonText="Suivant"
                     buttonTextStyle={styles.buttonText}
-                style={{width: width * 0.85, alignItems: 'center'}}
-            
+                    style={{ width: width * 0.85, alignItems: 'center' }}
+
                 >
                     <Picker
                         items={[
@@ -148,7 +146,7 @@ const styles = StyleSheet.create({
         fontSize: 17,
     },
     inputText: {
-        
+
         fontFamily: 'mulishRegular',
         color: colors.palette.purple200,
         fontSize: 14,

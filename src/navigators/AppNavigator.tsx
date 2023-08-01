@@ -1,12 +1,12 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { useAuthentication } from '../utils/hooks/useAuthentication';
+import { useAuthentication } from '../hooks/useAuthentication';
 import 'react-native-gesture-handler';
 import UserStack from './MainNavigator';
 import AuthStack from './WelcomeNavigator';
 import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import * as Notifications from 'expo-notifications';
-import { useNotifications } from '../utils/hooks/useNotifications';
+import { useNotifications } from '../hooks/useNotifications';
 
 
 import {

@@ -10,11 +10,11 @@ import {
     ActivityIndicator
 
 } from 'react-native';
-import CARD_DECK from '../../../utils/cards';
+import CARD_DECK from '../../../data/cards';
 import { colors } from '../../../theme';
 import { StackScreenProps } from '@react-navigation/stack';
-import { useCrossQuestionStore } from '../../../utils/hooks/useCrossQuestionStore';
-import { useCrossQuestion } from '../../../utils/hooks/useCrossQuestion';
+import { useCrossQuestionStore } from '../../../hooks/useCrossQuestionStore';
+import { useCrossQuestion } from '../../../hooks/useCrossQuestion';
 import { setDoc, doc, collection } from 'firebase/firestore';
 import { firestore, getAuth } from '../../../config/firebaseConfig';
 
@@ -236,7 +236,7 @@ const styles = StyleSheet.create({
         height: 118,
         borderRadius: 10,
     },
-    cardView : {
+    cardView: {
         alignItems: 'center',
         resizeMode: 'contain',
 

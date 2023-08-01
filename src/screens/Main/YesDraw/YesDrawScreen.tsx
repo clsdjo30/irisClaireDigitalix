@@ -9,7 +9,7 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input } from '@rneui/themed';
 import { colors } from '../../../theme';
-import { useQuestionStore } from '../../../utils/hooks/useQuestionStore';
+import { useQuestionStore } from '../../../hooks/useQuestionStore';
 import { StackScreenProps } from '@react-navigation/stack';
 
 interface YesDrawScreenProps {
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: SCREEN_WIDTH * 0.18,
     backgroundColor: colors.palette.violet,
     alignItems: 'center',
-    
+
   },
   blockTitle: {
     paddingVertical: SCREEN_HEIGHT * 0.2,

@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Animated, Dimensions } from 'react-native'
 import { colors } from '../../theme'
-import STEPPER from '../../utils/stepper'
+import STEPPER from '../../data/stepper'
 
 const { width } = Dimensions.get('screen')
 
