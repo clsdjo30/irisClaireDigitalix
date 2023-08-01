@@ -42,6 +42,7 @@
   "dependencies": {
     "@expo-google-fonts/mulish": "^0.2.3",
     "@expo-google-fonts/oswald": "^0.2.3",
+    "@expo/metro-config": "^0.10.7",
     "@firebase/rules-unit-testing": "^2.0.7",
     "@react-native-community/datetimepicker": "7.2.0",
     "@react-navigation/bottom-tabs": "^6.5.7",
