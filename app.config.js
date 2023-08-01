@@ -18,11 +18,11 @@ export default {
     "slug": "irisclairedigitalix",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icons/iris_002.png",
+    "icon": "./assets/icons/iris.png",
     "scheme": "com.digitalix.irisclaire",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash/Splash002.png",
+      "image": "./assets/splash/splash.png",
       "resizeMode": "cover"
     },
     "platforms": [
@@ -34,6 +34,10 @@ export default {
     ],
     "ios": {
       "supportsTablet": true,
+      "splash": {
+      "image": "./assets/splash/splash.png",
+      "resizeMode": "cover"
+    },
       "runtimeVersion": {
         "policy": "sdkVersion"
       }
@@ -42,7 +46,7 @@ export default {
       "package": "com.digitalix.irisclaire",
       "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/icons/iris_002.png",
+        "foregroundImage": "./assets/icons/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       }
     },

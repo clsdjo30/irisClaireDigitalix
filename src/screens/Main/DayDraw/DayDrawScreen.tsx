@@ -98,7 +98,6 @@ const DayDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     );
 
     // display card when click
-    // display card when click
 
     const displayResult = () => {
         if (flippedCardIndex !== -1) {
