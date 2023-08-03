@@ -2,25 +2,29 @@
 
 exports[`CreditCard matches snapshot 1`] = `
 <ViewManagerAdapter_ExpoLinearGradient
-  proxiedProperties={
-    {
-      "colors": [
-        4278190080,
-        4294967295,
-      ],
-      "endPoint": [
-        1,
-        0.5,
-      ],
-      "locations": [
-        0.1,
-        0.9,
-      ],
-      "startPoint": [
-        0,
-        0.5,
-      ],
-    }
+  colors={
+    [
+      4278190080,
+      4294967295,
+    ]
+  }
+  endPoint={
+    [
+      1,
+      0.5,
+    ]
+  }
+  locations={
+    [
+      0.1,
+      0.9,
+    ]
+  }
+  startPoint={
+    [
+      0,
+      0.5,
+    ]
   }
   style={
     {

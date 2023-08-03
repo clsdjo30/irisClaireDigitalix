@@ -11,6 +11,8 @@ const mockRoute: any = {
     name: 'MockName',
 };
 
+jest.mock('react-native/Libraries/Image/Image', () => 'Image');
+
 describe('StepperScreen', () => {
     it('renders without error', () => {
         const { getByTestId } = render(<StepperScreen navigation={mockNavigation} route={mockRoute} />);

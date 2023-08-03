@@ -2,6 +2,8 @@ import React from 'react';
 import { render, fireEvent } from '@testing-library/react-native';
 import CardChoices from '../../src/components/CardChoices'; 
 
+jest.mock('react-native/Libraries/Image/Image', () => 'Image');
+
 describe('CardChoices', () => {
     it('renders correctly', () => {
         const onPressMock = jest.fn();

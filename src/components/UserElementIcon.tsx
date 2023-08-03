@@ -22,7 +22,7 @@ const UserElementIcon: React.FC<UserElementIconProps> = ({userElement, name}) =>
        
         return (
             <View style={styles.blockSign}>
-                <Image source={air} style={styles.elementImage} />
+                <Image testID='element-image' source={air} style={styles.elementImage} />
                 <Text style={styles.signText}>{name}</Text>
             </View>
         );
@@ -31,7 +31,7 @@ const UserElementIcon: React.FC<UserElementIconProps> = ({userElement, name}) =>
     if (userElement === 'water' ) {
         return (
             <View style={styles.blockSign}>
-                <Image source={water} style={styles.elementImage} />
+                <Image  source={water} style={styles.elementImage} />
                 <Text style={styles.signText}>{name}</Text>
             </View>
         );

@@ -37,7 +37,12 @@
       "tsx",
       "json",
       "node"
-    ]
+    ],
+     "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|webp|svg)$": "<rootDir>/__mocks__/fileMock.js"
+    }
+      
+    
   },
   "dependencies": {
     "@expo-google-fonts/mulish": "^0.2.3",

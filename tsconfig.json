@@ -7,5 +7,5 @@
     "images.d.ts",
     "./**/*.ts",
     "./**/*.tsx"
-  ]
+, "__mocks__/fileMock.js"  ]
 }

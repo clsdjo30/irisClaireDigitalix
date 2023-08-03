@@ -99,25 +99,29 @@ exports[`BuyIrisScreen renders correctly 1`] = `
     }
   >
     <ViewManagerAdapter_ExpoLinearGradient
-      proxiedProperties={
-        {
-          "colors": [
-            4292664046,
-            4293848566,
-          ],
-          "endPoint": [
-            1,
-            0.5,
-          ],
-          "locations": [
-            0.1,
-            0.9,
-          ],
-          "startPoint": [
-            0,
-            0.5,
-          ],
-        }
+      colors={
+        [
+          4292664046,
+          4293848566,
+        ]
+      }
+      endPoint={
+        [
+          1,
+          0.5,
+        ]
+      }
+      locations={
+        [
+          0.1,
+          0.9,
+        ]
+      }
+      startPoint={
+        [
+          0,
+          0.5,
+        ]
       }
       style={
         {
@@ -230,25 +234,29 @@ exports[`BuyIrisScreen renders correctly 1`] = `
       </View>
     </ViewManagerAdapter_ExpoLinearGradient>
     <ViewManagerAdapter_ExpoLinearGradient
-      proxiedProperties={
-        {
-          "colors": [
-            4292664046,
-            4293848566,
-          ],
-          "endPoint": [
-            1,
-            0.5,
-          ],
-          "locations": [
-            0.1,
-            0.9,
-          ],
-          "startPoint": [
-            0,
-            0.5,
-          ],
-        }
+      colors={
+        [
+          4292664046,
+          4293848566,
+        ]
+      }
+      endPoint={
+        [
+          1,
+          0.5,
+        ]
+      }
+      locations={
+        [
+          0.1,
+          0.9,
+        ]
+      }
+      startPoint={
+        [
+          0,
+          0.5,
+        ]
       }
       style={
         {
@@ -410,25 +418,29 @@ exports[`BuyIrisScreen renders correctly 1`] = `
       </View>
     </ViewManagerAdapter_ExpoLinearGradient>
     <ViewManagerAdapter_ExpoLinearGradient
-      proxiedProperties={
-        {
-          "colors": [
-            4294932040,
-            4293848566,
-          ],
-          "endPoint": [
-            1,
-            0.5,
-          ],
-          "locations": [
-            0.1,
-            0.9,
-          ],
-          "startPoint": [
-            0,
-            0.5,
-          ],
-        }
+      colors={
+        [
+          4294932040,
+          4293848566,
+        ]
+      }
+      endPoint={
+        [
+          1,
+          0.5,
+        ]
+      }
+      locations={
+        [
+          0.1,
+          0.9,
+        ]
+      }
+      startPoint={
+        [
+          0,
+          0.5,
+        ]
       }
       style={
         {
@@ -566,25 +578,29 @@ exports[`BuyIrisScreen renders correctly 1`] = `
       </View>
     </ViewManagerAdapter_ExpoLinearGradient>
     <ViewManagerAdapter_ExpoLinearGradient
-      proxiedProperties={
-        {
-          "colors": [
-            4292664046,
-            4293848566,
-          ],
-          "endPoint": [
-            1,
-            0.5,
-          ],
-          "locations": [
-            0.1,
-            0.9,
-          ],
-          "startPoint": [
-            0,
-            0.5,
-          ],
-        }
+      colors={
+        [
+          4292664046,
+          4293848566,
+        ]
+      }
+      endPoint={
+        [
+          1,
+          0.5,
+        ]
+      }
+      locations={
+        [
+          0.1,
+          0.9,
+        ]
+      }
+      startPoint={
+        [
+          0,
+          0.5,
+        ]
       }
       style={
         {
@@ -697,25 +713,29 @@ exports[`BuyIrisScreen renders correctly 1`] = `
       </View>
     </ViewManagerAdapter_ExpoLinearGradient>
     <ViewManagerAdapter_ExpoLinearGradient
-      proxiedProperties={
-        {
-          "colors": [
-            4292664046,
-            4293848566,
-          ],
-          "endPoint": [
-            1,
-            0.5,
-          ],
-          "locations": [
-            0.1,
-            0.9,
-          ],
-          "startPoint": [
-            0,
-            0.5,
-          ],
-        }
+      colors={
+        [
+          4292664046,
+          4293848566,
+        ]
+      }
+      endPoint={
+        [
+          1,
+          0.5,
+        ]
+      }
+      locations={
+        [
+          0.1,
+          0.9,
+        ]
+      }
+      startPoint={
+        [
+          0,
+          0.5,
+        ]
       }
       style={
         {

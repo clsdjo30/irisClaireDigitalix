@@ -85,25 +85,29 @@ exports[`HomeScreen renders correctly 1`] = `
     }
   >
     <ViewManagerAdapter_ExpoLinearGradient
-      proxiedProperties={
-        {
-          "colors": [
-            4292664046,
-            4292664046,
-          ],
-          "endPoint": [
-            1,
-            0.5,
-          ],
-          "locations": [
-            0.1,
-            0.9,
-          ],
-          "startPoint": [
-            0,
-            0.5,
-          ],
-        }
+      colors={
+        [
+          4292664046,
+          4292664046,
+        ]
+      }
+      endPoint={
+        [
+          1,
+          0.5,
+        ]
+      }
+      locations={
+        [
+          0.1,
+          0.9,
+        ]
+      }
+      startPoint={
+        [
+          0,
+          0.5,
+        ]
       }
       style={
         {
@@ -159,11 +163,12 @@ exports[`HomeScreen renders correctly 1`] = `
         }
       >
         <Image
-          source={1}
+          source="test-file-stub"
           style={
             {
-              "height": "55%",
-              "width": "25%",
+              "height": "70%",
+              "marginLeft": 10,
+              "width": "30%",
             }
           }
           testID="card-icon"
@@ -209,25 +214,29 @@ exports[`HomeScreen renders correctly 1`] = `
       </View>
     </ViewManagerAdapter_ExpoLinearGradient>
     <ViewManagerAdapter_ExpoLinearGradient
-      proxiedProperties={
-        {
-          "colors": [
-            4292664046,
-            4292664046,
-          ],
-          "endPoint": [
-            1,
-            0.5,
-          ],
-          "locations": [
-            0.1,
-            0.9,
-          ],
-          "startPoint": [
-            0,
-            0.5,
-          ],
-        }
+      colors={
+        [
+          4292664046,
+          4292664046,
+        ]
+      }
+      endPoint={
+        [
+          1,
+          0.5,
+        ]
+      }
+      locations={
+        [
+          0.1,
+          0.9,
+        ]
+      }
+      startPoint={
+        [
+          0,
+          0.5,
+        ]
       }
       style={
         {
@@ -283,11 +292,12 @@ exports[`HomeScreen renders correctly 1`] = `
         }
       >
         <Image
-          source={1}
+          source="test-file-stub"
           style={
             {
-              "height": "55%",
-              "width": "25%",
+              "height": "70%",
+              "marginLeft": 10,
+              "width": "30%",
             }
           }
           testID="card-icon"
@@ -333,25 +343,29 @@ exports[`HomeScreen renders correctly 1`] = `
       </View>
     </ViewManagerAdapter_ExpoLinearGradient>
     <ViewManagerAdapter_ExpoLinearGradient
-      proxiedProperties={
-        {
-          "colors": [
-            4292664046,
-            4292664046,
-          ],
-          "endPoint": [
-            1,
-            0.5,
-          ],
-          "locations": [
-            0.1,
-            0.9,
-          ],
-          "startPoint": [
-            0,
-            0.5,
-          ],
-        }
+      colors={
+        [
+          4292664046,
+          4292664046,
+        ]
+      }
+      endPoint={
+        [
+          1,
+          0.5,
+        ]
+      }
+      locations={
+        [
+          0.1,
+          0.9,
+        ]
+      }
+      startPoint={
+        [
+          0,
+          0.5,
+        ]
       }
       style={
         {
@@ -408,11 +422,12 @@ exports[`HomeScreen renders correctly 1`] = `
         testID="day-tendance-card"
       >
         <Image
-          source={1}
+          source="test-file-stub"
           style={
             {
-              "height": "55%",
-              "width": "25%",
+              "height": "70%",
+              "marginLeft": 10,
+              "width": "30%",
             }
           }
         />
@@ -459,9 +474,9 @@ exports[`HomeScreen renders correctly 1`] = `
         <View
           style={
             {
+              "left": 105,
               "position": "absolute",
-              "right": 20,
-              "top": 32,
+              "top": 38,
             }
           }
         >

@@ -4,6 +4,7 @@ import DayCardChoices from '../../src/components//DayCardChoices';
 
 // Mock the Icon component from react-native-vector-icons/FontAwesome
 jest.mock('react-native-vector-icons/FontAwesome', () => 'Icon');
+jest.mock('react-native/Libraries/Image/Image', () => 'Image');
 
 // Mock the navigation object
 const mockNavigation = {

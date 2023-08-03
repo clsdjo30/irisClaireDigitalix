@@ -4,6 +4,8 @@ import renderer from 'react-test-renderer';
 
 import HomeScreen from '../../../src/screens/Main/HomeScreen';
 
+jest.mock('react-native/Libraries/Image/Image', () => 'Image');
+
 jest.mock('../../../src/hooks/useUserInformations', () => ({
     useUserInformation: () => ({
         user: {
