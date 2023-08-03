@@ -110,7 +110,7 @@ const DrawOneCardScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
   const [selectedCards, setSelectedCards] = useState(0);
   const [modalVisible, setModalVisible] = useState(false);
-  const [credit, setCredit] = useState(0);
+  const [credit, setCredit] = useState(1);
 
 
   // On utilise useEffect pour détecter quand l'utilisateur a retourné les 4 cartes.
@@ -171,7 +171,7 @@ const DrawOneCardScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
       <View style={styles.deckContainer}>
         <View style={styles.titleText}>
           <Text style={styles.title}>
-            Concentrez-vous sur votre question et tirer 4 cartes !
+            Concentrez-vous sur votre question et retourné une carte !
           </Text>
         </View>
 
@@ -208,7 +208,7 @@ const DrawOneCardScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.palette.violet
+    backgroundColor: colors.palette.violetBg
   },
   header: {
     position: 'absolute',
@@ -217,7 +217,7 @@ const styles = StyleSheet.create({
     height: SCREEN_HEIGHT * 0.4,
     borderBottomLeftRadius: SCREEN_WIDTH * 0.1,
     borderBottomRightRadius: SCREEN_WIDTH * 0.1,
-    backgroundColor: colors.background
+    backgroundColor: colors.palette.violet
   },
   titleText: {
     width: "90%",
@@ -230,7 +230,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontFamily: 'MulishRegular',
     fontSize: 18,
-    color: colors.palette.violet,
+    color: colors.palette.violetBg,
   },
   deckContainer: {
     height: "80%",

@@ -110,7 +110,7 @@ const CrossDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
   const [selectedCards, setSelectedCards] = useState(0);
   const [modalVisible, setModalVisible] = useState(false);
-  const [credit, setCredit] = useState(1);
+  const [credit, setCredit] = useState(5);
 
 
 
@@ -235,7 +235,7 @@ const CrossDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.palette.purple100
+    backgroundColor: colors.palette.violet
   },
   header: {
     position: 'absolute',
@@ -244,7 +244,7 @@ const styles = StyleSheet.create({
     height: SCREEN_HEIGHT * 0.4,
     borderBottomLeftRadius: SCREEN_WIDTH * 0.1,
     borderBottomRightRadius: SCREEN_WIDTH * 0.1,
-    backgroundColor: colors.palette.purple600
+    backgroundColor: colors.palette.violet
   },
   titleText: {
     width: "90%",
@@ -257,7 +257,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontFamily: 'MulishRegular',
     fontSize: 18,
-    color: colors.palette.violetBg,
+    color: colors.palette.violetClair,
   },
   deckContainer: {
     height: "80%",

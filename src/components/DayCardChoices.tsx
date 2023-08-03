@@ -12,7 +12,7 @@ interface DayTendanceCardProps {
 }
 
 const DayTendanceCard: React.FC<DayTendanceCardProps> = ({ navigation, daycard }) => {
-    const question = require('../../assets/images/testVector/yesNo.png');
+    const horoscope = require('../../assets/icons/horoscope.png');
 
     return (
         <LinearGradient
@@ -23,7 +23,7 @@ const DayTendanceCard: React.FC<DayTendanceCardProps> = ({ navigation, daycard }
             style={styles.domainCard}
         >
             <Pressable style={styles.innerContainer} onPress={() => goToDayDraw(navigation, daycard)} testID="day-tendance-card">
-                <Image source={question} style={styles.icon} />
+                <Image source={horoscope} style={styles.icon} />
                 <View style={[styles.direction]}>
                     {daycard.isdraw === false ?
                         <>

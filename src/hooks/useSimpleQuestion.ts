@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useQuestionStore } from "./useQuestionStore";
 import Constants from "expo-constants";
 
-const apikey = Constants.manifest?.extra?.openAiId;
+const apikey = Constants.expoConfig?.extra?.openAiId;
 
 
 const openai = axios.create({

@@ -55,8 +55,9 @@ export const styles = StyleSheet.create({
   },
   // taille image domain Card
   icon: {
-    width: "25%",
-    height: "55%",
+    width: "30%",
+    height: "70%",
+    marginLeft: 10,
   },
   //container text domain card
   direction: {
@@ -118,8 +119,8 @@ export const styles = StyleSheet.create({
   },
   iconContainerCheck: {
     position: "absolute",
-    right: 0,
-    top: 18,
+    left: 0,
+    top: 10,
     justifyContent: "center",
     alignItems: "center",
     width: 15,
@@ -129,8 +130,8 @@ export const styles = StyleSheet.create({
   },
   dayDrawAlert: {
     position: "absolute",
-    right: 20,
-    top: 32,
+    left: 105,
+    top: 38,
   },
   tendanceContainer: {
     position: "absolute",

@@ -11,7 +11,8 @@ import { styles } from './HomeScreen.styles';
 
 const auth = getAuth();
 const yesNo = require('../../../assets/images/testVector/yesNo.png');
-
+const eye = require('../../../assets/icons/iris_card.png');
+const yesCard = require('../../../assets/icons/yesCard.png');
 
 const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   const [daycard, setDayCard] = useDaydrawStore();
@@ -45,14 +46,14 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
       <View style={styles.domainsContainer}>
 
         <CardChoices
-          iconSource={yesNo}
+          iconSource={yesCard}
           onPress={() => goToYesDraw(navigation)}
           title="Question Oui/Non"
           explanation="Recevez une réponse breve à vos questions les plus simple"
         />
 
         <CardChoices
-          iconSource={yesNo}
+          iconSource={eye}
           onPress={() => goToCrossDraw(navigation)}
           title="Tirage Complet"
           explanation="Vous avez de grande interogation, vous voulez ...."

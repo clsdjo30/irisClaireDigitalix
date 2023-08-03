@@ -1,5 +1,4 @@
-
-import React, { useRef } from 'react'
+import React from 'react'
 import {
     StyleSheet,
     Image,
@@ -8,99 +7,54 @@ import {
     Text,
     Dimensions
 } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import { Form, FormItem } from 'react-native-form-component';
-import { LinearGradient } from 'expo-linear-gradient';
 import { colors } from '../../../theme';
 import { useQuestionStore } from '../../../hooks/useQuestionStore';
 import { StackScreenProps } from '@react-navigation/stack';
 
 // import icons
-const love = require('../../../../assets/icons/domainIcon/heart_icon.png');
-const money = require('../../../../assets/icons/domainIcon/gold_chest.png');
-const work = require('../../../../assets/icons/domainIcon/briefcase.png');
-const general = require('../../../../assets/icons/domainIcon/general_icon.png');
+const ICONS: Record<string, any> = {
+    amour: require('../../../../assets/icons/domainIcon/heart_icon.png'),
+    argent: require('../../../../assets/icons/domainIcon/gold_chest.png'),
+    travail: require('../../../../assets/icons/domainIcon/briefcase.png'),
+    general: require('../../../../assets/icons/domainIcon/general_icon.png'),
+};
 
-interface YesDrawScreenProps {
-    navigation: any;
-}
-
-interface YesDrawScreenState {
-    value: string;
-}
+//Define domains
+const DOMAINS = [
+    { id: 'amour', name: 'Amour' },
+    { id: 'travail', name: 'Travail' },
+    { id: 'argent', name: 'Argent' },
+    { id: 'general', name: 'Général' },
+];
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = SCREEN_WIDTH * 1.5;
 
-
 const DomainScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     const [value, setValue] = useQuestionStore();
 
-    function goToAskQuestionCard() {
+    function goToAskQuestionCard(domain: string) {
+        setValue({ ...value, domain });
         navigation.navigate('AskQuestion');
     }
 
-    function loveChoice() {
-        setValue({ ...value, domain: 'amour' });
-        goToAskQuestionCard();
-    }
-
-    function workChoice() {
-        setValue({ ...value, domain: 'travail' });
-        goToAskQuestionCard();
-    }
-
-    function moneyChoice() {
-        setValue({ ...value, domain: 'argent' });
-        goToAskQuestionCard();
-    }
-
-    function generalChoice() {
-        setValue({ ...value, domain: 'general' });
-        goToAskQuestionCard();
-    }
-
-
     return (
         <View style={styles.container}>
-
             <View style={styles.header} />
             <View style={styles.domainsContainer}>
                 <View>
                     <Text style={styles.contentTitle}>Choisissez votre Domaine</Text>
                 </View>
-                <Pressable style={styles.domainCard} onPress={loveChoice}>
-                    <View style={styles.iconBlock}>
-                        <Image source={love} style={styles.icon} />
-                    </View>
-                    <View style={styles.domainTextBlockBlock}>
-                        <Text style={styles.domainText}>Amour</Text>
-                    </View>
-                </Pressable>
-                <Pressable style={styles.domainCard} onPress={workChoice}>
-                    <View style={styles.iconBlock}>
-                        <Image source={work} style={styles.icon} />
-                    </View>
-                    <View style={styles.domainTextBlockBlock}>
-                        <Text style={styles.domainText}>Travail</Text>
-                    </View>
-                </Pressable>
-                <Pressable style={styles.domainCard} onPress={moneyChoice}>
-                    <View style={styles.iconBlock}>
-                        <Image source={money} style={styles.icon} />
-                    </View>
-                    <View style={styles.domainTextBlockBlock}>
-                        <Text style={styles.domainText}>Argent</Text>
-                    </View>
-                </Pressable>
-                <Pressable style={styles.domainCard} onPress={generalChoice}>
-                    <View style={styles.iconBlock}>
-                        <Image source={general} style={styles.icon} />
-                    </View>
-                    <View style={styles.domainTextBlockBlock}>
-                        <Text style={styles.domainText}>Général</Text>
-                    </View>
-                </Pressable>
+                {DOMAINS.map((domain) => (
+                    <Pressable key={domain.id} style={styles.domainCard} onPress={() => goToAskQuestionCard(domain.id)}>
+                        <View style={styles.iconBlock}>
+                            <Image source={ICONS[domain.id]} style={styles.icon} />
+                        </View>
+                        <View style={styles.domainTextBlockBlock}>
+                            <Text style={styles.domainText}>{domain.name}</Text>
+                        </View>
+                    </Pressable>
+                ))}
             </View>
         </View>
     )
@@ -129,39 +83,45 @@ const styles = StyleSheet.create({
     // Domain Container
     domainsContainer: {
         position: 'absolute', //Here is the trick
-        top: -50,
+        top: 70,
+        flex: 1,
+        flexDirection: "row",
+        flexWrap: "wrap",
         width: "100%",
         height: "100%",
         alignItems: "center",
         justifyContent: "center",
     },
     domainCard: {
-        width: "80%",
-        height: "10%",
+        width: "35%",
+        height: "28%",
+        alignContent: 'center',
+        justifyContent: 'center',
         margin: 10,
-        flexDirection: "row",
-        alignItems: "center",
-        borderWidth: 1,
-        borderColor: colors.palette.ivory,
+        borderWidth: 0.5,
+        borderColor: colors.palette.orange,
         borderRadius: 10,
         backgroundColor: colors.palette.violetClair,
+        elevation: 5,
+        
     },
     icon: {
-        width: SCREEN_WIDTH * 0.17,
-        height: SCREEN_WIDTH * 0.17,
+        width: SCREEN_WIDTH * 0.35,
+        height: SCREEN_WIDTH * 0.35,
     },
     iconBlock: {
-        width: '20%',
-        marginLeft: 20,
+        width: '100%',
+        alignItems: 'center',
     },
     domainTextBlockBlock: {
-        width: '80%',
-        marginLeft: 50,
+        width: '100%',
+        alignItems: 'center',
+        paddingTop: 10,
     },
     domainText: {
         fontFamily: "mulishBold",
         fontSize: 20,
-        color: colors.palette.violet,
+        color: colors.palette.golden,
     },
     contentTitle: {
         fontFamily: "mulishBold",

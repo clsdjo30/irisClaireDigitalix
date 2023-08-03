@@ -9,9 +9,10 @@ import {
 } from 'react-native';
 import { colors } from '../theme';
 
-import homeIcon from '../../assets/icons/moon.png';
+import homeIcon from '../../assets/icons/eye.png';
 import profilIcon from '../../assets/icons/account.png';
 import irisIcon from '../../assets/icons/iris.png';
+import ball from '../../assets/icons/crystal_ball.png';
 
 import HomeScreen from '../screens/Main/HomeScreen';
 import DayDrawScreen from '../screens/Main/DayDraw/DayDrawScreen';
