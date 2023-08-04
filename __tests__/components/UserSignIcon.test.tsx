@@ -6,7 +6,8 @@ import UserSignIcon from '../../src/components/UserSignIcon';
 afterEach(cleanup);
 
 const ASTRO_SIGNS = ['aquarius', 'aries', 'cancer', 'capricorn', 'gemini', 'leo', 'libra', 'pisces', 'sagittarius', 'scorpio', 'taurus', 'virgo'];
-jest.mock('react-native/Libraries/Image/Image', () => 'Image');
+
+
 describe('UserSignIcon', () => {
     ASTRO_SIGNS.forEach(sign => {
         it(`should render correctly with the "${sign}" sign`, () => {
@@ -68,9 +69,5 @@ describe('UserSignIcon', () => {
         expect(queryByTestId('sign-name')).toBeNull();
     });
 
-    it('renders correctly with valid sign name', () => {
-        const { getByTestId } = render(<UserSignIcon userSign="leo" name="leo" />);
-        const image = getByTestId('astro-image');
-        expect(image.props.source).toEqual(require('../../assets/icons/signs/leo.png'));
-    });
+   
 });

@@ -163,7 +163,7 @@ exports[`HomeScreen renders correctly 1`] = `
         }
       >
         <Image
-          source="test-file-stub"
+          source={1}
           style={
             {
               "height": "70%",
@@ -292,7 +292,7 @@ exports[`HomeScreen renders correctly 1`] = `
         }
       >
         <Image
-          source="test-file-stub"
+          source={1}
           style={
             {
               "height": "70%",
@@ -422,7 +422,7 @@ exports[`HomeScreen renders correctly 1`] = `
         testID="day-tendance-card"
       >
         <Image
-          source="test-file-stub"
+          source={1}
           style={
             {
               "height": "70%",

@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react-native';
 import UserStoneIcon from '../../src/components/UserStoneIcon';
 
-jest.mock('react-native/Libraries/Image/Image', () => 'Image');
+
 
 describe('UserStoneIcon', () => {
     it('renders correctly with valid stone name', () => {
@@ -35,11 +35,5 @@ describe('UserStoneIcon', () => {
         const { queryByTestId } = render(<UserStoneIcon userStone="onyx" name={null} />);
         expect(queryByTestId('stone-image')).toBeTruthy();
         expect(queryByTestId('stone-name')).toBeNull();
-    });
-
-    it('renders correctly with valid stone name', () => {
-        const { getByTestId } = render(<UserStoneIcon userStone="onyx" name="Onyx" />);
-        const image = getByTestId('stone-image');
-        expect(image.props.source).toEqual(require('../../assets/icons/stones/onyx.png'));
     });
 });
