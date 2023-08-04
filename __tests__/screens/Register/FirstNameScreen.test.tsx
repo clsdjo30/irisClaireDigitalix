@@ -14,6 +14,11 @@ const mockRoute: any = {
 jest.mock('react-native-vector-icons/FontAwesome', () => 'Icon');
 
 describe('FirstNameScreen', () => {
+    it('renders correctly and matches snapshot', () => {
+        const tree = render(<FirstNameScreen navigation={mockNavigation} route={mockRoute} />);
+        expect(tree).toMatchSnapshot();
+    });
+
     it('renders correctly', () => {
         const { getByTestId } = render(<FirstNameScreen navigation={mockNavigation} route={mockRoute} />);
         expect(getByTestId('first-name-screen')).toBeTruthy();
