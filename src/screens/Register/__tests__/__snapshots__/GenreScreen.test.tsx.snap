@@ -1,0 +1,237 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GenreScreen renders correctly and matches the snapshot 1`] = `
+<View
+  style={
+    {
+      "alignItems": "center",
+      "backgroundColor": "#2F2A5A",
+      "flex": 1,
+      "height": "100%",
+      "justifyContent": "center",
+    }
+  }
+  testID="genre-screen"
+>
+  <View
+    style={
+      {
+        "alignItems": "center",
+        "flexDirection": "column",
+        "marginTop": 40,
+      }
+    }
+  >
+    <View
+      style={
+        {
+          "flexDirection": "row",
+          "width": 600,
+        }
+      }
+    >
+      <Text
+        style={
+          {
+            "color": "#eeedf6",
+            "fontFamily": "mulishRegular",
+            "fontSize": 18,
+            "marginBottom": 20,
+          }
+        }
+      >
+        Vous êtes : 
+      </Text>
+    </View>
+    <View
+      onLayout={[Function]}
+      style={
+        [
+          {
+            "alignItems": "center",
+            "width": 637.5,
+          },
+          {
+            "paddingBottom": 0,
+          },
+        ]
+      }
+    >
+      <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onLayout={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          [
+            {
+              "alignItems": "center",
+              "backgroundColor": "white",
+              "borderRadius": 4,
+              "flexDirection": "row",
+              "height": 44,
+              "justifyContent": "space-between",
+              "marginBottom": 24,
+              "paddingLeft": 8,
+            },
+            {
+              "alignItems": "center",
+              "backgroundColor": "#EEEDF6",
+              "borderBottomColor": "#CBA135",
+              "borderBottomWidth": 1,
+              "borderLeftColor": "#CBA135",
+              "borderLeftWidth": 1,
+              "flexDirection": "row",
+              "height": 60,
+              "marginBottom": 20,
+              "width": 637.5,
+            },
+          ]
+        }
+      >
+        <Text
+          numberOfLines={1}
+          style={
+            [
+              {
+                "maxWidth": "90%",
+                "opacity": 1,
+              },
+              {
+                "color": "#B7B7E1",
+                "fontFamily": "mulishRegular",
+                "fontSize": 14,
+                "marginLeft": 14,
+              },
+            ]
+          }
+        >
+          Choisissez votre genre
+        </Text>
+        <View
+          style={
+            [
+              {
+                "alignItems": "stretch",
+                "alignSelf": "stretch",
+                "backgroundColor": "white",
+                "borderBottomRightRadius": 4,
+                "borderTopRightRadius": 4,
+                "justifyContent": "center",
+                "marginRight": 8,
+                "padding": 8,
+              },
+              {
+                "backgroundColor": "#EEEDF6",
+              },
+            ]
+          }
+        >
+          Icon
+        </View>
+      </View>
+      <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onLayout={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          [
+            {
+              "alignItems": "center",
+              "backgroundColor": "#D81F28",
+              "borderRadius": 8,
+              "height": 48,
+              "justifyContent": "center",
+              "marginVertical": 32,
+            },
+            {
+              "opacity": 1,
+            },
+            {
+              "backgroundColor": "#FF7648",
+              "borderRadius": 16,
+              "height": 30,
+              "marginTop": 30,
+              "paddingVertical": 5,
+              "position": "relative",
+              "width": 637.5,
+            },
+          ]
+        }
+      >
+        <Text
+          style={
+            [
+              {
+                "color": "white",
+                "fontSize": 16,
+                "fontWeight": "bold",
+              },
+              {
+                "color": "#eeedf6",
+                "fontFamily": "mulishBold",
+                "fontSize": 14,
+              },
+            ]
+          }
+        >
+          Suivant
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;

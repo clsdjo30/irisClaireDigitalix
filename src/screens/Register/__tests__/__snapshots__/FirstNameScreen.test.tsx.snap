@@ -1,0 +1,201 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FirstNameScreen renders correctly and matches snapshot 1`] = `
+<View
+  style={
+    {
+      "alignItems": "center",
+      "backgroundColor": "#2F2A5A",
+      "flex": 1,
+      "height": "100%",
+      "justifyContent": "center",
+    }
+  }
+  testID="first-name-screen"
+>
+  <View
+    style={
+      {
+        "alignItems": "center",
+        "flexDirection": "column",
+        "marginTop": 40,
+      }
+    }
+  >
+    <View
+      style={
+        {
+          "flexDirection": "row",
+          "width": 300,
+        }
+      }
+    >
+      <Text
+        style={
+          {
+            "color": "#dcdaee",
+            "fontFamily": "mulishRegular",
+            "fontSize": 18,
+            "marginBottom": 20,
+          }
+        }
+      >
+        Quelle est votre prénom ?
+      </Text>
+    </View>
+    <View
+      style={
+        {
+          "marginBottom": 20,
+          "width": 675,
+        }
+      }
+    >
+      <View
+        style={
+          {
+            "paddingHorizontal": 10,
+            "width": "100%",
+          }
+        }
+        testID="RNE__Input__view-wrapper"
+      >
+        <View
+          collapsable={false}
+          style={
+            {
+              "alignItems": "center",
+              "backgroundColor": "#EEEDF6",
+              "borderBottomColor": "#CBA135",
+              "borderBottomWidth": 1,
+              "borderColor": "#86939e",
+              "borderLeftColor": "#CBA135",
+              "borderLeftWidth": 1,
+              "borderRadius": 6,
+              "flexDirection": "row",
+              "padding": 3,
+              "transform": [
+                {
+                  "translateX": 0,
+                },
+              ],
+            }
+          }
+        >
+          <View
+            style={
+              {
+                "alignItems": "center",
+                "height": 40,
+                "justifyContent": "center",
+                "marginVertical": 4,
+                "paddingRight": 4,
+              }
+            }
+          >
+            <Icon
+              name="user"
+              size={28}
+              style={
+                {
+                  "color": "#bc9531",
+                  "marginLeft": 10,
+                }
+              }
+            />
+          </View>
+          <TextInput
+            editable={true}
+            onChangeText={[Function]}
+            placeholder="Saisissez votre prénom"
+            placeholderTextColor="#B7B7E1"
+            style={
+              {
+                "color": "#2F2A5A",
+                "flex": 1,
+                "fontFamily": "mulishRegular",
+                "fontSize": 14,
+                "marginLeft": 10,
+                "minHeight": 40,
+              }
+            }
+            testID="RNE__Input__text-input"
+            underlineColorAndroid="transparent"
+            value=""
+          />
+        </View>
+        <Text
+          style={
+            {
+              "color": "#ff190c",
+              "fontSize": 12,
+              "margin": 5,
+            }
+          }
+        />
+      </View>
+    </View>
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        [
+          {
+            "alignItems": "center",
+            "borderRadius": 16,
+            "marginBottom": 10,
+            "paddingVertical": 5,
+          },
+          {
+            "backgroundColor": "#FF7648",
+            "width": 637.5,
+          },
+        ]
+      }
+    >
+      <Text
+        style={
+          [
+            {
+              "fontFamily": "mulishBold",
+              "fontSize": 14,
+            },
+            {
+              "color": "#eeedf6",
+            },
+          ]
+        }
+      >
+        Suivant
+      </Text>
+    </View>
+  </View>
+</View>
+`;
