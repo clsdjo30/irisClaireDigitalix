@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, SafeAreaView, Platform, TextInput, Dimensions, Pressable } from 'react-native';
+import { StyleSheet, Text, View,  Platform, TextInput, Dimensions, Pressable } from 'react-native';
 import { Icon } from '@rneui/base'
 import { StackScreenProps } from '@react-navigation/stack';
 import { useUserStore } from '../../hooks/useUserStore';
@@ -38,7 +38,7 @@ const BirthdayScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
     return (
 
-        <SafeAreaView style={styles.container}>
+        <View testID='birthday-screen' style={styles.container}>
 
             <Text style={styles.contentTitle}>Quelle est votre date de naissance ?</Text>
             <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
@@ -84,7 +84,7 @@ const BirthdayScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                     </View>
                 </View>
             </View>
-        </SafeAreaView>
+        </View>
     );
 };
 

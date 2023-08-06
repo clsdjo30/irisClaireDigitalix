@@ -1,0 +1,172 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BirthDayScreen component renders correctly and matches snapshot 1`] = `
+<View
+  style={
+    {
+      "alignItems": "center",
+      "backgroundColor": "#2F2A5A",
+      "flex": 1,
+      "height": "100%",
+      "justifyContent": "center",
+    }
+  }
+  testID="birthday-screen"
+>
+  <Text
+    style={
+      {
+        "color": "#eeedf6",
+        "fontFamily": "mulishRegular",
+        "fontSize": 18,
+        "marginBottom": 20,
+      }
+    }
+  >
+    Quelle est votre date de naissance ?
+  </Text>
+  <View
+    style={
+      {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "justifyContent": "center",
+      }
+    }
+  >
+    <View>
+      <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          {
+            "alignItems": "center",
+            "backgroundColor": "#eeedf6",
+            "borderBottomColor": "#bc9531",
+            "borderBottomWidth": 1,
+            "borderLeftColor": "#bc9531",
+            "borderLeftWidth": 1,
+            "borderRadius": 10,
+            "flexDirection": "row",
+            "padding": 10,
+            "paddingBottom": 10,
+            "width": 300,
+          }
+        }
+      >
+        Icon
+        <TextInput
+          editable={false}
+          onFocus={[Function]}
+          placeholder="Date de naissance"
+          placeholderTextColor="#B7B7E1"
+          style={
+            {
+              "color": "#8ca0d7",
+              "fontSize": 14,
+              "paddingLeft": 20,
+            }
+          }
+          value="01/01/2000"
+        />
+      </View>
+      <View
+        style={
+          {
+            "marginTop": 60,
+          }
+        }
+      >
+        <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            [
+              {
+                "alignItems": "center",
+                "borderRadius": 16,
+                "marginBottom": 10,
+                "paddingVertical": 5,
+              },
+              {
+                "backgroundColor": "#FF7648",
+                "width": 576.9230769230769,
+              },
+            ]
+          }
+        >
+          <Text
+            style={
+              [
+                {
+                  "fontFamily": "mulishBold",
+                  "fontSize": 14,
+                },
+                {
+                  "color": "#eeedf6",
+                },
+              ]
+            }
+          >
+            S'inscrire
+          </Text>
+        </View>
+      </View>
+    </View>
+  </View>
+</View>
+`;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, SafeAreaView, Text, Dimensions } from 'react-native';
+import { StyleSheet, View, Text, Dimensions } from 'react-native';
 import { Icon } from '@rneui/base'
 import { StackScreenProps } from '@react-navigation/stack';
 import { Form, Picker } from 'react-native-form-component';
@@ -14,9 +14,9 @@ const GenreScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     const [user, setUser] = useUserStore()
 
     return (
-        <SafeAreaView style={styles.container}>
+        <View testID='genre-screen' style={styles.container}>
 
-            <View testID='genre-screen' style={styles.controls}>
+            <View  style={styles.controls}>
                 <View style={styles.genderTitle}>
                     <Text style={styles.contentTitle}>Vous êtes : </Text>
                 </View>
@@ -50,7 +50,7 @@ const GenreScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                     />
                 </Form>
             </View>
-        </SafeAreaView >
+        </View >
     );
 }
 

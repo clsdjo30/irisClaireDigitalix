@@ -1,6 +1,5 @@
 import {  
     Image, 
-    Dimensions, 
     Pressable, 
     ImageSourcePropType, 
     StyleSheet 
@@ -14,20 +13,17 @@ interface IProps {
 }
 
 const Card: React.FC<IProps> = ({ onPress, source}: IProps) => {
-    const PAGE_WIDTH = Dimensions.get('window').width;
-    const itemWidth = 60;
-    const centerOffset = PAGE_WIDTH / 2 - itemWidth / 2;
-
-
+   
     return (
 
         <Pressable
-            onPress={onPress}
-            
+            testID='card'
+            onPress={onPress}            
             style={styles.cardShadow}
         >
             
             <Image
+                testID='card-image'
                 source={source}
                 style={{
                     width: 80,
