@@ -1,0 +1,961 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DayDrawScreen renders correctly 1`] = `
+<View
+  style={
+    {
+      "alignItems": "center",
+      "backgroundColor": "#eeedf6",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+>
+  <View
+    style={
+      {
+        "backgroundColor": "#2F2A5A",
+        "borderBottomLeftRadius": 75,
+        "borderBottomRightRadius": 75,
+        "height": 533.6,
+        "position": "absolute",
+        "top": 0,
+        "width": 745,
+      }
+    }
+  />
+  <View
+    style={
+      {
+        "alignItems": "center",
+        "height": 533.6,
+        "justifyContent": "center",
+        "position": "absolute",
+        "top": 0,
+        "width": 745,
+      }
+    }
+  >
+    <Text
+      style={
+        {
+          "color": "#F8F8FF",
+          "fontSize": 30,
+          "fontWeight": "bold",
+        }
+      }
+    >
+      Tirage du jour
+    </Text>
+  </View>
+  <View
+    animatedStyle={
+      {
+        "value": {},
+      }
+    }
+    collapsable={false}
+    forwardedRef={[Function]}
+    handlerTag={1}
+    handlerType="PanGestureHandler"
+    onGestureHandlerEvent={[Function]}
+    onTouchEnd={[Function]}
+    onTouchStart={[Function]}
+    style={
+      {
+        "bottom": 40,
+        "flexDirection": "row",
+        "height": 750,
+        "overflow": "hidden",
+        "position": "absolute",
+        "width": 750,
+      }
+    }
+  >
+    <View
+      animatedStyle={
+        {
+          "value": {
+            "transform": [
+              {
+                "translateX": 335,
+              },
+              {
+                "translateY": 70,
+              },
+              {
+                "rotate": "0rad",
+              },
+            ],
+          },
+        }
+      }
+      collapsable={false}
+      style={
+        {
+          "height": 320,
+          "position": "absolute",
+          "transform": [
+            {
+              "translateX": 335,
+            },
+            {
+              "translateY": 70,
+            },
+            {
+              "rotate": "0rad",
+            },
+          ],
+          "width": 67,
+        }
+      }
+      testID="__CAROUSEL_ITEM_0_NOT_READY__"
+    />
+    <View
+      animatedStyle={
+        {
+          "value": {
+            "transform": [
+              {
+                "translateX": 419.6,
+              },
+              {
+                "translateY": 80,
+              },
+              {
+                "rotate": "0.3rad",
+              },
+            ],
+          },
+        }
+      }
+      collapsable={false}
+      style={
+        {
+          "height": 320,
+          "position": "absolute",
+          "transform": [
+            {
+              "translateX": 419.6,
+            },
+            {
+              "translateY": 80,
+            },
+            {
+              "rotate": "0.3rad",
+            },
+          ],
+          "width": 67,
+        }
+      }
+      testID="__CAROUSEL_ITEM_1_NOT_READY__"
+    />
+    <View
+      animatedStyle={
+        {
+          "value": {
+            "transform": [
+              {
+                "translateX": 504.2,
+              },
+              {
+                "translateY": 110,
+              },
+              {
+                "rotate": "0.6333333333333332rad",
+              },
+            ],
+          },
+        }
+      }
+      collapsable={false}
+      style={
+        {
+          "height": 320,
+          "position": "absolute",
+          "transform": [
+            {
+              "translateX": 504.2,
+            },
+            {
+              "translateY": 110,
+            },
+            {
+              "rotate": "0.6333333333333332rad",
+            },
+          ],
+          "width": 67,
+        }
+      }
+      testID="__CAROUSEL_ITEM_2_NOT_READY__"
+    />
+    <View
+      animatedStyle={
+        {
+          "value": {
+            "transform": [
+              {
+                "translateX": 588.8,
+              },
+              {
+                "translateY": 140,
+              },
+              {
+                "rotate": "0.9666666666666663rad",
+              },
+            ],
+          },
+        }
+      }
+      collapsable={false}
+      style={
+        {
+          "height": 320,
+          "position": "absolute",
+          "transform": [
+            {
+              "translateX": 588.8,
+            },
+            {
+              "translateY": 140,
+            },
+            {
+              "rotate": "0.9666666666666663rad",
+            },
+          ],
+          "width": 67,
+        }
+      }
+      testID="__CAROUSEL_ITEM_3_NOT_READY__"
+    />
+    <View
+      animatedStyle={
+        {
+          "value": {
+            "transform": [
+              {
+                "translateX": 673.4,
+              },
+              {
+                "translateY": 170,
+              },
+              {
+                "rotate": "1.2999999999999996rad",
+              },
+            ],
+          },
+        }
+      }
+      collapsable={false}
+      style={
+        {
+          "height": 320,
+          "position": "absolute",
+          "transform": [
+            {
+              "translateX": 673.4,
+            },
+            {
+              "translateY": 170,
+            },
+            {
+              "rotate": "1.2999999999999996rad",
+            },
+          ],
+          "width": 67,
+        }
+      }
+      testID="__CAROUSEL_ITEM_4_NOT_READY__"
+    />
+    <View
+      animatedStyle={
+        {
+          "value": {
+            "transform": [
+              {
+                "translateX": 758,
+              },
+              {
+                "translateY": 200,
+              },
+              {
+                "rotate": "1.6333333333333326rad",
+              },
+            ],
+          },
+        }
+      }
+      collapsable={false}
+      style={
+        {
+          "height": 320,
+          "position": "absolute",
+          "transform": [
+            {
+              "translateX": 758,
+            },
+            {
+              "translateY": 200,
+            },
+            {
+              "rotate": "1.6333333333333326rad",
+            },
+          ],
+          "width": 67,
+        }
+      }
+      testID="__CAROUSEL_ITEM_5_NOT_READY__"
+    />
+    <View
+      animatedStyle={
+        {
+          "value": {
+            "transform": [
+              {
+                "translateX": 840.4,
+              },
+              {
+                "translateY": 230,
+              },
+              {
+                "rotate": "1.966666666666666rad",
+              },
+            ],
+          },
+        }
+      }
+      collapsable={false}
+      style={
+        {
+          "height": 320,
+          "position": "absolute",
+          "transform": [
+            {
+              "translateX": 840.4,
+            },
+            {
+              "translateY": 230,
+            },
+            {
+              "rotate": "1.966666666666666rad",
+            },
+          ],
+          "width": 67,
+        }
+      }
+      testID="__CAROUSEL_ITEM_6_NOT_READY__"
+    />
+    <View
+      animatedStyle={
+        {
+          "value": {
+            "transform": [
+              {
+                "translateX": 922.8,
+              },
+              {
+                "translateY": 260,
+              },
+              {
+                "rotate": "2.2999999999999994rad",
+              },
+            ],
+          },
+        }
+      }
+      collapsable={false}
+      style={
+        {
+          "height": 320,
+          "position": "absolute",
+          "transform": [
+            {
+              "translateX": 922.8,
+            },
+            {
+              "translateY": 260,
+            },
+            {
+              "rotate": "2.2999999999999994rad",
+            },
+          ],
+          "width": 67,
+        }
+      }
+      testID="__CAROUSEL_ITEM_7_NOT_READY__"
+    />
+    <View
+      animatedStyle={
+        {
+          "value": {
+            "transform": [
+              {
+                "translateX": 1005.2,
+              },
+              {
+                "translateY": 290,
+              },
+              {
+                "rotate": "2.6333333333333324rad",
+              },
+            ],
+          },
+        }
+      }
+      collapsable={false}
+      style={
+        {
+          "height": 320,
+          "position": "absolute",
+          "transform": [
+            {
+              "translateX": 1005.2,
+            },
+            {
+              "translateY": 290,
+            },
+            {
+              "rotate": "2.6333333333333324rad",
+            },
+          ],
+          "width": 67,
+        }
+      }
+      testID="__CAROUSEL_ITEM_8_NOT_READY__"
+    />
+    <View
+      animatedStyle={
+        {
+          "value": {
+            "transform": [
+              {
+                "translateX": 1087.6,
+              },
+              {
+                "translateY": 320,
+              },
+              {
+                "rotate": "2.966666666666666rad",
+              },
+            ],
+          },
+        }
+      }
+      collapsable={false}
+      style={
+        {
+          "height": 320,
+          "position": "absolute",
+          "transform": [
+            {
+              "translateX": 1087.6,
+            },
+            {
+              "translateY": 320,
+            },
+            {
+              "rotate": "2.966666666666666rad",
+            },
+          ],
+          "width": 67,
+        }
+      }
+      testID="__CAROUSEL_ITEM_9_NOT_READY__"
+    />
+    <View
+      animatedStyle={
+        {
+          "value": {
+            "transform": [
+              {
+                "translateX": 1170,
+              },
+              {
+                "translateY": 350,
+              },
+              {
+                "rotate": "3.299999999999999rad",
+              },
+            ],
+          },
+        }
+      }
+      collapsable={false}
+      style={
+        {
+          "height": 320,
+          "position": "absolute",
+          "transform": [
+            {
+              "translateX": 1170,
+            },
+            {
+              "translateY": 350,
+            },
+            {
+              "rotate": "3.299999999999999rad",
+            },
+          ],
+          "width": 67,
+        }
+      }
+      testID="__CAROUSEL_ITEM_10_NOT_READY__"
+    />
+    <View
+      animatedStyle={
+        {
+          "value": {
+            "transform": [
+              {
+                "translateX": 1252,
+              },
+              {
+                "translateY": 380,
+              },
+              {
+                "rotate": "3.6333333333333324rad",
+              },
+            ],
+          },
+        }
+      }
+      collapsable={false}
+      style={
+        {
+          "height": 320,
+          "position": "absolute",
+          "transform": [
+            {
+              "translateX": 1252,
+            },
+            {
+              "translateY": 380,
+            },
+            {
+              "rotate": "3.6333333333333324rad",
+            },
+          ],
+          "width": 67,
+        }
+      }
+      testID="__CAROUSEL_ITEM_11_NOT_READY__"
+    />
+    <View
+      animatedStyle={
+        {
+          "value": {
+            "transform": [
+              {
+                "translateX": -500,
+              },
+              {
+                "translateY": 540,
+              },
+              {
+                "rotate": "-3.299999999999999rad",
+              },
+            ],
+          },
+        }
+      }
+      collapsable={false}
+      style={
+        {
+          "height": 320,
+          "position": "absolute",
+          "transform": [
+            {
+              "translateX": -500,
+            },
+            {
+              "translateY": 540,
+            },
+            {
+              "rotate": "-3.299999999999999rad",
+            },
+          ],
+          "width": 67,
+        }
+      }
+      testID="__CAROUSEL_ITEM_12_NOT_READY__"
+    />
+    <View
+      animatedStyle={
+        {
+          "value": {
+            "transform": [
+              {
+                "translateX": -417.6,
+              },
+              {
+                "translateY": 490,
+              },
+              {
+                "rotate": "-2.9666666666666655rad",
+              },
+            ],
+          },
+        }
+      }
+      collapsable={false}
+      style={
+        {
+          "height": 320,
+          "position": "absolute",
+          "transform": [
+            {
+              "translateX": -417.6,
+            },
+            {
+              "translateY": 490,
+            },
+            {
+              "rotate": "-2.9666666666666655rad",
+            },
+          ],
+          "width": 67,
+        }
+      }
+      testID="__CAROUSEL_ITEM_13_NOT_READY__"
+    />
+    <View
+      animatedStyle={
+        {
+          "value": {
+            "transform": [
+              {
+                "translateX": -335.2,
+              },
+              {
+                "translateY": 440,
+              },
+              {
+                "rotate": "-2.633333333333332rad",
+              },
+            ],
+          },
+        }
+      }
+      collapsable={false}
+      style={
+        {
+          "height": 320,
+          "position": "absolute",
+          "transform": [
+            {
+              "translateX": -335.2,
+            },
+            {
+              "translateY": 440,
+            },
+            {
+              "rotate": "-2.633333333333332rad",
+            },
+          ],
+          "width": 67,
+        }
+      }
+      testID="__CAROUSEL_ITEM_14_NOT_READY__"
+    />
+    <View
+      animatedStyle={
+        {
+          "value": {
+            "transform": [
+              {
+                "translateX": -252.8,
+              },
+              {
+                "translateY": 390,
+              },
+              {
+                "rotate": "-2.299999999999999rad",
+              },
+            ],
+          },
+        }
+      }
+      collapsable={false}
+      style={
+        {
+          "height": 320,
+          "position": "absolute",
+          "transform": [
+            {
+              "translateX": -252.8,
+            },
+            {
+              "translateY": 390,
+            },
+            {
+              "rotate": "-2.299999999999999rad",
+            },
+          ],
+          "width": 67,
+        }
+      }
+      testID="__CAROUSEL_ITEM_15_NOT_READY__"
+    />
+    <View
+      animatedStyle={
+        {
+          "value": {
+            "transform": [
+              {
+                "translateX": -170.4,
+              },
+              {
+                "translateY": 340,
+              },
+              {
+                "rotate": "-1.9666666666666661rad",
+              },
+            ],
+          },
+        }
+      }
+      collapsable={false}
+      style={
+        {
+          "height": 320,
+          "position": "absolute",
+          "transform": [
+            {
+              "translateX": -170.4,
+            },
+            {
+              "translateY": 340,
+            },
+            {
+              "rotate": "-1.9666666666666661rad",
+            },
+          ],
+          "width": 67,
+        }
+      }
+      testID="__CAROUSEL_ITEM_16_NOT_READY__"
+    />
+    <View
+      animatedStyle={
+        {
+          "value": {
+            "transform": [
+              {
+                "translateX": -88,
+              },
+              {
+                "translateY": 290,
+              },
+              {
+                "rotate": "-1.6333333333333329rad",
+              },
+            ],
+          },
+        }
+      }
+      collapsable={false}
+      style={
+        {
+          "height": 320,
+          "position": "absolute",
+          "transform": [
+            {
+              "translateX": -88,
+            },
+            {
+              "translateY": 290,
+            },
+            {
+              "rotate": "-1.6333333333333329rad",
+            },
+          ],
+          "width": 67,
+        }
+      }
+      testID="__CAROUSEL_ITEM_17_NOT_READY__"
+    />
+    <View
+      animatedStyle={
+        {
+          "value": {
+            "transform": [
+              {
+                "translateX": -3.4,
+              },
+              {
+                "translateY": 240,
+              },
+              {
+                "rotate": "-1.2999999999999996rad",
+              },
+            ],
+          },
+        }
+      }
+      collapsable={false}
+      style={
+        {
+          "height": 320,
+          "position": "absolute",
+          "transform": [
+            {
+              "translateX": -3.4,
+            },
+            {
+              "translateY": 240,
+            },
+            {
+              "rotate": "-1.2999999999999996rad",
+            },
+          ],
+          "width": 67,
+        }
+      }
+      testID="__CAROUSEL_ITEM_18_NOT_READY__"
+    />
+    <View
+      animatedStyle={
+        {
+          "value": {
+            "transform": [
+              {
+                "translateX": 81.2,
+              },
+              {
+                "translateY": 190,
+              },
+              {
+                "rotate": "-0.9666666666666663rad",
+              },
+            ],
+          },
+        }
+      }
+      collapsable={false}
+      style={
+        {
+          "height": 320,
+          "position": "absolute",
+          "transform": [
+            {
+              "translateX": 81.2,
+            },
+            {
+              "translateY": 190,
+            },
+            {
+              "rotate": "-0.9666666666666663rad",
+            },
+          ],
+          "width": 67,
+        }
+      }
+      testID="__CAROUSEL_ITEM_19_NOT_READY__"
+    />
+    <View
+      animatedStyle={
+        {
+          "value": {
+            "transform": [
+              {
+                "translateX": 165.8,
+              },
+              {
+                "translateY": 140,
+              },
+              {
+                "rotate": "-0.6333333333333332rad",
+              },
+            ],
+          },
+        }
+      }
+      collapsable={false}
+      style={
+        {
+          "height": 320,
+          "position": "absolute",
+          "transform": [
+            {
+              "translateX": 165.8,
+            },
+            {
+              "translateY": 140,
+            },
+            {
+              "rotate": "-0.6333333333333332rad",
+            },
+          ],
+          "width": 67,
+        }
+      }
+      testID="__CAROUSEL_ITEM_20_NOT_READY__"
+    />
+    <View
+      animatedStyle={
+        {
+          "value": {
+            "transform": [
+              {
+                "translateX": 250.4,
+              },
+              {
+                "translateY": 90,
+              },
+              {
+                "rotate": "-0.3rad",
+              },
+            ],
+          },
+        }
+      }
+      collapsable={false}
+      style={
+        {
+          "height": 320,
+          "position": "absolute",
+          "transform": [
+            {
+              "translateX": 250.4,
+            },
+            {
+              "translateY": 90,
+            },
+            {
+              "rotate": "-0.3rad",
+            },
+          ],
+          "width": 67,
+        }
+      }
+      testID="__CAROUSEL_ITEM_21_NOT_READY__"
+    />
+  </View>
+  <View
+    style={
+      {
+        "alignItems": "center",
+        "backgroundColor": "#CBA135",
+        "borderRadius": 16,
+        "bottom": 20,
+        "marginBottom": 10,
+        "paddingVertical": 5,
+        "position": "absolute",
+        "width": 300,
+      }
+    }
+  >
+    <Text
+      style={
+        {
+          "color": "#EEEDF6",
+          "fontFamily": "oswaldRegular",
+          "fontSize": 14,
+        }
+      }
+    >
+      Choisissez votre Carte
+    </Text>
+  </View>
+</View>
+`;

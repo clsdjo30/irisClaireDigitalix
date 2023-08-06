@@ -1,0 +1,78 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FlippableCard renders correctly 1`] = `
+<View
+  animatedStyle={
+    {
+      "value": {
+        "transform": [
+          {
+            "rotateY": "0deg",
+          },
+        ],
+      },
+    }
+  }
+  collapsable={false}
+  style={
+    {
+      "transform": [
+        {
+          "rotateY": "0deg",
+        },
+      ],
+    }
+  }
+>
+  <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      {
+        "elevation": 5,
+        "shadowColor": "#fff",
+      }
+    }
+    testID="card"
+  >
+    <Image
+      source={1}
+      style={
+        {
+          "height": 150,
+          "resizeMode": "cover",
+          "width": 80,
+        }
+      }
+      testID="card-image"
+    />
+  </View>
+</View>
+`;
