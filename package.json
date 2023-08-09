@@ -11,7 +11,7 @@
   "jest": {
     "preset": "jest-expo",
     "setupFilesAfterEnv": [
-       "@testing-library/jest-native/extend-expect"
+      "@testing-library/jest-native/extend-expect"
     ],
     "verbose": true,
     "resetMocks": true,
@@ -38,8 +38,6 @@
       "json",
       "node"
     ]
-      
-    
   },
   "dependencies": {
     "@expo-google-fonts/mulish": "^0.2.3",
@@ -81,8 +79,10 @@
     "react-native-safe-area-context": "4.6.3",
     "react-native-screens": "~3.22.0",
     "react-native-vector-icons": "^9.2.0",
+    "react-native-view-shot": "3.7.0",
     "react-native-web": "~0.19.6",
-    "zodiac-signs": "^1.2.1"
+    "zodiac-signs": "^1.2.1",
+    "expo-sharing": "~11.5.0"
   },
   "devDependencies": {
     "@babel/core": "^7.22.5",
