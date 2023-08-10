@@ -23,7 +23,8 @@ export default {
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash/splash.png",
-      "resizeMode": "cover"
+      "resizeMode": "cover",
+      "backgroundColor": "#fffff"
     },
     "platforms": [
       "ios",

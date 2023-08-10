@@ -36,7 +36,7 @@ const STONE_ICON = [
       return (
         <View style={styles.blockSign}>
           <Image testID="stone-image" source={Object.values(stoneIcon)[0]} style={styles.stoneImage} />
-          {name && <Text testID="stone-name" style={styles.signText}>{name} </Text>}
+          {name && <Text testID="stone-name" style={styles.signText}>Ma Pierre</Text>}
         </View>
       );
     }
@@ -51,14 +51,14 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     stoneImage: {
-      width: 70,
-      height: 70,
+      width: 60,
+      height: 60,
       },
     signText: {
-        color: colors.palette.violet,
-        fontSize: 13,
-        fontFamily: 'mulishLight',
-        textTransform: 'capitalize',
+
+      color: colors.palette.violet,
+      fontSize: SCREEN_FONT_SCALE + 12,
+      fontFamily: 'mulishLight',
     },
 });
 

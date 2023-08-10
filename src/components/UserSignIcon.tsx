@@ -7,8 +7,6 @@ interface UserSignIconProps {
     name: string | null;
 }
 
-const SCREEN_WIDTH = Dimensions.get('window').width;
-const SCREEN_HEIGHT = SCREEN_WIDTH * 1.5;
 const SCREEN_SCALE = Dimensions.get('window').scale;
 const SCREEN_FONT_SCALE = SCREEN_SCALE * 0.5;
 
@@ -34,7 +32,7 @@ const UserSignIcon: React.FC<UserSignIconProps> = ({ userSign, name }) => {
         return (
             <View style={styles.blockSign}>
                 <Image testID='astro-image' source={Object.values(astroIcon)[0]} style={styles.astroImage} />
-                {name && <Text testID='sign-name' style={styles.signText}>{name}</Text>}
+                {name && <Text testID='sign-name' style={styles.signText}>Mon Signe Astro</Text>}
             </View>
         );
     }
@@ -54,7 +52,6 @@ const styles = StyleSheet.create({
         height: 60,
     },
     signText: {
-        paddingTop: 10,
         color: colors.palette.violet,
         fontSize:  SCREEN_FONT_SCALE +12,
         fontFamily: 'mulishLight',

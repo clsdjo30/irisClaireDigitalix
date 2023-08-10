@@ -9,8 +9,6 @@ import {
 } from 'react-native';
 import { Switch } from '@rneui/themed';
 import { colors } from '../../../theme';
-import { LinearGradient } from 'expo-linear-gradient'
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { StackScreenProps } from '@react-navigation/stack';
 import { useUserStore } from '../../../hooks/useUserStore';
 import { useUserInformation } from '../../../hooks/useUserInformations';
@@ -33,7 +31,7 @@ const SCREEN_FONT_SCALE = SCREEN_SCALE * 0.5;
 
 const ProfilScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   useUserInformation();
-  const [checked, setChecked] = React.useState(false);
+  const [checked, setChecked] = useState(false);
   const [user, setUser] = useUserStore();
 
 
@@ -45,34 +43,73 @@ const ProfilScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
 
 
+
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
 
-      <View style={styles.header} />
-      {/* START USER CARD */}
-      <View style={styles.userCard}>
-        <View style={styles.headerUnderlineTop}>
-          {UserStoneIcon({userStone:userStone, name:user?.stone})}
-          {UserSignIcon({userSign:userSign, name:user?.zodiacname})}
-          {UserElementIcon({ userElement: userElement, name: user?.element })}
-
-        </View>
+      <View style={styles.header}>
+        
+        {/* START USER CARD */}
         {/* Header User Information */}
+        <View style={styles.userCard}>
+          <Text style={styles.headerTitle}>mon profil</Text>
+          <View style={styles.headerUnderlineTop}>
+            {UserStoneIcon({ userStone: userStone, name: user?.stone })}
+            {UserSignIcon({ userSign: userSign, name: user?.zodiacname })}
+            {UserElementIcon({ userElement: userElement, name: user?.element })}
+          </View>
+          <View style={styles.blockProfilInput}>
+            <View style={styles.profilInput}>
+              <Text style={styles.textEmail}>Prénom: </Text>
+              <Text style={styles.textDetail}>{user?.firstname}</Text>
+            </View>
+            <View style={styles.profilInput}>
+              <Text style={styles.textEmail}>Email: </Text>
+              <Text style={styles.textDetail} >{user?.email}</Text>
+            </View>
+            <View style={styles.profilInput}>
+              <Text style={styles.textEmail}>Date de naissance: </Text>
+              <Text style={styles.textDetail} >{user?.birthday}</Text>
+            </View>
+          </View>
+          <View style={styles.headerUnderlineTop} />
+          
+          <View style={styles.blockElement}>
+            <View style={styles.profilInput}>
+              <Text style={styles.textEmail}>Ma Pierre: </Text>
+              <Text style={styles.textDetail} >{userStone}</Text>
+            </View>
+            <View style={styles.profilInput}>
+              <Text style={styles.textEmail}>Mon Signe: </Text>
+              {userSign === 'Taurus'
+                ?
+                <Text style={styles.textDetail} >Taureau</Text>
+                :
+                <Text style={styles.textDetail} >{userSign}</Text>
 
-        <Text style={styles.headerTitle}>mon compte</Text>
+              }
+            </View>
+            <View style={styles.profilInput}>
+              <Text style={styles.textEmail}>Mon Element: </Text>
+              <Text style={styles.textDetail} >{userElement}</Text>
+            </View>
+          </View>
+          <View>
 
-        {/* User Astro information*/}
-        <View style={styles.headerUnderline}>
-          <Text style={styles.headerSubTitle}>{user?.firstname}</Text>
-          <Text style={styles.textEmail}>{user?.email}</Text>
+
+          </View>
+
         </View>
       </View>
+
+      {/* User Astro information*/}
 
       {/* END USER CARD */}
 
 
       <View style={styles.paramContent}>
-        <View style={styles.blockSwitch}>
+
+        {/* <View style={styles.blockSwitch}>
           <View style={styles.switchParam}>
             <Text style={styles.switchText}>Notifications</Text>
             <Switch
@@ -87,14 +124,16 @@ const ProfilScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
               onValueChange={(value) => setChecked(value)}
             />
           </View>
-        </View>
+        </View> */}
+
+
 
         <View style={styles.paramsList}>
           <View style={styles.blockParam}>
             <TouchableOpacity
               style={styles.paramRow}
               onPress={() => navigation.navigate('MyQuestions')}>
-              <Text style={styles.switchText}>Mes Questions</Text>
+              <Text style={styles.switchText}>Mon historique</Text>
               <Image source={rightArrow} style={styles.iconImage} />
             </TouchableOpacity>
           </View>
@@ -141,7 +180,7 @@ const ProfilScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
         </View>
       </View>
 
-    </SafeAreaView>
+    </View>
   )
 }
 
@@ -161,7 +200,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     width: SCREEN_WIDTH - 5,
-    height: SCREEN_HEIGHT * 0.4,
+    height: SCREEN_HEIGHT * 0.63,
     borderBottomLeftRadius: SCREEN_WIDTH * 0.1,
     borderBottomRightRadius: SCREEN_WIDTH * 0.1,
     backgroundColor: colors.background
@@ -233,11 +272,7 @@ const styles = StyleSheet.create({
     height: 20,
   },
   //START O FUSER CARD INFORMATION
-  userCard: {
-    position: 'absolute',
-    top: 0,
 
-  },
   cardUserStyle: {
     width: SCREEN_WIDTH / 1.1,
     height: SCREEN_HEIGHT * 0.345,
@@ -247,12 +282,12 @@ const styles = StyleSheet.create({
     fontSize: SCREEN_FONT_SCALE + 25,
     fontFamily: 'oswaldLight',
     textTransform: 'capitalize',
-    textAlign: 'center',
+    textAlign: 'left',
     marginTop: SCREEN_HEIGHT / 50,
   },
   headerSubTitle: {
     color: colors.palette.violet,
-    fontSize: SCREEN_FONT_SCALE + 16,
+    fontSize: 14,
     fontFamily: 'oswaldBold',
     textTransform: 'capitalize',
   },
@@ -261,7 +296,6 @@ const styles = StyleSheet.create({
     paddingVertical: SCREEN_HEIGHT / 80,
     paddingBottom: SCREEN_HEIGHT * 0.04,
     flexDirection: 'row',
-    justifyContent: 'space-around',
     alignItems: 'center',
     marginTop: SCREEN_HEIGHT / 50,
   },
@@ -273,10 +307,38 @@ const styles = StyleSheet.create({
     paddingVertical: SCREEN_HEIGHT / 50,
     borderBottomWidth: 0.5,
   },
+
+  //Header Profil
+  userCard: {
+    position: 'relative',
+    marginLeft: SCREEN_WIDTH / 20,
+  },
+  profilInput: {
+    flexDirection: 'row',
+  },
+  blockProfilInput: {
+    marginTop: SCREEN_HEIGHT / 50,
+
+  },
   textEmail: {
     color: colors.palette.violet,
     fontFamily: 'mulishLight',
     fontSize: 16,
-
   },
+  textDetail: {
+    color: colors.palette.orange,
+    fontFamily: 'mulishLight',
+    fontSize: 16,
+    paddingLeft: SCREEN_WIDTH / 30,
+    textTransform: 'capitalize',
+  },
+  blockIcon: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+  },
+  // Block Element
+  blockElement: {
+    marginTop: SCREEN_HEIGHT / 50,
+    flexDirection: 'column',
+  }
 })
