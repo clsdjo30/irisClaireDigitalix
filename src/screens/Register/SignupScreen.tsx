@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState} from 'react';
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input, CheckBox } from '@rneui/themed';
@@ -8,60 +8,31 @@ import { useUserStore } from '../../hooks/useUserStore';
 import { StackScreenProps } from '@react-navigation/stack';
 import { colors } from '../../theme';
 import NavigationButton from '../../components/NavigationButton';
-
-const { width } = Dimensions.get('screen');
+import { SCREEN_WIDTH } from '../../utils/constants';
+import { getZodiacSign } from '../../utils/zodiacHelpers';
 
 
 const auth = getAuth()
 
+interface User {
+  email: string;
+  password: string;
+}
+
 const SignInScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   const [user, setUser] = useUserStore();
-  const [policy, setPolicy] = React.useState([false, false]);
-  const [error, setError] = React.useState('');
+  const [policy, setPolicy] = useState([false, false]);
+  const [error, setError] = useState(''); 
 
-  // Recuperation de la date de naissance
+
   const dateStr = user.birthday;
   const dateParts = dateStr.split('/');
   const day = parseInt(dateParts[0]);
   const month = parseInt(dateParts[1]);
-  // Recuperation des element du signe astrologique
-  const zodiac = require('zodiac-signs')('en');
-  const sign = zodiac.getSignByDate({ day: day, month: month });
+  const zodiacInfo = getZodiacSign(day, month);
 
-  const airSign = [
-    'Gemini',
-    'Libra',
-    'Aquarius',
-  ];
-  const waterSign = [
-    'Cancer',
-    'Scorpio',
-    'Pisces',
-  ];
-  const fireSign = [
-    'Aries',
-    'Leo',
-    'Sagittarius',
-  ];
-  const earthSign = [
-    'Taurus',
-    'Virgo',
-    'Capricorn',
-  ];
+  console.log('Name',zodiacInfo);
 
-  function findUserElement() {
-    if (airSign.includes(sign.name)) {
-      return 'air'
-    } else if (waterSign.includes(sign.name)) {
-      return 'water'
-    } else if (fireSign.includes(sign.name)) {
-      return 'fire'
-    } else if (earthSign.includes(sign.name)) {
-      return 'earth'
-    }
-  }
-
-  const userElement = findUserElement();
 
   function saveUser(useruid: string) {
     const db = firestore;
@@ -71,10 +42,10 @@ const SignInScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
       genre: user.genre,
       birthday: user.birthday,
       isagree: user.isagree,
-      zodiac: sign.name,
-      stone: sign.stone,
-      symbol: sign.symbol,
-      element: userElement,
+      zodiac: zodiacInfo.name,
+      stone: zodiacInfo.stone,
+      symbol: zodiacInfo.symbol,
+      element: zodiacInfo.element,
     });
   }
 
@@ -163,7 +134,7 @@ const SignInScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
         </View>
         <View style={styles.validationButton}>
           <NavigationButton
-            width={width / 1.2}
+            width={SCREEN_WIDTH / 1.2}
             backgroundColor={colors.palette.orange}
             color={colors.palette.violetBg}
             title="Commencer a poser vos questions"

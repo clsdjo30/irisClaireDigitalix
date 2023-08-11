@@ -82,7 +82,8 @@
     "react-native-view-shot": "3.7.0",
     "react-native-web": "~0.19.6",
     "zodiac-signs": "^1.2.1",
-    "expo-sharing": "~11.5.0"
+    "expo-sharing": "~11.5.0",
+    "expo-localization": "~14.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.22.5",

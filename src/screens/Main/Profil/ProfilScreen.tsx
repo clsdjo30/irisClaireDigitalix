@@ -34,7 +34,7 @@ const ProfilScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   const [checked, setChecked] = useState(false);
   const [user, setUser] = useUserStore();
 
-
+console.log('user', user)
   const rightArrow = require('../../../../assets/icons/caretRight.png');
 
   const userSign = user?.zodiacname;
@@ -322,12 +322,12 @@ const styles = StyleSheet.create({
   },
   textEmail: {
     color: colors.palette.violet,
-    fontFamily: 'mulishLight',
+    fontFamily: 'mulishRegular',
     fontSize: 16,
   },
   textDetail: {
     color: colors.palette.orange,
-    fontFamily: 'mulishLight',
+    fontFamily: 'mulishRegular',
     fontSize: 16,
     paddingLeft: SCREEN_WIDTH / 30,
     textTransform: 'capitalize',

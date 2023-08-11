@@ -24,7 +24,6 @@ export default {
     "splash": {
       "image": "./assets/splash/splash.png",
       "resizeMode": "cover",
-      "backgroundColor": "#fffff"
     },
     "platforms": [
       "ios",
@@ -48,7 +47,7 @@ export default {
       "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./assets/icons/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#C8B5E4"
       }
     },
     "web": {

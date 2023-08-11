@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
 
       color: colors.palette.violet,
       fontSize: SCREEN_FONT_SCALE + 12,
-      fontFamily: 'mulishLight',
+      fontFamily: 'mulishRegular',
     },
 });
 
