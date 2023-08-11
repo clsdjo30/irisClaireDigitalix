@@ -31,8 +31,7 @@ const SignInScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   const month = parseInt(dateParts[1]);
   const zodiacInfo = getZodiacSign(day, month);
 
-  console.log('Name',zodiacInfo);
-
+  console.log('zodiacInfo', zodiacInfo)
 
   function saveUser(useruid: string) {
     const db = firestore;
@@ -42,9 +41,8 @@ const SignInScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
       genre: user.genre,
       birthday: user.birthday,
       isagree: user.isagree,
-      zodiac: zodiacInfo.name,
-      stone: zodiacInfo.stone,
-      symbol: zodiacInfo.symbol,
+      zodiac: zodiacInfo.transUserSign,
+      stone: zodiacInfo.transUserStone,
       element: zodiacInfo.element,
     });
   }

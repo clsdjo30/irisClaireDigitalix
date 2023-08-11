@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import {
   StyleSheet,
   Text,
@@ -7,22 +7,20 @@ import {
   TouchableOpacity,
   Dimensions
 } from 'react-native';
-import { Switch } from '@rneui/themed';
+import { getAuth } from 'firebase/auth';
 import { colors } from '../../../theme';
 import { StackScreenProps } from '@react-navigation/stack';
-import { useUserStore } from '../../../hooks/useUserStore';
 import { useUserInformation } from '../../../hooks/useUserInformations';
-import { getAuth } from 'firebase/auth';
 import UserSignIcon from '../../../components/UserSignIcon';
 import UserStoneIcon from '../../../components/UserStoneIcon';
 import UserElementIcon from '../../../components/UserElementIcon';
-
-interface Item {
-  id: string;
-  title: string;
-}
+import NavigationButton from '../../../components/NavigationButton';
+import * as Localization from "expo-localization";
+import { getLocaleSign, getLocaleStone, getLocaleElement } from '../../../utils/zodiacTranslate';
 
 const auth = getAuth();
+const rightArrow = require('../../../../assets/icons/caretRight.png');
+
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = SCREEN_WIDTH * 1.5;
 const SCREEN_SCALE = Dimensions.get('window').scale;
@@ -30,103 +28,80 @@ const SCREEN_FONT_SCALE = SCREEN_SCALE * 0.5;
 
 
 const ProfilScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
-  useUserInformation();
-  const [checked, setChecked] = useState(false);
-  const [user, setUser] = useUserStore();
 
-console.log('user', user)
-  const rightArrow = require('../../../../assets/icons/caretRight.png');
+  const userInfo = useUserInformation();
+  // Récupérez la locale actuelle (par exemple, "fr-FR" ou "en-US")
+  const locale = Localization.locale.split("-")[0];
 
-  const userSign = user?.zodiacname;
-  const userStone = user?.stone;
-  const userElement = user?.element;
+  // recup user Astro, Element, Stone
+  const userSign = userInfo.user?.zodiacname
+  const userStone = userInfo.user?.stone
+  const userElement = userInfo.user?.element
 
-
+  // Affiche le nom en fonction de la locale
+  const userTransSign = getLocaleSign(userInfo.user?.zodiacname, locale)
+  const userTransStone = getLocaleStone(userInfo.user?.zodiacname, locale)
+  const userTransElement = getLocaleElement(userInfo.user?.element, locale)
 
 
   return (
     <View style={styles.container}>
 
       <View style={styles.header}>
-        
+
         {/* START USER CARD */}
-        {/* Header User Information */}
         <View style={styles.userCard}>
           <Text style={styles.headerTitle}>mon profil</Text>
+
+          {/* Header User Element Informations  */}
           <View style={styles.headerUnderlineTop}>
-            {UserStoneIcon({ userStone: userStone, name: user?.stone })}
-            {UserSignIcon({ userSign: userSign, name: user?.zodiacname })}
-            {UserElementIcon({ userElement: userElement, name: user?.element })}
+            {UserSignIcon({ userSign: userSign})}
+            {UserElementIcon({ userElement: userElement})}
+            {UserStoneIcon({ userStone: userStone })}
           </View>
+
+          {/* Header User Information */}
           <View style={styles.blockProfilInput}>
             <View style={styles.profilInput}>
               <Text style={styles.textEmail}>Prénom: </Text>
-              <Text style={styles.textDetail}>{user?.firstname}</Text>
+              <Text style={styles.textDetail}>{userInfo.user?.firstname}</Text>
             </View>
             <View style={styles.profilInput}>
               <Text style={styles.textEmail}>Email: </Text>
-              <Text style={styles.textDetail} >{user?.email}</Text>
+              <Text style={styles.textDetail} >{userInfo.user?.email}</Text>
             </View>
             <View style={styles.profilInput}>
               <Text style={styles.textEmail}>Date de naissance: </Text>
-              <Text style={styles.textDetail} >{user?.birthday}</Text>
+              <Text style={styles.textDetail} >{userInfo.user?.birthday}</Text>
             </View>
           </View>
+
           <View style={styles.headerUnderlineTop} />
-          
+
+          {/* User Astro information*/}
           <View style={styles.blockElement}>
             <View style={styles.profilInput}>
               <Text style={styles.textEmail}>Ma Pierre: </Text>
-              <Text style={styles.textDetail} >{userStone}</Text>
+              <Text style={styles.textDetail} >{userTransStone}</Text>
             </View>
             <View style={styles.profilInput}>
               <Text style={styles.textEmail}>Mon Signe: </Text>
-              {userSign === 'Taurus'
-                ?
-                <Text style={styles.textDetail} >Taureau</Text>
-                :
-                <Text style={styles.textDetail} >{userSign}</Text>
-
-              }
+              <Text style={styles.textDetail} >{userTransSign}</Text>
             </View>
             <View style={styles.profilInput}>
               <Text style={styles.textEmail}>Mon Element: </Text>
-              <Text style={styles.textDetail} >{userElement}</Text>
+              <Text style={styles.textDetail} >{userTransElement}</Text>
             </View>
           </View>
           <View>
-
-
           </View>
-
         </View>
       </View>
-
-      {/* User Astro information*/}
 
       {/* END USER CARD */}
 
 
       <View style={styles.paramContent}>
-
-        {/* <View style={styles.blockSwitch}>
-          <View style={styles.switchParam}>
-            <Text style={styles.switchText}>Notifications</Text>
-            <Switch
-              value={checked}
-              onValueChange={(value) => setChecked(value)}
-            />
-          </View>
-          <View style={styles.switchParam}>
-            <Text style={styles.switchText}>Recevoir nos offre</Text>
-            <Switch
-              value={checked}
-              onValueChange={(value) => setChecked(value)}
-            />
-          </View>
-        </View> */}
-
-
 
         <View style={styles.paramsList}>
           <View style={styles.blockParam}>
@@ -172,11 +147,13 @@ console.log('user', user)
 
         </View>
         <View style={styles.blockButton}>
-          <TouchableOpacity style={styles.button} onPress={() => auth.signOut()}>
-            <Text style={styles.buttonText}>
-              se déconnecter
-            </Text>
-          </TouchableOpacity>
+          <NavigationButton
+            title="Se Déconnecter"
+            onPress={() => auth.signOut()}
+            width={SCREEN_WIDTH / 1.2}
+            backgroundColor={colors.palette.orange}
+            color={colors.palette.violetBg}
+          />
         </View>
       </View>
 
