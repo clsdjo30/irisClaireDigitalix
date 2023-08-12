@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View, Text, Dimensions } from 'react-native';
 import { Icon } from '@rneui/base'
 import { StackScreenProps } from '@react-navigation/stack';
@@ -12,16 +12,31 @@ const width = Dimensions.get('window').width;
 
 const GenreScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     const [user, setUser] = useUserStore()
+    const [error, setError] = useState('')
+
+    function goToBirthday() {
+        if (user.genre.length === 0) {
+            setError("Vous devez choisr un genre");
+            return;
+        }
+
+        navigation.navigate('Birthday', { user: user });
+    }
+
 
     return (
         <View testID='genre-screen' style={styles.container}>
-
+            {error !== '' && (
+                <View style={styles.errorContainer}>
+                    <Text style={styles.errorText}>{error}</Text>
+                </View>
+            )}
             <View  style={styles.controls}>
                 <View style={styles.genderTitle}>
                     <Text style={styles.contentTitle}>Vous êtes : </Text>
                 </View>
                 <Form
-                    onButtonPress={() => navigation.navigate('Birthday', { user: user })}
+                    onButtonPress={goToBirthday}
                     buttonStyle={styles.button}
                     buttonText="Suivant"
                     buttonTextStyle={styles.buttonText}
@@ -157,6 +172,22 @@ const styles = StyleSheet.create({
         fontSize: 18,
         color: colors.palette.violetBg,
         marginBottom: 20
+    },
+    //ERROR
+    errorContainer: {
+        position: 'absolute',
+        top: 0,
+        width: '80%',
+        backgroundColor: colors.palette.orange,
+        marginTop: 40,
+        borderRadius: 16,
+    },
+    errorText: {
+        textAlign: "center",
+        fontFamily: "mulishBold",
+        fontSize: 12,
+        color: colors.palette.violetClair,
+        paddingVertical: 6,
     },
 });
 

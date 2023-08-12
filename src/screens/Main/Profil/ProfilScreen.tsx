@@ -33,6 +33,8 @@ const ProfilScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   // Récupérez la locale actuelle (par exemple, "fr-FR" ou "en-US")
   const locale = Localization.locale.split("-")[0];
 
+  
+
   // recup user Astro, Element, Stone
   const userSign = userInfo.user?.zodiacname
   const userStone = userInfo.user?.stone
@@ -55,8 +57,8 @@ const ProfilScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
           {/* Header User Element Informations  */}
           <View style={styles.headerUnderlineTop}>
-            {UserSignIcon({ userSign: userSign})}
             {UserElementIcon({ userElement: userElement})}
+            {UserSignIcon({ userSign: userSign})}
             {UserStoneIcon({ userStone: userStone })}
           </View>
 
