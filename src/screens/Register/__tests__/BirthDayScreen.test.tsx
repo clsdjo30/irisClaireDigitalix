@@ -1,6 +1,5 @@
 import React from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react-native';
-import { goToSignUp } from '../BirthdayScreen';
 import BirthdayScreen from '../BirthdayScreen';
 
 // Mock de useUserStore
