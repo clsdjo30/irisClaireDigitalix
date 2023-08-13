@@ -16,11 +16,11 @@ const GenreScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
     function goToBirthday() {
         if (user.genre.length === 0) {
-            setError("Vous devez choisr un genre");
+            setError("Vous devez choisir un genre");
             return;
         }
 
-        navigation.navigate('Birthday', { user: user });
+        navigation.navigate('Birthday');
     }
 
 

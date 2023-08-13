@@ -1,36 +1,30 @@
 import React from 'react';
-import { render } from '@testing-library/react-native';
+import { render, cleanup } from '@testing-library/react-native';
 import UserElementIcon from '../UserElementIcon';
 
+afterEach(cleanup);
+
+const ELEMENT_NAMES = ['Air', 'Water', 'Fire', 'Earth'];
+
 describe('UserElementIcon', () => {
-    it('renders correctly with valid element name', () => {
-        const { getByText } = render(<UserElementIcon userElement="air" name="Air" />);
-        expect(getByText('Air')).toBeTruthy();
+    ELEMENT_NAMES.forEach(element => {
+        it(`should render correctly with the "${element}" element`, () => {
+            const { getByText, getByTestId } = render(<UserElementIcon userElement={element} />);
+            expect(getByTestId('element-image')).toBeTruthy();
+            expect(getByText('Mon Element')).toBeTruthy();
+        });
     });
 
-    it('does not render with invalid element name', () => {
-        const { queryByText } = render(<UserElementIcon userElement="invalid" name="Invalid" />);
-        expect(queryByText('Invalid')).toBeNull();
+    it('should not render if an invalid element is passed', () => {
+        const { queryByTestId } = render(<UserElementIcon userElement="invalidElement" />);
+        expect(queryByTestId('element-image')).toBeNull();
     });
 
-    it('does not render when userElement is an empty string', () => {
-        const { queryByText } = render(<UserElementIcon userElement="" name="Air" />);
-        expect(queryByText('Air')).toBeNull();
-    });
+    it('should not render if userElement is null or an empty string', () => {
+        const { queryByTestId } = render(<UserElementIcon userElement={null} />);
+        expect(queryByTestId('element-image')).toBeNull();
 
-    it('does not render when userElement is null', () => {
-        const { queryByText } = render(<UserElementIcon userElement={null} name="Air" />);
-        expect(queryByText('Air')).toBeNull();
+        const { queryByTestId: queryByTestId2 } = render(<UserElementIcon userElement="" />);
+        expect(queryByTestId2('element-image')).toBeNull();
     });
-
-    it('renders correctly when name is an empty string', () => {
-        const { getByText } = render(<UserElementIcon userElement="air" name="" />);
-        expect(getByText('')).toBeTruthy();
-    });
-
-    it('renders correctly when name is null', () => {
-        const { getByText } = render(<UserElementIcon userElement="air" name={null} />);
-        expect(getByText('')).toBeTruthy();
-    });
-
 });

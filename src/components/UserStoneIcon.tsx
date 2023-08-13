@@ -34,7 +34,7 @@ const STONE_ICON = [
       return (
         <View style={styles.blockSign}>
           <Image testID="stone-image" source={Object.values(stoneIcon)[0]} style={styles.stoneImage} />
-          <Text testID="stone-name" style={styles.signText}>Ma Pierre</Text>
+          <Text style={styles.signText}>Ma Pierre</Text>
         </View>
       );
     }

@@ -23,7 +23,7 @@ const ASTRO_ICON = [
     { sagittarius: require('../../assets/icons/astroSign/sagittarius.png') },
     { scorpio: require('../../assets/icons/astroSign/scorpio.png') },
     { taurus: require('../../assets/icons/astroSign/taurus.png') },
-    { virgo: require('../../assets/icons/astroSign/virgo.png') },
+    { virgo: require('../../assets/icons/astroSign/virgo.png') }, 
 ];
 
 const UserSignIcon: React.FC<UserSignIconProps> = ({ userSign }) => {

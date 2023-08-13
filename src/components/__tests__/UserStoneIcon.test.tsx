@@ -1,39 +1,30 @@
 import React from 'react';
-import { render } from '@testing-library/react-native';
+import { render, cleanup } from '@testing-library/react-native';
 import UserStoneIcon from '../UserStoneIcon';
 
+afterEach(cleanup);
 
+const STONE_NAMES = ['Onyx', 'Cornaline', 'Amethyst', 'Emerald', 'Ruby', 'Sapphire', 'Topaz', 'Agate', 'Beryl', 'Chrysolite', 'Camelian', 'Heliotrope'];
 
 describe('UserStoneIcon', () => {
-    it('renders correctly with valid stone name', () => {
-        const { getByText } = render(<UserStoneIcon userStone="onyx" name="Onyx" />);
-        expect(getByText('Onyx')).toBeTruthy();
+    STONE_NAMES.forEach(stone => {
+        it(`should render correctly with the "${stone}" stone`, () => {
+            const { getByText, getByTestId } = render(<UserStoneIcon userStone={stone} />);
+            expect(getByTestId('stone-image')).toBeTruthy();
+            expect(getByText('Ma Pierre')).toBeTruthy();
+        });
     });
 
-    it('does not render with invalid stone name', () => {
-        const { queryByText } = render(<UserStoneIcon userStone="invalid" name="Invalid" />);
-        expect(queryByText('Invalid')).toBeNull();
+    it('should not render if an invalid stone is passed', () => {
+        const { queryByTestId } = render(<UserStoneIcon userStone="invalidStone" />);
+        expect(queryByTestId('stone-image')).toBeNull();
     });
 
-    it('does not render when userStone is an empty string', () => {
-        const { queryByText } = render(<UserStoneIcon userStone="" name="Onyx" />);
-        expect(queryByText('Onyx')).toBeNull();
-    });
+    it('should not render if userStone is null or an empty string', () => {
+        const { queryByTestId } = render(<UserStoneIcon userStone={null} />);
+        expect(queryByTestId('stone-image')).toBeNull();
 
-    it('does not render when userStone is null', () => {
-        const { queryByText } = render(<UserStoneIcon userStone={null} name="Onyx" />);
-        expect(queryByText('Onyx')).toBeNull();
-    });
-
-    it('renders correctly when name is an empty string', () => {
-        const { queryByTestId } = render(<UserStoneIcon userStone="onyx" name="" />);
-        expect(queryByTestId('stone-image')).toBeTruthy();
-        expect(queryByTestId('stone-name')).toBeNull();
-    });
-
-    it('renders correctly when name is null', () => {
-        const { queryByTestId } = render(<UserStoneIcon userStone="onyx" name={null} />);
-        expect(queryByTestId('stone-image')).toBeTruthy();
-        expect(queryByTestId('stone-name')).toBeNull();
+        const { queryByTestId: queryByTestId2 } = render(<UserStoneIcon userStone="" />);
+        expect(queryByTestId2('stone-image')).toBeNull();
     });
 });
