@@ -5,11 +5,6 @@ export function getZodiacSign(day: number, month: number) {
   const sign = zodiac.getSignByDate({ day, month });
   const userSign = sign.name;
 
-  //   if (!zodiacTranslate[locale] || !zodiacTranslate[locale].signs[sign]) {
-  //     console.error(`Translation missing for ${sign} in locale ${locale}`);
-  //     return null;
-  //   }
-
     const localizedSign = zodiacTranslate['en'].signs[userSign];
     //recup du sign traduit
     const transUserSign = localizedSign.name;
@@ -21,7 +16,7 @@ export function getZodiacSign(day: number, month: number) {
   return { transUserSign, transUserStone, element };
 }
 
-function determineElement(signName: string, locale: string) {
+export function determineElement(signName: string, locale: string) {
   const airSign = ["Gemini", "Libra", "Aquarius"];
   const waterSign = ["Cancer", "Scorpio", "Pisces"];
   const fireSign = ["Aries", "Leo", "Sagittarius"];
