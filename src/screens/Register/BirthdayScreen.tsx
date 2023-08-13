@@ -60,7 +60,7 @@ const BirthdayScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
         <View testID='birthday-screen' style={styles.container}>
             {error !== '' && (
-                <View style={styles.errorContainer}>
+                <View testID='error' style={styles.errorContainer}>
                     <Text style={styles.errorText}>{error}</Text>
                 </View>
             )}
@@ -98,6 +98,7 @@ const BirthdayScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
                     <View style={styles.button}>
                         <NavigationButton
+                            testID='goToSignUp'
                             color={colors.palette.violetBg}
                             backgroundColor={colors.palette.orange}
                             width={width / 1.3}
