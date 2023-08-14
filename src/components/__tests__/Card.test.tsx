@@ -9,7 +9,11 @@ describe('Card', () => {
     it('renders correctly', () => {
         const { getByTestId } = render(<Card onPress={onPressMock} source={imageSource} />);
 
+<<<<<<< HEAD
         const card = getByTestId('cardss');
+=======
+        const card = getByTestId('card777777');
+>>>>>>> parent of c23cc17 (test husky again)
         expect(card).toBeTruthy();
     });
 

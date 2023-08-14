@@ -9,8 +9,13 @@
     "test": "jest"
   },
   "husky": {
+<<<<<<< HEAD
   "hooks": {
     "pre-commit": "npm test"
+=======
+    "hooks": {
+      "pre-commit": "npm test"
+>>>>>>> parent of c23cc17 (test husky again)
   }
   },
   "jest": {
