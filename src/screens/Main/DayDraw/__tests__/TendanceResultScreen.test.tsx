@@ -1,8 +1,10 @@
 import React from 'react';
-import { render, fireEvent, act } from '@testing-library/react-native';
+import { render, fireEvent, act, cleanup } from '@testing-library/react-native';
 import TendanceResultScreen from '../TendanceResultScreen';
 import * as Sharing from 'expo-sharing';
 import * as ViewShot from 'react-native-view-shot';
+import { BackHandler } from 'react-native';
+
 
 // Mocks
 jest.mock('expo-sharing', () => ({
@@ -53,6 +55,7 @@ const mockedCaptureRef = ViewShot.captureRef as jest.MockedFunction<typeof ViewS
 describe('TendanceResultScreen', () => {
     afterEach(() => {
         jest.clearAllMocks();
+        cleanup();
     });
 
     it('renders correctly', () => {
@@ -104,5 +107,24 @@ describe('TendanceResultScreen', () => {
 
         expect(mockedCaptureRef).toHaveBeenCalled();
         expect(mockedShareAsync).toHaveBeenCalledWith('path/to/image.png');
+    });
+
+    it('listens for hardware back press on mount', () => {
+        const addEventListenerSpy = jest.spyOn(BackHandler, 'addEventListener');
+
+        render(<TendanceResultScreen {...mockProps} />);
+
+        expect(addEventListenerSpy).toHaveBeenCalledWith('hardwareBackPress', expect.any(Function));
+    });
+
+    it('removes the listener on unmount', () => {
+        const removeSpy = jest.fn();
+        jest.spyOn(BackHandler, 'addEventListener').mockReturnValue({ remove: removeSpy });
+
+        const { unmount } = render(<TendanceResultScreen {...mockProps} />);
+
+        unmount();
+
+        expect(removeSpy).toHaveBeenCalled();
     });
 });

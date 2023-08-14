@@ -1,10 +1,11 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import {
     StyleSheet,
     View,
     Image,
     Text,
-    ImageSourcePropType
+    ImageSourcePropType, 
+    BackHandler
 } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
 import { colors } from '../../../theme';
@@ -17,6 +18,19 @@ import * as Sharing from 'expo-sharing';
 const TendanceResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     const [ daydraw ] = useDaydrawStore();
     const viewRef = useRef<View>(null);
+
+    useEffect(() => {
+        const backAction = () => {
+            return true;
+        };
+
+        const backHandler = BackHandler.addEventListener(
+            "hardwareBackPress",
+            backAction
+        );
+
+        return () => backHandler.remove();
+    }, []);
    
     const captureAndShare = async (viewRef:  React.ReactInstance | React.RefObject<unknown>) => {
         if (!(await Sharing.isAvailableAsync())) {
