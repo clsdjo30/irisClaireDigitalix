@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import {
   StyleSheet,
   Text,
@@ -7,24 +7,20 @@ import {
   TouchableOpacity,
   Dimensions
 } from 'react-native';
-import { Switch } from '@rneui/themed';
-import { colors } from '../../../theme';
-import { LinearGradient } from 'expo-linear-gradient'
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { StackScreenProps } from '@react-navigation/stack';
-import { useUserStore } from '../../../hooks/useUserStore';
-import { useUserInformation } from '../../../hooks/useUserInformations';
 import { getAuth } from 'firebase/auth';
+import { colors } from '../../../theme';
+import { StackScreenProps } from '@react-navigation/stack';
+import { useUserInformation } from '../../../hooks/useUserInformations';
 import UserSignIcon from '../../../components/UserSignIcon';
 import UserStoneIcon from '../../../components/UserStoneIcon';
 import UserElementIcon from '../../../components/UserElementIcon';
-
-interface Item {
-  id: string;
-  title: string;
-}
+import NavigationButton from '../../../components/NavigationButton';
+import * as Localization from "expo-localization";
+import { getLocaleSign, getLocaleStone, getLocaleElement } from '../../../utils/zodiacTranslate';
 
 const auth = getAuth();
+const rightArrow = require('../../../../assets/icons/caretRight.png');
+
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = SCREEN_WIDTH * 1.5;
 const SCREEN_SCALE = Dimensions.get('window').scale;
@@ -32,39 +28,76 @@ const SCREEN_FONT_SCALE = SCREEN_SCALE * 0.5;
 
 
 const ProfilScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
-  useUserInformation();
-  const [checked, setChecked] = React.useState(false);
-  const [user, setUser] = useUserStore();
 
+  const userInfo = useUserInformation();
+  // Récupérez la locale actuelle (par exemple, "fr-FR" ou "en-US")
+  const locale = Localization.locale.split("-")[0];
 
-  const rightArrow = require('../../../../assets/icons/caretRight.png');
+  
+  console.log('userInfo', userInfo)
+  
+  // recup user Astro, Element, Stone
+  const userSign = userInfo.user?.zodiacname
+  const userStone = userInfo.user?.stone
+  const userElement = userInfo.user?.element
 
-  const userSign = user?.zodiacname;
-  const userStone = user?.stone;
-  const userElement = user?.element;
-
+  // Affiche le nom en fonction de la locale
+  const userTransSign = getLocaleSign(userInfo.user?.zodiacname, locale)
+  const userTransStone = getLocaleStone(userInfo.user?.zodiacname, locale)
+  const userTransElement = getLocaleElement(userInfo.user?.element, locale)
 
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
 
-      <View style={styles.header} />
-      {/* START USER CARD */}
-      <View style={styles.userCard}>
-        <View style={styles.headerUnderlineTop}>
-          {UserStoneIcon({userStone:userStone, name:user?.stone})}
-          {UserSignIcon({userSign:userSign, name:user?.zodiacname})}
-          {UserElementIcon({ userElement: userElement, name: user?.element })}
+      <View style={styles.header}>
 
-        </View>
-        {/* Header User Information */}
+        {/* START USER CARD */}
+        <View style={styles.userCard}>
+          <Text style={styles.headerTitle}>mon profil</Text>
 
-        <Text style={styles.headerTitle}>mon compte</Text>
+          {/* Header User Element Informations  */}
+          <View style={styles.headerUnderlineTop}>
+            {UserElementIcon({ userElement: userElement})}
+            {UserSignIcon({ userSign: userSign})}
+            {UserStoneIcon({ userStone: userStone })}
+          </View>
 
-        {/* User Astro information*/}
-        <View style={styles.headerUnderline}>
-          <Text style={styles.headerSubTitle}>{user?.firstname}</Text>
-          <Text style={styles.textEmail}>{user?.email}</Text>
+          {/* Header User Information */}
+          <View style={styles.blockProfilInput}>
+            <View style={styles.profilInput}>
+              <Text style={styles.textEmail}>Prénom: </Text>
+              <Text style={styles.textDetail}>{userInfo.user?.firstname}</Text>
+            </View>
+            <View style={styles.profilInput}>
+              <Text style={styles.textEmail}>Email: </Text>
+              <Text style={styles.textDetail} >{userInfo.user?.email}</Text>
+            </View>
+            <View style={styles.profilInput}>
+              <Text style={styles.textEmail}>Date de naissance: </Text>
+              <Text style={styles.textDetail} >{userInfo.user?.birthday}</Text>
+            </View>
+          </View>
+
+          <View style={styles.headerUnderlineTop} />
+
+          {/* User Astro information*/}
+          <View style={styles.blockElement}>
+            <View style={styles.profilInput}>
+              <Text style={styles.textEmail}>Ma Pierre: </Text>
+              <Text style={styles.textDetail} >{userTransStone}</Text>
+            </View>
+            <View style={styles.profilInput}>
+              <Text style={styles.textEmail}>Mon Signe: </Text>
+              <Text style={styles.textDetail} >{userTransSign}</Text>
+            </View>
+            <View style={styles.profilInput}>
+              <Text style={styles.textEmail}>Mon Element: </Text>
+              <Text style={styles.textDetail} >{userTransElement}</Text>
+            </View>
+          </View>
+          <View>
+          </View>
         </View>
       </View>
 
@@ -72,29 +105,13 @@ const ProfilScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
 
       <View style={styles.paramContent}>
-        <View style={styles.blockSwitch}>
-          <View style={styles.switchParam}>
-            <Text style={styles.switchText}>Notifications</Text>
-            <Switch
-              value={checked}
-              onValueChange={(value) => setChecked(value)}
-            />
-          </View>
-          <View style={styles.switchParam}>
-            <Text style={styles.switchText}>Recevoir nos offre</Text>
-            <Switch
-              value={checked}
-              onValueChange={(value) => setChecked(value)}
-            />
-          </View>
-        </View>
 
         <View style={styles.paramsList}>
           <View style={styles.blockParam}>
             <TouchableOpacity
               style={styles.paramRow}
               onPress={() => navigation.navigate('MyQuestions')}>
-              <Text style={styles.switchText}>Mes Questions</Text>
+              <Text style={styles.switchText}>Mon historique</Text>
               <Image source={rightArrow} style={styles.iconImage} />
             </TouchableOpacity>
           </View>
@@ -133,15 +150,17 @@ const ProfilScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
         </View>
         <View style={styles.blockButton}>
-          <TouchableOpacity style={styles.button} onPress={() => auth.signOut()}>
-            <Text style={styles.buttonText}>
-              se déconnecter
-            </Text>
-          </TouchableOpacity>
+          <NavigationButton
+            title="Se Déconnecter"
+            onPress={() => auth.signOut()}
+            width={SCREEN_WIDTH / 1.2}
+            backgroundColor={colors.palette.orange}
+            color={colors.palette.violetBg}
+          />
         </View>
       </View>
 
-    </SafeAreaView>
+    </View>
   )
 }
 
@@ -161,7 +180,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     width: SCREEN_WIDTH - 5,
-    height: SCREEN_HEIGHT * 0.4,
+    height: SCREEN_HEIGHT * 0.63,
     borderBottomLeftRadius: SCREEN_WIDTH * 0.1,
     borderBottomRightRadius: SCREEN_WIDTH * 0.1,
     backgroundColor: colors.background
@@ -233,11 +252,7 @@ const styles = StyleSheet.create({
     height: 20,
   },
   //START O FUSER CARD INFORMATION
-  userCard: {
-    position: 'absolute',
-    top: 0,
 
-  },
   cardUserStyle: {
     width: SCREEN_WIDTH / 1.1,
     height: SCREEN_HEIGHT * 0.345,
@@ -247,12 +262,12 @@ const styles = StyleSheet.create({
     fontSize: SCREEN_FONT_SCALE + 25,
     fontFamily: 'oswaldLight',
     textTransform: 'capitalize',
-    textAlign: 'center',
+    textAlign: 'left',
     marginTop: SCREEN_HEIGHT / 50,
   },
   headerSubTitle: {
     color: colors.palette.violet,
-    fontSize: SCREEN_FONT_SCALE + 16,
+    fontSize: 14,
     fontFamily: 'oswaldBold',
     textTransform: 'capitalize',
   },
@@ -261,7 +276,6 @@ const styles = StyleSheet.create({
     paddingVertical: SCREEN_HEIGHT / 80,
     paddingBottom: SCREEN_HEIGHT * 0.04,
     flexDirection: 'row',
-    justifyContent: 'space-around',
     alignItems: 'center',
     marginTop: SCREEN_HEIGHT / 50,
   },
@@ -273,10 +287,38 @@ const styles = StyleSheet.create({
     paddingVertical: SCREEN_HEIGHT / 50,
     borderBottomWidth: 0.5,
   },
-  textEmail: {
-    color: colors.palette.violet,
-    fontFamily: 'mulishLight',
-    fontSize: 16,
+
+  //Header Profil
+  userCard: {
+    position: 'relative',
+    marginLeft: SCREEN_WIDTH / 20,
+  },
+  profilInput: {
+    flexDirection: 'row',
+  },
+  blockProfilInput: {
+    marginTop: SCREEN_HEIGHT / 50,
 
   },
+  textEmail: {
+    color: colors.palette.violet,
+    fontFamily: 'mulishRegular',
+    fontSize: 16,
+  },
+  textDetail: {
+    color: colors.palette.orange,
+    fontFamily: 'mulishRegular',
+    fontSize: 16,
+    paddingLeft: SCREEN_WIDTH / 30,
+    textTransform: 'capitalize',
+  },
+  blockIcon: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+  },
+  // Block Element
+  blockElement: {
+    marginTop: SCREEN_HEIGHT / 50,
+    flexDirection: 'column',
+  }
 })

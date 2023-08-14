@@ -5,9 +5,7 @@ import {
   StyleSheet,
   View,
   ImageSourcePropType,
-  Dimensions,
   Text,
-  Modal,
   ViewStyle
 } from 'react-native';
 import Animated, {
@@ -23,83 +21,9 @@ import {
   useCrossQuestionStore
 } from '../../../hooks/useCrossQuestionStore';
 import CustomModal from '../../../components/reusable/CustomModal';
-const SCREEN_WIDTH = Dimensions.get('window').width;
-const SCREEN_HEIGHT = SCREEN_WIDTH * 1.5;
+import FlipCard from '../../../components/FlipCard';
+import { SCREEN_HEIGHT, SCREEN_WIDTH } from '../../../utils/constants';
 
-// On définit un type pour les props de notre composant FlipCard. Ces props incluent deux images: l'image de face et l'image de dos de la carte.
-type CardProps = {
-  frontImageUrl: Array<ImageSourcePropType>,
-  backImageUrl: Array<ImageSourcePropType>,
-  onFlip?: () => void,
-  style?: ViewStyle
-}
-// Le composant FlipCard est responsable de l'affichage d'une seule carte et de la gestion de son état "flip".
-const FlipCard: React.FC<CardProps> = ({ frontImageUrl, backImageUrl, onFlip, style }) => {
-  // On utilise useState pour gérer l'état "flip" de la carte.
-  const [isFlipped, setIsFlipped] = useState(false);
-  const [isCardFlipped, setIsCardFlipped] = useState(false);
-  const frontImageRef = useRef<Image>(null);
-  const backImageRef = useRef<Image>(null);
-  // On utilise useSharedValue de react-native-reanimated pour animer le flip de la carte.
-  const flip = useSharedValue(0);
-  const scale = useSharedValue(1);
-  const up = useSharedValue(0);
-  const left = useSharedValue(0);
-
-  useEffect(() => {
-    if (isCardFlipped) {
-      frontImageRef.current?.setNativeProps({ style: { transform: [{ scaleX: -1 }] } });
-      backImageRef.current?.setNativeProps({ style: { transform: [{ scaleX: -1 }] } });
-    } else {
-      frontImageRef.current?.setNativeProps({ style: { transform: [{ scaleX: 1 }] } });
-      backImageRef.current?.setNativeProps({ style: { transform: [{ scaleX: 1 }] } });
-    }
-  }, [isCardFlipped]);
-
-  // La fonction flipCard inverse l'état flip de la carte et déclenche l'animation.
-  const flipCard = () => {
-    if (!isFlipped) { // only allow flipping to front side
-      setIsFlipped(true);
-      flip.value = withTiming(180, { duration: 1200 });
-      scale.value = withTiming(2, { duration: 1200 }, () => { scale.value = withTiming(1, { duration: 1200 }) });
-      left.value = withTiming(-30, { duration: 1200 }, () => { left.value = withTiming(0, { duration: 1200 }) });
-      up.value = withTiming(-80, { duration: 1200 }, () => { up.value = withTiming(0, { duration: 1200 }) });
-      if (onFlip) { // make sure onFlip is not undefined before calling it
-        onFlip();
-      }
-    }
-  };
-
-  // On utilise useAnimatedStyle pour créer des styles animés pour la carte.
-  const animatedStyle = useAnimatedStyle(() => {
-    return {
-      // On anime la propriété rotateY pour créer l'effet de flip.
-      transform: [
-        { translateX: left.value },
-        { translateY: up.value },
-        { rotateY: `${flip.value}deg` },
-        { scale: scale.value },
-        { perspective: 1000 },
-      ]
-    };
-  });
-
-  return (
-    <Pressable onPress={flipCard}>
-      <Animated.View style={[styles.cardImage, animatedStyle, style]}>
-        <Image
-          ref={isFlipped ? backImageRef : frontImageRef}
-          source={isFlipped ? frontImageUrl as ImageSourcePropType : backImageUrl as ImageSourcePropType}
-          style={styles.image}
-          onLoad={() => {
-            frontImageRef.current?.setNativeProps({ style: { transform: [{ scaleX: isFlipped ? -1 : 1 }] } });
-            backImageRef.current?.setNativeProps({ style: { transform: [{ scaleX: isFlipped ? -1 : 1 }] } });
-          }}
-        />
-      </Animated.View>
-    </Pressable>
-  );
-};
 
 
 const CrossDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
@@ -177,7 +101,7 @@ const CrossDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     };
 
   }
-  console.log(selectedCards);
+ 
   function gotToResult() {
     navigation.navigate('DrawResult');
   }
@@ -217,6 +141,8 @@ const CrossDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
         <CustomModal
           visible={modalVisible}
           credit={credit}
+          modalText='Voulez-vous utiliser 3 credits pour voir le résultat ?'
+          useCreditButtonTitle='Utiliser 3 credits'
           onValidate={() => {
             setModalVisible(!modalVisible);
             setCredit(credit - 1);
@@ -226,6 +152,7 @@ const CrossDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
           onBuyCredit={() => {
             goBuyCredit();
           }}
+
         />
       </View>
     </SafeAreaView>
@@ -235,16 +162,20 @@ const CrossDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.palette.violet
+    width: SCREEN_WIDTH,
+    height: SCREEN_HEIGHT,
+    backgroundColor: colors.background,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   header: {
-    position: 'absolute',
+    position: "absolute",
     top: 0,
     width: SCREEN_WIDTH - 5,
     height: SCREEN_HEIGHT * 0.4,
     borderBottomLeftRadius: SCREEN_WIDTH * 0.1,
     borderBottomRightRadius: SCREEN_WIDTH * 0.1,
-    backgroundColor: colors.palette.violet
+    backgroundColor: colors.palette.violet,
   },
   titleText: {
     width: "90%",

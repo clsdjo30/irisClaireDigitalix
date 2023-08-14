@@ -4,7 +4,6 @@ import { colors } from '../theme';
 
 interface UserStoneIconProps {
   userStone: string | null;
-  name: string | null;
 }
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -13,30 +12,29 @@ const SCREEN_SCALE = Dimensions.get('window').scale;
 const SCREEN_FONT_SCALE = SCREEN_SCALE * 0.5;
 
 const STONE_ICON = [
-    { onyx: require('../../assets/icons/stones/onyx.png') },
-    { garnet: require('../../assets/icons/stones/garnet.png') },
-    { amethyst: require('../../assets/icons/stones/amethyst.png') },
-    { emerald: require('../../assets/icons/stones/emerald.png') },
-    { ruby: require('../../assets/icons/stones/ruby.png') },
-    { sapphire: require('../../assets/icons/stones/sapphire.png') },
-    { topaz: require('../../assets/icons/stones/topaz.png') },
-    { agate: require('../../assets/icons/stones/agate.png') },
-    { beryl: require('../../assets/icons/stones/beryl.png') },
-    { chrysolite: require('../../assets/icons/stones/chrysolite.png') },
-    { camelian: require('../../assets/icons/stones/camelian.png') },
-    { heliotrope: require('../../assets/icons/stones/heliotrope.png') },
+    { Onyx: require('../../assets/icons/stones/onyx.png') },
+    { Cornaline: require('../../assets/icons/stones/garnet.png') },
+    { Amethyst: require('../../assets/icons/stones/amethyst.png') },
+    { Emerald: require('../../assets/icons/stones/emerald.png') },
+    { Ruby: require('../../assets/icons/stones/ruby.png') },
+    { Sapphire: require('../../assets/icons/stones/sapphire.png') },
+    { Topaz: require('../../assets/icons/stones/topaz.png') },
+    { Agate: require('../../assets/icons/stones/agate.png') },
+    { Beryl: require('../../assets/icons/stones/beryl.png') },
+    { Chrysolite: require('../../assets/icons/stones/chrysolite.png') },
+    { Camelian: require('../../assets/icons/stones/camelian.png') },
+    { Heliotrope: require('../../assets/icons/stones/heliotrope.png') },
 
   ];
 
  
-  const UserStoneIcon: React.FC<UserStoneIconProps> = ({userStone, name}) => {
-    const stoneIcon = userStone ? STONE_ICON.find((item) => item.hasOwnProperty(userStone.toLowerCase())) : null;
-    const stone = userStone;
+  const UserStoneIcon: React.FC<UserStoneIconProps> = ({userStone}) => {
+    const stoneIcon = userStone ? STONE_ICON.find((item) => item.hasOwnProperty(userStone)) : null;
     if (stoneIcon) {
       return (
         <View style={styles.blockSign}>
           <Image testID="stone-image" source={Object.values(stoneIcon)[0]} style={styles.stoneImage} />
-          {name && <Text testID="stone-name" style={styles.signText}>{name} </Text>}
+          <Text style={styles.signText}>Ma Pierre</Text>
         </View>
       );
     }
@@ -51,14 +49,13 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     stoneImage: {
-      width: 70,
-      height: 70,
+      width: 60,
+      height: 60,
       },
     signText: {
-        color: colors.palette.violet,
-        fontSize: 13,
-        fontFamily: 'mulishLight',
-        textTransform: 'capitalize',
+      color: colors.palette.violet,
+      fontSize: SCREEN_FONT_SCALE + 12,
+      fontFamily: 'mulishRegular',
     },
 });
 

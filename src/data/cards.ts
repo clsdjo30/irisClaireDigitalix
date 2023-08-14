@@ -11,7 +11,7 @@ interface Card {
     {
       id: 1,
       name: 'le bateleur',
-      pseudo: "l'Iris de Magie",
+      pseudo: "Iris Alpha",
       backImageUrl: require('../../assets/images/cards/back/Card_Back_001.png'),
       frontImageUrl: require('../../assets/images/cards/front/1-le-bateleur.png'),
       tendance: [
@@ -23,7 +23,7 @@ interface Card {
     {
       id: 2,
       name: 'la papesse',
-      pseudo: "L'Iris de Sagesse",
+      pseudo: "Iris Mithéra",
       backImageUrl: require('../../assets/images/cards/back/Card_Back_001.png'),
       frontImageUrl: require('../../assets/images/cards/front/2-la-papesse.png'),
       tendance: [
@@ -35,7 +35,7 @@ interface Card {
     {
       id: 3,
       name: 'l imperatrice',
-      pseudo: "L'Iris de Fertilité",
+      pseudo: "Iris Khali",
       backImageUrl: require('../../assets/images/cards/back/Card_Back_001.png'),
       frontImageUrl: require('../../assets/images/cards/front/3-l-imperatrice.png'),
       tendance: [
@@ -47,7 +47,7 @@ interface Card {
     {
       id: 4,
       name: 'l empereur',
-      pseudo: "l'Iris de Stabilité",
+      pseudo: "Iris Khal",
       backImageUrl: require('../../assets/images/cards/back/Card_Back_001.png'),
       frontImageUrl: require('../../assets/images/cards/front/4-l-empereur.png'),
       tendance: [
@@ -59,7 +59,7 @@ interface Card {
   {
       id: 5,
       name: 'le pape',
-      pseudo: "l'Iris du Sage Divin",
+      pseudo: "Iris Pateras",
       backImageUrl: require('../../assets/images/cards/back/Card_Back_001.png'),
       frontImageUrl: require('../../assets/images/cards/front/5-le-pape.png'),
       tendance: [
@@ -71,7 +71,7 @@ interface Card {
   {
       id: 6,
       name: 'l amoureux',
-      pseudo: "l'Iris de Tentation",
+      pseudo: "Iris Amour",
       backImageUrl: require('../../assets/images/cards/back/Card_Back_001.png'),
       frontImageUrl: require('../../assets/images/cards/front/6-l-amoureux.png'),
       tendance: [
@@ -83,7 +83,7 @@ interface Card {
   {
       id: 7,
       name: 'le chariot',
-      pseudo: "l'Iris de Succès",
+      pseudo: "Iris Chemin",
       backImageUrl: require('../../assets/images/cards/back/Card_Back_001.png'),
       frontImageUrl: require('../../assets/images/cards/front/7-le-chariot.png'),
       tendance: [
@@ -95,7 +95,7 @@ interface Card {
   {
       id: 8,
       name: 'la justice',
-      pseudo: "l'Iris de Feu",
+      pseudo: "Iris Krisi",
       backImageUrl: require('../../assets/images/cards/back/Card_Back_001.png'),
       frontImageUrl: require('../../assets/images/cards/front/8-la-justice.png'),
       tendance: [
@@ -107,7 +107,7 @@ interface Card {
   {
       id: 9,
       name: 'l hermite',
-      pseudo: "l'Iris d'Introspection",
+      pseudo: "Iris Reflexion",
       backImageUrl: require('../../assets/images/cards/back/Card_Back_001.png'),
       frontImageUrl: require('../../assets/images/cards/front/9-l-hermite.png'),
       tendance: [
@@ -119,7 +119,7 @@ interface Card {
   {
       id: 10,
       name: 'la roue de la fortune',
-      pseudo: "l'Iris de Destinée",
+      pseudo: "Iris Cycle",
       backImageUrl: require('../../assets/images/cards/back/Card_Back_001.png'),
       frontImageUrl: require('../../assets/images/cards/front/10-la-roue-de-fortune.png'),
       tendance: [
@@ -131,7 +131,7 @@ interface Card {
   {
       id: 11,
       name: 'la force',
-      pseudo: "l'Iris de Volonté",
+      pseudo: "Iris Dynami",
       backImageUrl: require('../../assets/images/cards/back/Card_Back_001.png'),
       frontImageUrl: require('../../assets/images/cards/front/11-la-force.png'),
       tendance: [
@@ -143,7 +143,7 @@ interface Card {
   {
       id: 12,
       name: 'le pendu',
-      pseudo: "l'Iris de Patience",
+      pseudo: "Iris Attente",
       backImageUrl: require('../../assets/images/cards/back/Card_Back_001.png'),
       frontImageUrl: require('../../assets/images/cards/front/12-le-pendu.png'),
       tendance: [
@@ -155,7 +155,7 @@ interface Card {
   {
       id: 13,
       name: 'l arcane sans nom',
-      pseudo: "l'Iris Big Bang",
+      pseudo: "Iris Trepas",
       backImageUrl: require('../../assets/images/cards/back/Card_Back_001.png'),
       frontImageUrl: require('../../assets/images/cards/front/13-l-arcane-sans-nom.png'),
       tendance: [
@@ -167,7 +167,7 @@ interface Card {
   {
       id: 14,
       name: 'la temperance',
-      pseudo: "l'Iris d'Equilibre",
+      pseudo: "Iris Equité",
       backImageUrl: require('../../assets/images/cards/back/Card_Back_001.png'),
       frontImageUrl: require('../../assets/images/cards/front/14-la-temperance.png'),
       tendance: [
@@ -179,7 +179,7 @@ interface Card {
   {
       id: 15,
       name: 'le diable',
-      pseudo: "l'Iris de Succube",
+      pseudo: "l'Iris Luxure",
       backImageUrl: require('../../assets/images/cards/back/Card_Back_001.png'),
       frontImageUrl: require('../../assets/images/cards/front/15-le-diable.png'),
       tendance: [
@@ -191,7 +191,7 @@ interface Card {
   {
       id: 16,
       name: 'la maison dieu',
-      pseudo: "l'Iris de la Tour de Babel",
+      pseudo: "Iris Tromos",
       backImageUrl: require('../../assets/images/cards/back/Card_Back_001.png'),
       frontImageUrl: require('../../assets/images/cards/front/16-la-maison-dieu.png'),
       tendance: [
@@ -203,7 +203,7 @@ interface Card {
   {
       id: 17,
       name: 'l etoile',
-      pseudo: "l'Iris de l'Espoir",
+      pseudo: "Iris Aster",
       backImageUrl: require('../../assets/images/cards/back/Card_Back_001.png'),
       frontImageUrl: require('../../assets/images/cards/front/17-l-etoile.png'),
       tendance: [
@@ -215,7 +215,7 @@ interface Card {
   {
       id: 18,
       name: 'la lune',
-      pseudo: "l'Iris des Intuitions",
+      pseudo: "Iris Couchant",
       backImageUrl: require('../../assets/images/cards/back/Card_Back_001.png'),
       frontImageUrl: require('../../assets/images/cards/front/18-la-lune.png'),
       tendance: [
@@ -227,7 +227,7 @@ interface Card {
   {
       id: 19,
       name: 'le soleil',
-      pseudo: "l'Iris de Joie",
+      pseudo: "Iris Clair",
       backImageUrl: require('../../assets/images/cards/back/Card_Back_001.png'),
       frontImageUrl: require('../../assets/images/cards/front/19-le-soleil.png'),
       tendance: [
@@ -239,7 +239,7 @@ interface Card {
   {
       id: 20,
       name: 'le jugement',
-      pseudo: "l'Iris de Vérité",
+      pseudo: "Iris Messager",
       backImageUrl: require('../../assets/images/cards/back/Card_Back_001.png'),
       frontImageUrl: require('../../assets/images/cards/front/20-le-jugement.png'),
       tendance: [
@@ -251,7 +251,7 @@ interface Card {
   {
       id: 21,
       name: 'le monde',
-      pseudo: "l'Iris de PLénitude",
+      pseudo: "Iris Cosmos",
       backImageUrl: require('../../assets/images/cards/back/Card_Back_001.png'),
       frontImageUrl: require('../../assets/images/cards/front/21-le-monde.png'),
       tendance: [

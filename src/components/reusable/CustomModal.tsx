@@ -10,6 +10,8 @@ type CustomModalProps = {
     onValidate: () => void;
     onCancel: () => void;
     onBuyCredit: () => void;
+    modalText: string; 
+    useCreditButtonTitle: string;
 };
 
 
@@ -19,6 +21,9 @@ const CustomModal: React.FC<CustomModalProps> = ({
     onValidate,
     onCancel,
     onBuyCredit,
+    modalText,
+    useCreditButtonTitle,
+    
 }) => {
     return (
         <Modal 
@@ -32,11 +37,11 @@ const CustomModal: React.FC<CustomModalProps> = ({
                     {credit > 0 ? (
                         <>
                             <View style={{ marginBottom: 20 }}>
-                                <Text style={styles.modalText}>Voulez-vous utilisez 1 crédit pour recevoir votre réponse ?</Text>
+                                <Text style={styles.modalText}>{modalText}</Text>
                             </View>
                             <View style={styles.buttonView}>
                                 <NavigationButton
-                                    title='Utiliser un crédit'
+                                    title={useCreditButtonTitle}
                                     onPress={onValidate}
                                     width={width * 0.6}
                                     color={colors.palette.violet}
@@ -91,7 +96,7 @@ const styles = StyleSheet.create({
         backgroundColor: colors.palette.violetClair,
         borderRadius: 16,
         paddingVertical: height * 0.05,
-        paddingHorizontal: width * 0.1,
+        paddingHorizontal: width * 0.05,
         alignItems: 'center',
         shadowColor: colors.palette.violetBg,
         shadowOffset: {
@@ -120,8 +125,8 @@ const styles = StyleSheet.create({
     },
     modalText: {
         textAlign: 'center',
-        fontFamily: 'mulishRegular',
-        fontSize: 20,
+        fontFamily: 'mulishSemiBold',
+        fontSize: 16,
         color: colors.palette.violet,
     },
 });

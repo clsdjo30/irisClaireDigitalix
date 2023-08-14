@@ -38,11 +38,17 @@ describe('FirstNameScreen', () => {
     });
 
     it('navigates to the next screen when the Next button is pressed', () => {
-        const { getByText } = render(<FirstNameScreen navigation={mockNavigation} route={mockRoute} />);
+        const { getByText, getByPlaceholderText } = render(<FirstNameScreen navigation={mockNavigation} route={mockRoute} />);
+
+        // Simulate a valid input
+        const input = getByPlaceholderText('Saisissez votre prénom');
+        fireEvent.changeText(input, 'John');
+
         const nextButton = getByText('Suivant');
         fireEvent.press(nextButton);
-        expect(mockNavigation.navigate).toHaveBeenCalledWith('Genre', { user: expect.any(Object) });
-    });
+
+        expect(mockNavigation.navigate).toHaveBeenCalledWith('Genre');
+    }); 
 
     it('updates the user state when the input changes', () => {
         const { getByPlaceholderText } = render(<FirstNameScreen navigation={mockNavigation} route={mockRoute} />);

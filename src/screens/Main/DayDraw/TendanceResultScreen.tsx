@@ -1,42 +1,58 @@
-import React, { useState, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import {
     StyleSheet,
     View,
     Image,
     Text,
-    TouchableOpacity,
-    ImageSourcePropType
+    ImageSourcePropType, 
+    BackHandler
 } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
 import { colors } from '../../../theme';
 import { useDaydrawStore } from '../../../hooks/useDayDrawStore';
-import CARD_DECK from '../../../data/cards';
-
+import NavigationButton from '../../../components/NavigationButton';
+import { SCREEN_WIDTH } from '../../../utils/constants';
+import { captureRef } from 'react-native-view-shot';
+import * as Sharing from 'expo-sharing';
 
 const TendanceResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
-    const [daydraw, setDayDraw] = useDaydrawStore();
-    const resetTime = 120000;
-    console.log(daydraw)
+    const [ daydraw ] = useDaydrawStore();
+    const viewRef = useRef<View>(null);
+
     useEffect(() => {
-        if (daydraw.isdraw) {
-            setTimeout(() => {
-                setDayDraw({
-                    ...daydraw,
-                    isdraw: false,
-                    daycard: '',
-                    daycardimage: '' as ImageSourcePropType,
-                    daycardbackimage: '' as ImageSourcePropType,
-                    daytendance: ''
-                });
-                navigation.navigate('Tirage');
-            }, resetTime);
+        const backAction = () => {
+            return true;
+        };
+
+        const backHandler = BackHandler.addEventListener(
+            "hardwareBackPress",
+            backAction
+        );
+
+        return () => backHandler.remove();
+    }, []);
+   
+    const captureAndShare = async (viewRef:  React.ReactInstance | React.RefObject<unknown>) => {
+        if (!(await Sharing.isAvailableAsync())) {
+            alert(`Uh oh, sharing isn't available on your platform`);
+            return;
         }
-    }, [daydraw.isdraw]);
+
+        // Capturez l'écran
+        const uri = await captureRef(viewRef, {
+            format: 'png',
+            quality: 1,
+        });
+
+        // Partagez l'image
+        await Sharing.shareAsync(uri);
+    }
+
 
     return (
 
-        <View style={styles.container}>
-            <View style={styles.tendanceScreen}>
+        <View style={styles.container} testID={'day-result-screen'}>
+            <View style={styles.tendanceScreen} ref={viewRef}>
                 <View style={styles.cardContainer}>
                     <Image source={daydraw.daycardimage as ImageSourcePropType} style={styles.fortuneTeller} />
                 </View>
@@ -44,13 +60,25 @@ const TendanceResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) =
                     <Text style={styles.cardNameTextStyle}>{daydraw.daycard}</Text>
                     <Text style={styles.textStyle}>{daydraw.daytendance}</Text>
                 </View>
+            </View>
 
-                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Home')}>
-                    <Text style={styles.buttonText}>
-                        A Demain
-                    </Text>
-                </TouchableOpacity>
-
+            <View style={styles.blockButton}>
+                <NavigationButton
+                    testID='share-result-button'
+                    color={colors.palette.violetBg}
+                    backgroundColor={colors.palette.orange}
+                    width={SCREEN_WIDTH / 1.3}
+                    title="Partagez votre tendance"
+                    onPress={() => captureAndShare(viewRef)}
+                />
+                <NavigationButton
+                    testID='day-result-button'
+                    color={colors.palette.violet}
+                    backgroundColor={colors.palette.violetClair}
+                    width={SCREEN_WIDTH / 1.3}
+                    title="A Demain"
+                    onPress={() => navigation.navigate('Home')}
+                />
             </View>
         </View>
 
@@ -112,19 +140,9 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         marginBottom: 20,
     },
-    button: {
-        width: 300,
-        backgroundColor: "#CBA135",
-        marginTop: 60,
-        marginBottom: 10,
-        borderRadius: 16,
-        alignItems: "center",
-        paddingVertical: 5,
-    },
-    buttonText: {
-        fontFamily: "oswaldMedium",
-        fontSize: 14,
-        color: colors.palette.ivory,
+    blockButton: {
+        position: 'absolute',
+        bottom: 30,
     },
 });
 

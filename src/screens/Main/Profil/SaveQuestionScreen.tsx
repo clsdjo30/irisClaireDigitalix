@@ -1,139 +1,39 @@
-
-import React from 'react'
+import React, { useState } from 'react'
 import {
     StyleSheet,
     View,
     Text,
-    Dimensions,
-    FlatList,
 } from 'react-native';
+import YesQuestionList from '../../../components/Profil/YesQuestionList';
+import CrossQuestionList from '../../../components/Profil/CrossQuestionList';
 import { colors } from '../../../theme';
 import { StackScreenProps } from '@react-navigation/stack';
 import { useUserYesQuestion } from '../../../hooks/useUserYesQuestion';
 import { useUserCrossQuestion } from '../../../hooks/useUserCrossQuestion';
 import { getAuth } from 'firebase/auth';
-import { ListItem, Tab, TabView } from '@rneui/themed';
+import { Tab, TabView } from '@rneui/themed';
+import { SCREEN_WIDTH, SCREEN_HEIGHT } from '../../../utils/constants';
 
-interface Question {
-    question: string;
-    choosecardpseudo: string;
-    domain: string;
-    answer: string;
-}
 
-interface CrossQuestion {
-    question: string;
-    cardpseudoone: string;
-    cardpseudotwo: string;
-    cardpseudothree: string;
-    cardpseudofour: string;
-    cardpseudofive: string;
-    domain: string;
-    answer: string;
-}
-
-const SCREEN_WIDTH = Dimensions.get('window').width;
-const SCREEN_HEIGHT = SCREEN_WIDTH * 1.5;
 const auth = getAuth();
 
 const SaveQuestionScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     // Use expandedState for each ListItem.Accordion
-    // Use expandedState for each ListItem.Accordion
-    const [yesNoExpandedState, setYesNoExpandedState] = React.useState<string | null>(null);
-    const [crossQuestionExpandedState, setCrossQuestionExpandedState] = React.useState<string | null>(null);
+    const [yesNoExpandedState, setYesNoExpandedState] = useState<string | null>(null);
+    const [crossQuestionExpandedState, setCrossQuestionExpandedState] = useState<string | null>(null);
 
-    const [index, setIndex] = React.useState(0);
+    const [index, setIndex] = useState(0);
     // Get the current user ID
     const currentUser = auth.currentUser;
     const userID = currentUser ? currentUser.uid : null;
 
     // Get the Yes questions from the database
     const { questions } = useUserYesQuestion(userID);
-    // console.log('Questions :', questions)
+
     // Get the Cross questions from the database
     const { crossQuestions } = useUserCrossQuestion(userID);
-    console.log('Cross Questions :', crossQuestions);
 
-
-    // Function to render each item of the Yes Question in FlatList
-    const renderYesQuestion = ({ item, index }: { item: Question, index: number }) => {
-
-        // Convert the index to string
-        const indexStr = index.toString();
-
-        // Determine whether the current item is expanded
-        const isExpanded = yesNoExpandedState === indexStr;
-
-        return (
-            <>
-                <ListItem.Accordion
-                    containerStyle={{ backgroundColor: colors.palette.violetClair }}
-                    content={
-                        <ListItem.Content>
-                            <ListItem.Subtitle style={styles.cardSubitle}>{item.domain}</ListItem.Subtitle>
-                            <ListItem.Title style={styles.cardTitle}>{item.question}</ListItem.Title>
-                        </ListItem.Content>
-                    }
-                    isExpanded={isExpanded}
-                    onPress={() => {
-                        // Toggle between expanded and collapsed state
-                        setYesNoExpandedState(isExpanded ? null : indexStr);
-                    }}
-                >
-                    <ListItem containerStyle={{ backgroundColor: colors.palette.violetBg }}>
-                        <ListItem.Content>
-                            <ListItem.Title style={styles.irisTitle}>{item.choosecardpseudo}</ListItem.Title>
-                            <ListItem.Subtitle style={styles.cardTitle}>{item.answer}</ListItem.Subtitle>
-                        </ListItem.Content>
-                    </ListItem>
-
-
-
-                </ListItem.Accordion>
-            </>
-        );
-    }
-
-    // Function to render each item of the Cross Question in FlatList
-    const renderCrossQuestion = ({ item, index }: { item: CrossQuestion, index: number }) => {
-
-        // Convert the index to string
-        const indexStr = index.toString();
-
-        // Determine whether the current item is expanded
-        const isExpanded = crossQuestionExpandedState === indexStr;
-
-        return (
-            <>
-                <ListItem.Accordion
-                    containerStyle={{ backgroundColor: colors.palette.violetClair }}
-                    content={
-                        <ListItem.Content>
-                            <ListItem.Subtitle style={styles.cardSubitle}>{item.domain}</ListItem.Subtitle>
-                            <ListItem.Title style={styles.cardTitle}>{item.question}</ListItem.Title>
-                        </ListItem.Content>
-                    }
-                    isExpanded={isExpanded}
-                    onPress={() => {
-                        // Toggle between expanded and collapsed state
-                        setCrossQuestionExpandedState(isExpanded ? null : indexStr);
-                    }}
-                >
-                    <ListItem containerStyle={{ backgroundColor: colors.palette.violetBg }}>
-                        <ListItem.Content>
-                            <ListItem.Title style={styles.irisTitle}>
-                                {item.cardpseudoone}, {item.cardpseudotwo}, {item.cardpseudothree}, {item.cardpseudofour}, {item.cardpseudofive}
-                            </ListItem.Title>
-                            <ListItem.Subtitle style={styles.cardTitle}>{item.answer}</ListItem.Subtitle>
-                        </ListItem.Content>
-                    </ListItem>
-
-
-
-                </ListItem.Accordion>
-            </>
-        );
-    }
+    
     return (
         <View style={styles.container}>
             <View style={styles.header} />
@@ -163,19 +63,17 @@ const SaveQuestionScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => 
                     containerStyle={{ height: '100%', width: '100%' }}
                     animationType="spring">
                     <TabView.Item style={{ backgroundColor: colors.palette.violetClair, width: '100%' }}>
-                        <FlatList
-                            data={questions}
-                            renderItem={renderYesQuestion}
-                            keyExtractor={(item, index) => index.toString()}
-
+                        <YesQuestionList
+                            questions={questions}
+                            expandedState={yesNoExpandedState}
+                            setExpandedState={setYesNoExpandedState}
                         />
                     </TabView.Item>
                     <TabView.Item style={{ backgroundColor: colors.palette.violetClair, width: '100%' }}>
-                        <FlatList
-                            data={crossQuestions}
-                            renderItem={renderCrossQuestion}
-                            keyExtractor={(item, index) => index.toString()}
-
+                        <CrossQuestionList
+                            crossQuestions={crossQuestions}
+                            crossQuestionExpandedState={crossQuestionExpandedState}
+                            setCrossQuestionExpandedState={setCrossQuestionExpandedState}
                         />
                     </TabView.Item>
                 </TabView>
@@ -250,23 +148,5 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         textAlign: 'center'
     },
-    // List Item Style
-    cardTitle: {
-        fontFamily: "mulishRegular",
-        fontSize: 14,
-        color: colors.palette.violet,
-    },
-    cardSubitle: {
-        fontFamily: "mulishRegular",
-        fontSize: 14,
-        color: colors.palette.golden,
-        textTransform: 'uppercase'
-    },
-    irisTitle: {
-        fontFamily: "mulishBold",
-        fontSize: 14,
-        color: colors.palette.violet,
-        textTransform: 'capitalize',
-        marginBottom: 10
-    }
+   
 })

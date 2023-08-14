@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState} from 'react';
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input } from '@rneui/base'
@@ -12,9 +12,36 @@ const width = Dimensions.get('window').width;
 
 const FirstNameScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   const [user, setUser] = useUserStore()
+  const [error, setError] = useState('')
+
+  // Fonction pour nettoyer les entrées utilisateur
+  const sanitizeInput = (text: string) => {
+    // Remplacer les caractères potentiellement malveillants
+    return text.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+
+  function goToGenreScreen() {
+    if (user.firstname.length === 0) {
+      setError("Le prénom ne peut pas être vide");
+      return;
+    }
+
+    if (user.firstname.length < 3) {
+      setError("Le prénom doit contenir au moins 3 caractères");
+      return;
+    }
+
+    navigation.navigate('Genre');
+  }
+  
   return (
     <View testID='first-name-screen' style={styles.container}>
-
+      {error !== '' && (
+        <View style={styles.errorContainer}>
+          <Text style={styles.errorText}>{error}</Text>
+        </View>
+      )}
+     
       <View style={styles.controls}>
         <View style={styles.genderTitle}>
           <Text style={styles.contentTitle}>Quelle est votre prénom ?</Text>
@@ -26,7 +53,10 @@ const FirstNameScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
             placeholderTextColor={colors.palette.purple200}
             inputContainerStyle={styles.input}
             inputStyle={styles.inputStyle}
-            onChangeText={(text) => setUser({ ...user, firstname: text })}
+            onChangeText={(text) => {
+              setError(''); 
+              setUser({ ...user, firstname: sanitizeInput(text) });
+            }}
             leftIcon={<Icon
               name='user'
               size={28}
@@ -39,7 +69,8 @@ const FirstNameScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
           backgroundColor={colors.palette.orange}
           width={width * 0.85}
           title="Suivant"
-          onPress={() => navigation.navigate('Genre', { user: user })}
+          onPress={goToGenreScreen}
+          
         />
 
       </View>
@@ -92,7 +123,23 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: colors.palette.violetClair,
     marginBottom: 20
-  }
+  },
+  //ERROR
+  errorContainer: {
+    position: 'absolute',
+    top: 0,
+    width: '80%',
+    backgroundColor: colors.palette.orange,
+    marginTop: 40,
+    borderRadius: 16,
+  },
+  errorText: {
+    textAlign: "center",
+    fontFamily: "mulishBold",
+    fontSize: 12,
+    color: colors.palette.violetClair,
+    paddingVertical: 6,
+  },
 
 });
 

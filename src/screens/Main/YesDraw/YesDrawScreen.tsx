@@ -19,7 +19,6 @@ const SCREEN_HEIGHT = SCREEN_WIDTH * 1.5;
 const YesDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   const [value, setValue] = useQuestionStore();
   const [errorMessage, setErrorMessage] = React.useState('');
-  console.log('value', value);
 
   function handleTextChange(text: string) {
     setErrorMessage(''); // Réinitialise le message d'erreur
@@ -50,7 +49,7 @@ const YesDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
         )}
       </View>
       <View style={styles.blockTitle}>
-        <Text style={styles.contentTitle}>Formulez votre question </Text>
+        <Text style={styles.contentTitle}>Question Oui/Non</Text>
         <View>
           <Text style={styles.contentSubTitle}>
             {
@@ -78,7 +77,7 @@ const YesDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
             containerStyle={styles.containerStyle}
             inputContainerStyle={styles.inputContainerStyle}
             inputStyle={styles.inputStyle}
-            placeholder='Saisissez votre question'
+            placeholder='Formulez votre question'
             placeholderTextColor={colors.palette.violet}
             textAlignVertical='top'
             value={value.question}
@@ -128,8 +127,8 @@ const styles = StyleSheet.create({
 
   },
   blockTitle: {
-    position: 'absolute', //Here is the trick
-    top: 70,
+    position: 'absolute', 
+    top: 50,
     flex: 1,
     flexDirection: "row",
     flexWrap: "wrap",
@@ -168,8 +167,9 @@ const styles = StyleSheet.create({
   //ERROR
   errorContainer: {
     width: '80%',
+    alignSelf: 'center',
     backgroundColor: colors.palette.orange,
-    marginTop: 20,
+    marginTop: 10,
     borderRadius: 16,
   },
   errorText: {

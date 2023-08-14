@@ -3,13 +3,8 @@ import {
   getAuth,
   firestore,
   collection,
-  Firestore,
-  query,
   getDocs,
-  doc,
 } from "../config/firebaseConfig";
-
-const auth = getAuth();
 
 interface Question {
   question: string;
@@ -20,6 +15,7 @@ interface Question {
 
 export function useUserYesQuestion(userID: string | null) {
   const [questions, setQuestions] = useState<Question[]>([]);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (userID) {
@@ -31,8 +27,7 @@ export function useUserYesQuestion(userID: string | null) {
     try {
       const db = firestore;
       if (!userID) {
-        console.error("User ID is null");
-        return;
+        throw new Error("User ID is null");
       }
 
       const usersCollectionRef = collection(db, "users");
@@ -44,20 +39,31 @@ export function useUserYesQuestion(userID: string | null) {
 
       const querySnapshot = await getDocs(userQuestionsCollectionRef);
 
-      const questions: Question[] = querySnapshot.docs.map((doc) => ({
-        question: doc.data().question,
-        choosecardpseudo: doc.data().cardpseudo,
-        domain: doc.data().domain,
-        answer: doc.data().answer,
-      }));
+      const questions: Question[] = querySnapshot.docs.map((doc) => {
+        const data = doc.data();
+        return {
+          question: data.question,
+          choosecardpseudo: data.cardpseudo,
+          domain: data.domain,
+          answer: data.answer,
+        };
+      });
 
       setQuestions(questions);
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+          if (err instanceof Error) {
+            console.error(err.message);
+            setError(err.message);
+          } else {
+            // Handle other types of errors or re-throw
+            console.error(err);
+            setError("An unknown error occurred.");
+          }
     }
   };
 
   return {
     questions,
+    error,
   };
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View,  Platform, TextInput, Dimensions, Pressable } from 'react-native';
 import { Icon } from '@rneui/base'
 import { StackScreenProps } from '@react-navigation/stack';
@@ -12,9 +12,10 @@ const width = Dimensions.get('window').width;
 const BirthdayScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
     const [user, setUser] = useUserStore();
-    const [date, setDate] = React.useState(new Date());
-    const [mode, setMode] = React.useState<'date'>('date');
-    const [show, setShow] = React.useState(false);
+    const [date, setDate] = useState(new Date());
+    const [mode, setMode] = useState<'date'>('date');
+    const [show, setShow] = useState(false);
+    const [ error, setError ] = useState('');
 
     const onChange = (event: any, selectedDate: any) => {
         const currentDate = selectedDate || date;
@@ -36,10 +37,33 @@ const BirthdayScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
         showMode('date');
     };
 
+    //Verification de date
+    function goToSignUp() {
+        if (user.birthday.length === 0) {
+            setError("Votre date de naissance ne peut pas être vide");
+            return;
+        }
+
+        const currentDate = new Date();
+        const eighteenYearsAgo = new Date(currentDate.getFullYear() - 18, currentDate.getMonth(), currentDate.getDate());
+
+        if (date > eighteenYearsAgo) {
+            setError("Vous devez avoir plus de 18 ans pour vous inscrire");
+            return;
+        }
+
+        navigation.navigate('Sign Up');
+    }
+
+
     return (
 
         <View testID='birthday-screen' style={styles.container}>
-
+            {error !== '' && (
+                <View testID='error' style={styles.errorContainer}>
+                    <Text style={styles.errorText}>{error}</Text>
+                </View>
+            )}
             <Text style={styles.contentTitle}>Quelle est votre date de naissance ?</Text>
             <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
 
@@ -74,11 +98,12 @@ const BirthdayScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
                     <View style={styles.button}>
                         <NavigationButton
+                            testID='goToSignUp'
                             color={colors.palette.violetBg}
                             backgroundColor={colors.palette.orange}
                             width={width / 1.3}
                             title="S'inscrire"
-                            onPress={() => navigation.navigate('Sign Up')}
+                            onPress={goToSignUp}
                         />
 
                     </View>
@@ -137,6 +162,22 @@ const styles = StyleSheet.create({
         fontSize: 18,
         color: colors.palette.violetBg,
         marginBottom: 20
+    },
+    //ERROR
+    errorContainer: {
+        position: 'absolute',
+        top: 0,
+        width: '80%',
+        backgroundColor: colors.palette.orange,
+        marginTop: 40,
+        borderRadius: 16,
+    },
+    errorText: {
+        textAlign: "center",
+        fontFamily: "mulishBold",
+        fontSize: 12,
+        color: colors.palette.violetClair,
+        paddingVertical: 6,
     },
 });
 

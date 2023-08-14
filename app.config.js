@@ -23,7 +23,7 @@ export default {
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash/splash.png",
-      "resizeMode": "cover"
+      "resizeMode": "cover",
     },
     "platforms": [
       "ios",
@@ -47,7 +47,7 @@ export default {
       "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./assets/icons/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#C8B5E4"
       }
     },
     "web": {

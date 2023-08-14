@@ -4,7 +4,6 @@ import { colors } from '../theme';
 
 interface UserSignIconProps {
     userSign: string | null;
-    name: string | null;
 }
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -24,17 +23,17 @@ const ASTRO_ICON = [
     { sagittarius: require('../../assets/icons/astroSign/sagittarius.png') },
     { scorpio: require('../../assets/icons/astroSign/scorpio.png') },
     { taurus: require('../../assets/icons/astroSign/taurus.png') },
-    { virgo: require('../../assets/icons/astroSign/virgo.png') },
+    { virgo: require('../../assets/icons/astroSign/virgo.png') }, 
 ];
 
-const UserSignIcon: React.FC<UserSignIconProps> = ({ userSign, name }) => {
+const UserSignIcon: React.FC<UserSignIconProps> = ({ userSign }) => {
     const astroIcon = userSign ? ASTRO_ICON.find((item) => item.hasOwnProperty(userSign.toLowerCase())) : null;
 
     if (astroIcon) {
         return (
             <View style={styles.blockSign}>
                 <Image testID='astro-image' source={Object.values(astroIcon)[0]} style={styles.astroImage} />
-                {name && <Text testID='sign-name' style={styles.signText}>{name}</Text>}
+               <Text testID='sign-name' style={styles.signText}>Mon Signe</Text>
             </View>
         );
     }
@@ -54,10 +53,9 @@ const styles = StyleSheet.create({
         height: 60,
     },
     signText: {
-        paddingTop: 10,
         color: colors.palette.violet,
         fontSize:  SCREEN_FONT_SCALE +12,
-        fontFamily: 'mulishLight',
+        fontFamily: 'mulishRegular',
     },
 });
 

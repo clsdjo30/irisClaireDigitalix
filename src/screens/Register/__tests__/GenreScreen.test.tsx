@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { render, fireEvent } from '@testing-library/react-native';
 import GenreScreen from '../GenreScreen';
 
-// Mock the navigation object with required methods
+// Mock de la navigation
 const mockNavigation: any = {
     navigate: jest.fn(),
 };
@@ -10,33 +10,48 @@ const mockRoute: any = {
     key: 'MockKey',
     name: 'MockName',
 };
+const mockProps = {
+    navigation: mockNavigation,
+    route: mockRoute,
+};
+
+jest.mock('../../../hooks/useUserStore', () => ({
+    useUserStore: jest.fn(),
+}));
+const mockUseUserStore = require('../../../hooks/useUserStore').useUserStore;
 
 // Mock the Icon component from react-native-vector-icons/FontAwesome
 jest.mock('@rneui/base', () => ({
     Icon: () => 'Icon',
 }));
 
+beforeEach(() => {
+    mockUseUserStore.mockReturnValue([{ genre: '' }, jest.fn()]);
+});
+
 describe('GenreScreen', () => {
     it('renders correctly and matches the snapshot', () => {
-        const tree = render(<GenreScreen navigation={mockNavigation} route={mockRoute} />).toJSON();
+        const tree = render(<GenreScreen {...mockProps} />).toJSON();
         expect(tree).toMatchSnapshot();
     });
 
-    it('renders correctly', () => {
-        const { getByTestId } = render(<GenreScreen navigation = { mockNavigation } route = { mockRoute }  />);
+    it('should render correctly', () => {
+        const { getByText, getByTestId } = render(<GenreScreen {...mockProps} />);
+        expect(getByText('Vous êtes : ')).toBeTruthy();
         expect(getByTestId('genre-screen')).toBeTruthy();
     });
 
-    it('contains the key elements', () => {
-        const { getByText} = render(<GenreScreen navigation={mockNavigation} route={mockRoute} />);
-        expect(getByText('Vous êtes : ')).toBeTruthy();
-        expect(getByText('Choisissez votre genre')).toBeTruthy();
+    it('should navigate to Birthday screen if genre is selected', () => {
+        mockUseUserStore.mockReturnValueOnce([{ genre: 'Femme' }, jest.fn()]);
+        const { getByText } = render(<GenreScreen {...mockProps} />);
+        fireEvent.press(getByText('Suivant'));
+        expect(mockNavigation.navigate).toHaveBeenCalledWith('Birthday');
     });
 
-    it('navigates to the next screen when the Next button is pressed', () => {
-        const { getByText } = render(<GenreScreen navigation={mockNavigation} route={mockRoute} />);
-        const nextButton = getByText('Suivant');
-        fireEvent.press(nextButton);
-        expect(mockNavigation.navigate).toHaveBeenCalledWith('Birthday', { user: expect.any(Object) });
+    it('should show an error if no genre is selected', () => {
+        const { getByText } = render(<GenreScreen {...mockProps} />);
+        fireEvent.press(getByText('Suivant'));
+        expect(mockNavigation.navigate).not.toHaveBeenCalled();
+        expect(getByText('Vous devez choisir un genre')).toBeTruthy();
     });
-});
+})
