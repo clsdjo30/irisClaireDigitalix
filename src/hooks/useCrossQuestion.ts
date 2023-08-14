@@ -5,7 +5,6 @@ import Constants from 'expo-constants';
 
 const apikey = Constants.expoConfig?.extra?.openAiId;
 
-console.log(apikey);
 
 const openai = axios.create({
   baseURL: "https://api.openai.com/v1/completions",

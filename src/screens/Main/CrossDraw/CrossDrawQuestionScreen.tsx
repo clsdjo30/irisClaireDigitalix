@@ -12,18 +12,8 @@ import { colors } from '../../../theme';
 import { useCrossQuestionStore } from '../../../hooks/useCrossQuestionStore';
 import { StackScreenProps } from '@react-navigation/stack';
 
-interface YesDrawScreenProps {
-  navigation: any;
-}
-
-interface YesDrawScreenState {
-  value: string;
-}
-
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = SCREEN_WIDTH * 1.5;
-const SCREEN_SCALE = Dimensions.get('window').scale;
-const SCREEN_FONT_SCALE = SCREEN_SCALE * 0.5;
 
 const CrossDrawQuestionScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   const [value, setValue] = useCrossQuestionStore();
@@ -47,8 +37,7 @@ const CrossDrawQuestionScreen: React.FC<StackScreenProps<any>> = ({ navigation }
 
     navigation.navigate('DrawCard');
   }
-  console.log("crossQuestion", value)
-  console.log("Question", value.question)
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -59,38 +48,59 @@ const CrossDrawQuestionScreen: React.FC<StackScreenProps<any>> = ({ navigation }
         )}
       </View>
       <View style={styles.blockTitle}>
-        <Text style={styles.contentTitle}>Formulez votre question</Text>
-      </View>
-
-      <View style={styles.formBlock}>
-        <Input
-          containerStyle={styles.containerStyle}
-          inputContainerStyle={styles.inputContainerStyle}
-          inputStyle={styles.inputStyle}
-          placeholder='Saisissez votre question'
-          placeholderTextColor={colors.palette.violet}
-          textAlignVertical='top'
-          value={value.question}
-          onChangeText={handleTextChange}
-          style={{ fontFamily: "mulishMedium" }}
-          maxLength={300}
-          multiline={true}
-          numberOfLines={5}
-          leftIcon={<Icon
-            name='question-circle'
-            size={28}
-            style={styles.icon}
-          />}
-        />
-        <View style={styles.validationButton}>
-          <TouchableOpacity style={styles.button} onPress={goToChooseCard}>
-            <Text style={styles.buttonText}>
-              Tirer ma carte
-            </Text>
-          </TouchableOpacity>
+        <Text style={styles.contentTitle}>Tirage Complet</Text>
+        <View>
+          <Text style={styles.contentSubTitle}>
+            {
+              (() => {
+                switch (value.domain) {
+                  case "amour":
+                    return "Votre question va concerner le domaine amoureux";
+                  case "travail":
+                    return "Votre question va concerner le domaine professionnel";
+                  case "argent":
+                    return "Votre question va concerner le domaine financier";
+                  case "general":
+                    return "Votre question est d'ordre général";
+                  default:
+                    return ""; // retourne une chaîne vide si aucune des conditions ci-dessus n'est respectée
+                }
+              })()
+            }
+          </Text>
         </View>
-      </View>
-    </View >
+
+
+        <View style={styles.formBlock}>
+          <Input
+            containerStyle={styles.containerStyle}
+            inputContainerStyle={styles.inputContainerStyle}
+            inputStyle={styles.inputStyle}
+            placeholder='Formulez votre question'
+            placeholderTextColor={colors.palette.violet}
+            textAlignVertical='top'
+            value={value.question}
+            onChangeText={handleTextChange}
+            style={{ fontFamily: "mulishMedium" }}
+            maxLength={300}
+            multiline={true}
+            numberOfLines={5}
+            leftIcon={<Icon
+              name='question-circle'
+              size={28}
+              style={styles.icon}
+            />}
+          />
+          <View style={styles.validationButton}>
+            <TouchableOpacity style={styles.button} onPress={goToChooseCard}>
+              <Text style={styles.buttonText}>
+                Tirer ma carte
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </View >
+    </View>
   )
 }
 
@@ -103,25 +113,41 @@ const styles = StyleSheet.create({
     height: SCREEN_HEIGHT,
     backgroundColor: colors.background,
     alignItems: 'center',
+    justifyContent: 'center',
   },
   header: {
     position: 'absolute',
     top: 0,
-    width: SCREEN_WIDTH,
-    height: SCREEN_HEIGHT / 2,
-    borderBottomLeftRadius: SCREEN_WIDTH * 0.18,
-    borderBottomRightRadius: SCREEN_WIDTH * 0.18,
-    backgroundColor: colors.palette.violet,
-    alignItems: 'center',
+    width: SCREEN_WIDTH - 5,
+    height: SCREEN_HEIGHT * 0.4,
+    borderBottomLeftRadius: SCREEN_WIDTH * 0.1,
+    borderBottomRightRadius: SCREEN_WIDTH * 0.1,
+    backgroundColor: colors.palette.violet
 
   },
   blockTitle: {
-    paddingVertical: SCREEN_HEIGHT * 0.2,
+    position: 'absolute', //Here is the trick
+    top: 50,
+    flex: 1,
+    flexDirection: "row",
+    flexWrap: "wrap",
+    width: "100%",
+    height: "100%",
+    alignItems: "center",
+    justifyContent: "center",
   },
   contentTitle: {
+    textAlign: "center",
     fontFamily: "mulishBold",
     fontSize: 22,
-    color: colors.palette.ivory,
+    color: colors.palette.violetClair,
+  },
+  contentSubTitle: {
+    paddingTop: 10,
+    textAlign: "center",
+    fontFamily: "mulishExtraLight",
+    fontSize: 14,
+    color: colors.palette.violetClair,
   },
   containerStyle: {
     width: SCREEN_WIDTH * 0.8,
@@ -140,8 +166,9 @@ const styles = StyleSheet.create({
   //ERROR
   errorContainer: {
     width: '80%',
+    alignSelf: 'center',
     backgroundColor: colors.palette.orange,
-    marginTop: 20,
+    marginTop: 10,
     borderRadius: 16,
   },
   errorText: {

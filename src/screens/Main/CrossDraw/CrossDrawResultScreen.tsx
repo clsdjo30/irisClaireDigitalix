@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import {
     StyleSheet,
     Image,
@@ -40,6 +40,7 @@ const CrossDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) 
     const secondCard = CARD_DECK.find(card => card.id === questionInformations.choosecardtwonumber);
     const thirdCard = CARD_DECK.find(card => card.id === questionInformations.choosecardthreenumber);
     const fourthCard = CARD_DECK.find(card => card.id === questionInformations.choosecardfournumber);
+    const fithCard = CARD_DECK.find(card => card.id === questionInformations.choosecardfivenumber);
 
     function saveCrossQuestion(useruid: string | any) {
         const db = firestore;
@@ -150,6 +151,13 @@ const CrossDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) 
                                 />
                                 <Text style={styles.pseudoTitle}>{fourthCard?.pseudo}</Text>
                             </View>
+                            <View>
+                                <Image
+                                    style={styles.cardImage}
+                                    source={fithCard?.frontImageUrl}
+                                />
+                                <Text style={styles.pseudoTitle}>{fourthCard?.pseudo}</Text>
+                            </View>
                         </View>
                     </View>
                     <ScrollView style={styles.resultView}>
@@ -232,9 +240,9 @@ const styles = StyleSheet.create({
     card: {
     },
     cardImage: {
-        width: 67,
-        height: 118,
-        borderRadius: 10,
+        width: SCREEN_WIDTH * 0.18,
+        height: SCREEN_HEIGHT * 0.22,
+        
     },
     cardView: {
         alignItems: 'center',

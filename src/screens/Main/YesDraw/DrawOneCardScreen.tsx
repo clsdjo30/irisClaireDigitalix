@@ -85,6 +85,8 @@ const DrawOneCardScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
         <CustomModal
           visible={modalVisible}
           credit={credit}
+          modalText='Voulez-vous utiliser 1 credit pour voir le résultat ?'
+          useCreditButtonTitle='Utiliser 1 credit'
           onValidate={() => {
             setModalVisible(!modalVisible);
             setCredit(credit - 1);
