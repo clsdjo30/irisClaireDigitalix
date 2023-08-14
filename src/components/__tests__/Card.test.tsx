@@ -9,7 +9,7 @@ describe('Card', () => {
     it('renders correctly', () => {
         const { getByTestId } = render(<Card onPress={onPressMock} source={imageSource} />);
 
-        const card = getByTestId('cards');
+        const card = getByTestId('cardss');
         expect(card).toBeTruthy();
     });
 
