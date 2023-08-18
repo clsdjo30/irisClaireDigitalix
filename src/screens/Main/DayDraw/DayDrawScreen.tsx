@@ -87,8 +87,8 @@ const DayDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                 style={{
                     width: SCREEN_WIDTH,
                     height: SCREEN_WIDTH / 1,
-                    position: 'absolute',
-                    bottom: 40,
+                    position: 'relative',
+                    top: 140,
                 }}
                 loop
                 autoPlay={false}
@@ -200,7 +200,7 @@ const styles = StyleSheet.create({
     },
     choiceButton: {
         position: 'absolute',
-        bottom: 20,
+        bottom: 40,
         width: 300,
         backgroundColor: "#CBA135",
         marginBottom: 10,
