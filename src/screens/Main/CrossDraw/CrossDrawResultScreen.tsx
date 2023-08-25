@@ -122,7 +122,7 @@ const CrossDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) 
                     <View style={styles.headerContainer}>
                         <Text style={styles.contentTitle}>Votre Tirage</Text>
                         <View style={styles.cardContainer}>
-                            <View style={styles.cardView}>
+                            <View>
                                 <Image
                                     style={styles.cardImage}
                                     source={firstCard?.frontImageUrl}
@@ -243,11 +243,6 @@ const styles = StyleSheet.create({
         width: SCREEN_WIDTH * 0.18,
         height: SCREEN_HEIGHT * 0.22,
         
-    },
-    cardView: {
-        alignItems: 'center',
-        resizeMode: 'contain',
-
     },
     pseudoTitle: {
         fontFamily: "oswaldMedium",
