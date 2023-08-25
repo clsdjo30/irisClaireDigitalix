@@ -13,6 +13,7 @@ export default {
       firebaseMessagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
       firebaseAppId: process.env.FIREBASE_APP_ID,
       openAiId: process.env.OPEN_AI_ID,
+      googleRevenueCatApiKey: process.env.GOOGLE_REVENUE_CAT_API_KEY,
     },
     "name": "irisClaireDigitalix",
     "slug": "irisclairedigitalix",

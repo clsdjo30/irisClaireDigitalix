@@ -2,11 +2,12 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import { Platform } from 'react-native';
 import Purchases, { LOG_LEVEL, PurchasesPackage } from 'react-native-purchases';
 import { CustomerInfo } from 'react-native-purchases';
+import Constants from 'expo-constants';
 
 // Use your RevenueCat API keys
 const APIKeys = {
     ios: 'IOS_REVENUECAT_API_KEY',
-    google: 'GOOGLE_REVENUECAT_API_KEY'
+    google: Constants.expoConfig?.extra?.googleRevenueCatApiKey
 };
 
 interface RevenueCatProps {
@@ -32,7 +33,6 @@ export const useRevenueCat = () => {
 export const RevenueCatProvider = ({ children }: any) => {
     const [user, setUser] = useState<UserState>({
         irisCoin: 0,
-      
     });
     const [packages, setPackages] = useState<PurchasesPackage[]>([]);
     const [isREady, setIsReady] = useState(false);
@@ -64,12 +64,7 @@ export const RevenueCatProvider = ({ children }: any) => {
         if (currentOffering) {
             // console.log('RCurrentOffering: ', currentOffering.availablePackages[0].product);
             setPackages(currentOffering.availablePackages);
-
         }
-
-
-
-
     };
 
 
