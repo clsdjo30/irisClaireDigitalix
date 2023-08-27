@@ -1,17 +1,21 @@
 import React from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { styles } from '../screens/Main/IrisPage/BuyIrisScreen.styles';
+import { styles } from './IrisCreditCard.styles';
 
 interface CreditCardProps {
     colors: string[];
-    creditAmount: number;
+    title: string;
+    description: string;
     price: number;
-    promoPrice?: number;
+    discount?: number;
     bestDeal?: boolean;
+    onPress: () => void;
+    creditAmount?: number;
+    promoPrice?: number;
 }
 
-const CreditCard: React.FC<CreditCardProps> = ({ colors, creditAmount, price, promoPrice, bestDeal }) => {
+const CreditCard: React.FC<CreditCardProps> = ({ colors, creditAmount, price, promoPrice, bestDeal, onPress }) => {
     return (
         <LinearGradient
             colors={colors}
@@ -21,7 +25,8 @@ const CreditCard: React.FC<CreditCardProps> = ({ colors, creditAmount, price, pr
             style={styles.domainCard}
         >
             <Pressable
-                style={styles.innerContainer}
+                style={styles.pressableCard}
+                onPress={onPress}
             >
                 <View style={styles.priceBlock}>
                     <Text style={styles.priceText}>{creditAmount}</Text>
@@ -44,7 +49,7 @@ const CreditCard: React.FC<CreditCardProps> = ({ colors, creditAmount, price, pr
                     <Text style={styles.price}>{price}€</Text>
                 </View>
             </Pressable>
-        </LinearGradient>
+         </LinearGradient>
     );
 };
 
