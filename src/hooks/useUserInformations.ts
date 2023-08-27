@@ -31,9 +31,10 @@ export function useUserInformation() {
           firstname: doc.data().firstname,
           zodiacname: doc.data().zodiac,
           stone: doc.data().stone,
-          symbol: doc.data().symbol,
           genre: doc.data().genre,
           element: doc.data().element,
+          freeCoins: doc.data().freeCoins,
+          buyCoins: doc.data().buyCoins,
         });
         // console.log(doc.data())
       }

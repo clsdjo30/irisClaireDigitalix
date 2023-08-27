@@ -69,6 +69,8 @@ export const useSignIn = () => {
       zodiac: zodiacInfo.transUserSign,
       stone: zodiacInfo.transUserStone,
       element: zodiacInfo.element,
+      freeCoins: user.freeCoins,
+      buyCoins: user.buyCoins,
     });
   };
 

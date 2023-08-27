@@ -33,13 +33,15 @@ const ProfilScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   // Récupérez la locale actuelle (par exemple, "fr-FR" ou "en-US")
   const locale = Localization.locale.split("-")[0];
 
-  
+
   console.log('userInfo', userInfo)
-  
+
   // recup user Astro, Element, Stone
   const userSign = userInfo.user?.zodiacname
   const userStone = userInfo.user?.stone
   const userElement = userInfo.user?.element
+  const userFreeCoins = userInfo.user?.freeCoins
+  const userBuyCoins = userInfo.user?.buyCoins
 
   // Affiche le nom en fonction de la locale
   const userTransSign = getLocaleSign(userInfo.user?.zodiacname, locale)
@@ -58,17 +60,26 @@ const ProfilScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
           {/* Header User Element Informations  */}
           <View style={styles.headerUnderlineTop}>
-            {UserElementIcon({ userElement: userElement})}
-            {UserSignIcon({ userSign: userSign})}
+            {UserElementIcon({ userElement: userElement })}
+            {UserSignIcon({ userSign: userSign })}
             {UserStoneIcon({ userStone: userStone })}
+          </View>
+
+          {/* Header User Coins Informations  */}
+          <View style={styles.headerUnderlineTop} >
+           
+            <View style={styles.profilInput}>
+              <Text style={styles.textEmail}>Mes Iris: </Text>
+              <Text style={styles.textDetail} >{userBuyCoins}</Text>
+            </View>
+            <View style={styles.profilInput}>
+              <Text style={styles.textEmail}>Mes Free Iris: </Text>
+              <Text style={styles.textDetail} >{userFreeCoins}</Text>
+            </View>
           </View>
 
           {/* Header User Information */}
           <View style={styles.blockProfilInput}>
-            <View style={styles.profilInput}>
-              <Text style={styles.textEmail}>Prénom: </Text>
-              <Text style={styles.textDetail}>{userInfo.user?.firstname}</Text>
-            </View>
             <View style={styles.profilInput}>
               <Text style={styles.textEmail}>Email: </Text>
               <Text style={styles.textDetail} >{userInfo.user?.email}</Text>
@@ -78,8 +89,6 @@ const ProfilScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
               <Text style={styles.textDetail} >{userInfo.user?.birthday}</Text>
             </View>
           </View>
-
-          <View style={styles.headerUnderlineTop} />
 
           {/* User Astro information*/}
           <View style={styles.blockElement}>
@@ -180,7 +189,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     width: SCREEN_WIDTH - 5,
-    height: SCREEN_HEIGHT * 0.63,
+    height: SCREEN_HEIGHT * 0.64,
     borderBottomLeftRadius: SCREEN_WIDTH * 0.1,
     borderBottomRightRadius: SCREEN_WIDTH * 0.1,
     backgroundColor: colors.background
@@ -250,6 +259,10 @@ const styles = StyleSheet.create({
   iconImage: {
     width: 20,
     height: 20,
+  },
+  // IRIS SECTION
+  irisTitle: {
+  
   },
   //START O FUSER CARD INFORMATION
 
