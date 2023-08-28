@@ -36,12 +36,14 @@ export function useUserInformation() {
           genre: doc.data().genre,
           element: doc.data().element,
           irisCoins: doc.data().irisCoins,
+          hasSeenModal: doc.data().hasSeenModal,
         });
         // console.log(doc.data())
       }
     });
   };
 
+  // Met à jour les credit de l'utilisateur dans Firestore
   const updateUserIrisCoins = async (newIrisCoins: number) => {
     try {
       // Vérifiez si userID est null
@@ -64,8 +66,25 @@ export function useUserInformation() {
     }
   };
 
+  // Met à jour le champ hasSeenModal de l'utilisateur dans Firestore
+  const updateHasSeenModal = async () => {
+    try {
+      if (!userID) {
+        console.error("UserID is null. Cannot update document.");
+        return;
+      }
+      const userRef = doc(firestore, "users", userID);
+      await updateDoc(userRef, {
+        hasSeenModal: true,
+      });
+    } catch (error) {
+      console.error("Error updating hasSeenModal: ", error);
+    }
+  };
+
   return {
     user,
     updateUserIrisCoins,
+    updateHasSeenModal,
   };
 }

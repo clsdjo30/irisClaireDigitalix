@@ -70,6 +70,7 @@ export const useSignIn = () => {
       stone: zodiacInfo.transUserStone,
       element: zodiacInfo.element,
       irisCoins: user.irisCoins,
+      hasSeenModal: user.hasSeenModal,
     });
   };
 

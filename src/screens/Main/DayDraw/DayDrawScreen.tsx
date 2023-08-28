@@ -1,5 +1,5 @@
 // DayDrawScreen.tsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, ImageSourcePropType, Text } from 'react-native';
 import { interpolate, useSharedValue } from 'react-native-reanimated';
 import Carousel from 'react-native-reanimated-carousel';
@@ -9,6 +9,8 @@ import { useDaydrawStore } from '../../../hooks/useDayDrawStore';
 import CARD_DECK from '../../../data/cards';
 import FlippableCard from '../../../components/DayDraw/FlippableCard';
 import { SCREEN_WIDTH, SCREEN_HEIGHT } from '../../../utils/constants';
+import { useUserInformation } from '../../../hooks/useUserInformations';
+import WelcomeDaydrawModal from '../../../components/reusable/WelcomeDaydawModal';
 
 const DayDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     const [daydraw, setDayDraw] = useDaydrawStore();
@@ -16,11 +18,12 @@ const DayDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     const itemWidth = 80;
     const centerOffset = SCREEN_WIDTH / 2 - itemWidth / 2;
     const [flippedCardIndex, setFlippedCardIndex] = React.useState(-1);
-
     //DISPLAY BACK CARD IMAGE
     const backCard: Array<ImageSourcePropType> = CARD_DECK.map((card) => card.backImageUrl);
     //DISPLAY FRONT CARD IMAGE
     const frontCard: ImageSourcePropType = CARD_DECK.map((card) => card.frontImageUrl);
+    const { user, updateHasSeenModal } = useUserInformation();
+    const [isModalVisible, setModalVisible] = useState(false);
 
     //START CAROUSEL ANIMATION
     const animationStyle = React.useCallback(
@@ -47,6 +50,13 @@ const DayDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
         },
         [],
     );
+
+    useEffect(() => {
+        if (user?.hasSeenModal === false) {
+            setModalVisible(true);
+        }
+
+    }, []);
 
     const selectCard = (index: number) => {
         const newtendance = CARD_DECK[index].tendance[Math.floor(Math.random() * CARD_DECK[index].tendance.length)];
@@ -122,6 +132,19 @@ const DayDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
             <View style={styles.choiceButton}>
                 <Text style={styles.tendanceButtonText}>Choisissez votre Carte</Text>
             </View>
+            
+            <WelcomeDaydrawModal
+                visible={isModalVisible}
+                onValidate={() => {
+                    setModalVisible(!isModalVisible);
+                }}
+                modalTitle="Tirage du jour"
+                modalSubTitle="Découvrez la tendance de votre journée"
+                modalExplain="Chaque jour, une carte vous est attribuée. Cette carte vous permet de connaitre la tendance de votre journée."
+                modalContent="Pour cela, choisissez une carte et découvrez la tendance de votre journée."
+                buttonText="Je découvre ma tendance"
+            />
+
         </View>
     );
 }

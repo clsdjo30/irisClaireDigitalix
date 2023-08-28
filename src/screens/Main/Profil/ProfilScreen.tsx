@@ -34,7 +34,7 @@ const ProfilScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   const locale = Localization.locale.split("-")[0];
 
 
-  console.log('userInfo', userInfo)
+  console.log('userInfo PROFIL SCREEN', userInfo)
 
   // recup user Astro, Element, Stone
   const userSign = userInfo.user?.zodiacname

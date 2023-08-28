@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import {
     StyleSheet,
     View,
@@ -14,12 +14,22 @@ import NavigationButton from '../../../components/NavigationButton';
 import { SCREEN_WIDTH } from '../../../utils/constants';
 import { captureRef } from 'react-native-view-shot';
 import * as Sharing from 'expo-sharing';
+import { useUserInformation } from '../../../hooks/useUserInformations';
+import WelcomeDaydrawModal from '../../../components/reusable/WelcomeDaydawModal';
+import { goToYesDraw } from '../../../utils/NavigationFunctions';
 
 const TendanceResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     const [ daydraw ] = useDaydrawStore();
     const viewRef = useRef<View>(null);
+    const userInformation = useUserInformation();
+    const [isModalVisible, setModalVisible] = useState(false);
 
     useEffect(() => {
+        if (userInformation.user?.hasSeenModal === false) {
+            setModalVisible(true);
+            userInformation.updateHasSeenModal();
+        }
+
         const backAction = () => {
             return true;
         };
@@ -47,7 +57,6 @@ const TendanceResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) =
         // Partagez l'image
         await Sharing.shareAsync(uri);
     }
-
 
     return (
 
@@ -80,6 +89,18 @@ const TendanceResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) =
                     onPress={() => navigation.navigate('Home')}
                 />
             </View>
+
+            <WelcomeDaydrawModal
+                visible={isModalVisible}
+                buttonText={'Lire ma tendance'}
+                onValidate={() => {
+                    setModalVisible(!isModalVisible);
+                }}
+                modalTitle={'Tirage du jour'}
+                modalSubTitle={'Tous les jours, tirez une carte pour connaitre votre tendance'}
+                modalExplain={'Vous pouvez la partager avec vos amis ou la garder pour vous'}
+                modalContent={''}
+            />
         </View>
 
     );

@@ -33,6 +33,7 @@ const SignInScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     setVisible(!visible);
   };
 
+  console.log('USER SIGN IN HAS SEEN MODAL', user)
   // accepter les conditions générales d'utilisation
   const isAgree = () => {
     if (!policy) {
@@ -40,7 +41,8 @@ const SignInScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
       setUser({
         ...user,
         isagree: true,
-        irisCoins: 5
+        irisCoins: 5,
+        hasSeenModal: false
       });
     }
     setVisible(false);
