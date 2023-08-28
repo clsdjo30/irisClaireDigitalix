@@ -11,10 +11,7 @@ const UserStore = new GlobalStore({
     zodiacname: '',
     stone: '',
     element: '',
-    freeCoins: 0,
-    buyCoins: 0,
-
-
+    irisCoins: 0
 });
 
 export const useUserStore = UserStore.getHook();

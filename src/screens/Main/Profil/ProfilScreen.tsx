@@ -40,8 +40,8 @@ const ProfilScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   const userSign = userInfo.user?.zodiacname
   const userStone = userInfo.user?.stone
   const userElement = userInfo.user?.element
-  const userFreeCoins = userInfo.user?.freeCoins
-  const userBuyCoins = userInfo.user?.buyCoins
+  const userIrisCoins = userInfo?.user?.irisCoins
+
 
   // Affiche le nom en fonction de la locale
   const userTransSign = getLocaleSign(userInfo.user?.zodiacname, locale)
@@ -66,20 +66,15 @@ const ProfilScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
           </View>
 
           {/* Header User Coins Informations  */}
-          <View style={styles.headerUnderlineTop} >
            
-            <View style={styles.profilInput}>
-              <Text style={styles.textEmail}>Mes Iris: </Text>
-              <Text style={styles.textDetail} >{userBuyCoins}</Text>
-            </View>
-            <View style={styles.profilInput}>
-              <Text style={styles.textEmail}>Mes Free Iris: </Text>
-              <Text style={styles.textDetail} >{userFreeCoins}</Text>
-            </View>
-          </View>
+           
 
           {/* Header User Information */}
           <View style={styles.blockProfilInput}>
+            <View style={styles.profilInput}>
+              <Text style={styles.textEmail}>Mes Iris: </Text>
+              <Text style={styles.textDetail} >{userIrisCoins}</Text>
+            </View>
             <View style={styles.profilInput}>
               <Text style={styles.textEmail}>Email: </Text>
               <Text style={styles.textDetail} >{userInfo.user?.email}</Text>
@@ -90,6 +85,7 @@ const ProfilScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
             </View>
           </View>
 
+          <View style={styles.headerUnderlineTop} />
           {/* User Astro information*/}
           <View style={styles.blockElement}>
             <View style={styles.profilInput}>
@@ -189,7 +185,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     width: SCREEN_WIDTH - 5,
-    height: SCREEN_HEIGHT * 0.64,
+    height: SCREEN_HEIGHT * 0.62,
     borderBottomLeftRadius: SCREEN_WIDTH * 0.1,
     borderBottomRightRadius: SCREEN_WIDTH * 0.1,
     backgroundColor: colors.background

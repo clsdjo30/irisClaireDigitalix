@@ -5,6 +5,8 @@ import {
   getAuth,
   getDocs,
   collection,
+  doc,
+  updateDoc,
 } from "../config/firebaseConfig";
 
 const auth = getAuth();
@@ -33,15 +35,37 @@ export function useUserInformation() {
           stone: doc.data().stone,
           genre: doc.data().genre,
           element: doc.data().element,
-          freeCoins: doc.data().freeCoins,
-          buyCoins: doc.data().buyCoins,
+          irisCoins: doc.data().irisCoins,
         });
         // console.log(doc.data())
       }
     });
   };
 
+  const updateUserIrisCoins = async (newIrisCoins: number) => {
+    try {
+      // Vérifiez si userID est null
+      if (!userID) {
+        console.error("UserID is null. Cannot update document.");
+        return;
+      }
+      
+      // Assurez-vous que userID contient l'ID du document utilisateur
+      const userRef = doc(firestore, "users", userID);
+
+      // Mettre à jour le champ irisCoins
+      await updateDoc(userRef, {
+        irisCoins: newIrisCoins,
+      });
+
+      console.log("Document successfully updated!");
+    } catch (error) {
+      console.error("Error updating document: ", error);
+    }
+  };
+
   return {
     user,
+    updateUserIrisCoins,
   };
 }

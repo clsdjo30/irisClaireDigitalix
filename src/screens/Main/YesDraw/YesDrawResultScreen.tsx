@@ -7,6 +7,7 @@ import {
     Text,
     Dimensions,
     ActivityIndicator,
+    BackHandler,
 } from 'react-native';
 import CARD_DECK from '../../../data/cards';
 import { colors } from '../../../theme';
@@ -29,11 +30,22 @@ const YesDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) =>
     const [questionInformations, setQuestionInformations] = useQuestionStore();
     const currentUser = auth.currentUser;
     const userID = currentUser ? currentUser.uid : null;
-
-    //console.log(userID);
-
     const choosedCard = CARD_DECK.find((card) => card.id === questionInformations.choosecardnumber);
 
+    console.log('RESULT SCREEN USER ID', userID);
+
+    useEffect(() => {
+        const backAction = () => {
+            return true;
+        };
+
+        const backHandler = BackHandler.addEventListener(
+            "hardwareBackPress",
+            backAction
+        );
+
+        return () => backHandler.remove();
+    }, []);
 
 
     function saveQuestion(useruid: string | any) {

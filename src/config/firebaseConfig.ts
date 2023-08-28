@@ -1,6 +1,6 @@
 import * as firebase from "firebase/app";
 import Constants from 'expo-constants';
-import { getFirestore, initializeFirestore, setDoc, doc, getDoc, getDocs,collection, Firestore, query, where, DocumentData, CollectionReference} from 'firebase/firestore';
+import { getFirestore, initializeFirestore, setDoc, doc, getDoc, getDocs, updateDoc, collection, Firestore, query, where, DocumentData, CollectionReference} from 'firebase/firestore';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { FirebaseError } from '@firebase/util';
 
@@ -22,7 +22,7 @@ if (!firebase.getApps().length) {
 const firestore = getFirestore(firebase.getApp());
 
 
-export { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, firestore, query,where, setDoc, doc, getDoc, DocumentData, CollectionReference, getDocs, collection, signOut, FirebaseError, Firestore };
+export { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, firestore, query,where, setDoc, doc, getDoc, DocumentData, CollectionReference, getDocs, collection, signOut, FirebaseError, Firestore, updateDoc };
 
 export default firebase;
 

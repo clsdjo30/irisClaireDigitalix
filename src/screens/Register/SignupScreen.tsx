@@ -40,8 +40,7 @@ const SignInScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
       setUser({
         ...user,
         isagree: true,
-        freeCoins: 5,
-        buyCoins: 0,
+        irisCoins: 5
       });
     }
     setVisible(false);

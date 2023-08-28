@@ -1,5 +1,5 @@
 // DrawOneCardScreen.tsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
 import { useQuestionStore } from '../../../hooks/useQuestionStore';
@@ -7,13 +7,17 @@ import FlipCard from '../../../components/FlipCard';
 import CustomModal from '../../../components/reusable/CustomModal';
 import { cardDeckStyles } from '../../../theme';
 import CARD_DECK from '../../../data/cards';
+import { useUserInformation } from '../../../hooks/useUserInformations';
+import { useUserStore } from '../../../hooks/useUserStore';
 
 const DrawOneCardScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   const [value, setValue] = useQuestionStore();
   const [selectedCardIndex, setSelectedCardIndex] = useState<number | null>(null);
   const [selectedCards, setSelectedCards] = useState(0);
   const [modalVisible, setModalVisible] = useState(false);
-  const [credit, setCredit] = useState(1);
+  const [actualUser, setUser] = useUserStore();
+  const {user, updateUserIrisCoins} = useUserInformation();
+ 
 
   const handleCardFlip = (index: number) => {
     if (selectedCards === 0) {
@@ -32,22 +36,30 @@ const DrawOneCardScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   }
 
   const goToResult = () => {
-    navigation.navigate('DrawResult');
+    navigation.navigate('YesDrawResult');
   }
 
   const cancelModal = () => {
     navigation.navigate('Home');
   }
 
+
   const sendQuestion = () => {
-    if (credit > 0
+    if ( user?.irisCoins > 0
       && value.question != null
       && value.choosecardname != null
       && value.choosecardnumber != null
       && value.choosecardpseudo != null
     ) {
-      setCredit(credit - 1)
-      navigation.navigate('YesDrawResult')
+      const newIrisCoins = user.irisCoins - 1;
+
+      // Mettre à jour le state local
+      setUser({ ...user, irisCoins: newIrisCoins });
+
+      // Mettre à jour Firestore
+      updateUserIrisCoins(newIrisCoins);
+      goToResult();
+
     }
     else {
       goBuyCredit()
@@ -84,12 +96,11 @@ const DrawOneCardScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
         <CustomModal
           visible={modalVisible}
-          credit={credit}
+          credit={user?.irisCoins}
           modalText='Voulez-vous utiliser 1 credit pour voir le résultat ?'
           useCreditButtonTitle='Utiliser 1 credit'
           onValidate={() => {
             setModalVisible(!modalVisible);
-            setCredit(credit - 1);
             sendQuestion();
           }}
           onCancel={cancelModal}
