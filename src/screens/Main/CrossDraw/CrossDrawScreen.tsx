@@ -1,18 +1,9 @@
-import React, { useState, useEffect, useRef, RefObject } from 'react';
+import React, { useState } from 'react';
 import {
-  Image,
-  Pressable,
   StyleSheet,
   View,
-  ImageSourcePropType,
   Text,
-  ViewStyle
 } from 'react-native';
-import Animated, {
-  useAnimatedStyle,
-  useSharedValue,
-  withTiming,
-} from 'react-native-reanimated';
 import CARD_DECK from '../../../data/cards';
 import { colors } from '../../../theme/color'
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -23,6 +14,8 @@ import {
 import CustomModal from '../../../components/reusable/CustomModal';
 import FlipCard from '../../../components/FlipCard';
 import { SCREEN_HEIGHT, SCREEN_WIDTH } from '../../../utils/constants';
+import { useUserStore } from '../../../hooks/useUserStore';
+import { useUserInformation } from '../../../hooks/useUserInformations';
 
 
 
@@ -31,10 +24,13 @@ const CrossDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   const [value, setValue] = useCrossQuestionStore();
   // Ajoutez un nouvel état pour suivre la carte actuellement sélectionnée
   const [selectedCardIndex, setSelectedCardIndex] = useState<number | null>(null);
-
+  // Ajoutez un nouvel état pour suivre le nombre de cartes sélectionnées
   const [selectedCards, setSelectedCards] = useState(0);
+  // Ajoutez un nouvel état pour suivre le nombre de crédits
+  const [actualUser, setUser] = useUserStore();
+  const { user, updateUserIrisCoins } = useUserInformation();
   const [modalVisible, setModalVisible] = useState(false);
-  const [credit, setCredit] = useState(5);
+  
 
 
 
@@ -102,7 +98,7 @@ const CrossDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
   }
  
-  function gotToResult() {
+  function goToResult() {
     navigation.navigate('DrawResult');
   }
   function cancelModal() {
@@ -115,6 +111,40 @@ const CrossDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
       index: 0,
       routes: [{ name: 'Home' }]
     })
+  }
+
+  const sendQuestion = () => {
+    if (user?.irisCoins > 0
+      && value.question != null
+      && value.choosecardname != null
+      && value.choosecardnumber != null
+      && value.choosecardpseudo != null
+      && value.choosecardtwoname != null
+      && value.choosecardtwonumber != null
+      && value.choosecardtwopseudo != null
+      && value.choosecardthreename != null
+      && value.choosecardthreenumber != null
+      && value.choosecardthreepseudo != null
+      && value.choosecardfourname != null
+      && value.choosecardfournumber != null
+      && value.choosecardfourpseudo != null
+      && value.choosecardfivename != null
+      && value.choosecardfivenumber != null
+      && value.choosecardfivepseudo != null
+    ) {
+      const newIrisCoins = user.irisCoins - 3;
+
+      // Mettre à jour le state local
+      setUser({ ...user, irisCoins: newIrisCoins });
+
+      // Mettre à jour Firestore
+      updateUserIrisCoins(newIrisCoins);
+      goToResult();
+
+    }
+    else {
+      goBuyCredit()
+    }
   }
 
   return (
@@ -140,13 +170,12 @@ const CrossDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
         {/* Display Modal when all cards are flipped */}
         <CustomModal
           visible={modalVisible}
-          credit={credit}
+          credit={user?.irisCoins}
           modalText='Voulez-vous utiliser 3 credits pour voir le résultat ?'
           useCreditButtonTitle='Utiliser 3 credits'
           onValidate={() => {
             setModalVisible(!modalVisible);
-            setCredit(credit - 1);
-            gotToResult();
+            sendQuestion();
           }}
           onCancel={cancelModal}
           onBuyCredit={() => {
