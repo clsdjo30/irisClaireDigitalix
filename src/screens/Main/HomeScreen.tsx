@@ -18,8 +18,9 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   const userInformation = useUserInformation();
   const [isModalVisible, setModalVisible] = useState(false);
 
-  console.log('USER INFORMATION', userInformation.user?.hasSeenModal);
-
+  // console.log('USER INFORMATION', userInformation.user?.hasSeenModal);
+  // console.log('USER INFORMATION', userInformation.user);
+  // console.log('IS MODAL VISIBLE', isModalVisible)
   useEffect(() => {
     const timer = resetAtMidnight(() => {
       setDayCard(prevState => ({
@@ -27,8 +28,9 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
         isdraw: false
       }));
     });
-
-    console.log('USE EFFECT USER INFORMATION', userInformation.user?.hasSeenModal)
+    
+    // console.log('USE EFFECT USER INFORMATION', userInformation.user?.hasSeenModal)
+    // console.log('USE EFFECT IS MODAL VISIBLE', isModalVisible)
 
     if (userInformation.user?.hasSeenModal === false) {
       setModalVisible(true);
@@ -95,7 +97,8 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
           modalContent='Pour commencer, je vous propose de découvrir la tendance de votre journée.'
           buttonText="C'est parti !"
           onValidate={ () => {
-            goToDayDraw(navigation, daycard);
+            setModalVisible(!isModalVisible);
+           
           }}          
         />
 
