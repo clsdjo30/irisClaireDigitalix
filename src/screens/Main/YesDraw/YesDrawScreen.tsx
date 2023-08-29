@@ -95,7 +95,7 @@ const YesDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
           <View style={styles.validationButton}>
             <Pressable style={styles.button} onPress={goToChooseCard}>
               <Text style={styles.buttonText}>
-                Tirer ma carte
+                Validez votre question
               </Text>
             </Pressable>
           </View>

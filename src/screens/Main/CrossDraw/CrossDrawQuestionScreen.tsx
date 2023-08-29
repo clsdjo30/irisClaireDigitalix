@@ -94,7 +94,7 @@ const CrossDrawQuestionScreen: React.FC<StackScreenProps<any>> = ({ navigation }
           <View style={styles.validationButton}>
             <TouchableOpacity style={styles.button} onPress={goToChooseCard}>
               <Text style={styles.buttonText}>
-                Tirer ma carte
+                Valider votre question
               </Text>
             </TouchableOpacity>
           </View>
