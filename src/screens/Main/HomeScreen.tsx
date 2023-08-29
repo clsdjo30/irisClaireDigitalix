@@ -1,11 +1,11 @@
 import React, { useEffect, useState} from 'react';
-import { View, Text, Modal, TouchableOpacity } from 'react-native';
+import { View, Text } from 'react-native';
 import { useUserInformation } from '../../hooks/useUserInformations';
 import { StackScreenProps } from '@react-navigation/stack';
 import { useDaydrawStore } from '../../hooks/useDayDrawStore';
 import CardChoices from '../../components/CardChoices';
 import DayCardChoices from '../../components/DayCardChoices';
-import { goToYesDraw, goToCrossDraw, goToDayDraw } from '../../utils/NavigationFunctions';
+import { goToYesDraw, goToCrossDraw} from '../../utils/NavigationFunctions';
 import { styles } from './HomeScreen.styles';
 import { resetAtMidnight } from '../../utils/resetAtMidnight';
 import WelcomeModal from '../../components/reusable/WelcomeModal';
@@ -83,14 +83,8 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
         <WelcomeModal
           visible={isModalVisible}
-          modalTitle="Bienvenue dans Iris Claire"
-          modalSubTitle='Votre nouveau guide spirituel de poche.'
-          modalExplain='Je suis là pour vous aider à trouver des réponses à vos questions.'
-          modalContent='Pour commencer, je vous propose de découvrir la tendance de votre journée.'
-          buttonText="C'est parti !"
           onValidate={ () => {
             setModalVisible(!isModalVisible);
-           
           }}          
         />
 

@@ -7,22 +7,12 @@ import { useUserInformation } from '../../hooks/useUserInformations';
 
 type WelcomeModalProps = {
     visible: boolean;
-    buttonText: string;
     onValidate: () => void;
-    modalTitle: string;
-    modalSubTitle: string;
-    modalContent: string;
-    modalExplain: string;
 };
 
 const WelcomeModal: React.FC<WelcomeModalProps> = ({
     visible,
-    buttonText,
     onValidate,
-    modalTitle,
-    modalSubTitle,
-    modalContent,
-    modalExplain,
 }) => {
 
     const [currentSection, setCurrentSection] = useState('daydraw');
@@ -122,23 +112,6 @@ const WelcomeModal: React.FC<WelcomeModalProps> = ({
                             </Pressable>
                         </View>
                     )}
-                    {/* <>
-                            <View>
-                                <Text style={styles.modalTitle}>{modalTitle}</Text>
-                                <Text style={styles.modalSubTitle}>{modalSubTitle}</Text>
-                                <Text style={styles.modalExplain}>{modalExplain}</Text>
-                                <Text style={styles.modalExplain}>{modalContent}</Text>
-                            </View>
-                            <View style={styles.buttonView}>
-                                <NavigationButton
-                                    title={buttonText}
-                                    onPress={onValidate}
-                                    width={width * 0.6}
-                                    color={colors.palette.violet}
-                                    backgroundColor={colors.palette.orange}
-                                />
-                            </View>
-                        </> */}
                 </View>
             </View>
         </Modal>
