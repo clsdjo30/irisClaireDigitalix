@@ -263,7 +263,7 @@ interface Card {
   {
       id: 22,
       name: 'le mat',
-      pseudo: "l'Iris de l'Insouciance",
+      pseudo: "l'Iris de Nomade",
       backImageUrl: require('../../assets/images/cards/back/Card_Back_001.png'),
       frontImageUrl: require('../../assets/images/cards/front/22-le-mat.png'),
       tendance: [

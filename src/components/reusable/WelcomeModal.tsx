@@ -90,15 +90,15 @@ const styles = StyleSheet.create({
     },
     modalTitle: {
         color: colors.palette.darkgold,
-        fontSize: scale + 30,
-        fontFamily: 'oswaldLight',
+        fontSize: scale + 28,
+        fontFamily: 'oswaldRegular',
         textAlign: 'center',
         marginTop: height * 0.03,
     },
     modalSubTitle: {
         color: colors.palette.violet,
         fontSize: scale + 15,
-        fontFamily: 'oswaldLight',
+        fontFamily: 'oswaldRegular',
         textAlign: 'center',
         marginTop: -height * 0.01,
         marginBottom: height * 0.03,
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     modalExplain: {
         color: colors.palette.violet,
         fontSize: scale + 14,
-        fontFamily: 'oswaldExtraLight',
+        fontFamily: 'oswaldLight',
         textAlign: 'center',
         marginTop: -height * 0.02,
         marginBottom: height * 0.03,
