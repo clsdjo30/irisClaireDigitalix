@@ -33,15 +33,11 @@ const ProfilScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   // Récupérez la locale actuelle (par exemple, "fr-FR" ou "en-US")
   const locale = Localization.locale.split("-")[0];
 
-
-  console.log('userInfo PROFIL SCREEN', userInfo)
-
   // recup user Astro, Element, Stone
   const userSign = userInfo.user?.zodiacname
   const userStone = userInfo.user?.stone
   const userElement = userInfo.user?.element
   const userIrisCoins = userInfo?.user?.irisCoins
-
 
   // Affiche le nom en fonction de la locale
   const userTransSign = getLocaleSign(userInfo.user?.zodiacname, locale)
@@ -64,10 +60,6 @@ const ProfilScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
             {UserSignIcon({ userSign: userSign })}
             {UserStoneIcon({ userStone: userStone })}
           </View>
-
-          {/* Header User Coins Informations  */}
-           
-           
 
           {/* Header User Information */}
           <View style={styles.blockProfilInput}>
@@ -123,7 +115,7 @@ const ProfilScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
           <View style={styles.blockParam}>
             <TouchableOpacity
               style={styles.paramRow}
-              onPress={() => navigation.navigate('FirstName')}>
+              onPress={() => navigation.navigate('Home')}>
               <Text style={styles.switchText}>Modifier mes informations</Text>
               <Image source={rightArrow} style={styles.iconImage} />
             </TouchableOpacity>
@@ -131,7 +123,7 @@ const ProfilScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
           <View style={styles.blockParam}>
             <TouchableOpacity
               style={styles.paramRow}
-              onPress={() => navigation.navigate('FirstName')}>
+              onPress={() => navigation.navigate('Home')}>
               <Text style={styles.switchText}>Laissez un avis</Text>
               <Image source={rightArrow} style={styles.iconImage} />
             </TouchableOpacity>
@@ -139,7 +131,7 @@ const ProfilScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
           <View style={styles.blockParam}>
             <TouchableOpacity
               style={styles.paramRow}
-              onPress={() => navigation.navigate('FirstName')}>
+              onPress={() => navigation.navigate('Home')}>
               <Text style={styles.switchText}>Aide</Text>
               <Image source={rightArrow} style={styles.iconImage} />
             </TouchableOpacity>
@@ -147,7 +139,7 @@ const ProfilScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
           <View style={styles.blockParam}>
             <TouchableOpacity
               style={styles.paramRow}
-              onPress={() => navigation.navigate('FirstName')}>
+              onPress={() => navigation.navigate('Home')}>
               <Text style={styles.switchText}>A Propos</Text>
               <Image source={rightArrow} style={styles.iconImage} />
             </TouchableOpacity>
