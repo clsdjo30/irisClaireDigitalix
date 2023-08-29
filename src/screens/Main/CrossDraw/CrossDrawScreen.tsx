@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
   View,
@@ -16,6 +16,7 @@ import FlipCard from '../../../components/FlipCard';
 import { SCREEN_HEIGHT, SCREEN_WIDTH } from '../../../utils/constants';
 import { useUserStore } from '../../../hooks/useUserStore';
 import { useUserInformation } from '../../../hooks/useUserInformations';
+import { shuffleArray } from '../../../utils/shuffleArray';
 
 
 
@@ -30,10 +31,15 @@ const CrossDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   const [actualUser, setUser] = useUserStore();
   const { user, updateUserIrisCoins } = useUserInformation();
   const [modalVisible, setModalVisible] = useState(false);
+  // function pour melanger le CARD_DECK
+  const [shuffledDeck, setShuffledDeck] = useState(CARD_DECK);
   
 
 
 
+  useEffect(() => {
+    setShuffledDeck(shuffleArray([...CARD_DECK]));
+  }, []);
 
   // On utilise useEffect pour détecter quand l'utilisateur a retourné les 4 cartes.
   const handleCardFlip = (index: number) => {
@@ -157,7 +163,7 @@ const CrossDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
           </Text>
         </View>
 
-        {CARD_DECK.map((card, index) => (
+        {shuffledDeck.map((card, index) => (
           <FlipCard
             key={index}
             frontImageUrl={card.frontImageUrl}

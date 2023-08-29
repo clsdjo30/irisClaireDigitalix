@@ -9,6 +9,8 @@ import { cardDeckStyles } from '../../../theme';
 import CARD_DECK from '../../../data/cards';
 import { useUserInformation } from '../../../hooks/useUserInformations';
 import { useUserStore } from '../../../hooks/useUserStore';
+import { shuffleArray } from '../../../utils/shuffleArray';
+
 
 const DrawOneCardScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   const [value, setValue] = useQuestionStore();
@@ -16,7 +18,8 @@ const DrawOneCardScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   const [selectedCards, setSelectedCards] = useState(0);
   const [modalVisible, setModalVisible] = useState(false);
   const [actualUser, setUser] = useUserStore();
-  const {user, updateUserIrisCoins} = useUserInformation();
+  const { user, updateUserIrisCoins } = useUserInformation();
+  const [shuffledDeck, setShuffledDeck] = useState(CARD_DECK);
  
 
   const handleCardFlip = (index: number) => {
@@ -74,6 +77,14 @@ const DrawOneCardScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     })
   }
 
+
+
+  useEffect(() => {
+    setShuffledDeck(shuffleArray([...CARD_DECK]));
+  }, []);
+
+
+
   return (
     <View style={cardDeckStyles.container}>
       <View style={cardDeckStyles.header} />
@@ -84,7 +95,7 @@ const DrawOneCardScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
           </Text>
         </View>
 
-        {CARD_DECK.map((card, index) => (
+        {shuffledDeck.map((card, index) => (
           <FlipCard
             key={index}
             frontImageUrl={card.frontImageUrl}
