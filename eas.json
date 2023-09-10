@@ -6,6 +6,7 @@
     "development": {
       "developmentClient": true,
       "distribution": "internal",
+      "autoIncrement": true,
       "android": {
         "gradleCommand": ":app:bundleDebug"
       },
@@ -23,6 +24,7 @@
     "preview": {
       "channel": "preview",
       "distribution": "internal",
+      "autoIncrement": true,
       "android": {
         "gradleCommand": ":app:bundleRelease"
       },
@@ -40,6 +42,7 @@
     "production": {
       "channel": "production",
       "distribution": "store",
+      "autoIncrement": true,
       "android": {
         "gradleCommand": ":app:bundleRelease"
       },
@@ -56,6 +59,10 @@
     }
   },
   "submit": {
-    "production": {}
+    "production": {},
+    "preview": {
+      "channel": "preview"
+
+    }
   }
 }
