@@ -8,7 +8,7 @@ import { RevenueCatProvider } from './src/providers/RevenueCatProvider';
 export default function App() {
 
   return (
-    // <RevenueCatProvider>
+    <RevenueCatProvider>
       <GestureHandlerRootView style={{ flex: 1 }}>
         <SafeAreaProvider style={{ flex: 1 }}>
           <SafeAreaView style={{ flex: 1, paddingTop: 10 }} >
@@ -16,7 +16,7 @@ export default function App() {
           </SafeAreaView>
         </SafeAreaProvider>
       </GestureHandlerRootView>
-    // </RevenueCatProvider>
+    </RevenueCatProvider>
 
   );
 }
