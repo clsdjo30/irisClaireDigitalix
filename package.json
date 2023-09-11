@@ -8,7 +8,7 @@
     "web": "expo start --web",
     "test": "jest",
     "increment": "node ./IncrementVersion.js",
-    "androidAab": "npm run increment && eas build --platform android",
+    "androidAab": "npm run increment && eas build --profile production --platform android",
     "androidDev": "npm run increment && eas build --profile development --platform android"
   },
   "husky": {

@@ -7,7 +7,7 @@ import Constants from 'expo-constants';
 // Use your RevenueCat API keys
 const APIKeys = {
     ios: 'IOS_REVENUECAT_API_KEY',
-    google: "goog_vwoGBuqKcbTgyowiXiyLbThTmNl"
+    google: Constants.expoConfig?.extra?.googleRevenueCatApiKey
 };
 
 interface RevenueCatProps {
