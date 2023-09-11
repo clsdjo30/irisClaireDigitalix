@@ -90,7 +90,7 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
       </View>
 
-    </View>
+      </View>
   );
 }
 

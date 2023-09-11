@@ -3,9 +3,7 @@ import "dotenv/config";
 export default {
   "expo": {
     "updates": {
-      "username": "djodjo30",
-      "sdkVersion": "49.0.0",
-      "updateUrl": "https://exp.host/@djodjo30/irisClaireDigitalix",
+      "url": "https://u.expo.dev/185246d5-a728-4ce0-afed-6ac163ace50f"
     },
     "extra": {
       "eas": {
@@ -22,7 +20,7 @@ export default {
     },
     "name": "irisClaireDigitalix",
     "slug": "irisclairedigitalix",
-    "version": "1.0.0",
+    "version": "1.0.7",
     "orientation": "portrait",
     "icon": "./assets/icons/iris.png",
     "scheme": "com.digitalix.irisclaire",
@@ -50,10 +48,13 @@ export default {
     },
     "android": {
       "package": "com.digitalix.irisclaire",
-      "googleServicesFile": "./google-services.json",
+      "versionCode": 6,
       "adaptiveIcon": {
         "foregroundImage": "./assets/icons/adaptive-icon.png",
         "backgroundColor": "#C8B5E4"
+      },
+      "runtimeVersion": {
+        "policy": "appVersion"
       }
     },
     "web": {
