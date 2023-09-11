@@ -28,7 +28,9 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
     if (userInformation.user?.hasSeenModal === false) {
       setModalVisible(true);
-    } 
+    } else {
+      setModalVisible(false);
+    }
 
     // Nettoyez le setTimeout lorsque le composant est démonté ou si les dépendances changent
     return () => clearTimeout(timer);

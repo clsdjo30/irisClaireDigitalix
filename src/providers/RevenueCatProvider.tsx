@@ -7,7 +7,7 @@ import Constants from 'expo-constants';
 // Use your RevenueCat API keys
 const APIKeys = {
     ios: 'IOS_REVENUECAT_API_KEY',
-    google: Constants.expoConfig?.extra?.googleRevenueCatApiKey
+    google: "goog_vwoGBuqKcbTgyowiXiyLbThTmNl"
 };
 
 interface RevenueCatProps {
@@ -77,11 +77,12 @@ export const RevenueCatProvider = ({ children }: any) => {
             //TODO: load purchased items from RevenueCat to user account FireStore
             if (pack.product.identifier === 'iris_app_199_1_iris_consume') {
                 setUser({ ...user, irisCoin: (user.irisCoin += 1) });
-            } else if (pack.product.identifier === 'iris_app_399_3_iris_consume') {
-                setUser({ ...user, irisCoin: (user.irisCoin += 3) });
-            } else if (pack.product.identifier == 'iris_app_599_5_iris_consume') {
-                setUser({ ...user, irisCoin: (user.irisCoin += 5) })
             }
+            // else if (pack.product.identifier === 'iris_app_399_3_iris_consume') {
+            //     setUser({ ...user, irisCoin: (user.irisCoin += 3) });
+            // } else if (pack.product.identifier == 'iris_app_599_5_iris_consume') {
+            //     setUser({ ...user, irisCoin: (user.irisCoin += 5) })
+            // }
 
         } catch (e: any) {
             if (!e.userCancelled) {

@@ -4,6 +4,7 @@ import { StackScreenProps } from '@react-navigation/stack';
 import { styles } from './BuyIrisScreen.styles';
 import IrisCreditCard from '../../../components/IrisCreditCard';
 import { colors } from '../../../theme/color';
+import { RevenueCatProvider } from '../../../providers/RevenueCatProvider';
 import { useRevenueCat } from '../../../providers/RevenueCatProvider';
 import { PurchasesPackage } from 'react-native-purchases';
 
@@ -103,27 +104,29 @@ const BuyIrisScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
         />
     );
     return (
-        <View style={styles.container}>
-            <View style={styles.header} />
-            <View style={styles.titleCredit}>
-                <View style={styles.explainCredit}>
-                    <Text style={styles.contentTitle}>Credits</Text>
-                    <Text style={styles.textCredit}>1 Crédit = 1 Question Oui/Non</Text>
-                    <Text style={styles.textCredit}>3 Crédits = 1 Tirage Complet</Text>
+        <RevenueCatProvider>
+            <View style={styles.container}>
+                <View style={styles.header} />
+                <View style={styles.titleCredit}>
+                    <View style={styles.explainCredit}>
+                        <Text style={styles.contentTitle}>Credits</Text>
+                        <Text style={styles.textCredit}>1 Crédit = 1 Question Oui/Non</Text>
+                        <Text style={styles.textCredit}>3 Crédits = 1 Tirage Complet</Text>
+                    </View>
+                </View>
+                <View style={styles.flatList}>
+                    <FlatList
+                        data={data}
+                        renderItem={renderItem}
+                        keyExtractor={(item, index) => index.toString()}
+                        contentContainerStyle={styles.contentContainer}
+                        snapToEnd={false}
+                        decelerationRate={0.6}
+
+                    />
                 </View>
             </View>
-            <View style={styles.flatList}>
-                <FlatList
-                    data={data}
-                    renderItem={renderItem}
-                    keyExtractor={(item, index) => index.toString()}
-                    contentContainerStyle={styles.contentContainer}
-                    snapToEnd={false}
-                    decelerationRate={0.6}
-                    
-                />
-            </View>
-        </View>
+        </RevenueCatProvider>
     );
 }
 
