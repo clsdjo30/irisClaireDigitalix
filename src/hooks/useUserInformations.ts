@@ -3,8 +3,7 @@ import { useUserStore } from "./useUserStore";
 import {
   firestore,
   getAuth,
-  getDocs,
-  collection,
+  getDoc,
   doc,
   updateDoc,
 } from "../config/firebaseConfig";
@@ -24,25 +23,40 @@ export function useUserInformation() {
   }, [userID]);
 
   const fetchUser = async () => {
+    // Vérifiez si userID est défini. Si ce n'est pas le cas, sortez de la fonction.
+    if (!userID) return;
+
+    // Obtenez une référence à la base de données Firestore.
     const db = firestore;
-    const querySnapshot = await getDocs(collection(db, "users"));
-    querySnapshot.forEach((doc) => {
-      if (userID === doc.id) {
-        setUser({
-          ...user,
-          birthday: doc.data().birthday,
-          email: doc.data().email,
-          firstname: doc.data().firstname,
-          zodiacname: doc.data().zodiac,
-          stone: doc.data().stone,
-          genre: doc.data().genre,
-          element: doc.data().element,
-          irisCoins: doc.data().irisCoins,
-          hasSeenModal: doc.data().hasSeenModal,
-        });
-        // console.log(doc.data())
-      }
-    });
+
+    // Créez une référence spécifique au document de l'utilisateur en utilisant son userID.
+    const userRef = doc(db, "users", userID);
+
+    // Essayez de récupérer le document de l'utilisateur à partir de Firestore.
+    const userDoc = await getDoc(userRef);
+
+    // Vérifiez si le document existe.
+    if (userDoc.exists()) {
+      // Si le document existe, extrayez les données de l'utilisateur.
+      const userData = userDoc.data();
+
+      // Mettez à jour l'état de l'utilisateur avec les données récupérées.
+      setUser({
+        ...user,
+        birthday: userData?.birthday,
+        email: userData?.email,
+        firstname: userData?.firstname,
+        zodiacname: userData?.zodiac,
+        stone: userData?.stone,
+        genre: userData?.genre,
+        element: userData?.element,
+        irisCoins: userData?.irisCoins,
+        hasSeenModal: userData?.hasSeenModal,
+      });
+    } else {
+      // Si aucun document n'est trouvé pour cet utilisateur, affichez une erreur.
+      console.error(`No user found with ID: ${userID}`);
+    }
   };
 
   // Met à jour les credit de l'utilisateur dans Firestore
