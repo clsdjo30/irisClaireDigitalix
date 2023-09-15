@@ -16,11 +16,11 @@ export default {
       firebaseMessagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
       firebaseAppId: process.env.FIREBASE_APP_ID,
       openAiId: process.env.OPEN_AI_ID,
-      googleRevenueCatApiKey: process.env.GOOGLE_REVENUE_CAT_API_KEY,
+      googleRevenueCatApiKey: process.env.GOOGLE_REVENUECAT_API_KEY,
     },
     "name": "irisClaireDigitalix",
     "slug": "irisclairedigitalix",
-    "version": "1.0.9",
+    "version": "1.0.12",
     "orientation": "portrait",
     "icon": "./assets/icons/iris.png",
     "scheme": "com.digitalix.irisclaire",
@@ -48,7 +48,7 @@ export default {
     },
     "android": {
       "package": "com.digitalix.irisclaire",
-      "versionCode": 8,
+      "versionCode": 11,
       "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./assets/icons/adaptive-icon.png",

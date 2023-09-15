@@ -17,7 +17,6 @@ const WelcomeModal: React.FC<WelcomeModalProps> = ({
 
     const [currentSection, setCurrentSection] = useState('daydraw');
     const userInformation = useUserInformation();
-    console.log(userInformation);
     function toggleSection() {
         if (currentSection === 'daydraw') {
             setCurrentSection('yesno');

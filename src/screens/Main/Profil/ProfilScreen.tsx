@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   StyleSheet,
   Text,
@@ -30,6 +30,7 @@ const SCREEN_FONT_SCALE = SCREEN_SCALE * 0.5;
 const ProfilScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
   const userInfo = useUserInformation();
+  console.log('USERINFO: ', userInfo.user?.irisCoins)
   // Récupérez la locale actuelle (par exemple, "fr-FR" ou "en-US")
   const locale = Localization.locale.split("-")[0];
 
@@ -38,6 +39,11 @@ const ProfilScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   const userStone = userInfo.user?.stone
   const userElement = userInfo.user?.element
   const userIrisCoins = userInfo?.user?.irisCoins
+
+  // recup user IrisCoins
+  useEffect(() => {
+    userInfo.fetchUser()
+  }, [])
 
   // Affiche le nom en fonction de la locale
   const userTransSign = getLocaleSign(userInfo.user?.zodiacname, locale)

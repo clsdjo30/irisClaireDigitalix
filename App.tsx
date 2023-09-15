@@ -3,6 +3,7 @@ import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import './src/config/firebaseConfig';
 import RootNavigation from './src/navigators/AppNavigator';
+import { RevenueCatProvider } from './src/providers/RevenueCatProvider';
 
 
 export default function App() {
@@ -11,8 +12,10 @@ export default function App() {
   
       <GestureHandlerRootView style={{ flex: 1 }}>
         <SafeAreaProvider style={{ flex: 1 }}>
-          <SafeAreaView style={{ flex: 1, paddingTop: 10 }} >
+        <SafeAreaView style={{ flex: 1, paddingTop: 10 }} >
+          <RevenueCatProvider>
             <RootNavigation />
+          </RevenueCatProvider>
           </SafeAreaView>
         </SafeAreaProvider>
       </GestureHandlerRootView>

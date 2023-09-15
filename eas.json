@@ -25,7 +25,7 @@
       "channel": "preview",
       "distribution": "internal",
       "android": {
-        "gradleCommand": ":app:assembleRelease"
+        "gradleCommand": ":app:bundleRelease"
       },
       "env": {
         "FIREBASE_API_KEY": "@FIREBASE_API_KEY",
@@ -42,7 +42,7 @@
       "channel": "production",
       "distribution": "store",
       "android": {
-        "gradleCommand": ":app:assembleRelease"
+        "gradleCommand": ":app:bundleRelease"
       },
       "env": {
         "FIREBASE_API_KEY": "@FIREBASE_API_KEY",
@@ -57,8 +57,6 @@
     }
   },
   "submit": {
-    "production": {},
-    "preview": {},
-    "development": {}
+    "production": {}
   }
 }

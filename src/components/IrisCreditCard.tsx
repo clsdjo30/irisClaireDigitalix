@@ -5,8 +5,6 @@ import { styles } from './IrisCreditCard.styles';
 
 interface CreditCardProps {
     colors: string[];
-    title: string;
-    description: string;
     price: number;
     discount?: number;
     bestDeal?: boolean;
@@ -40,7 +38,7 @@ const CreditCard: React.FC<CreditCardProps> = ({ colors, creditAmount, price, pr
                 <View style={styles.domainTextBlock}>
                     {promoPrice && (
                         <View style={styles.promoBlock}>
-                            <Text style={styles.pricePromo}>{promoPrice}€</Text>
+                            <Text style={styles.pricePromo}>{promoPrice}</Text>
                             <View style={styles.bestOffer}>
                                 <Text style={styles.bestOfferText}>-13%</Text>
                             </View>

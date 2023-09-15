@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import { Platform } from 'react-native';
 import Purchases, { LOG_LEVEL, PurchasesPackage } from 'react-native-purchases';
 import { CustomerInfo } from 'react-native-purchases';
+import { useUserInformation } from '../hooks/useUserInformations';
 import Constants from 'expo-constants';
 
 // Use your RevenueCat API keys
@@ -13,13 +14,21 @@ const APIKeys = {
 interface RevenueCatProps {
     purchasePackage?: (pack: PurchasesPackage) => Promise<void>;
     restorePermissions?: () => Promise<CustomerInfo>;
-    user: UserState;
+    user: UserInfo;
+    updateUserIrisCoins: (newIrisCoins: number) => Promise<void>;
     packages: PurchasesPackage[];
 }
 
-export interface UserState {
-    //TODO: add user state to FireStore
-    irisCoin: number;
+interface UserInfo {
+    birthday: string;
+    email: string;
+    firstname: string;
+    zodiacname: string;
+    stone: string;
+    genre: string;
+    element: string;
+    irisCoins: number;
+    hasSeenModal: boolean;
 }
 
 const RevenueCatContext = createContext<RevenueCatProps | null>(null);
@@ -31,9 +40,7 @@ export const useRevenueCat = () => {
 
 //Provide REvenueCat context to the app
 export const RevenueCatProvider = ({ children }: any) => {
-    const [user, setUser] = useState<UserState>({
-        irisCoin: 0,
-    });
+    const { user, updateUserIrisCoins, fetchUser } = useUserInformation();
     const [packages, setPackages] = useState<PurchasesPackage[]>([]);
     const [isREady, setIsReady] = useState(false);
 
@@ -46,9 +53,11 @@ export const RevenueCatProvider = ({ children }: any) => {
 
             Purchases.setLogLevel(LOG_LEVEL.DEBUG);
 
-            Purchases.addCustomerInfoUpdateListener(async (info) => {
-                updateCustomerInformation(info);
-            });
+            // Purchases.addCustomerInfoUpdateListener((customerInfo: CustomerInfo) => {
+            //     updateCustomerInformation(customerInfo);
+            // });
+
+            
 
             await loadOfferings();
         };
@@ -59,10 +68,10 @@ export const RevenueCatProvider = ({ children }: any) => {
     const loadOfferings = async () => {
         const offerings = await Purchases.getOfferings();
 
-        // console.log('RevenueCatProvider.tsx: offerings: ', offerings);
+        //console.log('RevenueCatProvider.tsx: offerings: ', offerings.all.basic.availablePackages);
         const currentOffering = offerings.current;
         if (currentOffering) {
-            // console.log('RCurrentOffering: ', currentOffering.availablePackages[0].product);
+            //console.log('RCurrentOffering: ', currentOffering.availablePackages[0].product);
             setPackages(currentOffering.availablePackages);
         }
     };
@@ -75,14 +84,15 @@ export const RevenueCatProvider = ({ children }: any) => {
 
             // Directly add our consumable product
             //TODO: load purchased items from RevenueCat to user account FireStore
-            if (pack.product.identifier === 'iris_app_199_1_iris_consume') {
-                setUser({ ...user, irisCoin: (user.irisCoin += 1) });
+            if (pack.product.identifier === 'test_1_credit_199_consume') {
+               updateUserIrisCoins(user.irisCoins += 1);
             }
-            // else if (pack.product.identifier === 'iris_app_399_3_iris_consume') {
-            //     setUser({ ...user, irisCoin: (user.irisCoin += 3) });
-            // } else if (pack.product.identifier == 'iris_app_599_5_iris_consume') {
-            //     setUser({ ...user, irisCoin: (user.irisCoin += 5) })
-            // }
+            else if (pack.product.identifier === 'test_3_credits_6.99_consume') {
+                updateUserIrisCoins(user.irisCoins += 3);
+            }
+            //Ajouter les autres produits consommables ici
+
+            fetchUser();
 
         } catch (e: any) {
             if (!e.userCancelled) {
@@ -92,10 +102,9 @@ export const RevenueCatProvider = ({ children }: any) => {
     };
 
     //update user state based on previous purchases
-    const updateCustomerInformation = async (customerInfo: CustomerInfo) => {
-        const newUser: UserState = { irisCoin: user.irisCoin};    
-        setUser(newUser);
-    };
+    // const updateCustomerInformation = async (customerInfo: CustomerInfo) => {
+    //   fetchUser();
+    // };
 
     //Restore previous purchases
     const restorePermissions = async () => {
@@ -103,16 +112,22 @@ export const RevenueCatProvider = ({ children }: any) => {
         console.log('CUSTOMER: ', customer);
         return customer;
     };
+    
 
     const value = {
         purchasePackage,
-        restorePermissions,
+        restorePermissions: async () => {
+            const customer = await Purchases.restorePurchases();
+            console.log('CUSTOMER: ', customer);
+            return customer;
+        },
         user,
         packages,
+        updateUserIrisCoins
     };
 
     // return empty fragment if provider is not ready (Purchase not yet initialiyzed)
-    if (!isREady) {
+    if (!isREady || !user) {
         return <></>;
     }
 

@@ -17,14 +17,16 @@ export function useUserInformation() {
   const userID = currentUser ? currentUser.uid : null;
 
   useEffect(() => {
-    fetchUser();
-  }, []);
+     if (userID) {
+       // Vérifiez si l'utilisateur est connecté avant de tenter de récupérer ses informations.
+       fetchUser();
+     }
+  }, [userID]);
 
   const fetchUser = async () => {
     const db = firestore;
     const querySnapshot = await getDocs(collection(db, "users"));
     querySnapshot.forEach((doc) => {
-      // console.log(doc.id, " => ", doc.data());
       if (userID === doc.id) {
         setUser({
           ...user,
@@ -86,5 +88,6 @@ export function useUserInformation() {
     user,
     updateUserIrisCoins,
     updateHasSeenModal,
+    fetchUser,
   };
 }

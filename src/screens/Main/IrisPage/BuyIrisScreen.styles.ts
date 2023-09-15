@@ -45,13 +45,35 @@ export const styles = StyleSheet.create({
     color: colors.palette.ivory,
     paddingVertical: 8,
   },
-  
+
   //FLATLIST
   flatList: {
     position: "relative",
     height: SCREEN_HEIGHT * 0.93,
   },
   contentContainer: {
-    paddingTop  : 10,
+    paddingTop: 10,
+  },
+  button: {
+    padding: 12,
+    borderRadius: 4,
+    margin: 4,
+    flexDirection: "row",
+    width: "100%",
+    backgroundColor: "#fff",
+  },
+  text: {
+    flexGrow: 1,
+  },
+  desc: {
+    color: "#B6B7C0",
+    paddingVertical: 4,
+  },
+  price: {
+    justifyContent: "center",
+    borderWidth: 1,
+    borderRadius: 4,
+    paddingHorizontal: 8,
+    borderColor: "#EA3C4A",
   },
 });
