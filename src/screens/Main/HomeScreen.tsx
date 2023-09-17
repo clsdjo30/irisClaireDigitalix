@@ -16,8 +16,10 @@ const yesCard = require('../../../assets/icons/yesCard.png');
 const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   const [daycard, setDayCard] = useDaydrawStore();
   const userInformation = useUserInformation();
-  const [isModalVisible, setModalVisible] = useState(false);
-
+  const [isModalVisible, setModalVisible] = useState(true);
+  
+  console.log('USER HAS SEEN MODAL', userInformation.user?.hasSeenModal)
+  console.log('USER HAS SEEN MODAL', userInformation)
   useEffect(() => {
     const timer = resetAtMidnight(() => {
       setDayCard(prevState => ({
@@ -26,11 +28,9 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
       }));
     });
 
-    if (userInformation.user?.hasSeenModal === false) {
-      setModalVisible(true);
-    } else {
+    if (userInformation.user?.hasSeenModal === true) {
       setModalVisible(false);
-    }
+    } 
 
     // Nettoyez le setTimeout lorsque le composant est démonté ou si les dépendances changent
     return () => clearTimeout(timer);

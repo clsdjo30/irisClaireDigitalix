@@ -12,7 +12,7 @@ const UserStore = new GlobalStore({
     stone: '',
     element: '',
     irisCoins: 0, 
-    hasSeenModal: false,
+    hasSeenModal: true,
 });
 
 export const useUserStore = UserStore.getHook();
