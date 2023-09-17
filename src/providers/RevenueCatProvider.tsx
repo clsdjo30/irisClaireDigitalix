@@ -90,6 +90,15 @@ export const RevenueCatProvider = ({ children }: any) => {
             else if (pack.product.identifier === 'test_3_credits_6.99_consume') {
                 updateUserIrisCoins(user.irisCoins += 3);
             }
+            else if (pack.product.identifier === 'test_12iris_1499_consume') {
+                updateUserIrisCoins(user.irisCoins += 12);
+            }
+            else if (pack.product.identifier === 'test_24_credit_2899_consume') {
+                updateUserIrisCoins(user.irisCoins += 24);
+            }
+            else if (pack.product.identifier === 'test_50_credit_4999_consume') {
+                updateUserIrisCoins(user.irisCoins += 50);
+            }
             //Ajouter les autres produits consommables ici
 
             fetchUser();
