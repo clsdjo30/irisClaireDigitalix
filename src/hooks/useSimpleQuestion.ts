@@ -19,18 +19,17 @@ export const useSimpleQuestion = (delay: number) => {
   const [isLoading, setIsLoading] = useState(false);
   const userQuestion = value.question;
   const cardNumber = value.choosecardnumber;
-  const cardName = value.choosecardname;
   const cardPseudo = value.choosecardpseudo;
 
   useEffect(() => {
     let timeoutId: NodeJS.Timeout | null = null;
     const fetchAIReply = async () => {
       setIsLoading(true);
-      const prompt = `Tu es FortuneTellerGpt, un expert en interpretation de tirage du tarot de marseille. En utilisant tes connaissances dans les tarots de marseille et des livres de Florian Parisse, donne une première réponse par oui ou non et développe ta réponse en une phrase pertinente et courte en remplaçant le "cardName" de la carte qui te sera donnée par le "cardPseudo".Rédige la réponse à la question : ${userQuestion} le numéro de l'arcane tirée est : ${cardNumber}, son nom est: ${cardName} et son pseudo est : ${cardPseudo}`;
+      const prompt = `tu vas agir en tant que voyante experte en tarologie. pour ce tirage a 1 carte, tu vas devoir fournir une réponse à la question:"${userQuestion}".J'ai tiré la carte ${cardNumber} du tarot de marseille et son pseudo est ${cardPseudo} . tu vas devoir repondre par oui ou non, et tout en ayant un ton de confiance et d'expert, développé en une phrase courte, sans jamais dire le nom de la carte tirée.`;
       const data = {
         prompt,
-        model: "text-davinci-003", // "davinci" "curie" "babbage" "ada" "curie-instruct-beta" "davinci-instruct-beta"
-        max_tokens: 90,
+        model: "text-davinci-003", 
+        max_tokens: 150,
         temperature: 0.5,
         presence_penalty: 0,
         frequency_penalty: 0,
