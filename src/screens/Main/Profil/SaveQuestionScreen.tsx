@@ -32,6 +32,7 @@ const SaveQuestionScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => 
 
     // Get the Cross questions from the database
     const { crossQuestions } = useUserCrossQuestion(userID);
+    console.log('crossQuestions', crossQuestions)
 
     
     return (
