@@ -17,9 +17,7 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   const [daycard, setDayCard] = useDaydrawStore();
   const userInformation = useUserInformation();
   const [isModalVisible, setModalVisible] = useState(true);
-  
-  console.log('USER HAS SEEN MODAL', userInformation.user?.hasSeenModal)
-  console.log('USER HAS SEEN MODAL', userInformation)
+
   useEffect(() => {
     const timer = resetAtMidnight(() => {
       setDayCard(prevState => ({

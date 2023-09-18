@@ -33,7 +33,7 @@ const CrossDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) 
     const currentUser = auth.currentUser;
     const userID = currentUser ? currentUser.uid : null;
 
-    console.log('Valeur de QuestionStore', questionInformations)
+    // console.log('Valeur de QuestionStore', questionInformations)
 
 
     const firstCard = CARD_DECK.find(card => card.id === questionInformations.choosecardnumber);

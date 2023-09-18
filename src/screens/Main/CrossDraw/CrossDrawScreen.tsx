@@ -47,9 +47,9 @@ const CrossDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     if (selectedCards === 0) {
       setValue({
         ...value,
-        choosecardnumber: CARD_DECK[index].id,
-        choosecardname: CARD_DECK[index].name,
-        choosecardpseudo: CARD_DECK[index].pseudo,
+        choosecardnumber: shuffledDeck[index].id,
+        choosecardname: shuffledDeck[index].name,
+        choosecardpseudo: shuffledDeck[index].pseudo,
       });
       setSelectedCards(selectedCards + 1);
       setSelectedCardIndex(index);
@@ -57,9 +57,9 @@ const CrossDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     if (selectedCards === 1) {
       setValue({
         ...value,
-        choosecardtwonumber: CARD_DECK[index].id,
-        choosecardtwoname: CARD_DECK[index].name,
-        choosecardtwopseudo: CARD_DECK[index].pseudo,
+        choosecardtwonumber: shuffledDeck[index].id,
+        choosecardtwoname: shuffledDeck[index].name,
+        choosecardtwopseudo:shuffledDeck[index].pseudo,
       });
       setSelectedCards(selectedCards + 1);
       setSelectedCardIndex(index);
@@ -67,9 +67,9 @@ const CrossDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     if (selectedCards === 2) {
       setValue({
         ...value,
-        choosecardthreenumber: CARD_DECK[index].id,
-        choosecardthreename: CARD_DECK[index].name,
-        choosecardthreepseudo: CARD_DECK[index].pseudo,
+        choosecardthreenumber: shuffledDeck[index].id,
+        choosecardthreename: shuffledDeck[index].name,
+        choosecardthreepseudo: shuffledDeck[index].pseudo,
       });
       setSelectedCards(selectedCards + 1);
       setSelectedCardIndex(index);
@@ -77,9 +77,9 @@ const CrossDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     if (selectedCards === 3) {
       setValue({
         ...value,
-        choosecardfournumber: CARD_DECK[index].id,
-        choosecardfourname: CARD_DECK[index].name,
-        choosecardfourpseudo: CARD_DECK[index].pseudo,
+        choosecardfournumber: shuffledDeck[index].id,
+        choosecardfourname: shuffledDeck[index].name,
+        choosecardfourpseudo: shuffledDeck[index].pseudo,
       })
       setSelectedCards(selectedCards + 1);
       setSelectedCardIndex(index);
@@ -88,9 +88,9 @@ const CrossDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     if (selectedCards === 4) {
       setValue({
         ...value,
-        choosecardfivenumber: CARD_DECK[index].id,
-        choosecardfivename: CARD_DECK[index].name,
-        choosecardfivepseudo: CARD_DECK[index].pseudo,
+        choosecardfivenumber: shuffledDeck[index].id,
+        choosecardfivename: shuffledDeck[index].name,
+        choosecardfivepseudo: shuffledDeck[index].pseudo,
       }
 
       );

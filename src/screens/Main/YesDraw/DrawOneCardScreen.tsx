@@ -21,15 +21,18 @@ const DrawOneCardScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   const { user, updateUserIrisCoins } = useUserInformation();
   const [shuffledDeck, setShuffledDeck] = useState(CARD_DECK);
  
-
+  // console.log('DrawOneCardScreen.tsx - VALUE', value)
+  // console.log('DrawOneCardScreen.tsx - SHUFFLE CARD DECK', shuffledDeck)
+  
   const handleCardFlip = (index: number) => {
     if (selectedCards === 0) {
       setValue({
         ...value,
-        choosecardnumber: CARD_DECK[index].id,
-        choosecardname: CARD_DECK[index].name,
-        choosecardpseudo: CARD_DECK[index].pseudo,
+        choosecardnumber: shuffledDeck[index].id,
+        choosecardname: shuffledDeck[index].name,
+        choosecardpseudo: shuffledDeck[index].pseudo,
       });
+      console.log('DrawOneCardScreen.tsx - VALUE HANDLE FLIP', value)
       setSelectedCards(selectedCards + 1);
       setSelectedCardIndex(index);
       setTimeout(() => {
@@ -37,7 +40,7 @@ const DrawOneCardScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
       }, 2000);
     };
   }
-
+  
   const goToResult = () => {
     navigation.navigate('YesDrawResult');
   }
@@ -45,7 +48,7 @@ const DrawOneCardScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   const cancelModal = () => {
     navigation.navigate('Home');
   }
-
+  
 
   const sendQuestion = () => {
     if ( user?.irisCoins > 0
@@ -55,7 +58,7 @@ const DrawOneCardScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
       && value.choosecardpseudo != null
     ) {
       const newIrisCoins = user.irisCoins - 1;
-
+      
       // Mettre à jour le state local
       setUser({ ...user, irisCoins: newIrisCoins });
 
@@ -68,7 +71,7 @@ const DrawOneCardScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
       goBuyCredit()
     }
   }
-
+  
   const goBuyCredit = () => {
     navigation.navigate('Iris')
     navigation.reset({
@@ -76,11 +79,10 @@ const DrawOneCardScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
       routes: [{ name: 'Home' }]
     })
   }
-
-
-
+ 
   useEffect(() => {
     setShuffledDeck(shuffleArray([...CARD_DECK]));
+     
   }, []);
 
 

@@ -32,8 +32,7 @@ const YesDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) =>
     const userID = currentUser ? currentUser.uid : null;
     const choosedCard = CARD_DECK.find((card) => card.id === questionInformations.choosecardnumber);
 
-    console.log('RESULT SCREEN USER ID', userID);
-
+ console.log('YesDrawResultScreen.tsx - QUESTION INFORMATION', value)
     useEffect(() => {
         const backAction = () => {
             return true;
@@ -83,7 +82,7 @@ const YesDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) =>
             );
         }
 
-        return <Text style={styles.answerText}>{questionInformations.answer}</Text>;
+        return `${questionInformations.answer}\n\n J'espère que cette réponse vous aidera à avancer dans votre vie. Si vous avez d'autres questions, n'hésitez pas à revenir vers moi. Je vous souhaite une bonne journée. L'Iris Claire.`;
     };
 
     function questionClosed() {
@@ -128,7 +127,7 @@ const YesDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) =>
                         </View>
 
                         <Text style={styles.answerTitle}>Votre réponse: </Text>
-                        <Text style={styles.answerText}>{getContent()}</Text>
+                        <Text style={styles.answerText} numberOfLines={0} lineBreakMode='clip'>{getContent()}</Text>
                     </View>
                 </View>
 
