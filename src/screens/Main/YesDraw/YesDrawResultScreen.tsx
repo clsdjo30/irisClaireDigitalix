@@ -81,7 +81,7 @@ const YesDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) =>
                 </View>
             );
         }
-
+//TODO : INCLURE UN TABLEAU POUR DES FINS DE PHRASES ALEATOIRES
         return `${questionInformations.answer}\n\n J'espère que cette réponse vous aidera à avancer dans votre vie. Si vous avez d'autres questions, n'hésitez pas à revenir vers moi. Je vous souhaite une bonne journée. L'Iris Claire.`;
     };
 
