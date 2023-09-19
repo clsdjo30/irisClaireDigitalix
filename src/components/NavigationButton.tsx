@@ -25,13 +25,13 @@ export default NavigationButotn;
 
 const styles = StyleSheet.create({
     button: {
-        marginBottom: 10,
+        marginBottom: 16,
         borderRadius: 16,
         alignItems: "center",
         paddingVertical: 10,
     },
     buttonText: {
-        fontFamily: "mulishBold",
-      fontSize: 16,
+        fontFamily: "mulishSemiBold",
+      fontSize: 14,
     },
 });

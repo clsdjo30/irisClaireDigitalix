@@ -21,7 +21,7 @@ export const styles = StyleSheet.create({
   },
   controls: {
     flex: 1,
-    alignItems: "flex-start",
+    alignItems: "center",
     justifyContent: "center",
     width: "90%",
   },
@@ -45,6 +45,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 20,
+    gap: 10,
   },
   button: {
     width: "100%",
@@ -70,20 +71,15 @@ export const styles = StyleSheet.create({
     color: colors.palette.violetBg,
     marginLeft: -6,
   },
-  genderTitle: {
-    width: 300,
-    flexDirection: "row",
-    marginLeft: 10,
-  },
   icon: {
     marginLeft: 10,
     color: "#FFD700",
   },
   contentTitle: {
-    fontFamily: "mulishRegular",
-    fontSize: 18,
+    fontFamily: "mulishBold",
+    fontSize: 22,
     color: colors.palette.violetBg,
-    marginBottom: 20,
+    marginBottom: 26,
   },
   //ERROR
   errorContainer: {

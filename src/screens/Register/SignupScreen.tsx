@@ -56,14 +56,14 @@ const SignInScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
         </View>
       )}
       <View style={styles.controls}>
-        <View style={styles.genderTitle}>
+        
           <Text style={styles.contentTitle}>Créer votre compte </Text>
-        </View>
+        
         <Input
           placeholder='Email'
           placeholderTextColor={'#2072AF'}
           inputContainerStyle={styles.input}
-          inputStyle={{ fontSize: 14, marginLeft: 10, fontFamily: "mulishRegular", color: colors.palette.pink500 }}
+          inputStyle={{ fontSize: 16, marginLeft: 10, fontFamily: "mulishRegular", color: colors.palette.pink500 }}
 
           value={user.email}
           onChangeText={(text) => setUser({ ...user, email: text })}
@@ -78,7 +78,7 @@ const SignInScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
           placeholder='Password'
           placeholderTextColor={'#2072AF'}
           inputContainerStyle={styles.input}
-          inputStyle={{ fontSize: 14, marginLeft: 10, fontFamily: "mulishRegular", color: colors.palette.pink500 }}
+          inputStyle={{ fontSize: 16, marginLeft: 10, fontFamily: "mulishRegular", color: colors.palette.pink500 }}
           value={user.password}
           onChangeText={(text) => setUser({ ...user, password: text })}
           secureTextEntry={true}
@@ -101,7 +101,7 @@ const SignInScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
             width={SCREEN_WIDTH / 1.2}
             backgroundColor={colors.palette.orange}
             color={colors.palette.violetBg}
-            title="Commencer a poser vos questions"
+            title="Commencer à poser vos questions"
             onPress={() => signIn(user, policy)}
           />
 
