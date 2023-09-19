@@ -72,7 +72,7 @@ Veuillez me fournir le nom des cartes que vous avez tirée dans l'oracle "Iris C
         },
         {
           role: "user",
-          content: `Consultant: #${userName}, Domaine: "${domain}", Q:"${userQuestion}". Mon tirage: "${cardPseudo}", "${cardTwoPseudo}", "${cardThreePseudo}", "${cardFourPseudo}" et "${cardFivePseudo}". "`,
+          content: `Consultant: #${userName}, Domaine: "${domain}", Q:"${userQuestion}". Mon tirage: "${cardPseudo}", "${cardTwoPseudo}", "${cardThreePseudo}", "${cardFourPseudo}" et  "${cardFivePseudo}". "`,
         },
       ];
       const data = {

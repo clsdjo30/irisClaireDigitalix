@@ -48,7 +48,7 @@ Je suis un expert en interprétation de l'oracle "Iris Claire", qui est basé su
 - Iris Messager = Le Jugement
 - Iris Cosmos = Le Monde
 - Iris Nomade = Le Mat
-
+//TODO: MODIFIER LE TEXTE CI-DESSOUS
 Veuillez me fournir le nom de la carte que vous avez tirée dans l'oracle "Iris Claire" et toute question ou contexte spécifique que vous avez en tête. Je répondrai par "oui" ou "non", suivi d'une courte phrase d'explication sans dire le nom de la carte du tarot de Marseille.
 `;
   useEffect(() => {
@@ -68,7 +68,7 @@ Veuillez me fournir le nom de la carte que vous avez tirée dans l'oracle "Iris 
       const data = {
         model: "gpt-3.5-turbo",
         messages: messages,
-        max_tokens: 50,
+        max_tokens: 100,
         temperature: 0.1,
         presence_penalty: 0.5,
         frequency_penalty: 0,

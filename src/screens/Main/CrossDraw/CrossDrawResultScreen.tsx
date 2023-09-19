@@ -156,7 +156,7 @@ const CrossDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) 
                                     style={styles.cardImage}
                                     source={fithCard?.frontImageUrl}
                                 />
-                                <Text style={styles.pseudoTitle}>{fourthCard?.pseudo}</Text>
+                                <Text style={styles.pseudoTitle}>{fithCard?.pseudo}</Text>
                             </View>
                         </View>
                     </View>
