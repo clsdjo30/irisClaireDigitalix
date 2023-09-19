@@ -4,10 +4,14 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import './src/config/firebaseConfig';
 import RootNavigation from './src/navigators/AppNavigator';
 import { RevenueCatProvider } from './src/providers/RevenueCatProvider';
+import { Text } from 'react-native';
+
+(Text as any).defaultProps = (Text as any).defaultProps || {};
+(Text as any).defaultProps.allowFontScaling = false;
+
 
 
 export default function App() {
-
   return (
   
       <GestureHandlerRootView style={{ flex: 1 }}>
