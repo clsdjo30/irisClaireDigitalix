@@ -1,7 +1,7 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { Input } from '@rneui/base'
+import { Input } from '@rneui/base';
 import { StackScreenProps } from '@react-navigation/stack';
 import { useUserStore } from '../../hooks/useUserStore';
 import { colors } from '../../theme';
@@ -9,39 +9,41 @@ import NavigationButton from '../../components/NavigationButton';
 
 const width = Dimensions.get('window').width;
 
-
 const FirstNameScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
-  const [user, setUser] = useUserStore()
-  const [error, setError] = useState('')
+  const [user, setUser] = useUserStore();
+  const [error, setError] = useState('');
 
-  // Fonction pour nettoyer les entrées utilisateur
-  const sanitizeInput = (text: string) => {
-    // Remplacer les caractères potentiellement malveillants
-    return text.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-  }
+  const isValidName = (text: string) => {
+    const regex = /^[A-Za-z]+$/;
+    return regex.test(text);
+  };
 
-  function goToGenreScreen() {
+  const handleInputChange = (text: string) => {
+    setError('');
+    if (!isValidName(text)) {
+      setError('Veuillez entrer uniquement des lettres.');
+      return;
+    }
+    setUser({ ...user, firstname: text });
+  };
+
+  const goToGenreScreen = () => {
     if (user.firstname.length === 0) {
-      setError("Le prénom ne peut pas être vide");
+      setError('Le prénom ne peut pas être vide');
       return;
     }
 
     if (user.firstname.length < 3) {
-      setError("Le prénom doit contenir au moins 3 caractères");
+      setError('Le prénom doit contenir au moins 3 caractères');
       return;
     }
 
     navigation.navigate('Genre');
-  }
-  
+  };
+
   return (
     <View testID='first-name-screen' style={styles.container}>
-      {error !== '' && (
-        <View style={styles.errorContainer}>
-          <Text style={styles.errorText}>{error}</Text>
-        </View>
-      )}
-     
+      {error && <View style={styles.errorContainer}><Text style={styles.errorText}>{error}</Text></View>}
       <View style={styles.controls}>
         <View style={styles.genderTitle}>
           <Text style={styles.contentTitle}>Quelle est votre prénom ?</Text>
@@ -53,15 +55,8 @@ const FirstNameScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
             placeholderTextColor={colors.palette.purple200}
             inputContainerStyle={styles.input}
             inputStyle={styles.inputStyle}
-            onChangeText={(text) => {
-              setError(''); 
-              setUser({ ...user, firstname: sanitizeInput(text) });
-            }}
-            leftIcon={<Icon
-              name='user'
-              size={28}
-              style={styles.icon}
-            />}
+            onChangeText={handleInputChange}
+            leftIcon={<Icon name='user' size={24} style={styles.icon} />}
           />
         </View>
         <NavigationButton
@@ -70,13 +65,11 @@ const FirstNameScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
           width={width * 0.85}
           title="Suivant"
           onPress={goToGenreScreen}
-          
         />
-
       </View>
-    </View >
+    </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -96,7 +89,7 @@ const styles = StyleSheet.create({
     marginBottom: 20
   },
   input: {
-    backgroundColor: colors.palette.ivory,
+    backgroundColor: colors.palette.white,
     padding: 3,
     borderRadius: 6,
     borderBottomWidth: 1,
@@ -105,14 +98,14 @@ const styles = StyleSheet.create({
     borderBottomColor: colors.palette.darkgold,
   },
   inputStyle: {
-    fontSize: 14,
+    fontSize: 16,
     marginLeft: 10,
     fontFamily: "mulishRegular",
     color: colors.palette.violet
   },
   icon: {
     marginLeft: 10,
-    color: colors.palette.golden,
+    color: colors.palette.violet,
   },
   genderTitle: {
     width: 300,
