@@ -7,7 +7,6 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input } from '@rneui/themed';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { StackScreenProps } from '@react-navigation/stack';
 import {
   getAuth,
@@ -44,7 +43,7 @@ const SignInScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       {error && <Text style={styles.error}>{String(error)}</Text>}
       <View style={styles.controls}>
         <View style={styles.genderTitle}>
@@ -55,7 +54,7 @@ const SignInScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
           placeholder='Email'
           placeholderTextColor={colors.palette.purple200}
           inputContainerStyle={styles.input}
-          inputStyle={{ fontSize: 14, marginLeft: 10, fontFamily: "mulishMedium", color: colors.palette.violet }}
+          inputStyle={{ fontSize: 16, marginLeft: 10, fontFamily: "mulishMedium", color: colors.palette.violet }}
           value={email}
           onChangeText={(text) => setEmail(text)}
           leftIcon={<Icon
@@ -69,7 +68,7 @@ const SignInScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
           placeholder='Password'
           placeholderTextColor={colors.palette.purple200}
           inputContainerStyle={[styles.input, { marginBottom: 60}]}
-          inputStyle={{ fontSize: 14, marginLeft: 10, fontFamily: "mulishMedium", color: colors.palette.violet }}
+          inputStyle={{ fontSize: 16, marginLeft: 10, fontFamily: "mulishMedium", color: colors.palette.violet }}
           value={password}
           onChangeText={(text) => setPassword(text)}
           secureTextEntry={true}
@@ -79,18 +78,17 @@ const SignInScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
             style={styles.icon}
           />}
         />
-
-      </View>
-        <View style={styles.button}>
           <NavigationButotn 
-          width={width -30}
+          width={width / 1.1}
           backgroundColor={colors.palette.orange}
           title="Connexion" 
+          color= {colors.palette.violetBg}
           onPress={loginUser} />
-        </View>
+
+      </View>
 
 
-    </SafeAreaView>
+    </View>
   );
 }
 
@@ -103,7 +101,7 @@ const styles = StyleSheet.create({
   },
   controls: {
     flex: 1,
-    alignItems: 'flex-start',
+    alignItems: 'center',
     justifyContent: 'center',
     width: width,
     marginBottom: 60,
@@ -137,19 +135,18 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
+    marginBottom: 30,
   },
   contentTitle: {
     fontFamily: "mulishBold",
-    fontSize: 24,
+    fontSize: 26,
     color: colors.palette.violetBg,
     marginBottom: 20
   },
   button: {
-    position: 'absolute',
-    bottom: 100,
-    width: width -40,
-    justifyContent: 'center',
-    alignItems: 'center',
+    position: "relative",
+    top: 0,
+    
 
   }
 });

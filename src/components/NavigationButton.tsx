@@ -32,6 +32,6 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         fontFamily: "mulishBold",
-        fontSize: 16,
+      fontSize: 16,
     },
 });

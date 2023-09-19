@@ -119,8 +119,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   contentTitle: {
-    fontFamily: "mulishRegular",
-    fontSize: 18,
+    fontFamily: "mulishSemiBold",
+    fontSize: 20,
     color: colors.palette.violetClair,
     marginBottom: 20
   },
