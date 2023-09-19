@@ -28,10 +28,10 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         borderRadius: 16,
         alignItems: "center",
-        paddingVertical: 5,
+        paddingVertical: 10,
     },
     buttonText: {
         fontFamily: "mulishBold",
-        fontSize: 14,
+        fontSize: 16,
     },
 });
