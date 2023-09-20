@@ -13,17 +13,27 @@ const FirstNameScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   const [user, setUser] = useUserStore();
   const [error, setError] = useState('');
 
+//interdire les caracteres speciaux
   const isValidName = (text: string) => {
     const regex = /^[A-Za-z]+$/;
     return regex.test(text);
   };
 
+  // Controller la saisi du prenom
   const handleInputChange = (text: string) => {
     setError('');
+
+    // Si le texte est vide, permettez la mise à jour
+    if (text === '') {
+      setUser({ ...user, firstname: text });
+      return;
+    }
+
     if (!isValidName(text)) {
       setError('Veuillez entrer uniquement des lettres.');
       return;
     }
+
     setUser({ ...user, firstname: text });
   };
 
