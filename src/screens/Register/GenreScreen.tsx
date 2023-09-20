@@ -73,7 +73,7 @@ const GenreScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                             <Icon
                                 name="man-outline"
                                 type="ionicon"
-                                color={colors.palette.golden}
+                                color={colors.palette.purple400}
                                 size={30}
                                 iconStyle={{ marginRight: 10 }}
                             />
@@ -101,7 +101,7 @@ const GenreScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                             <Icon
                                 name="woman-outline"
                                 type="ionicon"
-                                color={colors.palette.golden}
+                                color={colors.palette.purple400}
                                 size={30}
                                 iconStyle={{ marginRight: 10 }}
                             />
@@ -128,7 +128,7 @@ const GenreScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                             <Icon
                                 name="transgender-outline"
                                 type="ionicon"
-                                color={colors.palette.golden}
+                                color={colors.palette.purple400}
                                 size={30}
                                 iconStyle={{ marginRight: 10 }}
                             />
@@ -197,7 +197,7 @@ const styles = StyleSheet.create({
         marginLeft: 20,
     },
     checkedText: {
-        color: colors.palette.violet,
+        color: colors.palette.purple400,
         fontSize: 20,
         fontFamily: 'mulishSemiBold',
         marginLeft: 20,
