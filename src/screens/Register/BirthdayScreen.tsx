@@ -50,6 +50,11 @@ const BirthdayScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
         const currentDate = new Date();
         const eighteenYearsAgo = new Date(currentDate.getFullYear() - 18, currentDate.getMonth(), currentDate.getDate());
 
+        if (year < 1930) {
+            setError("L'année de naissance ne peut pas être avant 1930");
+            return;
+        }
+
         if (selectedDate > eighteenYearsAgo) {
             setError("Vous devez avoir plus de 18 ans pour vous inscrire");
             return;
