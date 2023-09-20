@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import { Input } from '@rneui/base';
+import { Input, Icon } from '@rneui/base';
 import { StackScreenProps } from '@react-navigation/stack';
 import { useUserStore } from '../../hooks/useUserStore';
 import { colors } from '../../theme';
 import NavigationButton from '../../components/NavigationButton';
 
-const width = Dimensions.get('window').width;
+import { SCREEN_WIDTH } from "../../utils/constants";
 
 const FirstNameScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   const [user, setUser] = useUserStore();
@@ -63,16 +62,20 @@ const FirstNameScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
             value={user.firstname}
             placeholder='Saisissez votre prénom'
             placeholderTextColor={colors.palette.purple200}
-            inputContainerStyle={styles.input}
-            inputStyle={styles.inputStyle}
+            style={styles.input}
             onChangeText={handleInputChange}
-            leftIcon={<Icon name='user' size={24} style={styles.icon} />}
+            leftIcon={<Icon
+              name="mail-outline"
+              type="ionicon"
+              color={colors.palette.white}
+              size={20}
+            />}
           />
         </View>
         <NavigationButton
           color={colors.palette.violetBg}
           backgroundColor={colors.palette.orange}
-          width={width * 0.85}
+          width={SCREEN_WIDTH * 0.85}
           title="Suivant"
           onPress={goToGenreScreen}
         />
@@ -95,17 +98,18 @@ const styles = StyleSheet.create({
     marginTop: 40,
   },
   inputView: {
-    width: width * 0.9,
+    width: SCREEN_WIDTH* 0.9,
     marginBottom: 20
   },
   input: {
-    backgroundColor: colors.palette.white,
-    padding: 3,
-    borderRadius: 6,
-    borderBottomWidth: 1,
-    borderLeftWidth: 1,
-    borderLeftColor: colors.palette.darkgold,
-    borderBottomColor: colors.palette.darkgold,
+    width: SCREEN_WIDTH / 0.3,
+    height: 40,
+    backgroundColor: colors.palette.violet,
+    borderRadius: 16,
+    paddingLeft: 20,
+    fontFamily: "mulishExtraLight",
+    fontSize: 18,
+    color: colors.palette.white,
   },
   inputStyle: {
     fontSize: 16,

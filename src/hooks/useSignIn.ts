@@ -13,7 +13,7 @@ const auth = getAuth();
 const isValidEmail = (email: string) =>
   /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(email);
 const isValidPassword = (password: string) =>
-  /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/.test(password);
+  /^(?=.*[A-Z]).{6,}$/.test(password);
 
 export const useSignIn = () => {
   const [error, setError] = useState("");

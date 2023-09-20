@@ -4,9 +4,9 @@ import {
   Text,
   View,
 } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import PolicyModal from '../../components/PolicyModal';
 import {
+  Icon,
   Input,
 } from '@rneui/themed';
 import { useUserStore } from '../../hooks/useUserStore';
@@ -14,8 +14,7 @@ import { StackScreenProps } from '@react-navigation/stack';
 import { colors } from '../../theme';
 import NavigationButton from '../../components/NavigationButton';
 import { SCREEN_WIDTH } from '../../utils/constants';
-import { useSignIn } from '../../hooks/useSignIn'
-
+import { useSignIn } from '../../hooks/useSignIn';
 
 
 const SignInScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
@@ -57,35 +56,34 @@ const SignInScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
       )}
       <View style={styles.controls}>
         
-          <Text style={styles.contentTitle}>Créer votre compte </Text>
+          <Text style={styles.contentTitle}>Créer votre compte</Text>
         
         <Input
           placeholder='Email'
-          placeholderTextColor={'#2072AF'}
-          inputContainerStyle={styles.input}
-          inputStyle={{ fontSize: 16, marginLeft: 10, fontFamily: "mulishRegular", color: colors.palette.pink500 }}
-
+          placeholderTextColor={colors.palette.white}
+          style={styles.input}
           value={user.email}
           onChangeText={(text) => setUser({ ...user, email: text })}
           leftIcon={<Icon
-            name='envelope'
-            size={28}
-            style={styles.icon}
+            name="mail-outline"
+            type="ionicon"
+            color={colors.palette.white}
+            size={20}
           />}
         />
 
         <Input
           placeholder='Password'
-          placeholderTextColor={'#2072AF'}
-          inputContainerStyle={styles.input}
-          inputStyle={{ fontSize: 16, marginLeft: 10, fontFamily: "mulishRegular", color: colors.palette.pink500 }}
+          placeholderTextColor={colors.palette.white}
+          style={styles.input}
           value={user.password}
           onChangeText={(text) => setUser({ ...user, password: text })}
           secureTextEntry={true}
           leftIcon={<Icon
-            name='key'
-            size={28}
-            style={styles.icon}
+            name="key"
+            type="ionicon"
+            color={colors.palette.white}
+            size={20}
           />}
         />
 
@@ -104,8 +102,8 @@ const SignInScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
             title="Commencer à poser vos questions"
             onPress={() => signIn(user, policy)}
           />
-
         </View>
+
       </View>
 
       {/* Modal View */}
