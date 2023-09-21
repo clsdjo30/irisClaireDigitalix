@@ -81,6 +81,7 @@ const BirthdayScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                     onChangeText={handleDateChange}
                     keyboardType="numeric"
                     maxLength={10}
+                    leftIconContainerStyle={styles.IconBox}
                     leftIcon={
                         <Icon
                             name="calendar"
@@ -108,7 +109,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: colors.palette.purple600,
+        backgroundColor: colors.palette.stepViolet,
     },
     inputContainer: {
         width: width / 1.2,
@@ -119,12 +120,16 @@ const styles = StyleSheet.create({
     input: {
         width: width / 1.3,
         height: 50,
-        backgroundColor: colors.palette.violet,
+        backgroundColor: colors.palette.stepViolet,
         borderRadius: 16,
-        paddingLeft: 20,
+        paddingLeft: 30,
         fontFamily: "mulishRegular",
         fontSize: 20,
         color: colors.palette.white,
+    },
+    IconBox: {
+        width: 50,
+        height: 50,
     },
     contentTitle: {
         fontFamily: "mulishSemiBold",
