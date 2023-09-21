@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: colors.palette.purple600,
+    backgroundColor: colors.palette.stepViolet
   },
   controls: {
     flexDirection: 'column',
@@ -98,13 +98,13 @@ const styles = StyleSheet.create({
     marginTop: 40,
   },
   inputView: {
-    width: SCREEN_WIDTH* 0.9,
+    width: SCREEN_WIDTH * 0.9,
     marginBottom: 20
   },
   input: {
     width: SCREEN_WIDTH / 0.3,
-    height: 40,
-    backgroundColor: colors.palette.violet,
+    height: 48,
+    backgroundColor: colors.palette.stepViolet,
     borderRadius: 16,
     paddingLeft: 20,
     fontFamily: "mulishExtraLight",
