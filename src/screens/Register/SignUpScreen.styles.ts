@@ -17,11 +17,11 @@ export const styles = StyleSheet.create({
   },
   input: {
     width: SCREEN_WIDTH / 0.3,
-    height: 40,
+    height: 50,
     backgroundColor: colors.palette.stepViolet,
     borderRadius: 16,
     paddingLeft: 20,
-    fontFamily: "mulishExtraLight",
+    fontFamily: "mulishLight",
     fontSize: 18,
     color: colors.palette.white,
   },
