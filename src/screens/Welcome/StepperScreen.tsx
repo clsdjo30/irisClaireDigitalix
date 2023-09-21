@@ -110,6 +110,6 @@ const styles = StyleSheet.create({
     },
     blockButton: {
         position: 'absolute',
-        bottom: 30,
+        bottom: 5,
     },
 })
