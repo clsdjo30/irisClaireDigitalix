@@ -24,11 +24,12 @@ const NavigationButotn: React.FC<NavigationButtonProps>  = ({ title, onPress, wi
 export default NavigationButotn;
 
 const styles = StyleSheet.create({
-    button: {
+  button: {
+        height: 48,
         marginBottom: 16,
         borderRadius: 16,
-        alignItems: "center",
-        paddingVertical: 10,
+    alignItems: "center",
+    justifyContent: "center",
     },
     buttonText: {
         fontFamily: "mulishSemiBold",

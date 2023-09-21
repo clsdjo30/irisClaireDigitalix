@@ -26,7 +26,7 @@ export const useSignIn = () => {
 
     if (!isValidPassword(user.password)) {
       setError(
-        "Le mot de passe doit contenir au moins 6 caractères, une majuscule, un chiffre et un caractère spécial."
+        "Le mot de passe doit contenir au moins 6 caractères dont une majuscule"
       );
       return;
     }

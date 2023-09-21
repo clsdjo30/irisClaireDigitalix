@@ -20,7 +20,9 @@ import { useSignIn } from '../../hooks/useSignIn';
 const SignInScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   const [user, setUser] = useUserStore();
   const [policy, setPolicy] = useState(false);
-
+  const [showPasswordMessage, setShowPasswordMessage] = useState(false);
+  
+  
   // utilise le hook SignIn
   const { signIn, error } = useSignIn();
 
@@ -64,6 +66,7 @@ const SignInScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
           style={styles.input}
           value={user.email}
           onChangeText={(text) => setUser({ ...user, email: text })}
+          leftIconContainerStyle={styles.iconBox}
           leftIcon={<Icon
             name="mail-outline"
             type="ionicon"
@@ -71,7 +74,7 @@ const SignInScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
             size={20}
           />}
         />
-
+       
         <Input
           placeholder='Password'
           placeholderTextColor={colors.palette.white}
@@ -79,13 +82,21 @@ const SignInScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
           value={user.password}
           onChangeText={(text) => setUser({ ...user, password: text })}
           secureTextEntry={true}
+          leftIconContainerStyle={styles.iconBox}
           leftIcon={<Icon
             name="key"
             type="ionicon"
             color={colors.palette.white}
             size={20}
           />}
+          onFocus={() => setShowPasswordMessage(true)}
+          onBlur={() => setShowPasswordMessage(false)}
         />
+        {showPasswordMessage && (
+          <Text style={{ color: colors.palette.white, fontSize:10 }}>
+            Le mot de passe minimun 6 caractères dont 1 majuscule.
+          </Text>
+        )}
 
         <View style={styles.validationButton}>
           <NavigationButton

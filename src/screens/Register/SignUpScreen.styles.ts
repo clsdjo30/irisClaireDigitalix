@@ -5,7 +5,7 @@ import { SCREEN_WIDTH } from "../../utils/constants";
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.palette.purple600,
+    backgroundColor: colors.palette.stepViolet,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
   input: {
     width: SCREEN_WIDTH / 0.3,
     height: 40,
-    backgroundColor: colors.palette.violet,
+    backgroundColor: colors.palette.stepViolet,
     borderRadius: 16,
     paddingLeft: 20,
     fontFamily: "mulishExtraLight",
@@ -34,6 +34,10 @@ export const styles = StyleSheet.create({
     fontSize: 20,
     color: colors.palette.violetClair,
     marginBottom: 20,
+  },
+  iconBox: {
+    width: 50,
+    height: 50,
   },
   //ERROR
   errorContainer: {
