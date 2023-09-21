@@ -173,7 +173,6 @@ const styles = StyleSheet.create({
 
   container: {
     flex: 1,
-    height: SCREEN_HEIGHT,
     width: SCREEN_WIDTH,
     backgroundColor: colors.palette.violet,
     justifyContent: 'center',
@@ -183,7 +182,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     width: SCREEN_WIDTH - 5,
-    height: SCREEN_HEIGHT * 0.62,
+    height: SCREEN_HEIGHT * 0.55,
     borderBottomLeftRadius: SCREEN_WIDTH * 0.1,
     borderBottomRightRadius: SCREEN_WIDTH * 0.1,
     backgroundColor: colors.background
@@ -270,7 +269,6 @@ const styles = StyleSheet.create({
     fontFamily: 'oswaldLight',
     textTransform: 'capitalize',
     textAlign: 'left',
-    marginTop: SCREEN_HEIGHT / 50,
   },
   headerSubTitle: {
     color: colors.palette.violet,
@@ -280,31 +278,30 @@ const styles = StyleSheet.create({
   },
   headerUnderline: {
     width: SCREEN_WIDTH / 1.1,
-    paddingVertical: SCREEN_HEIGHT / 80,
-    paddingBottom: SCREEN_HEIGHT * 0.04,
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: SCREEN_HEIGHT / 50,
   },
   headerUnderlineTop: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     width: SCREEN_WIDTH / 1.2,
-    paddingVertical: SCREEN_HEIGHT / 50,
+    paddingVertical: SCREEN_HEIGHT / 100,
     borderBottomWidth: 0.5,
   },
 
   //Header Profil
   userCard: {
     position: 'relative',
+    justifyContent: 'center',
+    alignItems: 'flex-start',
     marginLeft: SCREEN_WIDTH / 20,
   },
   profilInput: {
     flexDirection: 'row',
   },
   blockProfilInput: {
-    marginTop: SCREEN_HEIGHT / 50,
+    marginTop: SCREEN_HEIGHT / 90,
 
   },
   textEmail: {
@@ -325,7 +322,7 @@ const styles = StyleSheet.create({
   },
   // Block Element
   blockElement: {
-    marginTop: SCREEN_HEIGHT / 50,
+    marginTop: SCREEN_HEIGHT / 90,
     flexDirection: 'column',
   }
 })
