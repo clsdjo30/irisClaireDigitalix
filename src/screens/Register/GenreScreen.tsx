@@ -73,7 +73,7 @@ const GenreScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                             <Icon
                                 name="man-outline"
                                 type="ionicon"
-                                color={colors.palette.purple400}
+                                color={colors.palette.genderCheckText}
                                 size={30}
                                 iconStyle={{ marginRight: 10 }}
                             />
@@ -101,7 +101,7 @@ const GenreScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                             <Icon
                                 name="woman-outline"
                                 type="ionicon"
-                                color={colors.palette.purple400}
+                                color={colors.palette.genderCheckText}
                                 size={30}
                                 iconStyle={{ marginRight: 10 }}
                             />
@@ -128,7 +128,7 @@ const GenreScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                             <Icon
                                 name="transgender-outline"
                                 type="ionicon"
-                                color={colors.palette.purple400}
+                                color={colors.palette.genderCheckText}
                                 size={30}
                                 iconStyle={{ marginRight: 10 }}
                             />
@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: colors.palette.purple600,
+        backgroundColor: colors.palette.stepViolet,
     },
     icon: {
         marginRight: 16,
@@ -188,7 +188,7 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     genderCheckBox: {
-        backgroundColor: colors.palette.violet,
+        backgroundColor: colors.palette.stepViolet,
     },
     checkText: {
         color: colors.palette.white,
@@ -197,14 +197,14 @@ const styles = StyleSheet.create({
         marginLeft: 20,
     },
     checkedText: {
-        color: colors.palette.purple400,
+        color: colors.palette.genderCheckText,
         fontSize: 20,
         fontFamily: 'mulishSemiBold',
         marginLeft: 20,
     },
     positionBox: {
         width: width * 0.8,
-        backgroundColor: colors.palette.purple500,
+        backgroundColor: colors.palette.genderBox,
         borderRadius: 8,
         paddingVertical: 10,
         paddingHorizontal: 20,

@@ -7,6 +7,8 @@ const palette = {
   orange: "#C94013",
   golden: "#bc9531",
   stepViolet: "#423C7F",
+  genderBox: "#5D5FAA",
+  genderCheckText: "#325395",
 
   //GRAYSCALE
   neutral100: "#e4e4e7",
