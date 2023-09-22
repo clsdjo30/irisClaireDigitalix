@@ -84,7 +84,7 @@ const SignInScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
           secureTextEntry={true}
           leftIconContainerStyle={styles.iconBox}
           leftIcon={<Icon
-            name="key"
+            name="lock-closed-outline"
             type="ionicon"
             color={colors.palette.white}
             size={20}

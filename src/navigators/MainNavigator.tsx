@@ -28,6 +28,9 @@ import CrossDrawScreen from '../screens/Main/CrossDraw/CrossDrawScreen';
 import CrossDrawDomainScreen from '../screens/Main/CrossDraw/CrossDrawDomainScreen';
 import CrossDrawQuestionScreen from '../screens/Main/CrossDraw/CrossDrawQuestionScreen';
 import CrossDrawResultScreen from '../screens/Main/CrossDraw/CrossDrawResultScreen';
+import FirstNameScreen from '../screens/Register/FirstNameScreen';
+import GenreScreen from '../screens/Register/GenreScreen';
+import BirthDayScreen from '../screens/Register/BirthdayScreen';
 
 const DayDrawStack = createNativeStackNavigator();
 const ProfilStack = createNativeStackNavigator();
@@ -65,6 +68,15 @@ function ProfilStackScreen() {
         options={{ headerShown: false, }} />
         <ProfilStack.Screen name="MyQuestions"
         component={SaveQuestionScreen}
+        options={{ headerShown: false, }} />
+      <ProfilStack.Screen name="FirstName"
+        component={FirstNameScreen}
+        options={{ headerShown: false, }} />
+      <ProfilStack.Screen name="Genre"
+        component={GenreScreen}
+        options={{ headerShown: false, }} />
+      <ProfilStack.Screen name="Birthday"
+        component={BirthDayScreen}
         options={{ headerShown: false, }} />
     </ProfilStack.Navigator>
   )

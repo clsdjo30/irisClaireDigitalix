@@ -30,7 +30,8 @@ const SCREEN_FONT_SCALE = SCREEN_SCALE * 0.5;
 const ProfilScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
   const userInfo = useUserInformation();
-  console.log('USERINFO: ', userInfo.user?.irisCoins)
+
+  // console.log('ProfilScreen.tsx USER', userInfo.user)
   // Récupérez la locale actuelle (par exemple, "fr-FR" ou "en-US")
   const locale = Localization.locale.split("-")[0];
 
@@ -87,16 +88,16 @@ const ProfilScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
           {/* User Astro information*/}
           <View style={styles.blockElement}>
             <View style={styles.profilInput}>
-              <Text style={styles.textEmail}>Ma Pierre: </Text>
-              <Text style={styles.textDetail} >{userTransStone}</Text>
+              <Text style={styles.textEmail}>Mon Element: </Text>
+              <Text style={styles.textDetail} >{userTransElement}</Text>
             </View>
             <View style={styles.profilInput}>
               <Text style={styles.textEmail}>Mon Signe: </Text>
               <Text style={styles.textDetail} >{userTransSign}</Text>
             </View>
             <View style={styles.profilInput}>
-              <Text style={styles.textEmail}>Mon Element: </Text>
-              <Text style={styles.textDetail} >{userTransElement}</Text>
+              <Text style={styles.textEmail}>Ma Pierre: </Text>
+              <Text style={styles.textDetail} >{userTransStone}</Text>
             </View>
           </View>
           <View>
@@ -121,7 +122,7 @@ const ProfilScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
           <View style={styles.blockParam}>
             <TouchableOpacity
               style={styles.paramRow}
-              onPress={() => navigation.navigate('Home')}>
+              onPress={() => navigation.navigate('FirstName')}>
               <Text style={styles.switchText}>Modifier mes informations</Text>
               <Image source={rightArrow} style={styles.iconImage} />
             </TouchableOpacity>
@@ -157,7 +158,7 @@ const ProfilScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
             title="Se Déconnecter"
             onPress={() => auth.signOut()}
             width={SCREEN_WIDTH / 1.2}
-            backgroundColor={colors.palette.orange}
+            backgroundColor={colors.palette.violet}
             color={colors.palette.violetBg}
           />
         </View>

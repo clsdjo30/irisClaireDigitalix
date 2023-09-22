@@ -5,14 +5,20 @@ import { StackScreenProps } from '@react-navigation/stack';
 import { useUserStore } from '../../hooks/useUserStore';
 import { colors } from '../../theme';
 import NavigationButton from '../../components/NavigationButton';
+import { useUpdateUserInformation } from '../../hooks/useUpdateUserInformation';
+import { useAuthentication } from '../../hooks/useAuthentication';
 
 const width = Dimensions.get('window').width;
 
 const BirthdayScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
-    const [user, setUser] = useUserStore();
-    const [birthDate, setBirthDate] = useState('');
+    const [newUser, setUser] = useUserStore();
+    const [birthDate, setBirthDate] = useState(newUser.birthday || '');
     const [error, setError] = useState('');
+    const { user } = useAuthentication();
+    const { updateUserDetails } = useUpdateUserInformation();
+    
 
+    
     const handleDateChange = (text: string) => {
         if (text.length < birthDate.length) { // Si la longueur du texte est inférieure à celle de l'état précédent, l'utilisateur supprime un caractère
             if (birthDate[birthDate.length - 1] === '/') { // Si le dernier caractère est un '/', supprimez-le
@@ -60,8 +66,25 @@ const BirthdayScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
             return;
         }
 
-        setUser({ ...user, birthday: birthDate });
-        navigation.navigate('Sign Up');
+        if (user) {
+            const firstName = newUser.firstname;
+            const genre = newUser.genre;
+            updateUserDetails(user.uid, {
+                firstname: firstName, // Assurez-vous que newUser contient le prénom
+                genre: genre, // Assurez-vous que newUser contient le genre
+                birthday: birthDate
+            });
+
+          // Redirigez vers le profil si l'utilisateur est connecté
+            navigation.navigate('Profil');
+            navigation.reset({
+                index: 0,
+                routes: [{ name: 'Profil' }],
+            }); 
+        } else {
+            setUser({ ...newUser, birthday: birthDate });
+            navigation.navigate('Sign Up'); // Redirigez vers l'inscription si l'utilisateur n'est pas connecté
+        }
     }
 
     return (
@@ -92,12 +115,13 @@ const BirthdayScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                     }
                 />
             </View>
+           
             <NavigationButton
                 testID='goToSignUp'
                 color={colors.palette.violetBg}
                 backgroundColor={colors.palette.orange}
                 width={width / 1.3}
-                title="S'inscrire"
+                title={ user ? "Modifier" : "S'inscrire" }
                 onPress={goToSignUp}
             />
         </View>

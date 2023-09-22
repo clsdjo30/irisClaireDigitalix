@@ -6,17 +6,20 @@ import { useUserStore } from '../../hooks/useUserStore';
 import { colors } from '../../theme'
 import NavigationButton from '../../components/NavigationButton';
 import { CheckBox } from '@rneui/themed';
+import { useUserInformation } from '../../hooks/useUserInformations';
+
 
 const width = Dimensions.get('window').width;
 
 
 
 const GenreScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
-    const [user, setUser] = useUserStore()
+    const [newUser, setUser] = useUserStore()
     const [error, setError] = useState('')
-    const [homme, setHomme] = useState(false)
-    const [femme, setFemme] = useState(false)
-    const [autres, setAutres] = useState(false)
+    const [homme, setHomme] = useState(newUser.genre === 'homme');
+    const [femme, setFemme] = useState(newUser.genre === 'femme');
+    const [autres, setAutres] = useState(newUser.genre === 'autres');
+
 
     const resetAll = () => {
         setHomme(false);
@@ -26,24 +29,24 @@ const GenreScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
     const handleHommeCheck = () => {
         resetAll();
-        setHomme(true);
-        setUser({ ...user, genre: 'homme' })
+        setHomme(true);    
+        setUser({ ...newUser, genre: 'homme' })
     }
 
     const handleFemmeCheck = () => {
         resetAll();
         setFemme(true);
-        setUser({ ...user, genre: 'femme' })
+        setUser({ ...newUser, genre: 'femme' })
     }
 
     const handleAutresCheck = () => {
         resetAll();
         setAutres(true);
-        setUser({ ...user, genre: 'autres' })
+        setUser({ ...newUser, genre: 'autres' })
     }
 
     function goToBirthday() {
-        if (user.genre.length === 0) {
+        if (newUser.genre.length === 0) {
             setError("Vous devez choisir un genre");
             return;
         }

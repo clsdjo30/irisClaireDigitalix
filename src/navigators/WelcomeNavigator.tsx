@@ -8,6 +8,7 @@ import Genre from '../screens/Register/GenreScreen';
 import Birthday from '../screens/Register/BirthdayScreen';
 import SignupScreen from '../screens/Register/SignupScreen';
 import LoginScreen from '../screens/Register/LoginScreen';
+import ProfilScreen from '../screens/Main/Profil/ProfilScreen';
 
 const Stack = createStackNavigator();
 
@@ -22,6 +23,7 @@ export default function AuthStack() {
         <Stack.Screen name="Birthday" component={Birthday} options={{ headerShown: false }} />
         <Stack.Screen name="Sign Up" component={SignupScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="Profil" component={ProfilScreen} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

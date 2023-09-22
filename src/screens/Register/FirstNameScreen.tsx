@@ -5,11 +5,13 @@ import { StackScreenProps } from '@react-navigation/stack';
 import { useUserStore } from '../../hooks/useUserStore';
 import { colors } from '../../theme';
 import NavigationButton from '../../components/NavigationButton';
+import { useUserInformation } from '../../hooks/useUserInformations';
 
 import { SCREEN_WIDTH } from "../../utils/constants";
 
 const FirstNameScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
-  const [user, setUser] = useUserStore();
+  const [newUser, setUser] = useUserStore();
+  // console.log('FirstNameScreen.tsx NEW USER', newUser)
   const [error, setError] = useState('');
 
 //interdire les caracteres speciaux
@@ -24,7 +26,7 @@ const FirstNameScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
     // Si le texte est vide, permettez la mise à jour
     if (text === '') {
-      setUser({ ...user, firstname: text });
+      setUser({ ...newUser, firstname: text });
       return;
     }
 
@@ -33,16 +35,16 @@ const FirstNameScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
       return;
     }
 
-    setUser({ ...user, firstname: text });
+    setUser({ ...newUser, firstname: text });
   };
 
   const goToGenreScreen = () => {
-    if (user.firstname.length === 0) {
+    if (newUser.firstname.length === 0) {
       setError('Le prénom ne peut pas être vide');
       return;
     }
 
-    if (user.firstname.length < 3) {
+    if (newUser.firstname.length < 3) {
       setError('Le prénom doit contenir au moins 3 caractères');
       return;
     }
@@ -59,13 +61,13 @@ const FirstNameScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
         </View>
         <View style={styles.inputView}>
           <Input
-            value={user.firstname}
+            value={newUser.firstname}
             placeholder='Saisissez votre prénom'
             placeholderTextColor={colors.palette.purple200}
             style={styles.input}
             onChangeText={handleInputChange}
             leftIcon={<Icon
-              name="mail-outline"
+              name="person-outline"
               type="ionicon"
               color={colors.palette.white}
               size={20}
