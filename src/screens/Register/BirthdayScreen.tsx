@@ -76,10 +76,10 @@ const BirthdayScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
             });
 
           // Redirigez vers le profil si l'utilisateur est connecté
-            navigation.navigate('Profil');
+            navigation.navigate('Loading');
             navigation.reset({
                 index: 0,
-                routes: [{ name: 'Profil' }],
+                routes: [{ name: 'Loading' }],
             }); 
         } else {
             setUser({ ...newUser, birthday: birthDate });

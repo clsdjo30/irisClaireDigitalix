@@ -31,6 +31,7 @@ import CrossDrawResultScreen from '../screens/Main/CrossDraw/CrossDrawResultScre
 import FirstNameScreen from '../screens/Register/FirstNameScreen';
 import GenreScreen from '../screens/Register/GenreScreen';
 import BirthDayScreen from '../screens/Register/BirthdayScreen';
+import LoadingScreen from '../components/reusable/LoadingScreen';
 
 const DayDrawStack = createNativeStackNavigator();
 const ProfilStack = createNativeStackNavigator();
@@ -77,6 +78,9 @@ function ProfilStackScreen() {
         options={{ headerShown: false, }} />
       <ProfilStack.Screen name="Birthday"
         component={BirthDayScreen}
+        options={{ headerShown: false, }} />
+      <ProfilStack.Screen name="Loading"
+        component={LoadingScreen}
         options={{ headerShown: false, }} />
     </ProfilStack.Navigator>
   )
