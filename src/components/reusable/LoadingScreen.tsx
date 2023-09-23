@@ -1,11 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { useUserInformation } from '../../hooks/useUserInformations';
 import { StackScreenProps } from '@react-navigation/stack';
+import LottieView from 'lottie-react-native';
+import { SCREEN_WIDTH, SCREEN_HEIGHT} from '../../utils/constants';
+import { colors } from '../../theme';
 
 const LoadingScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     const { user, fetchUser } = useUserInformation();
-
+    
     useEffect(() => {
         // Définissez un délai de 3 secondes
         const timer = setTimeout(() => {
@@ -15,7 +18,7 @@ const LoadingScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                 index: 0,
                 routes: [{ name: 'Profil' }],
             }); 
-        }, 3000); // 3000ms = 3s
+        }, 6000); // 3000ms = 3s
 
         // Nettoyez le timer lorsque le composant est démonté
         return () => clearTimeout(timer);
@@ -23,20 +26,34 @@ const LoadingScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>CHARGEMENT DES DONNÉES</Text>
+            <LottieView
+                autoPlay
+                style={{
+                    width: SCREEN_WIDTH * 0.5,
+                    height: SCREEN_HEIGHT * 0.5,
+                    backgroundColor: '#423C7F',
+                }}
+                // Find more Lottie files at https://lottiefiles.com/featured
+                source={require('../../../assets/new_eye.json')}
+            />
+            <Text style={styles.text}>Iris Claire se concentre</Text>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        justifyContent: 'center',
+        backgroundColor: colors.palette.stepViolet,
         alignItems: 'center',
+        justifyContent: 'center',
+        flex: 1,
     },
     text: {
-        fontSize: 20,
-        fontWeight: 'bold',
+        position: 'absolute',
+        bottom: 150,
+        fontFamily: "mulishExtraLight",
+        fontSize: 16,
+        color: colors.palette.violetClair,
     },
 });
 

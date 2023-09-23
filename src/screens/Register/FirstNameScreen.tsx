@@ -112,6 +112,7 @@ const styles = StyleSheet.create({
     fontFamily: "mulishExtraLight",
     fontSize: 18,
     color: colors.palette.white,
+    textTransform: 'capitalize' 
   },
   inputStyle: {
     fontSize: 16,
