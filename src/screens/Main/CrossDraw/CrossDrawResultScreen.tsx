@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
     StyleSheet,
     Image,
@@ -7,8 +7,8 @@ import {
     Text,
     Dimensions,
     ScrollView,
-    ActivityIndicator
-
+    ActivityIndicator,
+    BackHandler
 } from 'react-native';
 import CARD_DECK from '../../../data/cards';
 import { colors } from '../../../theme';
@@ -33,7 +33,20 @@ const CrossDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) 
     const currentUser = auth.currentUser;
     const userID = currentUser ? currentUser.uid : null;
 
-    // console.log('Valeur de QuestionStore', questionInformations)
+
+    useEffect(() => {
+
+        const backAction = () => {
+            return true;
+        };
+
+        const backHandler = BackHandler.addEventListener(
+            "hardwareBackPress",
+            backAction
+        );
+
+        return () => backHandler.remove();
+    }, []);
 
 
     const firstCard = CARD_DECK.find(card => card.id === questionInformations.choosecardnumber);
