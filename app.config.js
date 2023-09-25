@@ -17,6 +17,7 @@ export default {
       firebaseAppId: process.env.FIREBASE_APP_ID,
       openAiId: process.env.OPEN_AI_ID,
       googleRevenueCatApiKey: process.env.GOOGLE_REVENUECAT_API_KEY,
+      irisApi: process.env.IRIS_API,
     },
     "name": "irisClaireDigitalix",
     "slug": "irisclairedigitalix",
