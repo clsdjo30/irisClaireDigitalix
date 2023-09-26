@@ -11,6 +11,7 @@ import { Input } from '@rneui/themed';
 import { colors } from '../../../theme';
 import { useQuestionStore } from '../../../hooks/useQuestionStore';
 import { StackScreenProps } from '@react-navigation/stack';
+import HowToAskQuestion from '../../../components/reusable/HowToAskQuestion';
 
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -100,6 +101,7 @@ const YesDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
             </Pressable>
           </View>
         </View>
+        <HowToAskQuestion />
       </View>
     </View >
   )

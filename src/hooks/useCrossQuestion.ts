@@ -185,15 +185,17 @@ export const useCrossQuestion = (delay: number) => {
       const data = {
         model: "gpt-3.5-turbo-16k",
         messages: messages,
-        max_tokens: 3000,
+        max_tokens: 2000,
         temperature: 0.5,
         presence_penalty: 0,
         frequency_penalty: 0,
         top_p: 1,
       };
-      console.log("Data sent:", data);
+      console.log("USE CROSS QUESTION DATA SEND:", data);
       try {
         const response = await openai.post("", data);
+        const tokensUsed = response.data.usage.total_tokens;
+        console.log("USE CROSS QUESTION Total tokens used:", tokensUsed);
         let reply = response.data.choices[0].message.content.trimStart();
         setValue({ ...value, answer: reply, isanswered: true });
         setIsDone(false);

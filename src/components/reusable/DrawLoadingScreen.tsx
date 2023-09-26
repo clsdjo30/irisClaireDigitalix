@@ -9,7 +9,7 @@ import { useCrossQuestion } from '../../hooks/useCrossQuestion';
 import CARD_DECK from '../../data/cards';
 
 const LoadingScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
-    // const [value] = useCrossQuestion(1000);
+    const [value] = useCrossQuestion(1000);
 
     const [question] = useCrossQuestionStore();
     const firstCard = CARD_DECK.find(card => card.id === question.choosecardnumber);

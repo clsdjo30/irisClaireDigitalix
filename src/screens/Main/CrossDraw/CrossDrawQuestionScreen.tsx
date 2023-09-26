@@ -11,6 +11,7 @@ import { Input } from '@rneui/themed';
 import { colors } from '../../../theme';
 import { useCrossQuestionStore } from '../../../hooks/useCrossQuestionStore';
 import { StackScreenProps } from '@react-navigation/stack';
+import HowToAskQuestion from '../../../components/reusable/HowToAskQuestion';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = SCREEN_WIDTH * 1.5;
@@ -99,6 +100,7 @@ const CrossDrawQuestionScreen: React.FC<StackScreenProps<any>> = ({ navigation }
             </TouchableOpacity>
           </View>
         </View>
+        <HowToAskQuestion />
       </View >
     </View>
   )
