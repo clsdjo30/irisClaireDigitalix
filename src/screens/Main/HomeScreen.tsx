@@ -9,6 +9,7 @@ import { goToYesDraw, goToCrossDraw } from '../../utils/NavigationFunctions';
 import { styles } from './HomeScreen.styles';
 import { resetAtMidnight } from '../../utils/resetAtMidnight';
 import WelcomeModal from '../../components/reusable/WelcomeModal';
+import { useCrossQuestionStore } from '../../hooks/useCrossQuestionStore';
 
 const eye = require('../../../assets/icons/iris_card.png');
 const yesCard = require('../../../assets/icons/yesCard.png');
@@ -17,6 +18,10 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   const [daycard, setDayCard] = useDaydrawStore();
   const userInformation = useUserInformation();
   const [isModalVisible, setModalVisible] = useState(true);
+
+  const [value, setValue] = useCrossQuestionStore();
+
+  console.log('VALUE ', value);
 
   useEffect(() => {
     const timer = resetAtMidnight(() => {

@@ -32,6 +32,7 @@ import FirstNameScreen from '../screens/Register/FirstNameScreen';
 import GenreScreen from '../screens/Register/GenreScreen';
 import BirthDayScreen from '../screens/Register/BirthdayScreen';
 import LoadingScreen from '../components/reusable/LoadingScreen';
+import DrawLoadingScreen from '../components/reusable/DrawLoadingScreen';
 
 const DayDrawStack = createNativeStackNavigator();
 const ProfilStack = createNativeStackNavigator();
@@ -67,7 +68,7 @@ function ProfilStackScreen() {
       <ProfilStack.Screen name="Settings"
         component={ProfilScreen}
         options={{ headerShown: false, }} />
-        <ProfilStack.Screen name="MyQuestions"
+      <ProfilStack.Screen name="MyQuestions"
         component={SaveQuestionScreen}
         options={{ headerShown: false, }} />
       <ProfilStack.Screen name="FirstName"
@@ -125,13 +126,16 @@ function CrossStackScreen() {
       <CrossStack.Screen name="ChooseDomain"
         component={CrossDrawDomainScreen}
         options={{ headerShown: false, }} />
-        <CrossStack.Screen name="AskCrossQuestion"
+      <CrossStack.Screen name="AskCrossQuestion"
         component={CrossDrawQuestionScreen}
         options={{ headerShown: false, }} />
       <CrossStack.Screen name="DrawCard"
         component={CrossDrawScreen}
         options={{ headerShown: false, }} />
-        <CrossStack.Screen name="DrawResult"
+      <CrossStack.Screen name="Loading"
+        component={DrawLoadingScreen}
+        options={{ headerShown: false, }} />
+      <CrossStack.Screen name="DrawResult"
         component={CrossDrawResultScreen}
         options={{ headerShown: false, }} />
     </CrossStack.Navigator>
@@ -169,7 +173,7 @@ function HomeStackScreen() {
         component={DayDrawStackScreen}
         options={{ headerShown: false, }} />
 
-<HomeStack.Screen name="TendanceResult"
+      <HomeStack.Screen name="TendanceResult"
         component={TendanceResultScreen}
         options={{ headerShown: false, }} />
 
@@ -186,10 +190,10 @@ export default function UserStack() {
 
   return (
     <NavigationContainer>
-      <Tab.Navigator       
-        screenOptions={({ route}) => ({
+      <Tab.Navigator
+        screenOptions={({ route }) => ({
           tabBarStyle: ((route) => {
-            
+
             const routeName = getFocusedRouteNameFromRoute(route) ?? ""
             if (routeName === 'YesDraw' || routeName === 'CrossDraw' || routeName === 'DayDraw' || routeName === 'TendanceResult') {
               return { display: "none" }
@@ -197,40 +201,40 @@ export default function UserStack() {
             return
           })(route),
           tabBarBackground: () => (
-            <View style={{ width: '100%', height: '100%', backgroundColor: colors.palette.violetBg ,paddingTop:10, borderTopWidth: 0.5,borderTopColor: colors.palette.gold }} />
-          ), 
-          tabBarShowLabel: false,  
+            <View style={{ width: '100%', height: '100%', backgroundColor: colors.palette.violetBg, paddingTop: 10, borderTopWidth: 0.5, borderTopColor: colors.palette.gold }} />
+          ),
+          tabBarShowLabel: false,
           tabBarActiveTintColor: colors.palette.violet,
-          focused: true,     
+          focused: true,
         })}
-        
+
 
 
       >
         <Tab.Screen
-  name="IrisClaire"
-  component={HomeStackScreen}
-  options={{
-    headerShown: false,
-    tabBarShowLabel: false,
-    tabBarIcon: ({ focused }) => (
-      <Image source={homeIcon} style={{width: 30, height: 30, tintColor: focused ? colors.palette.violet : colors.palette.golden}}/>
-    )
-  }}
-/>
+          name="IrisClaire"
+          component={HomeStackScreen}
+          options={{
+            headerShown: false,
+            tabBarShowLabel: false,
+            tabBarIcon: ({ focused }) => (
+              <Image source={homeIcon} style={{ width: 30, height: 30, tintColor: focused ? colors.palette.violet : colors.palette.golden }} />
+            )
+          }}
+        />
 
         <Tab.Screen
-        name="Iris"
-        component={IrisStackScreen}
-        options={{
-          headerShown: false,
-          tabBarShowLabel: false,
-          tabBarIcon: ({ focused }) => (
-            <Image source={irisIcon} style={{width: 25, height: 25, tintColor: focused ? colors.palette.violet : colors.palette.golden}}/>
-          ),
-          tabBarActiveTintColor: colors.palette.violet,
-        }}
-      />
+          name="Iris"
+          component={IrisStackScreen}
+          options={{
+            headerShown: false,
+            tabBarShowLabel: false,
+            tabBarIcon: ({ focused }) => (
+              <Image source={irisIcon} style={{ width: 25, height: 25, tintColor: focused ? colors.palette.violet : colors.palette.golden }} />
+            ),
+            tabBarActiveTintColor: colors.palette.violet,
+          }}
+        />
 
         <Tab.Screen
           name="Profil"
@@ -238,7 +242,7 @@ export default function UserStack() {
           options={{
             headerShown: false, tabBarShowLabel: false,
             tabBarIcon: ({ focused }) => (
-              <Image source={profilIcon} style={{width: 30, height: 30, tintColor: focused ? colors.palette.violet : colors.palette.golden}}/>
+              <Image source={profilIcon} style={{ width: 30, height: 30, tintColor: focused ? colors.palette.violet : colors.palette.golden }} />
             ),
             tabBarActiveTintColor: colors.palette.violet,
           }} />

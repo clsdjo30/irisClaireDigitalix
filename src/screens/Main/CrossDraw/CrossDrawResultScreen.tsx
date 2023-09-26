@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import {
     StyleSheet,
     Image,
@@ -7,14 +7,12 @@ import {
     Text,
     Dimensions,
     ScrollView,
-    ActivityIndicator,
     BackHandler
 } from 'react-native';
 import CARD_DECK from '../../../data/cards';
 import { colors } from '../../../theme';
 import { StackScreenProps } from '@react-navigation/stack';
 import { useCrossQuestionStore } from '../../../hooks/useCrossQuestionStore';
-import { useCrossQuestion } from '../../../hooks/useCrossQuestion';
 import { setDoc, doc, collection } from 'firebase/firestore';
 import { firestore, getAuth } from '../../../config/firebaseConfig';
 
@@ -25,10 +23,7 @@ const SCREEN_FONT_SCALE = SCREEN_SCALE * 0.5;
 
 const auth = getAuth();
 
-const CrossDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
-
-    const [cardImage, setCardImage] = useState(null);
-    const [value, isLoading] = useCrossQuestion(1000);
+const CrossDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {    
     const [questionInformations, setQuestionInformations] = useCrossQuestionStore()
     const currentUser = auth.currentUser;
     const userID = currentUser ? currentUser.uid : null;
@@ -81,18 +76,9 @@ const CrossDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) 
     }
 
     const getContent = () => {
-        if (isLoading) {
-            return (
-                <View style={styles.indicatorWrapper}>
-                    <ActivityIndicator size="large" color={colors.palette.orange} style={styles.indicator} />
-                    <Text style={styles.answerText}>
-                        L'Iris Claire se concentre sur votre tirage
-                    </Text>
-                </View>
-            )
-
-        }
-        return `${questionInformations.answer}`;
+        
+            return `${questionInformations.answer}`;
+        
     };
 
 
@@ -118,6 +104,7 @@ const CrossDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) 
             choosecardthreepseudo: "",
             choosecardfourpseudo: "",
             choosecardfivepseudo: "",
+            isanswered: false,
         })
         navigation.navigate('Home')
         navigation.reset({

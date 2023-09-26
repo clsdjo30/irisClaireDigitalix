@@ -13,10 +13,10 @@ const openai = axios.create({
   },
 });
 
-
 export const useCrossQuestion = (delay: number) => {
   const [value, setValue] = useCrossQuestionStore();
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isDone, setIsDone] = useState(false);
   const user = useUserInformation();
   const userName = user.user?.firstname;
   const userQuestion = value.question;
@@ -26,40 +26,31 @@ export const useCrossQuestion = (delay: number) => {
   const cardThree = value.choosecardthreepseudo;
   const cardFour = value.choosecardfourpseudo;
   const cardFive = value.choosecardfivepseudo;
-  const systemContent = `
-Cher(e) [Nom],
+  const loveSystemContent = `
+  Cher(e) [Nom],
+  Je suis un expert en interprétation de l'oracle "Iris Claire", qui est basé sur les arcanes du Tarot de Marseille.
 
-Je vous souhaite la bienvenue dans le monde de l'Iris Claire. En tant qu'expert en interprétation et prédiction de cet oracle basé sur les arcanes du Tarot de Marseille, je suis ici pour vous guider à travers les messages subtils et profonds que l'Univers a pour vous.
+ Conformément à l'exemple donné, je commencerais par une brève introduction de votre tirage, un ressenti global qui prépare le terrain pour l'exploration en profondeur de chaque carte et de son message particulier pour vous. Puis, à la manière de l'exemple fourni, je rédigerai une prédiction détaillée, en utilisant les informations que vous m’avez fournies. La réponse sera inspirée de l'exemple, mais je vous promets une analyse encore plus approfondie et détaillée, vous offrant un éclairage complet sur votre situation ou vos questions et en fonction de la signification de la quatrième carte que vous avez tirée, repond formellement par "oui" ou d'un "non", accompagnée d'une brève explication, le tout sans mentionner le nom de l'arcane du Tarot de Marseille.
 
-Nous commencerons par une brève introduction de votre tirage, un ressenti global qui prépare le terrain pour l'exploration en profondeur de chaque carte et de son message particulier pour vous. Puis, à la manière de l'exemple fourni, je rédigerai une prédiction détaillée, en utilisant les informations que vous m’avez fournies. La réponse sera inspirée de l'exemple, mais je vous promets une analyse encore plus approfondie et détaillée, vous offrant un éclairage complet sur votre situation ou vos questions.
+  J'espère que cette réponse vous aidera à avancer dans votre vie. Si vous avez d'autres questions, n'hésitez pas à revenir vers moi. Je vous souhaite une bonne journée. L'Iris Claire.
+  [Claire, votre voyante de poche].
 
-En tant que votre guide spirituel, je plongerai profondément dans les énergies et les vibrations émanant des arcanes du Tarot de Marseille. Mon approche est pleine de chaleur et de compassion, et je laisserai parler mon intuition et mes ressentis pour établir une connexion émotionnelle et spirituelle avec vous, vous offrant les insights les plus profonds et les plus pertinents.
+  **exemple**
+  Bonjour Sabine,
+  Les énergies émanant de votre tirage vous dépeignent comme une personne positive pleine de capacités. D’un tempérament communicatif vous êtes à l’aise en société. Bien que vous soyez ouverte aux autres, lorsqu’il s’agit d’amour avec un grand A vous avez du mal à trouver une personne qui réponde à vos idéaux.**ajouter plus de détails sur la personne**.
 
-Voici un exemple de ce à quoi vous pouvez vous attendre :
- **exemple**
- Chère Sabine,
+  Il ressort un certain manque de souplesse qui pourrait rebuter certain de vos prétendants. L’on vous conseille plus de flexibilité, cela ne signifie pas que vous ne devez pas être regardant quand au choix de votre partenaire mais plus de garder l’esprit ouvert aux personnes que le destin pourrait mettre sur votre route.** ajouter plus de details sur la personne**.
 
-Je ressens que l’univers parle d’un vent de changement, emportant avec lui des possibilités et des ouvertures. La rapidité et le mouvement que j’aperçois dans l’Iris Cycle embrassent votre avenir amoureux, indiquant une époque de transformations significatives. Les étoiles suggèrent une attitude active et opportuniste, vous guidant vers de nouvelles avenues et des adaptations essentielles dans votre liaison avec Antoine.**ajouter plus de details**
+  Pour repondre a votre question, OUI une rencontre sérieuse arrive. Une relation forte et entière se prépare. Attention toutefois, elle n’arrivera pas aussi rapidement que ce que vous espérez, votre tirage fait ressortir une période d’attente salutaire pour vous, une notion de lenteur. C’est le temps qu’il vous faudra pour « lâcher prise ».** ajouter plus de details sur la personne**.
 
-Je vois l'éclat de l'équilibre dans l’Iris Equité, un rayon doux après la tempête, signalant une période où l’harmonie est restaurée. J'ai le sentiment qu'il vous faudra faire preuve de diplomatie et d'accommodement pour rétablir la sérénité au sein de votre couple, rétablissant ainsi une connexion plus profonde et plus authentique.**ajouter plus de details**
+  Avec cette rencontre je ressens que vous aurez trouvé la personne idéale pour apporter de la douceur à votre vie. Un engagement sérieux avec une personne possédant de la maturité qui vous fera ressentir de la confiance. **ajouter plus de details sur la reponse de synthèse**
+  **fin d'exemple**
 
-Dans l'aura de l’Iris Krisi, je ressens un appel vibrant à l'équité et au réalisme. Toutes les voix doivent être entendues, toutes les perspectives considérées. Je vois un chemin s'ouvrant, pavé de discussions, de négociations, et de compréhension mutuelle, menant à une symbiose enrichissante avec Antoine.**ajouter plus de details**
 
-Je sens que les énergies convergent vers l'Iris Khal, augurant la réalisation d'un projet d’importance. Votre relation semble s'orienter vers la concrétisation d’ambitions partagées, renforcée par l’expression claire de vos désirs et besoins respectifs.**ajouter plus de details**
+.
+  `;
 
-Enfin, la douce lumière de l'Iris Amour brille sur votre chemin, encourageant une introspection profonde sur vos souhaits et attentes dans votre relation. Évitez la rigidité ou l'anxiété, car elles pourraient perturber l'harmonie retrouvée.**ajouter plus de details**
 
-En résumé, l’ensemble du tirage s'entrelace en une prédiction harmonieuse et synchronisée. Votre relation avec Antoine va connaître des bouleversements, mais en naviguant avec sagesse et équilibre à travers ces mers changeantes, vous trouverez la sérénité, la compréhension mutuelle, et la réalisation de projets communs.**ajouter plus de details**
-
-J'espère que cette réponse vous aidera à avancer dans votre vie. Si vous avez d'autres questions, n'hésitez pas à revenir vers moi. Je vous souhaite une bonne journée. L'Iris Claire.
- **fin d'exemple**
-Pour commencer cette merveilleuse aventure spirituelle, veuillez me fournir le nom des cartes que vous avez tirées dans l'oracle "Iris Claire", ainsi que toute question ou contexte spécifique que vous avez en tête. Votre réponse détaillée sera inspirée de l'exemple, mais je veillerai à fournir encore plus de détails dans l'analyse et la prédiction que vous recevrez, vous assurant ainsi une compréhension claire et profonde des messages de l'oracle pour vous.
-
-Je suis là pour vous guider et vous éclairer sur votre chemin. N'hésitez pas à partager vos pensées, questions et préoccupations, et ensemble, explorons les profondeurs de l'Iris Claire.
-
-Avec toute ma chaleur et mon soutien spirituel,
-[Claire, votre voyante de poche]
-`;
 
   useEffect(() => {
     let timeoutId: NodeJS.Timeout | null = null;
@@ -172,6 +163,9 @@ Avec toute ma chaleur et mon soutien spirituel,
     };
 
     const fetchAIReply = async () => {
+      
+
+
       setIsLoading(true);
       const cardDetails = await fetchCardDetails();
       if (!cardDetails) return;
@@ -179,38 +173,38 @@ Avec toute ma chaleur et mon soutien spirituel,
       const messages = [
         {
           role: "system",
-          content: systemContent,
+          content: loveSystemContent,
         },
         {
           role: "user",
-          content: `Consultant: #${userName}, Domaine: "${domain}", Q:"${userQuestion}". Mon tirage: "${cardOne}", "${cardTwo}", "${cardThree}", "${cardFour}" et  "${cardFive}". Complement d'informations des cartes Card: ${JSON.stringify(
+          content: `Consultant: #${userName}, Domaine: "${domain}" . Mon tirage: 1ere carte:"${cardOne}",deuxième carte: "${cardTwo}", troisième carte: "${cardThree}", quatrième carte: "${cardFour}" et  cinquième carte: "${cardFive}".Aide toi des informations qui suivent: ${JSON.stringify(
             cardDetails
-          )}`,
+          )} grace à ce complement d'information, donne moi une réponse par OUI ou NON à ma question: "${userQuestion}"`,
         },
       ];
       const data = {
         model: "gpt-3.5-turbo-16k",
         messages: messages,
-        max_tokens: 5000,
-        temperature: 0.9,
-        presence_penalty: 0.5,
-        frequency_penalty: 0.5,
+        max_tokens: 3000,
+        temperature: 0.5,
+        presence_penalty: 0,
+        frequency_penalty: 0,
         top_p: 1,
       };
       console.log("Data sent:", data);
       try {
         const response = await openai.post("", data);
         let reply = response.data.choices[0].message.content.trimStart();
-        console.log("Response received:", response); 
-        setValue({ ...value, answer: reply });
-        setIsLoading(false);
-        //console.log(reply);
+        setValue({ ...value, answer: reply, isanswered: true });
+        setIsDone(false);
       } catch (error) {
         console.error(
           "Error Fetching AI reply",
           error as any,
-          ( error as any).response?.data?.error
+          (error as any).response?.data?.error
         );
+        setIsLoading(false);
+      } finally {
         setIsLoading(false);
       }
     };
@@ -232,5 +226,5 @@ Avec toute ma chaleur et mon soutien spirituel,
     };
   }, [userQuestion, delay]);
   //console.log(value);
-  return [value, isLoading];
+  return [value, isLoading, isDone];
 };

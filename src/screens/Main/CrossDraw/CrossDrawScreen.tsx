@@ -105,7 +105,7 @@ const CrossDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   }
  
   function goToResult() {
-    navigation.navigate('DrawResult');
+    navigation.navigate('Loading');
   }
   function cancelModal() {
     navigation.navigate('Home');
