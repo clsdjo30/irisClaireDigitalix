@@ -59,10 +59,10 @@ const HowToAskQuestion: React.FC = () => {
                         <TabView.Item style={{ paddingHorizontal: 15, marginTop:15 }}>
                             <View>
                                 <Text style={styles.explainText}>
-                                    C'est quoi ? Ce sont des questions qui demandent une grande réponse, pas juste un oui ou un non.
+                                    Ce sont des questions qui demandent une grande réponse, pas juste un oui ou un non.
                                 </Text>
                                 <Text style={styles.explainText}>
-                                    On les utilise quand ? Lorsque vous souhaitez plus d’informations ou que vous souhaitez explorer un sujet plus en profondeur.
+                                    Lorsque vous souhaitez plus d’informations ou que vous souhaitez explorer un sujet plus en profondeur.
                                 </Text>
                                 <Text style={styles.explainText}>
                                     Commencez votre question avec des mots comme "Comment", "Pourquoi", ou "Quand".
