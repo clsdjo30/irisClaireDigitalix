@@ -10,6 +10,7 @@ import { styles } from './HomeScreen.styles';
 import { resetAtMidnight } from '../../utils/resetAtMidnight';
 import WelcomeModal from '../../components/reusable/WelcomeModal';
 import { useCrossQuestionStore } from '../../hooks/useCrossQuestionStore';
+import CustomModal from '../../components/reusable/CustomModal';
 
 const eye = require('../../../assets/icons/iris_card.png');
 const yesCard = require('../../../assets/icons/yesCard.png');
@@ -18,10 +19,25 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   const [daycard, setDayCard] = useDaydrawStore();
   const userInformation = useUserInformation();
   const [isModalVisible, setModalVisible] = useState(true);
+  const [isIrisModalVisible, setIrisModalVisible] = useState(false);
 
   const [value, setValue] = useCrossQuestionStore();
 
-  console.log('VALUE ', value);
+  const possessedIris = userInformation.user?.irisCoins;
+  const cancelModal = () => {
+    setIrisModalVisible(false);
+  }
+  const goBuyIris = () => {
+    navigation.navigate('Iris');
+  }
+
+  const goToCrossDrawUpdated = () => {
+    if (possessedIris < 3) {
+      setIrisModalVisible(true);
+    } else {
+      goToCrossDraw(navigation);
+    }
+  };
 
   useEffect(() => {
     const timer = resetAtMidnight(() => {
@@ -75,7 +91,7 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
         <CardChoices
           iconSource={eye}
-          onPress={() => goToCrossDraw(navigation)}
+          onPress={goToCrossDrawUpdated}
           title="Tirage Complet"
           explanation="Vous avez de grande interogation, vous voulez ...."
         />
@@ -85,7 +101,22 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
           daycard={daycard}
         />
 
-
+        <CustomModal
+          visible={isIrisModalVisible}
+          credit={possessedIris}
+          modalText="Vous n'avez pas suffisament d'Iris pour posez votre question."
+          useCreditButtonTitle='Acheter des credits'
+          onValidate={() => {
+            setModalVisible(!isIrisModalVisible);
+            navigation.navigate('Iris');
+            navigation.reset({
+              index: 0,
+              routes: [{ name: 'Home' }]
+            })
+          }}
+          onCancel={cancelModal}
+          onBuyCredit={goBuyIris}
+        />
         <WelcomeModal
           visible={isModalVisible}
           onValidate={() => {

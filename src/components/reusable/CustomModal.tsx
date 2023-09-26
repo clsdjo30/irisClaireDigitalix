@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, Pressable, StyleSheet, Text, View, Dimensions } from 'react-native';
+import { Modal, StyleSheet, Text, View, Dimensions } from 'react-native';
 import NavigationButton from '../NavigationButton';
 import { colors } from '../../theme/color';
 const { width, height } = Dimensions.get('window');
@@ -44,7 +44,7 @@ const CustomModal: React.FC<CustomModalProps> = ({
                                     title={useCreditButtonTitle}
                                     onPress={onValidate}
                                     width={width * 0.6}
-                                    color={colors.palette.violet}
+                                    color={colors.palette.white}
                                     backgroundColor={colors.palette.orange}
                                 />
                                 <NavigationButton
@@ -65,7 +65,7 @@ const CustomModal: React.FC<CustomModalProps> = ({
                                     title='Acheter des crédits'
                                     onPress={onBuyCredit}
                                     width={width * 0.6}
-                                    color={colors.palette.violet}
+                                    color={colors.palette.white}
                                     backgroundColor={colors.palette.orange}
                                 />
                                 <NavigationButton
