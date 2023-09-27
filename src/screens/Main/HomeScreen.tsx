@@ -19,25 +19,9 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   const [daycard, setDayCard] = useDaydrawStore();
   const userInformation = useUserInformation();
   const [isModalVisible, setModalVisible] = useState(true);
-  const [isIrisModalVisible, setIrisModalVisible] = useState(false);
-
   const [value, setValue] = useCrossQuestionStore();
 
-  const possessedIris = userInformation.user?.irisCoins;
-  const cancelModal = () => {
-    setIrisModalVisible(false);
-  }
-  const goBuyIris = () => {
-    navigation.navigate('Iris');
-  }
-
-  const goToCrossDrawUpdated = () => {
-    if (possessedIris < 3) {
-      setIrisModalVisible(true);
-    } else {
-      goToCrossDraw(navigation);
-    }
-  };
+  
 
   useEffect(() => {
     const timer = resetAtMidnight(() => {
@@ -81,42 +65,29 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
       </View>
 
       <View style={styles.domainsContainer}>
-
+        {/* Carte pour poser une question OUI/NON */}
         <CardChoices
           iconSource={yesCard}
           onPress={() => goToYesDraw(navigation)}
           title="Question Oui/Non"
           explanation="Recevez une réponse breve à vos questions les plus simple"
-        />
+          />
 
+          {/* Carte pour poser une question complete */}
         <CardChoices
           iconSource={eye}
-          onPress={goToCrossDrawUpdated}
+          onPress={() => goToCrossDraw(navigation)}
           title="Tirage Complet"
           explanation="Vous avez de grande interogation, vous voulez ...."
-        />
+          />
 
+          {/* Carte pour l'horoscope du jour */}
         <DayCardChoices
           navigation={navigation}
           daycard={daycard}
         />
 
-        <CustomModal
-          visible={isIrisModalVisible}
-          credit={possessedIris}
-          modalText="Vous n'avez pas suffisament d'Iris pour posez votre question."
-          useCreditButtonTitle='Acheter des credits'
-          onValidate={() => {
-            setModalVisible(!isIrisModalVisible);
-            navigation.navigate('Iris');
-            navigation.reset({
-              index: 0,
-              routes: [{ name: 'Home' }]
-            })
-          }}
-          onCancel={cancelModal}
-          onBuyCredit={goBuyIris}
-        />
+       {/* Affichage du Didacticiel au premier lancement de l'application */}
         <WelcomeModal
           visible={isModalVisible}
           onValidate={() => {

@@ -11,7 +11,8 @@ import { Input } from '@rneui/themed';
 import { colors } from '../../../theme';
 import { useQuestionStore } from '../../../hooks/useQuestionStore';
 import { StackScreenProps } from '@react-navigation/stack';
-import HowToAskQuestion from '../../../components/reusable/HowToAskQuestion';
+import CustomModal from '../../../components/reusable/CustomModal';
+import  useIrisModal  from '../../../hooks/useIrisModal';
 
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -20,6 +21,15 @@ const SCREEN_HEIGHT = SCREEN_WIDTH * 1.5;
 const YesDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   const [value, setValue] = useQuestionStore();
   const [errorMessage, setErrorMessage] = React.useState('');
+
+  const {
+    isIrisModalVisible,
+    setIrisModalVisible,
+    goToYesDrawUpdated,
+    possessedIris,
+    cancelModal,
+    goBuyIris
+  } = useIrisModal(navigation, goToChooseCard);
 
   function handleTextChange(text: string) {
     setErrorMessage(''); // Réinitialise le message d'erreur
@@ -94,15 +104,30 @@ const YesDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
             />}
           />
           <View style={styles.validationButton}>
-            <Pressable style={styles.button} onPress={goToChooseCard}>
+            <Pressable style={styles.button} onPress={goToYesDrawUpdated}>
               <Text style={styles.buttonText}>
                 Validez votre question
               </Text>
             </Pressable>
           </View>
         </View>
-        <HowToAskQuestion />
       </View>
+      <CustomModal
+        visible={isIrisModalVisible}
+        credit={possessedIris}
+        modalText="Vous n'avez pas suffisament d'Iris pour posez votre question."
+        useCreditButtonTitle='Acheter des credits'
+        onValidate={() => {
+          setIrisModalVisible(!isIrisModalVisible);
+          navigation.navigate('Iris');
+          navigation.reset({
+            index: 0,
+            routes: [{ name: 'Home' }]
+          })
+        }}
+        onCancel={cancelModal}
+        onBuyCredit={goBuyIris}
+      />
     </View >
   )
 }

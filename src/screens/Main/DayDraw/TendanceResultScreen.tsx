@@ -95,29 +95,23 @@ const styles = StyleSheet.create({
     },
     tendanceScreen: {
         width: "100%",
-        height: "100%",
+        height: "90%",
         backgroundColor: colors.palette.purple600,
         alignItems: 'center',
-        justifyContent: 'center',
-        borderRadius: 10,
-        elevation: 10,
-        margin: 20,
-        paddingVertical: 30
     },
     cardContainer: {
+        position: 'relative',
+        top: 0,
         width: 170,
-        height: 300,
-        borderRadius: 3,
-        elevation: 5,
-        shadowColor: colors.palette.ivory
+        height: 200,
     },
     fortuneTeller: {
         width: 170,
         height: 300,
-        borderRadius: 3,
-        resizeMode: 'cover',
     },
     tendanceTextContainer: {
+        position: 'relative',
+        top: 100,
         marginTop: 20,
         width: '70%',
     },
