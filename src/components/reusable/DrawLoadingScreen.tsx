@@ -4,7 +4,7 @@ import { StackScreenProps } from '@react-navigation/stack';
 import LottieView from 'lottie-react-native';
 import { SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_SCALE } from '../../utils/constants';
 import { colors } from '../../theme';
-import { useCrossQuestionStore } from '../../hooks/useCrossQuestionStore';
+import { useCrossQuestionStore } from '../../store/useCrossQuestionStore';
 import { useCrossQuestion } from '../../hooks/useCrossQuestion';
 import CARD_DECK from '../../data/cards';
 
