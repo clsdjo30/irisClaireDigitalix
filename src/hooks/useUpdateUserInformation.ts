@@ -1,6 +1,5 @@
 import { firestore, setDoc, doc } from "../config/firebaseConfig";
 import { getZodiacSign } from "../utils/zodiacHelpers";
-import { useUserInformation } from "./useUserInformations";
 
 export function useUpdateUserInformation() {
 

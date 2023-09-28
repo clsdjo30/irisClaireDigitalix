@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useCrossQuestionStore } from "./useCrossQuestionStore";
+import { useCrossQuestionStore } from "../store/useCrossQuestionStore";
 import Constants from "expo-constants";
 import { useUserInformation } from "./useUserInformations";
 

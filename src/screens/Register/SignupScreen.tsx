@@ -9,7 +9,7 @@ import {
   Icon,
   Input,
 } from '@rneui/themed';
-import { useUserStore } from '../../hooks/useUserStore';
+import { useUserStore } from '../../store/useUserStore';
 import { StackScreenProps } from '@react-navigation/stack';
 import { colors } from '../../theme';
 import NavigationButton from '../../components/NavigationButton';
@@ -21,6 +21,7 @@ const SignInScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   const [user, setUser] = useUserStore();
   const [policy, setPolicy] = useState(false);
   const [showPasswordMessage, setShowPasswordMessage] = useState(false);
+  
   
   
   // utilise le hook SignIn

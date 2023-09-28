@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import CARD_DECK from '../../../data/cards';
 import { colors } from '../../../theme';
-import { useQuestionStore } from '../../../hooks/useQuestionStore';
+import { useQuestionStore } from '../../../store/useQuestionStore';
 import { StackScreenProps } from '@react-navigation/stack';
 import { useSimpleQuestion } from '../../../hooks/useSimpleQuestion';
 import { setDoc, doc, collection } from 'firebase/firestore';

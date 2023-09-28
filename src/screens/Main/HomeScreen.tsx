@@ -2,15 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { View, Text } from 'react-native';
 import { useUserInformation } from '../../hooks/useUserInformations';
 import { StackScreenProps } from '@react-navigation/stack';
-import { useDaydrawStore } from '../../hooks/useDayDrawStore';
 import CardChoices from '../../components/CardChoices';
 import DayCardChoices from '../../components/DayCardChoices';
 import { goToYesDraw, goToCrossDraw } from '../../utils/NavigationFunctions';
 import { styles } from './HomeScreen.styles';
 import { resetAtMidnight } from '../../utils/resetAtMidnight';
 import WelcomeModal from '../../components/reusable/WelcomeModal';
-import { useCrossQuestionStore } from '../../hooks/useCrossQuestionStore';
-import CustomModal from '../../components/reusable/CustomModal';
+import { useDaydrawStore } from '../../store/useDayDrawStore';
+import { useCrossQuestionStore } from '../../store/useCrossQuestionStore';
 
 const eye = require('../../../assets/icons/iris_card.png');
 const yesCard = require('../../../assets/icons/yesCard.png');

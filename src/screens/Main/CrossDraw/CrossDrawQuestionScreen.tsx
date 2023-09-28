@@ -9,7 +9,7 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input } from '@rneui/themed';
 import { colors } from '../../../theme';
-import { useCrossQuestionStore } from '../../../hooks/useCrossQuestionStore';
+import { useCrossQuestionStore } from '../../../store/useCrossQuestionStore';
 import { StackScreenProps } from '@react-navigation/stack';
 import CustomModal from '../../../components/reusable/CustomModal';
 import useIrisModal from '../../../hooks/useIrisModal';

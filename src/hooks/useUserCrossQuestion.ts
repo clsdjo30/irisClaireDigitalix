@@ -3,10 +3,7 @@ import {
   getAuth,
   firestore,
   collection,
-  Firestore,
-  query,
   getDocs,
-  doc,
 } from "../config/firebaseConfig";
 
 const auth = getAuth();

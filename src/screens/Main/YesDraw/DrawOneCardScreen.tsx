@@ -2,13 +2,13 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
-import { useQuestionStore } from '../../../hooks/useQuestionStore';
 import FlipCard from '../../../components/FlipCard';
 import CustomModal from '../../../components/reusable/CustomModal';
 import { cardDeckStyles } from '../../../theme';
 import CARD_DECK from '../../../data/cards';
 import { useUserInformation } from '../../../hooks/useUserInformations';
-import { useUserStore } from '../../../hooks/useUserStore';
+import { useQuestionStore } from '../../../store/useQuestionStore';
+import { useUserStore } from '../../../store/useUserStore';
 import { shuffleArray } from '../../../utils/shuffleArray';
 
 

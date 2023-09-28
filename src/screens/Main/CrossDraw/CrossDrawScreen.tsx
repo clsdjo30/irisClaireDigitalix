@@ -8,17 +8,13 @@ import CARD_DECK from '../../../data/cards';
 import { colors } from '../../../theme/color'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StackScreenProps } from '@react-navigation/stack';
-import {
-  useCrossQuestionStore
-} from '../../../hooks/useCrossQuestionStore';
+import { useCrossQuestionStore } from '../../../store/useCrossQuestionStore';
+import { useUserStore } from '../../../store/useUserStore';
 import CustomModal from '../../../components/reusable/CustomModal';
 import FlipCard from '../../../components/FlipCard';
 import { SCREEN_HEIGHT, SCREEN_WIDTH } from '../../../utils/constants';
-import { useUserStore } from '../../../hooks/useUserStore';
 import { useUserInformation } from '../../../hooks/useUserInformations';
 import { shuffleArray } from '../../../utils/shuffleArray';
-
-
 
 const CrossDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   // on stocke les informations du tirage en croix
@@ -34,8 +30,6 @@ const CrossDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   // function pour melanger le CARD_DECK
   const [shuffledDeck, setShuffledDeck] = useState(CARD_DECK);
   
-
-
 
   useEffect(() => {
     setShuffledDeck(shuffleArray([...CARD_DECK]));

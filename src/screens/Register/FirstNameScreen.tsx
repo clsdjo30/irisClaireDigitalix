@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import { Input, Icon } from '@rneui/base';
 import { StackScreenProps } from '@react-navigation/stack';
-import { useUserStore } from '../../hooks/useUserStore';
+import { useUserStore } from '../../store/useUserStore';
 import { colors } from '../../theme';
 import NavigationButton from '../../components/NavigationButton';
 import { useUserInformation } from '../../hooks/useUserInformations';

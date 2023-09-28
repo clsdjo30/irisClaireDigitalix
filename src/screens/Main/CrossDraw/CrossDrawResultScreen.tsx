@@ -12,7 +12,7 @@ import {
 import CARD_DECK from '../../../data/cards';
 import { colors } from '../../../theme';
 import { StackScreenProps } from '@react-navigation/stack';
-import { useCrossQuestionStore } from '../../../hooks/useCrossQuestionStore';
+import { useCrossQuestionStore } from '../../../store/useCrossQuestionStore';
 import { setDoc, doc, collection } from 'firebase/firestore';
 import { firestore, getAuth } from '../../../config/firebaseConfig';
 

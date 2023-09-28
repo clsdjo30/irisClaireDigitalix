@@ -3,7 +3,6 @@ import {
   StyleSheet,
   Text,
   View,
-  Dimensions
 } from 'react-native';
 import { Input, Icon } from '@rneui/themed';
 import { StackScreenProps } from '@react-navigation/stack';

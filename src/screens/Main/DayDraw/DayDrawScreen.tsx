@@ -1,11 +1,11 @@
 // DayDrawScreen.tsx
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View, ImageSourcePropType, Text } from 'react-native';
-import { interpolate, useSharedValue } from 'react-native-reanimated';
+import { interpolate } from 'react-native-reanimated';
 import Carousel from 'react-native-reanimated-carousel';
 import { StackScreenProps } from '@react-navigation/stack';
 import { colors } from '../../../theme';
-import { useDaydrawStore } from '../../../hooks/useDayDrawStore';
+import { useDaydrawStore } from '../../../store/useDayDrawStore';
 import CARD_DECK from '../../../data/cards';
 import FlippableCard from '../../../components/DayDraw/FlippableCard';
 import { SCREEN_WIDTH, SCREEN_HEIGHT } from '../../../utils/constants';

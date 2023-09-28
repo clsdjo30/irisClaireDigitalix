@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 import {
     StyleSheet,
     View,
@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
 import { colors } from '../../../theme';
-import { useDaydrawStore } from '../../../hooks/useDayDrawStore';
+import { useDaydrawStore } from '../../../store/useDayDrawStore';
 import NavigationButton from '../../../components/NavigationButton';
 import { SCREEN_WIDTH } from '../../../utils/constants';
 import { captureRef } from 'react-native-view-shot';

@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { useUserStore } from "./useUserStore";
+import { useEffect } from "react";
+import { useUserStore } from "../store/useUserStore";
 import {
   firestore,
   getAuth,
