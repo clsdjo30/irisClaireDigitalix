@@ -143,15 +143,6 @@ const ProfilScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
               <Image source={rightArrow} style={styles.iconImage} />
             </TouchableOpacity>
           </View>
-          <View style={styles.blockParam}>
-            <TouchableOpacity
-              style={styles.paramRow}
-              onPress={() => navigation.navigate('Home')}>
-              <Text style={styles.switchText}>A Propos</Text>
-              <Image source={rightArrow} style={styles.iconImage} />
-            </TouchableOpacity>
-          </View>
-
         </View>
         <View style={styles.blockButton}>
           <NavigationButton
@@ -256,7 +247,7 @@ const styles = StyleSheet.create({
   },
   // IRIS SECTION
   irisTitle: {
-  
+
   },
   //START O FUSER CARD INFORMATION
 
