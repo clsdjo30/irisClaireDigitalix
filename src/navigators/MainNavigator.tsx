@@ -33,6 +33,7 @@ import GenreScreen from '../screens/Register/GenreScreen';
 import BirthDayScreen from '../screens/Register/BirthdayScreen';
 import LoadingScreen from '../components/reusable/LoadingScreen';
 import DrawLoadingScreen from '../components/reusable/DrawLoadingScreen';
+import FaqScreen from '../screens/Main/Profil/FaqScreen';
 
 const DayDrawStack = createNativeStackNavigator();
 const ProfilStack = createNativeStackNavigator();
@@ -70,6 +71,9 @@ function ProfilStackScreen() {
         options={{ headerShown: false, }} />
       <ProfilStack.Screen name="MyQuestions"
         component={SaveQuestionScreen}
+        options={{ headerShown: false, }} />
+      <ProfilStack.Screen name="Faq"
+        component={FaqScreen}
         options={{ headerShown: false, }} />
       <ProfilStack.Screen name="FirstName"
         component={FirstNameScreen}

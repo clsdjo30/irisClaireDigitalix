@@ -138,7 +138,7 @@ const ProfilScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
           <View style={styles.blockParam}>
             <TouchableOpacity
               style={styles.paramRow}
-              onPress={() => navigation.navigate('Home')}>
+              onPress={() => navigation.navigate('Faq')}>
               <Text style={styles.switchText}>Aide</Text>
               <Image source={rightArrow} style={styles.iconImage} />
             </TouchableOpacity>
