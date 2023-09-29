@@ -3,8 +3,6 @@ import {
     StyleSheet,
     View,
     Text,
-    Modal,
-    Button
 } from 'react-native';
 import YesQuestionList from '../../../components/Profil/YesQuestionList';
 import CrossQuestionList from '../../../components/Profil/CrossQuestionList';
@@ -33,11 +31,8 @@ const SaveQuestionScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => 
     const { questions, error, deleteQuestion } = useUserYesQuestion(userID);
     console.log('QUESTION YES', questions)
     // Get the Cross questions from the database
-    const { crossQuestions } = useUserCrossQuestion(userID);
-
-    //Modal
-    const [isModalVisible, setModalVisible] = React.useState(false);
-    const [questionIdToDelete, setQuestionIdToDelete] = React.useState<string | null>(null);
+    const { crossQuestions, deleteCrossQuestion } = useUserCrossQuestion(userID);
+    console.log('QUESTION CROSS', crossQuestions)
 
 
     
@@ -81,21 +76,13 @@ const SaveQuestionScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => 
                     <TabView.Item style={{ backgroundColor: colors.palette.violetClair, width: '100%' }}>
                         <CrossQuestionList
                             crossQuestions={crossQuestions}
+                            onPress={deleteQuestion}
                             crossQuestionExpandedState={crossQuestionExpandedState}
                             setCrossQuestionExpandedState={setCrossQuestionExpandedState}
                         />
                     </TabView.Item>
                 </TabView>
             </View>
-            {/* //Modal */}
-            <Modal
-                animationType="slide"
-                transparent={true}
-                visible={isModalVisible}
-                onRequestClose={() => {
-                    setModalVisible(!isModalVisible);
-                }}
-            />
 
         </View >
     )

@@ -3,7 +3,8 @@ import {
   getAuth,
   firestore,
   collection,
-  getDocs,
+  doc,
+  deleteDoc,
   query,
   limit,
   orderBy,
@@ -21,6 +22,7 @@ interface CrossQuestion {
   cardpseudofour: string;
   cardpseudofive: string;
   answer: string;
+  id: string;
 }
 
 export function useUserCrossQuestion(userID: string | null) {
@@ -33,6 +35,27 @@ export function useUserCrossQuestion(userID: string | null) {
       return () => unsubscribe();
     }
   }, [userID]);
+
+   const deleteCrossQuestion = async (crossQuestionId: string) => {
+     try {
+       if (!userID) {
+         throw new Error("User ID is null");
+       }
+
+       const db = firestore;
+       const questionDocRef = doc(
+         db,
+         "users",
+         userID,
+         "crossquestions",
+         crossQuestionId
+       );
+       await deleteDoc(questionDocRef);
+     } catch (error) {
+       console.error(error);
+       setError("An error occurred while deleting the question.");
+     }
+   };
 
   const fetchUserYesQuestion = () => {
     try {
@@ -62,6 +85,7 @@ export function useUserCrossQuestion(userID: string | null) {
             (doc) => {
               const data = doc.data();
               return {
+                id: doc.id,
                 question: data.question,
                 cardpseudoone: data.cardpseudoone,
                 cardpseudotwo: data.cardpseudotwo,
@@ -99,5 +123,6 @@ export function useUserCrossQuestion(userID: string | null) {
   return {
     crossQuestions,
     error,
+    deleteCrossQuestion,
   };
 }
