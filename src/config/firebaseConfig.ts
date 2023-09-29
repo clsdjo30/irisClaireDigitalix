@@ -11,9 +11,14 @@ import {
   collection,
   Firestore,
   query,
+  orderBy,
+  limit,
   where,
   DocumentData,
   CollectionReference,
+  onSnapshot,
+  serverTimestamp,
+  Timestamp
 } from "firebase/firestore";
 import {
   getAuth,
@@ -21,7 +26,6 @@ import {
   signInWithEmailAndPassword,
   signOut,
   reload,
-  reauthenticateWithCredential
 } from "firebase/auth";
 import {
   initializeAuth,
@@ -91,7 +95,12 @@ export {
   FirebaseError,
   Firestore,
   updateDoc,
-  reload
+  reload,
+  onSnapshot,
+  orderBy,
+  limit,
+  serverTimestamp,  
+  Timestamp
 };
 
 export default firebase;

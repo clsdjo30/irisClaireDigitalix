@@ -1,9 +1,10 @@
-import { GlobalStore, isNumber } from "react-native-global-state-hooks";
+import { GlobalStore } from "react-native-global-state-hooks";
 
 const QuestionStore = new GlobalStore({
   question: "",
   domain: "",
   answer: "",
+  createdAt: 0,
   isanswered: false,
   choosecard: "",
   choosecardname: "",

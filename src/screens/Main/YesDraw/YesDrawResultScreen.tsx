@@ -14,8 +14,8 @@ import { colors } from '../../../theme';
 import { useQuestionStore } from '../../../store/useQuestionStore';
 import { StackScreenProps } from '@react-navigation/stack';
 import { useSimpleQuestion } from '../../../hooks/useSimpleQuestion';
-import { setDoc, doc, collection } from 'firebase/firestore';
-import { firestore, getAuth } from '../../../config/firebaseConfig';
+import { setDoc, doc, collection, serverTimestamp } from 'firebase/firestore';
+import { firestore, getAuth} from '../../../config/firebaseConfig';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = SCREEN_WIDTH * 1.5;
@@ -62,6 +62,7 @@ const YesDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) =>
             question: questionInformations.question,
             cardpseudo: questionInformations.choosecardpseudo,
             answer: questionInformations.answer,
+            createdAt:serverTimestamp(),
         })
             .then(() => console.log('Question saved successfully!'))
             .catch((error) => console.error('Error saving question:', error));

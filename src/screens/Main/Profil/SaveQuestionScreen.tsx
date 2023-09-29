@@ -28,15 +28,15 @@ const SaveQuestionScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => 
     const userID = currentUser ? currentUser.uid : null;
 
     // Get the Yes questions from the database
-    const { questions } = useUserYesQuestion(userID);
-
+    const { questions, error } = useUserYesQuestion(userID);
+    console.log('QUESTION YES', questions)
     // Get the Cross questions from the database
     const { crossQuestions } = useUserCrossQuestion(userID);
-    console.log('crossQuestions', crossQuestions)
 
     
     return (
         <View style={styles.container}>
+            {error && <Text>{error}</Text>}
             <View style={styles.header} />
             <View style={styles.headingContainer}>
                 <Text style={styles.contentTitle}>Vos questions sauvegardées</Text>
