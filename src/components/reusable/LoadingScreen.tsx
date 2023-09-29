@@ -29,14 +29,14 @@ const LoadingScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
             <LottieView
                 autoPlay
                 style={{
-                    width: SCREEN_WIDTH * 0.5,
-                    height: SCREEN_HEIGHT * 0.5,
+                    width: SCREEN_WIDTH * 0.4,
+                    height: SCREEN_HEIGHT * 0.4,
                     backgroundColor: '#423C7F',
                 }}
                 // Find more Lottie files at https://lottiefiles.com/featured
-                source={require('../../../assets/new_eye.json')}
+                source={require('../../../assets/lottie/circle.json')}
             />
-            <Text style={styles.text}>Iris Claire se concentre</Text>
+            <Text style={styles.text}>Iris Claire enregistre vos modifications</Text>
         </View>
     );
 };
