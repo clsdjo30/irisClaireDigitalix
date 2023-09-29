@@ -1,6 +1,6 @@
 import React from 'react';
 import { FlatList, StyleSheet } from 'react-native';
-import { ListItem } from '@rneui/themed';
+import { ListItem, Button } from '@rneui/themed';
 import { colors } from '../../theme';
 
 interface Question {
@@ -21,6 +21,7 @@ const YesQuestionList: React.FC<YesQuestionListProps> = ({ questions, expandedSt
         <FlatList
             data={questions}
             keyExtractor={(item, index) => index.toString()}
+            contentContainerStyle={{ paddingBottom: 60 }}
             renderItem={({ item, index }) => {
                 const indexStr = index.toString();
                 const isExpanded = expandedState === indexStr;
@@ -44,6 +45,14 @@ const YesQuestionList: React.FC<YesQuestionListProps> = ({ questions, expandedSt
                                 <ListItem.Content>
                                     <ListItem.Title style={styles.irisTitle}>{item.choosecardpseudo}</ListItem.Title>
                                     <ListItem.Subtitle style={styles.answerContainer}>{item.answer}</ListItem.Subtitle>
+                                    <Button
+                                        title="Supprimer"
+                                        buttonStyle={{ backgroundColor: colors.palette.orange, borderRadius: 10 }}
+                                        containerStyle={{
+                                           alignSelf: 'flex-end',
+                                        }}
+                                        titleStyle={{ color: 'white', marginHorizontal: 10 }}
+                                    />
                                 </ListItem.Content>
                             </ListItem>
                         </ListItem.Accordion>
@@ -78,9 +87,10 @@ const styles = StyleSheet.create({
     },
     answerContainer: {
         fontFamily: "mulishRegular",
-        fontSize: 14,
+        textAlign: 'justify',
+        fontSize: 16,
         color: colors.palette.violet,
         paddingVertical: 10,
-        marginBottom: 50,
+        marginBottom: 30,
     }
 })
