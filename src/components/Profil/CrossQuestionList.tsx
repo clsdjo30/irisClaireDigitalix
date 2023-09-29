@@ -1,6 +1,6 @@
 import React from 'react';
 import { FlatList, StyleSheet } from 'react-native';
-import { ListItem } from '@rneui/themed';
+import { ListItem, Button} from '@rneui/themed';
 import { colors } from '../../theme';
 
 interface CrossQuestion {
@@ -25,6 +25,7 @@ const CrossQuestionList: React.FC<CrossQuestionListProps> = ({ crossQuestions, c
         <FlatList
             data={crossQuestions}
             keyExtractor={(item, index) => index.toString()}
+            contentContainerStyle={{ paddingBottom: 60 }}
             renderItem={({ item, index }) => {
                 const indexStr = index.toString();
                 const isExpanded = crossQuestionExpandedState === indexStr;
@@ -52,6 +53,14 @@ const CrossQuestionList: React.FC<CrossQuestionListProps> = ({ crossQuestions, c
                                     <ListItem.Subtitle style={styles.answerContainer}>
                                         {item.answer}
                                     </ListItem.Subtitle>
+                                    <Button
+                                        title="Supprimer"
+                                        buttonStyle={{ backgroundColor: colors.palette.orange, borderRadius: 10 }}
+                                        containerStyle={{
+                                            alignSelf: 'flex-end',
+                                        }}
+                                        titleStyle={{ color: 'white', marginHorizontal: 10 }}
+                                    />
                                 </ListItem.Content>
                             </ListItem>
                         </ListItem.Accordion>
@@ -86,9 +95,10 @@ export const styles = StyleSheet.create({
     },
     answerContainer: {
         fontFamily: "mulishRegular",
-        fontSize: 14,
+        textAlign: 'justify',
+        fontSize: 16,
         color: colors.palette.violet,
         paddingVertical: 10,
-        marginBottom: 300,
+        marginBottom: 30,
     }
 })
