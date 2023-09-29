@@ -3,6 +3,8 @@ import {
     StyleSheet,
     View,
     Text,
+    Modal,
+    Button
 } from 'react-native';
 import YesQuestionList from '../../../components/Profil/YesQuestionList';
 import CrossQuestionList from '../../../components/Profil/CrossQuestionList';
@@ -28,10 +30,15 @@ const SaveQuestionScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => 
     const userID = currentUser ? currentUser.uid : null;
 
     // Get the Yes questions from the database
-    const { questions, error } = useUserYesQuestion(userID);
+    const { questions, error, deleteQuestion } = useUserYesQuestion(userID);
     console.log('QUESTION YES', questions)
     // Get the Cross questions from the database
     const { crossQuestions } = useUserCrossQuestion(userID);
+
+    //Modal
+    const [isModalVisible, setModalVisible] = React.useState(false);
+    const [questionIdToDelete, setQuestionIdToDelete] = React.useState<string | null>(null);
+
 
     
     return (
@@ -66,6 +73,7 @@ const SaveQuestionScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => 
                     <TabView.Item style={{ backgroundColor: colors.palette.violetClair, width: '100%' }}>
                         <YesQuestionList
                             questions={questions}
+                            onPress={deleteQuestion}
                             expandedState={yesNoExpandedState}
                             setExpandedState={setYesNoExpandedState}
                         />
@@ -79,6 +87,16 @@ const SaveQuestionScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => 
                     </TabView.Item>
                 </TabView>
             </View>
+            {/* //Modal */}
+            <Modal
+                animationType="slide"
+                transparent={true}
+                visible={isModalVisible}
+                onRequestClose={() => {
+                    setModalVisible(!isModalVisible);
+                }}
+            />
+
         </View >
     )
 }
@@ -149,5 +167,31 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         textAlign: 'center'
     },
+    //Modal
+    centeredView: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: 22
+    },
+    modalView: {
+        margin: 20,
+        backgroundColor: "white",
+        borderRadius: 20,
+        padding: 35,
+        alignItems: "center",
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5
+    },
+    modalText: {
+        marginBottom: 15,
+        textAlign: "center"
+    }
    
 })

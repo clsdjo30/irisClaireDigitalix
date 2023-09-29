@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { firestore, collection, query, limit, orderBy, onSnapshot } from "../config/firebaseConfig";
+import { firestore, collection, query, limit, orderBy, onSnapshot, doc, deleteDoc } from "../config/firebaseConfig";
 
 interface Question {
   question: string;
@@ -7,6 +7,7 @@ interface Question {
   domain: string;
   answer: string;
   createdAt: number;
+  id: string;
 }
 
 export function useUserYesQuestion(userID: string | null) {
@@ -19,6 +20,27 @@ export function useUserYesQuestion(userID: string | null) {
        return () => unsubscribe();
      }
    }, [userID]);
+  
+  const deleteQuestion = async (questionId: string) => {
+    try {
+      if (!userID) {
+        throw new Error("User ID is null");
+      }
+
+      const db = firestore;
+      const questionDocRef = doc(
+        db,
+        "users",
+        userID,
+        "yesquestions",
+        questionId
+      );
+      await deleteDoc(questionDocRef);
+    } catch (error) {
+      console.error(error);
+      setError("An error occurred while deleting the question.");
+    }
+  };
 
    const fetchUserYesQuestion = () => {
      try {
@@ -47,6 +69,7 @@ export function useUserYesQuestion(userID: string | null) {
            const questions: Question[] = querySnapshot.docs.map((doc) => {
              const data = doc.data();
              return {
+               id: doc.id,
                question: data.question,
                choosecardpseudo: data.cardpseudo,
                domain: data.domain,
@@ -78,5 +101,6 @@ export function useUserYesQuestion(userID: string | null) {
   return {
     questions,
     error,
+    deleteQuestion,
   };
 }
