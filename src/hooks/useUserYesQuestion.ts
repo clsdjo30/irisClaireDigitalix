@@ -6,6 +6,7 @@ interface Question {
   choosecardpseudo: string;
   domain: string;
   answer: string;
+  createdAt: number;
 }
 
 export function useUserYesQuestion(userID: string | null) {

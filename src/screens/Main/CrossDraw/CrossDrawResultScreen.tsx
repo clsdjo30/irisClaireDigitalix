@@ -13,7 +13,7 @@ import CARD_DECK from '../../../data/cards';
 import { colors } from '../../../theme';
 import { StackScreenProps } from '@react-navigation/stack';
 import { useCrossQuestionStore } from '../../../store/useCrossQuestionStore';
-import { setDoc, doc, collection } from 'firebase/firestore';
+import { setDoc, doc, collection, serverTimestamp } from 'firebase/firestore';
 import { firestore, getAuth } from '../../../config/firebaseConfig';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -63,6 +63,7 @@ const CrossDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) 
         setDoc(questionRef, {
             domain: questionInformations.domain,
             question: questionInformations.question,
+            createdAt: serverTimestamp(),
             cardpseudoone: questionInformations.choosecardpseudo,
             cardpseudotwo: questionInformations.choosecardtwopseudo,
             cardpseudothree: questionInformations.choosecardthreepseudo,

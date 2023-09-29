@@ -18,16 +18,8 @@ const LoadingScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     const fourthCard = CARD_DECK.find(card => card.id === question.choosecardfournumber);
     const fithCard = CARD_DECK.find(card => card.id === question.choosecardfivenumber);
 
-
-    console.log('VALUE ', question);
-
-    console.log('VALUE USEEFFECT ', question);
-    if (question.isanswered === true) {
-        navigation.navigate('DrawResult');
-    }
-
+    
     useEffect(() => {
-
         const backAction = () => {
             return true;
         };
@@ -39,6 +31,12 @@ const LoadingScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
         return () => backHandler.remove();
     }, []);
+
+    useEffect(() => {
+        if (question.isanswered === true) {
+            navigation.navigate('DrawResult');
+        }
+    }, [question.isanswered, navigation]);
 
     return (
         <View style={styles.container}>

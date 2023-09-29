@@ -3,6 +3,7 @@ import { GlobalStore, isNumber } from "react-native-global-state-hooks";
 const CrossQuestionStore = new GlobalStore({
   domain: "",
   question: "",
+  createdAt: 0,
   choosecardnumber: 0 ,
   choosecardtwonumber: 0 ,
   choosecardthreenumber: 0 ,

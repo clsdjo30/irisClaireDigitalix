@@ -42,7 +42,7 @@ const YesQuestionList: React.FC<YesQuestionListProps> = ({ questions, expandedSt
                             <ListItem containerStyle={{ backgroundColor: colors.palette.violetBg }}>
                                 <ListItem.Content>
                                     <ListItem.Title style={styles.irisTitle}>{item.choosecardpseudo}</ListItem.Title>
-                                    <ListItem.Subtitle style={styles.cardTitle}>{item.answer}</ListItem.Subtitle>
+                                    <ListItem.Subtitle style={styles.answerContainer}>{item.answer}</ListItem.Subtitle>
                                 </ListItem.Content>
                             </ListItem>
                         </ListItem.Accordion>
@@ -74,5 +74,12 @@ const styles = StyleSheet.create({
         color: colors.palette.violet,
         textTransform: 'capitalize',
         marginBottom: 10
+    },
+    answerContainer: {
+        fontFamily: "mulishRegular",
+        fontSize: 14,
+        color: colors.palette.violet,
+        paddingVertical: 10,
+        marginBottom: 50,
     }
 })

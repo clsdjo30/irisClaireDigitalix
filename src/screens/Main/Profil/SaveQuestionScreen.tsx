@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: SCREEN_HEIGHT * 0.3,
         width: "100%",
-        height: SCREEN_HEIGHT * 0.96,
+        height: SCREEN_HEIGHT * 0.7,
         backgroundColor: colors.palette.violetClair,
         justifyContent: 'flex-start',
         alignItems: 'center',
