@@ -15,7 +15,7 @@ import { useQuestionStore } from '../../../store/useQuestionStore';
 import { StackScreenProps } from '@react-navigation/stack';
 import { useSimpleQuestion } from '../../../hooks/useSimpleQuestion';
 import { setDoc, doc, collection, serverTimestamp } from 'firebase/firestore';
-import { firestore, getAuth} from '../../../config/firebaseConfig';
+import { firestore, getAuth } from '../../../config/firebaseConfig';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = SCREEN_WIDTH * 1.5;
@@ -32,7 +32,6 @@ const YesDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) =>
     const userID = currentUser ? currentUser.uid : null;
     const choosedCard = CARD_DECK.find((card) => card.id === questionInformations.choosecardnumber);
 
- console.log('YesDrawResultScreen.tsx - QUESTION INFORMATION', value)
     useEffect(() => {
         const backAction = () => {
             return true;
@@ -62,7 +61,7 @@ const YesDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) =>
             question: questionInformations.question,
             cardpseudo: questionInformations.choosecardpseudo,
             answer: questionInformations.answer,
-            createdAt:serverTimestamp(),
+            createdAt: serverTimestamp(),
         })
             .then(() => console.log('Question saved successfully!'))
             .catch((error) => console.error('Error saving question:', error));
@@ -82,7 +81,7 @@ const YesDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) =>
                 </View>
             );
         }
-//TODO : INCLURE UN TABLEAU POUR DES FINS DE PHRASES ALEATOIRES
+        //TODO : INCLURE UN TABLEAU POUR DES FINS DE PHRASES ALEATOIRES
         return `${questionInformations.answer}\n\n J'espère que cette réponse vous aidera à avancer dans votre vie. Si vous avez d'autres questions, n'hésitez pas à revenir vers moi. Je vous souhaite une bonne journée. L'Iris Claire.`;
     };
 
@@ -133,9 +132,14 @@ const YesDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) =>
                 </View>
 
                 <View style={styles.validationButton}>
-                    <Pressable style={styles.button} onPress={() => saveQuestion(userID)}>
-                        <Text style={styles.buttonText}>Revenir à l'accueil</Text>
-                    </Pressable>
+                    <View style={styles.buttonGroup}>
+                        <Pressable style={styles.button} onPress={() => saveQuestion(userID)}>
+                            <Text style={styles.buttonText}>Enregistrez</Text>
+                        </Pressable>
+                        <Pressable style={styles.button} onPress={questionClosed}>
+                            <Text style={styles.buttonText}>Ne Pas Enregistrer</Text>
+                        </Pressable>
+                    </View>
                 </View>
             </View>
         </View>
@@ -265,19 +269,25 @@ const styles = StyleSheet.create({
         marginTop: 20,
         elevation: 5,
     },
+    buttonGroup: {
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+    },
     button: {
-        width: '80%',
-        backgroundColor: '#CBA135',
+        width: '45%',
+        backgroundColor: colors.palette.orange,
         marginTop: 10,
         borderRadius: 16,
     },
     buttonText: {
         textAlign: 'center',
         alignItems: 'center',
-        paddingVertical: 10,
+        paddingVertical: 14,
         fontFamily: 'oswaldMedium',
-        fontSize: 14,
-        color: colors.palette.ivory,
+        fontSize: 16,
+        color: colors.palette.white,
     },
     //Loader
     indicatorWrapper: {
