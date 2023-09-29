@@ -27,9 +27,10 @@ const YesQuestionList: React.FC<YesQuestionListProps> = ({ questions, expandedSt
                 return (
                     <>
                         <ListItem.Accordion
-                            containerStyle={{ backgroundColor: colors.palette.violetClair }}
+                           
+                            containerStyle={{ backgroundColor: colors.palette.violetClair, borderBottomWidth: 0.6, borderBottomColor: colors.palette.violet }}
                             content={
-                                <ListItem.Content>
+                                <ListItem.Content >
                                     <ListItem.Subtitle style={styles.cardSubitle}>{item.domain}</ListItem.Subtitle>
                                     <ListItem.Title style={styles.cardTitle}>{item.question}</ListItem.Title>
                                 </ListItem.Content>

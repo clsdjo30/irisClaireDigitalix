@@ -31,7 +31,7 @@ const CrossQuestionList: React.FC<CrossQuestionListProps> = ({ crossQuestions, c
                 return (
                     <>
                         <ListItem.Accordion
-                            containerStyle={{ backgroundColor: colors.palette.violetClair }}
+                            containerStyle={{ backgroundColor: colors.palette.violetClair, borderBottomWidth: 0.6, borderBottomColor: colors.palette.violet }}
                             content={
                                 <ListItem.Content>
                                     <ListItem.Subtitle style={styles.cardSubitle}>{item.domain}</ListItem.Subtitle>
