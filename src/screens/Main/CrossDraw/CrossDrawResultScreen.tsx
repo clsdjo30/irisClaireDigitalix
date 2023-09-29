@@ -23,7 +23,7 @@ const SCREEN_FONT_SCALE = SCREEN_SCALE * 0.5;
 
 const auth = getAuth();
 
-const CrossDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {    
+const CrossDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     const [questionInformations, setQuestionInformations] = useCrossQuestionStore()
     const currentUser = auth.currentUser;
     const userID = currentUser ? currentUser.uid : null;
@@ -77,9 +77,9 @@ const CrossDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) 
     }
 
     const getContent = () => {
-        
-            return `${questionInformations.answer}`;
-        
+
+        return `${questionInformations.answer}`;
+
     };
 
 
@@ -175,9 +175,14 @@ const CrossDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) 
                 </View>
 
                 <View style={styles.validationButton}>
-                    <Pressable style={styles.button} onPress={() => saveCrossQuestion(userID)}>
-                        <Text style={styles.buttonText}>Revenir à l'accueil</Text>
-                    </Pressable>
+                    <View style={styles.buttonGroup}>
+                        <Pressable style={styles.button} onPress={() => saveCrossQuestion(userID)}>
+                            <Text style={styles.buttonText}>Enregistrer</Text>
+                        </Pressable>
+                        <Pressable style={styles.button} onPress={questionClosed}>
+                            <Text style={styles.buttonText}>Ne Pas Enregistrer</Text>
+                        </Pressable>
+                    </View>
                 </View>
 
             </View>
@@ -243,7 +248,7 @@ const styles = StyleSheet.create({
     cardImage: {
         width: SCREEN_WIDTH * 0.18,
         height: SCREEN_HEIGHT * 0.22,
-        
+
     },
     pseudoTitle: {
         fontFamily: "oswaldMedium",
@@ -306,21 +311,27 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         marginTop: 20,
+    },
+    buttonGroup: {
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center',
         elevation: 5,
     },
     button: {
-        width: '80%',
-        backgroundColor: "#CBA135",
+        width: '45%',
+        backgroundColor: colors.palette.orange,
         marginTop: 10,
         borderRadius: 16,
     },
     buttonText: {
-        textAlign: "center",
-        alignItems: "center",
-        paddingVertical: 10,
-        fontFamily: "oswaldMedium",
-        fontSize: 14,
-        color: colors.palette.ivory,
+        textAlign: 'center',
+        alignItems: 'center',
+        paddingVertical: 14,
+        fontFamily: 'oswaldMedium',
+        fontSize: 16,
+        color: colors.palette.white,
     },
     //Loader
     indicatorWrapper: {

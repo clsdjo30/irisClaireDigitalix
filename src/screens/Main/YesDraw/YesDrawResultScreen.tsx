@@ -267,13 +267,13 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         marginTop: 20,
-        elevation: 5,
     },
     buttonGroup: {
         width: '100%',
         flexDirection: 'row',
         justifyContent: 'space-around',
         alignItems: 'center',
+        elevation: 5,
     },
     button: {
         width: '45%',
