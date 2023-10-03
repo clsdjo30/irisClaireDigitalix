@@ -20,12 +20,10 @@ const DrawOneCardScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   const [actualUser, setUser] = useUserStore();
   const { user, updateUserIrisCoins } = useUserInformation();
   const [shuffledDeck, setShuffledDeck] = useState(CARD_DECK);
- 
-  // console.log('DrawOneCardScreen.tsx - VALUE', value)
-  // console.log('DrawOneCardScreen.tsx - SHUFFLE CARD DECK', shuffledDeck)
+  const [isCardClicked, setIsCardClicked] = useState(false);
   
   const handleCardFlip = (index: number) => {
-    if (selectedCards === 0) {
+    if (selectedCards === 0 && !isCardClicked) {
       setValue({
         ...value,
         choosecardnumber: shuffledDeck[index].id,
@@ -35,6 +33,7 @@ const DrawOneCardScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
       console.log('DrawOneCardScreen.tsx - VALUE HANDLE FLIP', value)
       setSelectedCards(selectedCards + 1);
       setSelectedCardIndex(index);
+      setIsCardClicked(true);
       setTimeout(() => {
         setModalVisible(true);
       }, 2000);
@@ -103,6 +102,7 @@ const DrawOneCardScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
             frontImageUrl={card.frontImageUrl}
             backImageUrl={card.backImageUrl}
             onFlip={() => { handleCardFlip(index) }}
+            isClickable={!isCardClicked} 
             style={{ zIndex: selectedCardIndex === index ? 1000 : 0 }}
           />
         ))}
