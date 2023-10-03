@@ -42,7 +42,7 @@ export function useEmailVerification() {
       const userRef = doc(firestore, "users", currentUser.uid);
       await updateDoc(userRef, {
         isEmailVerified: true,
-        irisCoins: 1,
+       
       });
     } catch (error) {
       console.error("Error updating isEmailVerified: ", error);
@@ -57,6 +57,7 @@ export function useEmailVerification() {
       }
       const userRef = doc(firestore, "users", currentUser.uid);
       await updateDoc(userRef, {
+        irisCoins: +1,
         isCoinAdded: true,
       });
       setIrisAdded(true);

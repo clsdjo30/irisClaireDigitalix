@@ -29,6 +29,8 @@ const CrossDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
   // function pour melanger le CARD_DECK
   const [shuffledDeck, setShuffledDeck] = useState(CARD_DECK);
+
+  const [isCardClicked, setIsCardClicked] = useState(false);
   
 
   useEffect(() => {
@@ -79,7 +81,7 @@ const CrossDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
       setSelectedCardIndex(index);
 
     }
-    if (selectedCards === 4) {
+    if (selectedCards === 4 && !isCardClicked) {
       setValue({
         ...value,
         choosecardfivenumber: shuffledDeck[index].id,
@@ -91,6 +93,7 @@ const CrossDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
       setSelectedCards(selectedCards + 1);
       setSelectedCardIndex(index);
+      setIsCardClicked(true);
       setTimeout(() => {
         setModalVisible(true);
       }, 1500);
@@ -163,6 +166,7 @@ const CrossDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
             frontImageUrl={card.frontImageUrl}
             backImageUrl={card.backImageUrl}
             onFlip={() => { handleCardFlip(index) }}
+            isClickable={!isCardClicked} 
             style={{ zIndex: selectedCardIndex === index ? 1000 : 0 }}
           />
         ))}
