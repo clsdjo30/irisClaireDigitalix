@@ -15,10 +15,12 @@ export function useUserInformation() {
   const currentUser = auth.currentUser;
   const userID = currentUser ? currentUser.uid : null;
 
+  
   useEffect(() => {
      if (userID) {
        // Vérifiez si l'utilisateur est connecté avant de tenter de récupérer ses informations.
        fetchUser();
+
      }
   }, [userID]);
 
@@ -52,6 +54,8 @@ export function useUserInformation() {
         element: userData?.element,
         irisCoins: userData?.irisCoins,
         hasSeenModal: userData?.hasSeenModal,
+        isEmailVerified: userData?.isEmailVerified,
+        isCoinAdded: userData?.isCoinAdded,
       });
     } else {
       // Si aucun document n'est trouvé pour cet utilisateur, affichez une erreur.

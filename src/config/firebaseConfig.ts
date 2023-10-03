@@ -25,8 +25,11 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  sendEmailVerification,
   signOut,
   reload,
+  onAuthStateChanged,
+  User,
 } from "firebase/auth";
 import {
   initializeAuth,
@@ -80,8 +83,11 @@ const firestore = getFirestore(firebase.getApp());
 
 export {
   getAuth,
+  User,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  sendEmailVerification,
+  onAuthStateChanged,
   firestore,
   query,
   where,

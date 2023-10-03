@@ -13,6 +13,8 @@ const UserStore = new GlobalStore({
     element: '',
     irisCoins: 0, 
     hasSeenModal: true,
+    isEmailVerified: false,
+    isCoinAdded: false,
 });
 
 export const useUserStore = UserStore.getHook();

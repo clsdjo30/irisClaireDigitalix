@@ -4,6 +4,7 @@ import {
   setDoc,
   doc,
   createUserWithEmailAndPassword,
+  sendEmailVerification,
   getAuth,
 } from "../config/firebaseConfig";
 import { getZodiacSign } from "../utils/zodiacHelpers";
@@ -36,20 +37,22 @@ export const useSignIn = () => {
       return;
     }
 
-    try {
-      await createUserWithEmailAndPassword(
-        auth,
-        user.email,
-        user.password
-      ).then((userCredential) => {
-        const useruid = userCredential.user.uid;
-        saveUser(useruid, user);
-      });
-    } catch (err) {
-      setError(
-        "Une erreur s'est produite lors de la création du compte. Veuillez réessayer."
-      );
-    }
+     try {
+       await createUserWithEmailAndPassword(
+         auth,
+         user.email,
+         user.password
+       ).then((userCredential) => {
+         const firebaseUser = userCredential.user; // récupérez l'utilisateur nouvellement créé
+         sendEmailVerification(firebaseUser); // envoyez l'e-mail de vérification
+         const useruid = userCredential.user.uid;
+         saveUser(useruid, user);
+       });
+     } catch (err) {
+       setError(
+         "Une erreur s'est produite lors de la création du compte. Veuillez réessayer."
+       );
+     }
   };
 
   const saveUser = (useruid: string, user: any) => {
@@ -71,6 +74,8 @@ export const useSignIn = () => {
       element: zodiacInfo.element,
       irisCoins: user.irisCoins,
       hasSeenModal: user.hasSeenModal,
+      isEmailVerified: false,
+      isCoinAdded: false,
     });
   };
 
