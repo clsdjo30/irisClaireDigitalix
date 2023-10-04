@@ -1,28 +1,23 @@
-import { useState, useEffect } from "react";
-import {
-  getAuth,
-  onAuthStateChanged,
-  firestore,
-  doc,
-  updateDoc,
-} from "../config/firebaseConfig";
+import { useState } from "react";
+import { getAuth, firestore, doc, updateDoc } from "../config/firebaseConfig";
 
 export function useEmailVerification() {
   const [isEmailVerified, setEmailVerified] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [IrisAdded, setIrisAdded] = useState(false);
   const [error, setError] = useState<Error | null>(null);
-
   const auth = getAuth();
   const currentUser = auth.currentUser;
 
-  const fetchUser = async () => {
+  // Vérifiez si l'utilisateur a vérifié son email
+  const fetchUserVerification = async () => {
     setLoading(true);
     try {
+      // Rechargez l'objet utilisateur pour mettre à jour les propriétés locales
       if (currentUser) {
         await currentUser.reload(); // Assurez-vous d'avoir les données les plus récentes
         setEmailVerified(currentUser.emailVerified);
       }
+      // Mettez à jour la base de données pour indiquer que l'email a été vérifié
       if (currentUser?.emailVerified === true) {
         updateIsEmailVerified();
       }
@@ -33,22 +28,26 @@ export function useEmailVerification() {
     }
   };
 
+  // Mettez à jour la base de données pour indiquer que l'email a été vérifié
   const updateIsEmailVerified = async () => {
     try {
       if (!currentUser) {
         console.error("UserID is null. Cannot update document.");
         return;
       }
+      // Rechargez l'objet utilisateur pour mettre à jour les propriétés locales
+      await currentUser.reload();
+      // Mettez à jour la base de données pour indiquer que l'email a été vérifié
       const userRef = doc(firestore, "users", currentUser.uid);
       await updateDoc(userRef, {
         isEmailVerified: true,
-       
       });
     } catch (error) {
       console.error("Error updating isEmailVerified: ", error);
     }
   };
 
+  // Mettez à jour la base de données et ajouter le cadeau de bienvenue
   const updateIrisAdded = async () => {
     try {
       if (!currentUser) {
@@ -60,32 +59,17 @@ export function useEmailVerification() {
         irisCoins: +1,
         isCoinAdded: true,
       });
-      setIrisAdded(true);
     } catch (error) {
       console.error("Error updating isIrisAdded: ", error);
     }
   };
 
-
-  useEffect(() => {
-    // Démarrez un timer qui appelle fetchUser toutes les 10 secondes
-    const timerId = setInterval(() => {
-      fetchUser();
-    }, 10000); // 10000 ms = 10 s
-
-    // Écoutez les changements d'état d'authentification
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        fetchUser();
-      }
-    });
-
-    // Nettoyez le timer et l'écouteur lorsque le composant est démonté ou si currentUser.emailVerified est true
-    return () => {
-      clearInterval(timerId);
-      unsubscribe();
-    };
-  }, []);
-
-  return { isEmailVerified, loading, error, fetchUser, updateIrisAdded, IrisAdded };
+  return {
+    isEmailVerified,
+    loading,
+    error,
+    fetchUserVerification,
+    updateIrisAdded,
+    updateIsEmailVerified,
+  };
 }

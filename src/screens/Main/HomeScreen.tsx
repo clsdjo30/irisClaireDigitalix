@@ -26,52 +26,57 @@ const yesCard = require('../../../assets/icons/yesCard.png');
 const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   const [value, setValue] = useCrossQuestionStore();
   const [daycard, setDayCard] = useDaydrawStore();
-  const userInformation = useUserInformation();
+  const { user, fetchUser } = useUserInformation();
   // Gestion du state des modal de la page Home
   const [isModalVisible, setModalVisible] = useState(true);
-  const [isEmailVerifyModalVisible, setEmailVerifyModalVisible] = useState(true);
+  const [isEmailVerifyModalVisible, setEmailVerifyModalVisible] = useState(false);
   const [isIrisAddedModalVisible, setIrisAddedModalVisible] = useState(false);
   //Listener sur le changement d'état de l'application
   const [appState, setAppState] = useState(AppState.currentState);
-  
-
   const {
     isEmailVerified,
-    fetchUser,
     updateIrisAdded,
-    IrisAdded
+    updateIsEmailVerified,
+    fetchUserVerification,
   } = useEmailVerification();
 
   useEffect(() => {
     // Si l'email n'est pas vérifié, affichez la modale de vérification d'email
-    if (!isEmailVerified) {
+    if (!isEmailVerified && !user?.isEmailVerified) {
       setEmailVerifyModalVisible(true);
+      setIrisAddedModalVisible(false); // Assurez-vous que cette modale est cachée
     } else {
-      // Si l'email est vérifié, cachez la modale de vérification d'email et affichez celle de l'Iris ajouté
       setEmailVerifyModalVisible(false);
-      setIrisAddedModalVisible(true);
-    }
-
-    if (isEmailVerified && !userInformation.user?.isCoinAdded ) {
-      setIrisAddedModalVisible(true);
-      // Mettez à jour la base de données pour indiquer que l'Iris a été ajouté
-      updateIrisAdded();
-      if (IrisAdded) {
+      // Si l'email est vérifié et que l'Iris n'a pas encore été ajouté, affichez la modale d'Iris ajouté
+      if (isEmailVerified && !user?.isCoinAdded) {
+        setIrisAddedModalVisible(true);
+      } else {
+        // Assurez-vous que les deux modales sont cachées
+        setEmailVerifyModalVisible(false);
         setIrisAddedModalVisible(false);
       }
     }
-  }, [isEmailVerified, userInformation.user?.isCoinAdded]);
+  }, [isEmailVerified, user?.isCoinAdded]);
 
+  // Fermez la modale d'Iris ajouté et mettez à jour la base de données pour indiquer que l'Iris a été ajouté
+  const handleIrisAddedModalClose = () => {
+    setIrisAddedModalVisible(false);
+    // Mettez à jour la base de données pour indiquer que l'Iris a été ajouté
+    updateIrisAdded();
+  };
 
   useEffect(() => {
+    // Mettez à jour le state de l'application
     const handleAppStateChange = (nextAppState: AppStateStatus) => {
       if (
         appState.match(/inactive|background/) &&
         nextAppState === 'active'
       ) {
-        console.log('App est passée au premier plan!');
-        fetchUser()
-        // Ici, vous pouvez exécuter la tâche que vous voulez effectuer
+        // L'application est passée de l'arrière-plan à l'avant-plan
+        // Mettez à jour les informations de l'utilisateur et la vérification de l'email
+        fetchUser();
+        updateIsEmailVerified();
+        fetchUserVerification();
       }
       setAppState(nextAppState);
     };
@@ -85,6 +90,7 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
   // Reset de la carte du jour à minuit
   useEffect(() => {
+    // Définissez un délai d'expiration pour minuit
     const timer = resetAtMidnight(() => {
       setDayCard(prevState => ({
         ...prevState,
@@ -97,19 +103,16 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
   // Affichage du didacticiel au premier lancement de l'application
   useEffect(() => {
-    if (userInformation.user?.hasSeenModal === true) {
+    // Si l'utilisateur a déjà vu le didacticiel, ne l'affichez pas
+    if (user.hasSeenModal === true) {
       setModalVisible(false);
     }
-
-  }, [userInformation.user?.hasSeenModal]);
-
-
-
+  }, [user?.hasSeenModal]);
 
   return (
     <View style={styles.container}>
       <View style={styles.header} />
-      <Text style={styles.headerTitle}>Bonjour {userInformation.user?.firstname}</Text>
+      <Text style={styles.headerTitle}>Bonjour {user?.firstname}</Text>
       <View style={styles.tendanceContainer}>
         {daycard.isdraw === false ?
           <>
@@ -169,8 +172,6 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
         <Modal
           animationType="slide"
           transparent={true}
-
-
         >
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
@@ -199,8 +200,6 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
         <Modal
           animationType="slide"
           transparent={true}
-
-
         >
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
@@ -208,19 +207,16 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                 <Text style={styles.modalTitle}> Email Vérifié </Text>
                 <Text style={styles.modalsubTitle}>C'est le moment de poser cette question qui vous trotte dans la tête. </Text>
                 <Text style={styles.modalText}>Utilisez votre question gratuite et découvrez ce que l'avenir vous réserve !</Text>
-
               </View>
-
               <View style={styles.buttonGroup}>
                 <Button
                   title="Fermer"
-                  onPress={() => setIrisAddedModalVisible(false)}
+                  onPress={handleIrisAddedModalClose}
                   buttonStyle={{
                     backgroundColor: colors.palette.orange,
                     borderRadius: 5,
                   }}
                 />
-
               </View>
             </View>
           </View>
