@@ -76,7 +76,7 @@ const SaveQuestionScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => 
                     <TabView.Item style={{ backgroundColor: colors.palette.violetClair, width: '100%' }}>
                         <CrossQuestionList
                             crossQuestions={crossQuestions}
-                            onPress={deleteQuestion}
+                            onPress={deleteCrossQuestion}
                             crossQuestionExpandedState={crossQuestionExpandedState}
                             setCrossQuestionExpandedState={setCrossQuestionExpandedState}
                         />

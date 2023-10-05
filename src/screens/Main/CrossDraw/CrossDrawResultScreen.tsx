@@ -78,7 +78,7 @@ const CrossDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) 
 
     const getContent = () => {
 
-        return `${questionInformations.answer}`;
+        return `${questionInformations.answer}\n\nJ'espère que cette réponse vous aidera à avancer dans votre vie.\nSi vous avez d'autres questions, n'hésitez pas à revenir vers moi. \nJe vous souhaite une bonne journée.\n\n Claire, \n Votre voyante de poche.`;
 
     };
 
@@ -180,7 +180,7 @@ const CrossDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) 
                             <Text style={styles.buttonText}>Enregistrer</Text>
                         </Pressable>
                         <Pressable style={styles.button} onPress={questionClosed}>
-                            <Text style={styles.buttonText}>Ne Pas Enregistrer</Text>
+                            <Text style={styles.buttonText}>Ne Pas Enregistrer !</Text>
                         </Pressable>
                     </View>
                 </View>
