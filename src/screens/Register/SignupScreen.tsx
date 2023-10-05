@@ -3,6 +3,7 @@ import { styles } from './SignUpScreen.styles'
 import {
   Text,
   View,
+  Pressable
 } from 'react-native';
 import PolicyModal from '../../components/PolicyModal';
 import {
@@ -21,9 +22,9 @@ const SignInScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   const [user, setUser] = useUserStore();
   const [policy, setPolicy] = useState(false);
   const [showPasswordMessage, setShowPasswordMessage] = useState(false);
-  
-  
-  
+
+
+
   // utilise le hook SignIn
   const { signIn, error } = useSignIn();
 
@@ -35,8 +36,8 @@ const SignInScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     setVisible(!visible);
   };
 
-  
- 
+
+
   // accepter les conditions générales d'utilisation
   const isAgree = () => {
     if (!policy) {
@@ -58,9 +59,9 @@ const SignInScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
         </View>
       )}
       <View style={styles.controls}>
-        
-          <Text style={styles.contentTitle}>Créer votre compte</Text>
-        
+
+        <Text style={styles.contentTitle}>Créer votre compte</Text>
+
         <Input
           placeholder='Email'
           placeholderTextColor={colors.palette.white}
@@ -75,7 +76,7 @@ const SignInScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
             size={20}
           />}
         />
-       
+
         <Input
           placeholder='Password'
           placeholderTextColor={colors.palette.white}
@@ -94,7 +95,7 @@ const SignInScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
           onBlur={() => setShowPasswordMessage(false)}
         />
         {showPasswordMessage && (
-          <Text style={{ color: colors.palette.white, fontSize:10 }}>
+          <Text style={{ color: colors.palette.white, fontSize: 10 }}>
             Le mot de passe minimun 6 caractères dont 1 majuscule.
           </Text>
         )}
@@ -116,7 +117,39 @@ const SignInScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
           />
         </View>
 
+
+        <View style={styles.providerContainer}>
+
+          <View style={styles.headerUnderlineTop} />
+          <View style={styles.headerUnderlineBottom}>
+            <Text style={styles.headerText}>Ou</Text>
+            <View />
+          </View>
+
+          <View style={styles.providerButtonContainer}>
+            <Pressable style={styles.providerButton}>
+              <Icon
+                name="logo-google"
+                type="ionicon"
+                color={colors.palette.violet}
+                size={20}
+              />
+              <Text style={styles.providerText}>Se connecter avec Google</Text>
+            </Pressable>
+
+            <Pressable style={styles.providerButton}>
+              <Icon
+                name="logo-facebook"
+                type="ionicon"
+                color={colors.palette.violet}
+                size={20}
+              />
+              <Text style={styles.providerText}>Se connecter avec Facebook</Text>
+            </Pressable>
+          </View>
+        </View>
       </View>
+
 
       {/* Modal View */}
       <PolicyModal
@@ -126,6 +159,7 @@ const SignInScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
       />
       {/* / Modal View */}
     </View >
+
   );
 }
 

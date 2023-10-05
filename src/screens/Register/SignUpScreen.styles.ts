@@ -1,19 +1,19 @@
 import { StyleSheet} from "react-native";
 import { colors } from "../../theme";
-import { SCREEN_WIDTH } from "../../utils/constants";
+import { SCREEN_HEIGHT, SCREEN_WIDTH } from "../../utils/constants";
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.palette.stepViolet,
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-start",
   },
   controls: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center",
     width: "90%",
+    marginTop: SCREEN_HEIGHT / 6,
   },
   input: {
     width: SCREEN_WIDTH / 0.3,
@@ -25,10 +25,7 @@ export const styles = StyleSheet.create({
     fontSize: 18,
     color: colors.palette.white,
   },
-  validationButton: {
-    position: "relative",
-    top: 150,
-  },
+  validationButton: {},
   contentTitle: {
     fontFamily: "mulishSemiBold",
     fontSize: 20,
@@ -54,5 +51,55 @@ export const styles = StyleSheet.create({
     fontSize: 12,
     color: colors.palette.violetClair,
     paddingVertical: 6,
+  },
+  //Provider
+  providerContainer: {
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: SCREEN_HEIGHT / 10,
+  },
+  providerText: {
+    fontFamily: "mulishRegular",
+    fontSize: 14,
+    color: colors.palette.violet,
+  },
+  providerButtonContainer: {
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 10,
+  },
+  providerButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-evenly",
+    width: SCREEN_WIDTH / 1.2,
+    height: SCREEN_HEIGHT / 18,
+    borderRadius: 16,
+    backgroundColor: colors.palette.white,
+  },
+  headerUnderlineTop: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    width: SCREEN_WIDTH / 1.2,
+    paddingVertical: SCREEN_HEIGHT / 100,
+    borderBottomWidth: 0.5,
+    borderBottomColor: colors.palette.white,
+    marginBottom: SCREEN_HEIGHT / 20,
+  },
+  headerText: {
+    fontFamily: "mulishSemiBold",
+    fontSize: 14,
+    color: colors.palette.white,
+  },
+  headerUnderlineBottom: {
+    position: "absolute",
+    top: SCREEN_HEIGHT * 0.005,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: colors.palette.stepViolet,
+    width: SCREEN_WIDTH / 3.9,
   },
 });
