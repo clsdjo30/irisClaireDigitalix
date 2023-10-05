@@ -57,7 +57,7 @@ export const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    marginTop: SCREEN_HEIGHT / 10,
+    marginTop: SCREEN_HEIGHT / 15,
   },
   providerText: {
     fontFamily: "mulishRegular",
@@ -100,6 +100,25 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: colors.palette.stepViolet,
-    width: SCREEN_WIDTH / 3.9,
+    width: SCREEN_WIDTH / 5,
   },
+  checkboxContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 4,
+    marginBottom: SCREEN_HEIGHT / 10,
+  },
+  checkbox: {
+    width: 20,
+    height: 20,
+    borderRadius: 4,
+    backgroundColor: colors.palette.stepViolet,
+    justifyContent: "center",
+    alignItems: "center",
+    color: colors.palette.white,
+  },
+  checkboxWrapper: {
+    color: colors.palette.white,
+  },
+  
 });

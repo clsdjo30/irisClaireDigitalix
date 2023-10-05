@@ -3,12 +3,14 @@ import { styles } from './SignUpScreen.styles'
 import {
   Text,
   View,
-  Pressable
+  Pressable, 
+  Switch
 } from 'react-native';
 import PolicyModal from '../../components/PolicyModal';
 import {
   Icon,
   Input,
+  CheckBox
 } from '@rneui/themed';
 import { useUserStore } from '../../store/useUserStore';
 import { StackScreenProps } from '@react-navigation/stack';
@@ -22,7 +24,7 @@ const SignInScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   const [user, setUser] = useUserStore();
   const [policy, setPolicy] = useState(false);
   const [showPasswordMessage, setShowPasswordMessage] = useState(false);
-
+  const [isEnabled, setIsEnabled] = useState(false);
 
 
   // utilise le hook SignIn
@@ -101,13 +103,22 @@ const SignInScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
         )}
 
         <View style={styles.validationButton}>
-          <NavigationButton
-            width={SCREEN_WIDTH / 1.2}
-            backgroundColor={colors.palette.golden}
-            color={colors.palette.violetBg}
-            title="Accepter la politique d'utilisation"
-            onPress={togglePolicy}
-          />
+          <View style={styles.checkboxContainer}>
+            <Switch
+              trackColor={{ false: '#767577', true: colors.palette.green }}
+              value={policy}
+              thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
+              onChange={togglePolicy}
+              onValueChange={() => setPolicy(!policy)}
+              style={{ marginRight: 10}}
+              
+             
+            />
+            <Text style={{ color: colors.palette.white, fontSize: 10 }}>
+              Accepter la politique d'utilisation
+            </Text>
+            </View>
+          
           <NavigationButton
             width={SCREEN_WIDTH / 1.2}
             backgroundColor={colors.palette.orange}
