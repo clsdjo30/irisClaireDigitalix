@@ -21,7 +21,7 @@ export default {
     },
     "name": "irisClaireDigitalix",
     "slug": "irisclairedigitalix",
-    "version": "1.0.16",
+    "version": "1.0.17",
     "orientation": "portrait",
     "icon": "./assets/icons/iris.png",
     "scheme": "com.digitalix.irisclaire",
@@ -49,7 +49,7 @@ export default {
     },
     "android": {
       "package": "com.digitalix.irisclaire",
-      "versionCode": 15,
+      "versionCode": 16,
       "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./assets/icons/adaptive-icon.png",
