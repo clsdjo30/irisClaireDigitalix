@@ -19,3 +19,6 @@ web-build/
 .idea/workspace.xml
 structure.md
 
+// google-services.json
+playstore.json
+```

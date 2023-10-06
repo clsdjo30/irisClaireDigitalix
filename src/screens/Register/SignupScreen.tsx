@@ -3,24 +3,29 @@ import { styles } from './SignUpScreen.styles'
 import {
   Text,
   View,
+  Pressable, 
+  Switch
 } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import PolicyModal from '../../components/PolicyModal';
 import {
+  Icon,
   Input,
+  CheckBox
 } from '@rneui/themed';
-import { useUserStore } from '../../hooks/useUserStore';
+import { useUserStore } from '../../store/useUserStore';
 import { StackScreenProps } from '@react-navigation/stack';
 import { colors } from '../../theme';
 import NavigationButton from '../../components/NavigationButton';
 import { SCREEN_WIDTH } from '../../utils/constants';
-import { useSignIn } from '../../hooks/useSignIn'
-
+import { useSignIn } from '../../hooks/useSignIn';
 
 
 const SignInScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   const [user, setUser] = useUserStore();
   const [policy, setPolicy] = useState(false);
+  const [showPasswordMessage, setShowPasswordMessage] = useState(false);
+  const [isEnabled, setIsEnabled] = useState(false);
+
 
   // utilise le hook SignIn
   const { signIn, error } = useSignIn();
@@ -33,6 +38,8 @@ const SignInScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     setVisible(!visible);
   };
 
+
+
   // accepter les conditions générales d'utilisation
   const isAgree = () => {
     if (!policy) {
@@ -40,6 +47,7 @@ const SignInScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
       setUser({
         ...user,
         isagree: true,
+        hasSeenModal: false
       });
     }
     setVisible(false);
@@ -53,57 +61,106 @@ const SignInScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
         </View>
       )}
       <View style={styles.controls}>
-        <View style={styles.genderTitle}>
-          <Text style={styles.contentTitle}>Créer votre compte </Text>
-        </View>
+
+        <Text style={styles.contentTitle}>Créer votre compte</Text>
+
         <Input
           placeholder='Email'
-          placeholderTextColor={'#2072AF'}
-          inputContainerStyle={styles.input}
-          inputStyle={{ fontSize: 14, marginLeft: 10, fontFamily: "mulishRegular", color: colors.palette.pink500 }}
-
+          placeholderTextColor={colors.palette.white}
+          style={styles.input}
           value={user.email}
           onChangeText={(text) => setUser({ ...user, email: text })}
+          leftIconContainerStyle={styles.iconBox}
           leftIcon={<Icon
-            name='envelope'
-            size={28}
-            style={styles.icon}
+            name="mail-outline"
+            type="ionicon"
+            color={colors.palette.white}
+            size={20}
           />}
         />
 
         <Input
           placeholder='Password'
-          placeholderTextColor={'#2072AF'}
-          inputContainerStyle={styles.input}
-          inputStyle={{ fontSize: 14, marginLeft: 10, fontFamily: "mulishRegular", color: colors.palette.pink500 }}
+          placeholderTextColor={colors.palette.white}
+          style={styles.input}
           value={user.password}
           onChangeText={(text) => setUser({ ...user, password: text })}
           secureTextEntry={true}
+          leftIconContainerStyle={styles.iconBox}
           leftIcon={<Icon
-            name='key'
-            size={28}
-            style={styles.icon}
+            name="lock-closed-outline"
+            type="ionicon"
+            color={colors.palette.white}
+            size={20}
           />}
+          onFocus={() => setShowPasswordMessage(true)}
+          onBlur={() => setShowPasswordMessage(false)}
         />
+        {showPasswordMessage && (
+          <Text style={{ color: colors.palette.white, fontSize: 10 }}>
+            Le mot de passe minimun 6 caractères dont 1 majuscule.
+          </Text>
+        )}
 
         <View style={styles.validationButton}>
-          <NavigationButton
-            width={SCREEN_WIDTH / 1.2}
-            backgroundColor={colors.palette.golden}
-            color={colors.palette.violetBg}
-            title="Accepter la politique d'utilisation"
-            onPress={togglePolicy}
-          />
+          <View style={styles.checkboxContainer}>
+            <Switch
+              trackColor={{ false: '#767577', true: colors.palette.green }}
+              value={policy}
+              thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
+              onChange={togglePolicy}
+              onValueChange={() => setPolicy(!policy)}
+              style={{ marginRight: 10}}
+              
+             
+            />
+            <Text style={{ color: colors.palette.white, fontSize: 10 }}>
+              Accepter la politique d'utilisation
+            </Text>
+            </View>
+          
           <NavigationButton
             width={SCREEN_WIDTH / 1.2}
             backgroundColor={colors.palette.orange}
             color={colors.palette.violetBg}
-            title="Commencer a poser vos questions"
+            title="Commencer à poser vos questions"
             onPress={() => signIn(user, policy)}
           />
+        </View>
 
+
+        <View style={styles.providerContainer}>
+
+          <View style={styles.headerUnderlineTop} />
+          <View style={styles.headerUnderlineBottom}>
+            <Text style={styles.headerText}>Ou</Text>
+            <View />
+          </View>
+
+          <View style={styles.providerButtonContainer}>
+            <Pressable style={styles.providerButton}>
+              <Icon
+                name="logo-google"
+                type="ionicon"
+                color={colors.palette.violet}
+                size={20}
+              />
+              <Text style={styles.providerText}>Se connecter avec Google</Text>
+            </Pressable>
+
+            <Pressable style={styles.providerButton}>
+              <Icon
+                name="logo-facebook"
+                type="ionicon"
+                color={colors.palette.violet}
+                size={20}
+              />
+              <Text style={styles.providerText}>Se connecter avec Facebook</Text>
+            </Pressable>
+          </View>
         </View>
       </View>
+
 
       {/* Modal View */}
       <PolicyModal
@@ -113,6 +170,7 @@ const SignInScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
       />
       {/* / Modal View */}
     </View >
+
   );
 }
 

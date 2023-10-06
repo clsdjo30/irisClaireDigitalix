@@ -9,8 +9,10 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input } from '@rneui/themed';
 import { colors } from '../../../theme';
-import { useCrossQuestionStore } from '../../../hooks/useCrossQuestionStore';
+import { useCrossQuestionStore } from '../../../store/useCrossQuestionStore';
 import { StackScreenProps } from '@react-navigation/stack';
+import CustomModal from '../../../components/reusable/CustomModal';
+import useIrisModal from '../../../hooks/useIrisModal';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = SCREEN_WIDTH * 1.5;
@@ -18,6 +20,14 @@ const SCREEN_HEIGHT = SCREEN_WIDTH * 1.5;
 const CrossDrawQuestionScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   const [value, setValue] = useCrossQuestionStore();
   const [errorMessage, setErrorMessage] = React.useState('');
+  const {
+    isIrisModalVisible,
+    setIrisModalVisible,
+    goToCrossDrawUpdated,
+    possessedIris,
+    cancelModal,
+    goBuyIris
+  } = useIrisModal(navigation, goToChooseCard);
 
   function handleTextChange(text: string) {
     setErrorMessage(''); // Réinitialise le message d'erreur
@@ -92,14 +102,30 @@ const CrossDrawQuestionScreen: React.FC<StackScreenProps<any>> = ({ navigation }
             />}
           />
           <View style={styles.validationButton}>
-            <TouchableOpacity style={styles.button} onPress={goToChooseCard}>
+            <TouchableOpacity style={styles.button} onPress={goToCrossDrawUpdated}>
               <Text style={styles.buttonText}>
-                Tirer ma carte
+                Valider votre question
               </Text>
             </TouchableOpacity>
           </View>
         </View>
       </View >
+      <CustomModal
+        visible={isIrisModalVisible}
+        credit={possessedIris}
+        modalText="Vous n'avez pas suffisament d'Iris pour posez votre question."
+        useCreditButtonTitle='Acheter des credits'
+        onValidate={() => {
+          setIrisModalVisible(!isIrisModalVisible);
+          navigation.navigate('Iris');
+          navigation.reset({
+            index: 0,
+            routes: [{ name: 'Home' }]
+          })
+        }}
+        onCancel={cancelModal}
+        onBuyCredit={goBuyIris}
+      />
     </View>
   )
 }

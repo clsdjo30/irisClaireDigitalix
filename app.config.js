@@ -2,6 +2,9 @@ import "dotenv/config";
 
 export default {
   "expo": {
+    "updates": {
+      "url": "https://u.expo.dev/185246d5-a728-4ce0-afed-6ac163ace50f"
+    },
     "extra": {
       "eas": {
         "projectId": "185246d5-a728-4ce0-afed-6ac163ace50f"
@@ -13,10 +16,12 @@ export default {
       firebaseMessagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
       firebaseAppId: process.env.FIREBASE_APP_ID,
       openAiId: process.env.OPEN_AI_ID,
+      googleRevenueCatApiKey: process.env.GOOGLE_REVENUECAT_API_KEY,
+      irisApi: process.env.IRIS_API,
     },
     "name": "irisClaireDigitalix",
     "slug": "irisclairedigitalix",
-    "version": "1.0.0",
+    "version": "1.0.17",
     "orientation": "portrait",
     "icon": "./assets/icons/iris.png",
     "scheme": "com.digitalix.irisclaire",
@@ -44,10 +49,14 @@ export default {
     },
     "android": {
       "package": "com.digitalix.irisclaire",
+      "versionCode": 16,
       "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./assets/icons/adaptive-icon.png",
         "backgroundColor": "#C8B5E4"
+      },
+      "runtimeVersion": {
+        "policy": "appVersion"
       }
     },
     "web": {

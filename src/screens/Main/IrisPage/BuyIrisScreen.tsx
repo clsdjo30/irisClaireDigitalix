@@ -1,51 +1,63 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, FlatList } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
 import { styles } from './BuyIrisScreen.styles';
-import CreditCard from '../../../components/IrisCreditCard';
+import IrisCreditCard from '../../../components/IrisCreditCard';
 import { colors } from '../../../theme/color';
+import { useRevenueCat } from '../../../providers/RevenueCatProvider';
+import { PurchasesPackage } from 'react-native-purchases';
+
+
 
 const BuyIrisScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
+    const { user, packages, purchasePackage } = useRevenueCat();
+
+    const onPurchase = (pack: PurchasesPackage) => {
+        // Purchase the package
+        purchasePackage!(pack);
+
+    };
+
+    const renderItem = ({ item }: { item: any }) => {
+        const { product } = item;
+        const bestDeal = product.price === 6.99;
+
+        return (
+            <IrisCreditCard
+                colors={bestDeal ? [colors.palette.orange, colors.palette.violetBg] : [colors.palette.violetClair, colors.palette.violetBg]}
+                creditAmount={product.description}
+                price={product.price} // Assurez-vous que le prix est au bon format
+                onPress={() => onPurchase(item)}
+                bestDeal={bestDeal}
+            // Ajoutez d'autres props si nécessaire
+            />
+        );
+    };
+
+   //console.log('RENDERITEM: ', packages)
     return (
-        <View style={styles.container}>
-            <View style={styles.header} />
-            <View style={styles.titleCredit}>
-                <View style={styles.explainCredit}>
-                    <Text style={styles.contentTitle}>Credits</Text>
-                    <Text style={styles.textCredit}>1 Crédit = 1 Question Oui/Non</Text>
-                    <Text style={styles.textCredit}>3 Crédits = 1 Tirage Complet</Text>
+        
+            <View style={styles.container}>
+                <View style={styles.header} />
+                <View style={styles.titleCredit}>
+                    <View style={styles.explainCredit}>
+                        <Text style={styles.contentTitle}>Credits</Text>
+                        <Text style={styles.textCredit}>1 Crédit = 1 Question Oui/Non</Text>
+                        <Text style={styles.textCredit}>3 Crédits = 1 Tirage Complet</Text>
+                    </View>
+                </View>
+                <View style={styles.flatList}>
+                    <FlatList
+                        data={packages}
+                        renderItem={renderItem}
+                        keyExtractor={(item, index) => index.toString()}
+                        contentContainerStyle={styles.contentContainer}
+                        snapToEnd={false}
+                        decelerationRate={0.6}
+
+                    />
                 </View>
             </View>
-            <View style={styles.domainsContainer}>
-                <CreditCard
-                    colors={[colors.palette.violetClair, colors.palette.violetBg]}
-                    creditAmount={1}
-                    price={1.99}
-                />
-                <CreditCard
-                    colors={[colors.palette.violetClair, colors.palette.violetBg]}
-                    creditAmount={3}
-                    price={4.99}
-                    promoPrice={6.00}
-                />
-                <CreditCard
-                    colors={[colors.palette.orange, colors.palette.violetBg]}
-                    creditAmount={10}
-                    price={15.99}
-                    bestDeal={true}
-                />
-                <CreditCard
-                    colors={[colors.palette.violetClair, colors.palette.violetBg]}
-                    creditAmount={20}
-                    price={28.99}
-                />
-                <CreditCard
-                    colors={[colors.palette.violetClair, colors.palette.violetBg]}
-                    creditAmount={30}
-                    price={39.99}
-                />
-            </View>
-        </View>
     );
 }
 

@@ -151,8 +151,8 @@ const styles = StyleSheet.create({
         marginVertical: 30,
         borderRadius: 16,
         alignItems: "center",
-        paddingVertical: 5,
-        backgroundColor: colors.palette.orange,
+        paddingVertical: 10,
+        backgroundColor: colors.palette.green,
     },
     modalButtonText: {
         fontFamily: "mulishBold",

@@ -1,82 +1,90 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import { Input } from '@rneui/base'
+import { Input, Icon } from '@rneui/base';
 import { StackScreenProps } from '@react-navigation/stack';
-import { useUserStore } from '../../hooks/useUserStore';
+import { useUserStore } from '../../store/useUserStore';
 import { colors } from '../../theme';
 import NavigationButton from '../../components/NavigationButton';
+import { useUserInformation } from '../../hooks/useUserInformations';
 
-const width = Dimensions.get('window').width;
-
+import { SCREEN_WIDTH } from "../../utils/constants";
 
 const FirstNameScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
-  const [user, setUser] = useUserStore()
-  const [error, setError] = useState('')
+  const [newUser, setUser] = useUserStore();
+  // console.log('FirstNameScreen.tsx NEW USER', newUser)
+  const [error, setError] = useState('');
 
-  // Fonction pour nettoyer les entrées utilisateur
-  const sanitizeInput = (text: string) => {
-    // Remplacer les caractères potentiellement malveillants
-    return text.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-  }
+//interdire les caracteres speciaux
+  const isValidName = (text: string) => {
+    const regex = /^[A-Za-z]+$/;
+    return regex.test(text);
+  };
 
-  function goToGenreScreen() {
-    if (user.firstname.length === 0) {
-      setError("Le prénom ne peut pas être vide");
+  // Controller la saisi du prenom
+  const handleInputChange = (text: string) => {
+    setError('');
+
+    // Si le texte est vide, permettez la mise à jour
+    if (text === '') {
+      setUser({ ...newUser, firstname: text });
       return;
     }
 
-    if (user.firstname.length < 3) {
-      setError("Le prénom doit contenir au moins 3 caractères");
+    if (!isValidName(text)) {
+      setError('Veuillez entrer uniquement des lettres.');
+      return;
+    }
+
+    setUser({ ...newUser, firstname: text });
+  };
+
+  const goToGenreScreen = () => {
+    if (newUser.firstname.length === 0) {
+      setError('Le prénom ne peut pas être vide');
+      return;
+    }
+
+    if (newUser.firstname.length < 3) {
+      setError('Le prénom doit contenir au moins 3 caractères');
       return;
     }
 
     navigation.navigate('Genre');
-  }
-  
+  };
+
   return (
     <View testID='first-name-screen' style={styles.container}>
-      {error !== '' && (
-        <View style={styles.errorContainer}>
-          <Text style={styles.errorText}>{error}</Text>
-        </View>
-      )}
-     
+      {error && <View style={styles.errorContainer}><Text style={styles.errorText}>{error}</Text></View>}
       <View style={styles.controls}>
         <View style={styles.genderTitle}>
           <Text style={styles.contentTitle}>Quelle est votre prénom ?</Text>
         </View>
         <View style={styles.inputView}>
           <Input
-            value={user.firstname}
+            value={newUser.firstname}
             placeholder='Saisissez votre prénom'
             placeholderTextColor={colors.palette.purple200}
-            inputContainerStyle={styles.input}
-            inputStyle={styles.inputStyle}
-            onChangeText={(text) => {
-              setError(''); 
-              setUser({ ...user, firstname: sanitizeInput(text) });
-            }}
+            style={styles.input}
+            onChangeText={handleInputChange}
             leftIcon={<Icon
-              name='user'
-              size={28}
-              style={styles.icon}
+              name="person-outline"
+              type="ionicon"
+              color={colors.palette.white}
+              size={20}
             />}
           />
         </View>
         <NavigationButton
           color={colors.palette.violetBg}
           backgroundColor={colors.palette.orange}
-          width={width * 0.85}
+          width={SCREEN_WIDTH * 0.85}
           title="Suivant"
           onPress={goToGenreScreen}
-          
         />
-
       </View>
-    </View >
+    </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -84,7 +92,7 @@ const styles = StyleSheet.create({
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: colors.palette.purple600,
+    backgroundColor: colors.palette.stepViolet
   },
   controls: {
     flexDirection: 'column',
@@ -92,35 +100,37 @@ const styles = StyleSheet.create({
     marginTop: 40,
   },
   inputView: {
-    width: width * 0.9,
+    width: SCREEN_WIDTH * 0.9,
     marginBottom: 20
   },
   input: {
-    backgroundColor: colors.palette.ivory,
-    padding: 3,
-    borderRadius: 6,
-    borderBottomWidth: 1,
-    borderLeftWidth: 1,
-    borderLeftColor: colors.palette.darkgold,
-    borderBottomColor: colors.palette.darkgold,
+    width: SCREEN_WIDTH / 0.3,
+    height: 48,
+    backgroundColor: colors.palette.stepViolet,
+    borderRadius: 16,
+    paddingLeft: 20,
+    fontFamily: "mulishExtraLight",
+    fontSize: 18,
+    color: colors.palette.white,
+    textTransform: 'capitalize' 
   },
   inputStyle: {
-    fontSize: 14,
+    fontSize: 16,
     marginLeft: 10,
     fontFamily: "mulishRegular",
     color: colors.palette.violet
   },
   icon: {
     marginLeft: 10,
-    color: colors.palette.golden,
+    color: colors.palette.violet,
   },
   genderTitle: {
     width: 300,
     flexDirection: 'row',
   },
   contentTitle: {
-    fontFamily: "mulishRegular",
-    fontSize: 18,
+    fontFamily: "mulishSemiBold",
+    fontSize: 20,
     color: colors.palette.violetClair,
     marginBottom: 20
   },

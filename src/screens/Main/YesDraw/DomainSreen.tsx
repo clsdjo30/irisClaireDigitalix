@@ -8,7 +8,7 @@ import {
     Dimensions
 } from 'react-native';
 import { colors } from '../../../theme';
-import { useQuestionStore } from '../../../hooks/useQuestionStore';
+import { useQuestionStore } from '../../../store/useQuestionStore';
 import { StackScreenProps } from '@react-navigation/stack';
 
 // import icons

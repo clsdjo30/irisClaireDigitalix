@@ -28,14 +28,17 @@ const SaveQuestionScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => 
     const userID = currentUser ? currentUser.uid : null;
 
     // Get the Yes questions from the database
-    const { questions } = useUserYesQuestion(userID);
-
+    const { questions, error, deleteQuestion } = useUserYesQuestion(userID);
+    console.log('QUESTION YES', questions)
     // Get the Cross questions from the database
-    const { crossQuestions } = useUserCrossQuestion(userID);
+    const { crossQuestions, deleteCrossQuestion } = useUserCrossQuestion(userID);
+    console.log('QUESTION CROSS', crossQuestions)
+
 
     
     return (
         <View style={styles.container}>
+            {error && <Text>{error}</Text>}
             <View style={styles.header} />
             <View style={styles.headingContainer}>
                 <Text style={styles.contentTitle}>Vos questions sauvegardées</Text>
@@ -65,6 +68,7 @@ const SaveQuestionScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => 
                     <TabView.Item style={{ backgroundColor: colors.palette.violetClair, width: '100%' }}>
                         <YesQuestionList
                             questions={questions}
+                            onPress={deleteQuestion}
                             expandedState={yesNoExpandedState}
                             setExpandedState={setYesNoExpandedState}
                         />
@@ -72,12 +76,14 @@ const SaveQuestionScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => 
                     <TabView.Item style={{ backgroundColor: colors.palette.violetClair, width: '100%' }}>
                         <CrossQuestionList
                             crossQuestions={crossQuestions}
+                            onPress={deleteCrossQuestion}
                             crossQuestionExpandedState={crossQuestionExpandedState}
                             setCrossQuestionExpandedState={setCrossQuestionExpandedState}
                         />
                     </TabView.Item>
                 </TabView>
             </View>
+
         </View >
     )
 }
@@ -124,7 +130,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: SCREEN_HEIGHT * 0.3,
         width: "100%",
-        height: SCREEN_HEIGHT * 0.96,
+        height: SCREEN_HEIGHT * 0.7,
         backgroundColor: colors.palette.violetClair,
         justifyContent: 'flex-start',
         alignItems: 'center',
@@ -148,5 +154,31 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         textAlign: 'center'
     },
+    //Modal
+    centeredView: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: 22
+    },
+    modalView: {
+        margin: 20,
+        backgroundColor: "white",
+        borderRadius: 20,
+        padding: 35,
+        alignItems: "center",
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5
+    },
+    modalText: {
+        marginBottom: 15,
+        textAlign: "center"
+    }
    
 })

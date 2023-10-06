@@ -4,6 +4,7 @@ import {
   setDoc,
   doc,
   createUserWithEmailAndPassword,
+  sendEmailVerification,
   getAuth,
 } from "../config/firebaseConfig";
 import { getZodiacSign } from "../utils/zodiacHelpers";
@@ -13,7 +14,7 @@ const auth = getAuth();
 const isValidEmail = (email: string) =>
   /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(email);
 const isValidPassword = (password: string) =>
-  /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/.test(password);
+  /^(?=.*[A-Z]).{6,}$/.test(password);
 
 export const useSignIn = () => {
   const [error, setError] = useState("");
@@ -26,7 +27,7 @@ export const useSignIn = () => {
 
     if (!isValidPassword(user.password)) {
       setError(
-        "Le mot de passe doit contenir au moins 6 caractères, une majuscule, un chiffre et un caractère spécial."
+        "Le mot de passe doit contenir au moins 6 caractères dont une majuscule"
       );
       return;
     }
@@ -36,20 +37,22 @@ export const useSignIn = () => {
       return;
     }
 
-    try {
-      await createUserWithEmailAndPassword(
-        auth,
-        user.email,
-        user.password
-      ).then((userCredential) => {
-        const useruid = userCredential.user.uid;
-        saveUser(useruid, user);
-      });
-    } catch (err) {
-      setError(
-        "Une erreur s'est produite lors de la création du compte. Veuillez réessayer."
-      );
-    }
+     try {
+       await createUserWithEmailAndPassword(
+         auth,
+         user.email,
+         user.password
+       ).then((userCredential) => {
+         const firebaseUser = userCredential.user; // récupérez l'utilisateur nouvellement créé
+         sendEmailVerification(firebaseUser); // envoyez l'e-mail de vérification
+         const useruid = userCredential.user.uid;
+         saveUser(useruid, user);
+       });
+     } catch (err) {
+       setError(
+         "Une erreur s'est produite lors de la création du compte. Veuillez réessayer."
+       );
+     }
   };
 
   const saveUser = (useruid: string, user: any) => {
@@ -69,8 +72,15 @@ export const useSignIn = () => {
       zodiac: zodiacInfo.transUserSign,
       stone: zodiacInfo.transUserStone,
       element: zodiacInfo.element,
+      irisCoins: user.irisCoins,
+      hasSeenModal: user.hasSeenModal,
+      isEmailVerified: false,
+      isCoinAdded: false,
     });
   };
 
+  // update user
+
+  
   return { signIn, error };
 };

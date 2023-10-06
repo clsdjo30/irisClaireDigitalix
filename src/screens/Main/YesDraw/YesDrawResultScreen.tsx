@@ -7,13 +7,14 @@ import {
     Text,
     Dimensions,
     ActivityIndicator,
+    BackHandler,
 } from 'react-native';
 import CARD_DECK from '../../../data/cards';
 import { colors } from '../../../theme';
-import { useQuestionStore } from '../../../hooks/useQuestionStore';
+import { useQuestionStore } from '../../../store/useQuestionStore';
 import { StackScreenProps } from '@react-navigation/stack';
 import { useSimpleQuestion } from '../../../hooks/useSimpleQuestion';
-import { setDoc, doc, collection } from 'firebase/firestore';
+import { setDoc, doc, collection, serverTimestamp } from 'firebase/firestore';
 import { firestore, getAuth } from '../../../config/firebaseConfig';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -29,11 +30,20 @@ const YesDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) =>
     const [questionInformations, setQuestionInformations] = useQuestionStore();
     const currentUser = auth.currentUser;
     const userID = currentUser ? currentUser.uid : null;
-
-    //console.log(userID);
-
     const choosedCard = CARD_DECK.find((card) => card.id === questionInformations.choosecardnumber);
 
+    useEffect(() => {
+        const backAction = () => {
+            return true;
+        };
+
+        const backHandler = BackHandler.addEventListener(
+            "hardwareBackPress",
+            backAction
+        );
+
+        return () => backHandler.remove();
+    }, []);
 
 
     function saveQuestion(useruid: string | any) {
@@ -51,6 +61,7 @@ const YesDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) =>
             question: questionInformations.question,
             cardpseudo: questionInformations.choosecardpseudo,
             answer: questionInformations.answer,
+            createdAt: serverTimestamp(),
         })
             .then(() => console.log('Question saved successfully!'))
             .catch((error) => console.error('Error saving question:', error));
@@ -70,8 +81,8 @@ const YesDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) =>
                 </View>
             );
         }
-
-        return <Text style={styles.answerText}>{questionInformations.answer}</Text>;
+        //TODO : INCLURE UN TABLEAU POUR DES FINS DE PHRASES ALEATOIRES
+        return `${questionInformations.answer}\n\n J'espère que cette réponse vous aidera à avancer dans votre vie. Si vous avez d'autres questions, n'hésitez pas à revenir vers moi. Je vous souhaite une bonne journée. L'Iris Claire.`;
     };
 
     function questionClosed() {
@@ -116,14 +127,19 @@ const YesDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) =>
                         </View>
 
                         <Text style={styles.answerTitle}>Votre réponse: </Text>
-                        <Text style={styles.answerText}>{getContent()}</Text>
+                        <Text style={styles.answerText} numberOfLines={0} lineBreakMode='clip'>{getContent()}</Text>
                     </View>
                 </View>
 
                 <View style={styles.validationButton}>
-                    <Pressable style={styles.button} onPress={() => saveQuestion(userID)}>
-                        <Text style={styles.buttonText}>Revenir à l'accueil</Text>
-                    </Pressable>
+                    <View style={styles.buttonGroup}>
+                        <Pressable style={styles.button} onPress={() => saveQuestion(userID)}>
+                            <Text style={styles.buttonText}>Enregistrez</Text>
+                        </Pressable>
+                        <Pressable style={styles.button} onPress={questionClosed}>
+                            <Text style={styles.buttonText}>Ne Pas Enregistrer</Text>
+                        </Pressable>
+                    </View>
                 </View>
             </View>
         </View>
@@ -251,21 +267,27 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         marginTop: 20,
+    },
+    buttonGroup: {
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center',
         elevation: 5,
     },
     button: {
-        width: '80%',
-        backgroundColor: '#CBA135',
+        width: '45%',
+        backgroundColor: colors.palette.orange,
         marginTop: 10,
         borderRadius: 16,
     },
     buttonText: {
         textAlign: 'center',
         alignItems: 'center',
-        paddingVertical: 10,
+        paddingVertical: 14,
         fontFamily: 'oswaldMedium',
-        fontSize: 14,
-        color: colors.palette.ivory,
+        fontSize: 16,
+        color: colors.palette.white,
     },
     //Loader
     indicatorWrapper: {

@@ -9,15 +9,17 @@ type CardProps = {
     frontImageUrl: ImageSourcePropType,
     backImageUrl: ImageSourcePropType,
     onFlip?: () => void,
-    style?: ViewStyle
+    style?: ViewStyle,
+    isClickable?: boolean
 }
 
-const FlipCard: React.FC<CardProps> = ({ frontImageUrl, backImageUrl, onFlip, style }) => {
+const FlipCard: React.FC<CardProps> = ({ frontImageUrl, backImageUrl, onFlip, style, isClickable = true }) => {
     const { isFlipped, flipCard, flip, scale, up, left } = useFlipAnimation();
     const frontImageRef = useRef<Image>(null);
     const backImageRef = useRef<Image>(null);
 
     const flipCardAndNotify = () => {
+        if (!isClickable) return; // Prevents the card from being flipped when it is not clickable
         flipCard();
         if (onFlip) {
             onFlip();
@@ -37,7 +39,7 @@ const FlipCard: React.FC<CardProps> = ({ frontImageUrl, backImageUrl, onFlip, st
     });
 
     return (
-        <Pressable testID = "flipCard" onPress={flipCardAndNotify}>
+        <Pressable testID="flipCard" onPress={flipCardAndNotify} disabled={!isClickable}>
             <Animated.View style={[cardImageStyle.cardImage, animatedStyle, style]}>
                 <Image
                     testID={isFlipped ? "backImage" : "frontImage"}

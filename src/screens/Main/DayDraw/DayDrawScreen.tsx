@@ -1,14 +1,15 @@
 // DayDrawScreen.tsx
 import React, { useState } from 'react';
 import { StyleSheet, View, ImageSourcePropType, Text } from 'react-native';
-import { interpolate, useSharedValue } from 'react-native-reanimated';
+import { interpolate } from 'react-native-reanimated';
 import Carousel from 'react-native-reanimated-carousel';
 import { StackScreenProps } from '@react-navigation/stack';
 import { colors } from '../../../theme';
-import { useDaydrawStore } from '../../../hooks/useDayDrawStore';
+import { useDaydrawStore } from '../../../store/useDayDrawStore';
 import CARD_DECK from '../../../data/cards';
 import FlippableCard from '../../../components/DayDraw/FlippableCard';
 import { SCREEN_WIDTH, SCREEN_HEIGHT } from '../../../utils/constants';
+import LottieView from 'lottie-react-native';
 
 const DayDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     const [daydraw, setDayDraw] = useDaydrawStore();
@@ -16,7 +17,6 @@ const DayDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     const itemWidth = 80;
     const centerOffset = SCREEN_WIDTH / 2 - itemWidth / 2;
     const [flippedCardIndex, setFlippedCardIndex] = React.useState(-1);
-
     //DISPLAY BACK CARD IMAGE
     const backCard: Array<ImageSourcePropType> = CARD_DECK.map((card) => card.backImageUrl);
     //DISPLAY FRONT CARD IMAGE
@@ -79,6 +79,16 @@ const DayDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
             <View style={styles.header} />
             <View style={styles.titleContainer}>
                 <Text style={styles.title}>Tirage du jour</Text>
+                <LottieView
+                    autoPlay
+                    style={{
+                        width: SCREEN_WIDTH * 0.25,
+                        height: SCREEN_HEIGHT * 0.25,
+                        backgroundColor: '#2F2A5A',
+                    }}
+                    // Find more Lottie files at https://lottiefiles.com/featured
+                    source={require('../../../../assets/lottie/horoscope.json')}
+                />
             </View>
 
             <Carousel
@@ -122,6 +132,7 @@ const DayDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
             <View style={styles.choiceButton}>
                 <Text style={styles.tendanceButtonText}>Choisissez votre Carte</Text>
             </View>
+
         </View>
     );
 }
@@ -138,14 +149,14 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: 0,
         width: SCREEN_WIDTH - 5,
-        height: SCREEN_HEIGHT * 0.4,
+        height: SCREEN_HEIGHT * 0.5,
         borderBottomLeftRadius: SCREEN_WIDTH * 0.1,
         borderBottomRightRadius: SCREEN_WIDTH * 0.1,
         backgroundColor: colors.palette.violet
     },
     titleContainer: {
         position: 'absolute',
-        top: 0,
+        top: 40,
         width: SCREEN_WIDTH - 5,
         height: SCREEN_HEIGHT * 0.4,
         justifyContent: 'center',
@@ -155,6 +166,7 @@ const styles = StyleSheet.create({
         fontSize: 30,
         fontWeight: 'bold',
         color: colors.palette.white,
+        marginBottom: 40,
     },
     deckContainer: {
         width: 80,

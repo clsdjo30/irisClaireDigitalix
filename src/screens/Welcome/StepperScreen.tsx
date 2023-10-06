@@ -81,7 +81,7 @@ const StepperScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
             <View style={styles.blockButton}>
                 <NavigationButton
                     testID='s-inscrire-button'
-                    color={colors.palette.violetBg}
+                    color={colors.palette.white}
                     backgroundColor={colors.palette.orange}
                     width={width / 1.3}
                     title="S'inscrire"
@@ -107,10 +107,9 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#fff',
     },
     blockButton: {
         position: 'absolute',
-        bottom: 30,
+        bottom: 5,
     },
 })

@@ -3,11 +3,8 @@ import {
   StyleSheet,
   Text,
   View,
-  Dimensions
 } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import { Input } from '@rneui/themed';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { Input, Icon } from '@rneui/themed';
 import { StackScreenProps } from '@react-navigation/stack';
 import {
   getAuth,
@@ -15,9 +12,8 @@ import {
   FirebaseError
 } from '../../config/firebaseConfig'
 import { colors } from '../../theme';
-import NavigationButotn from '../../components/NavigationButton';
-
-const { width, height } = Dimensions.get('screen');
+import NavigationButton from '../../components/NavigationButton';
+import { SCREEN_WIDTH } from "../../utils/constants";
 
 
 const SignInScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
@@ -44,7 +40,7 @@ const SignInScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       {error && <Text style={styles.error}>{String(error)}</Text>}
       <View style={styles.controls}>
         <View style={styles.genderTitle}>
@@ -54,58 +50,61 @@ const SignInScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
         <Input
           placeholder='Email'
           placeholderTextColor={colors.palette.purple200}
-          inputContainerStyle={styles.input}
-          inputStyle={{ fontSize: 14, marginLeft: 10, fontFamily: "mulishMedium", color: colors.palette.violet }}
+          style={styles.input}
           value={email}
           onChangeText={(text) => setEmail(text)}
+          leftIconContainerStyle={styles.iconBox}
           leftIcon={<Icon
-            name='envelope'
+            name="mail-outline"
+            type="ionicon"
+            color={colors.palette.white}
             size={20}
-            style={styles.icon}
           />}
         />
 
         <Input
           placeholder='Password'
           placeholderTextColor={colors.palette.purple200}
-          inputContainerStyle={[styles.input, { marginBottom: 60}]}
-          inputStyle={{ fontSize: 14, marginLeft: 10, fontFamily: "mulishMedium", color: colors.palette.violet }}
+          style={styles.input}
           value={password}
           onChangeText={(text) => setPassword(text)}
           secureTextEntry={true}
+          leftIconContainerStyle={styles.iconBox}
           leftIcon={<Icon
-            name='key'
+            name="key"
+            type="ionicon"
+            color={colors.palette.white}
             size={20}
-            style={styles.icon}
           />}
         />
-
-      </View>
-        <View style={styles.button}>
-          <NavigationButotn 
-          width={width -30}
+        < View style={styles.validationButton}>
+          <NavigationButton 
+          width={SCREEN_WIDTH / 1.1}
           backgroundColor={colors.palette.orange}
           title="Connexion" 
+          color= {colors.palette.violetBg}
           onPress={loginUser} />
-        </View>
+          </View>
+
+      </View>
 
 
-    </SafeAreaView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.palette.violet,
+    backgroundColor: colors.palette.stepViolet,
     alignItems: 'center',
     justifyContent: 'center',
   },
   controls: {
     flex: 1,
-    alignItems: 'flex-start',
+    alignItems: 'center',
     justifyContent: 'center',
-    width: width,
+    width: SCREEN_WIDTH * 0.9,
     marginBottom: 60,
   },
   icon: {
@@ -113,7 +112,7 @@ const styles = StyleSheet.create({
     color: colors.palette.gold,
   },
   error: {
-    width: width - 40,
+    width: SCREEN_WIDTH - 40,
     textAlign: 'center',
     backgroundColor: colors.palette.orange,
     borderRadius: 6,
@@ -124,32 +123,40 @@ const styles = StyleSheet.create({
 
   },
   input: {
-    backgroundColor: colors.palette.ivory,
-    padding: 3,
-    borderRadius: 6,
-    borderBottomWidth: 1,
-    borderLeftWidth: 1,
-    borderLeftColor: colors.palette.violet,
-    borderBottomColor: colors.palette.violet,
+    width: SCREEN_WIDTH / 0.3,
+    height: 50,
+    backgroundColor: colors.palette.stepViolet,
+    borderRadius: 16,
+    paddingLeft: 20,
+    fontFamily: "mulishLight",
+    fontSize: 18,
+    color: colors.palette.white,
+  },
+  iconBox: {
+    width: 50,
+    height: 50,
+  },
+  validationButton: {
+    position: "relative",
+    top: 150,
   },
   genderTitle: {
     width: '100%',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
+    marginBottom: 30,
   },
   contentTitle: {
     fontFamily: "mulishBold",
-    fontSize: 24,
+    fontSize: 26,
     color: colors.palette.violetBg,
     marginBottom: 20
   },
   button: {
-    position: 'absolute',
-    bottom: 100,
-    width: width -40,
-    justifyContent: 'center',
-    alignItems: 'center',
+    position: "relative",
+    top: 0,
+    
 
   }
 });

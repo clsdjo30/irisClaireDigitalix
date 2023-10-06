@@ -59,7 +59,7 @@ interface Card {
   {
       id: 5,
       name: 'le pape',
-      pseudo: "Iris Pateras",
+      pseudo: "Iris Patéras",
       backImageUrl: require('../../assets/images/cards/back/Card_Back_001.png'),
       frontImageUrl: require('../../assets/images/cards/front/5-le-pape.png'),
       tendance: [
@@ -107,7 +107,7 @@ interface Card {
   {
       id: 9,
       name: 'l hermite',
-      pseudo: "Iris Reflexion",
+      pseudo: "Iris Réflexion",
       backImageUrl: require('../../assets/images/cards/back/Card_Back_001.png'),
       frontImageUrl: require('../../assets/images/cards/front/9-l-hermite.png'),
       tendance: [
@@ -179,7 +179,7 @@ interface Card {
   {
       id: 15,
       name: 'le diable',
-      pseudo: "l'Iris Luxure",
+      pseudo: "Iris Luxure",
       backImageUrl: require('../../assets/images/cards/back/Card_Back_001.png'),
       frontImageUrl: require('../../assets/images/cards/front/15-le-diable.png'),
       tendance: [
@@ -227,7 +227,7 @@ interface Card {
   {
       id: 19,
       name: 'le soleil',
-      pseudo: "Iris Clair",
+      pseudo: "Iris Claire",
       backImageUrl: require('../../assets/images/cards/back/Card_Back_001.png'),
       frontImageUrl: require('../../assets/images/cards/front/19-le-soleil.png'),
       tendance: [
@@ -263,7 +263,7 @@ interface Card {
   {
       id: 22,
       name: 'le mat',
-      pseudo: "l'Iris de l'Insouciance",
+      pseudo: "Iris Nomade",
       backImageUrl: require('../../assets/images/cards/back/Card_Back_001.png'),
       frontImageUrl: require('../../assets/images/cards/front/22-le-mat.png'),
       tendance: [

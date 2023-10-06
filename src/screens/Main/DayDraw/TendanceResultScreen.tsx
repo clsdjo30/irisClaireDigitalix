@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
 import { colors } from '../../../theme';
-import { useDaydrawStore } from '../../../hooks/useDayDrawStore';
+import { useDaydrawStore } from '../../../store/useDayDrawStore';
 import NavigationButton from '../../../components/NavigationButton';
 import { SCREEN_WIDTH } from '../../../utils/constants';
 import { captureRef } from 'react-native-view-shot';
@@ -20,6 +20,7 @@ const TendanceResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) =
     const viewRef = useRef<View>(null);
 
     useEffect(() => {
+     
         const backAction = () => {
             return true;
         };
@@ -47,7 +48,6 @@ const TendanceResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) =
         // Partagez l'image
         await Sharing.shareAsync(uri);
     }
-
 
     return (
 
@@ -80,6 +80,7 @@ const TendanceResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) =
                     onPress={() => navigation.navigate('Home')}
                 />
             </View>
+
         </View>
 
     );
@@ -94,29 +95,23 @@ const styles = StyleSheet.create({
     },
     tendanceScreen: {
         width: "100%",
-        height: "100%",
+        height: "90%",
         backgroundColor: colors.palette.purple600,
         alignItems: 'center',
-        justifyContent: 'center',
-        borderRadius: 10,
-        elevation: 10,
-        margin: 20,
-        paddingVertical: 30
     },
     cardContainer: {
+        position: 'relative',
+        top: 0,
         width: 170,
-        height: 300,
-        borderRadius: 3,
-        elevation: 5,
-        shadowColor: colors.palette.ivory
+        height: 200,
     },
     fortuneTeller: {
         width: 170,
         height: 300,
-        borderRadius: 3,
-        resizeMode: 'cover',
     },
     tendanceTextContainer: {
+        position: 'relative',
+        top: 100,
         marginTop: 20,
         width: '70%',
     },

@@ -2,20 +2,50 @@ import React, { useState } from 'react';
 import { StyleSheet, View, Text, Dimensions } from 'react-native';
 import { Icon } from '@rneui/base'
 import { StackScreenProps } from '@react-navigation/stack';
-import { Form, Picker } from 'react-native-form-component';
-import { useUserStore } from '../../hooks/useUserStore';
+import { useUserStore } from '../../store/useUserStore';
 import { colors } from '../../theme'
+import NavigationButton from '../../components/NavigationButton';
+import { CheckBox } from '@rneui/themed';
+
 
 const width = Dimensions.get('window').width;
 
 
 
 const GenreScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
-    const [user, setUser] = useUserStore()
+    const [newUser, setUser] = useUserStore()
     const [error, setError] = useState('')
+    const [homme, setHomme] = useState(newUser.genre === 'homme');
+    const [femme, setFemme] = useState(newUser.genre === 'femme');
+    const [autres, setAutres] = useState(newUser.genre === 'autres');
+
+
+    const resetAll = () => {
+        setHomme(false);
+        setFemme(false);
+        setAutres(false);
+    }
+
+    const handleHommeCheck = () => {
+        resetAll();
+        setHomme(true);    
+        setUser({ ...newUser, genre: 'homme' })
+    }
+
+    const handleFemmeCheck = () => {
+        resetAll();
+        setFemme(true);
+        setUser({ ...newUser, genre: 'femme' })
+    }
+
+    const handleAutresCheck = () => {
+        resetAll();
+        setAutres(true);
+        setUser({ ...newUser, genre: 'autres' })
+    }
 
     function goToBirthday() {
-        if (user.genre.length === 0) {
+        if (newUser.genre.length === 0) {
             setError("Vous devez choisir un genre");
             return;
         }
@@ -31,40 +61,104 @@ const GenreScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                     <Text style={styles.errorText}>{error}</Text>
                 </View>
             )}
-            <View  style={styles.controls}>
+            <View style={styles.controls}>
                 <View style={styles.genderTitle}>
                     <Text style={styles.contentTitle}>Vous êtes : </Text>
                 </View>
-                <Form
-                    onButtonPress={goToBirthday}
-                    buttonStyle={styles.button}
-                    buttonText="Suivant"
-                    buttonTextStyle={styles.buttonText}
-                    style={{ width: width * 0.85, alignItems: 'center' }}
+                <View style={styles.checkContainer}>
+                    <CheckBox
+                        title="Un Homme"
+                        size={20}
+                        checked={homme}
+                        checkedTitle='Je suis un homme'
+                        checkedIcon={
+                            <Icon
+                                name="man-outline"
+                                type="ionicon"
+                                color={colors.palette.genderCheckText}
+                                size={30}
+                                iconStyle={{ marginRight: 10 }}
+                            />
+                        }
+                        uncheckedIcon={
+                            <Icon
+                                name="man-outline"
+                                type="ionicon"
+                                color={colors.palette.white}
+                                size={30}
+                                iconStyle={{ marginRight: 10 }}
+                            />
+                        }
+                        onPress={handleHommeCheck}
+                        containerStyle={styles.genderCheckBox}
+                        wrapperStyle={homme ? styles.positionCheckedBox : styles.positionBox}
+                        titleProps={homme ? { style: styles.checkedText } : { style: styles.checkText }}
 
-                >
-                    <Picker
-                        items={[
-                            { label: 'Une Femme', value: "Femme" },
-                            { label: 'Un Homme', value: "Homme" },
-                            { label: 'Autres', value: "Autres" },
-                        ]}
-                        placeholder='Choisissez votre genre'
-                        selectedValueStyle={styles.inputText}
-                        pickerIcon={<Icon
-                            name='venus-mars'
-                            type='font-awesome'
-                            color={colors.palette.pink200}
-                            size={28}
-                            style={styles.icon}
-                        />}
-                        iconWrapperStyle={{ backgroundColor: colors.palette.ivory }}
-                        selectedValue={user.genre}
-                        onSelection={(item: any) => setUser({ ...user, genre: item.value })}
-                        buttonStyle={styles.control}
                     />
-                </Form>
+                    <CheckBox
+                        title="Une Femme"
+                        checked={femme}
+                        checkedTitle='Je suis une femme'
+                        checkedIcon={
+                            <Icon
+                                name="woman-outline"
+                                type="ionicon"
+                                color={colors.palette.genderCheckText}
+                                size={30}
+                                iconStyle={{ marginRight: 10 }}
+                            />
+                        }
+                        uncheckedIcon={
+                            <Icon
+                                name="woman-outline"
+                                type="ionicon"
+                                color={colors.palette.white}
+                                size={30}
+                                iconStyle={{ marginRight: 10 }}
+                            />
+                        }
+                        onPress={handleFemmeCheck}
+                        containerStyle={styles.genderCheckBox}
+                        wrapperStyle={femme ? styles.positionCheckedBox : styles.positionBox}
+                        titleProps={femme ? { style: styles.checkedText } : { style: styles.checkText }}
+                    />
+                    <CheckBox
+                        title="Autres"
+                        checked={autres}
+                        checkedTitle='Je ne sais pas'
+                        checkedIcon={
+                            <Icon
+                                name="transgender-outline"
+                                type="ionicon"
+                                color={colors.palette.genderCheckText}
+                                size={30}
+                                iconStyle={{ marginRight: 10 }}
+                            />
+                        }
+                        uncheckedIcon={
+                            <Icon
+                                name="transgender-outline"
+                                type="ionicon"
+                                color={colors.palette.white}
+                                size={30}
+                                iconStyle={{ marginRight: 10 }}
+                            />
+                        }
+                        onPress={handleAutresCheck}
+                        containerStyle={styles.genderCheckBox}
+                        wrapperStyle={autres ? styles.positionCheckedBox : styles.positionBox}
+                        titleProps={autres ? { style: styles.checkedText } : { style: styles.checkText }}
+                    />
+
+                </View>
             </View>
+            <NavigationButton
+                color={colors.palette.violetBg}
+                backgroundColor={colors.palette.orange}
+                width={width * 0.85}
+                title="Suivant"
+                onPress={goToBirthday}
+            />
         </View >
     );
 }
@@ -72,105 +166,67 @@ const GenreScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        height: '100%',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: colors.palette.purple600,
+        backgroundColor: colors.palette.stepViolet,
     },
     icon: {
-        color: '#FFD700',
-        backgroundColor: colors.palette.ivory
-    },
-    error: {
-        marginTop: 20,
-        padding: 20,
-        backgroundColor: '#D54826FF',
-        borderRadius: 10,
-        width: "95%",
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    textError: {
-        color: '#fff',
-        fontSize: 16,
-        fontWeight: 'bold',
-    },
-    button: {
-        position: 'relative',
-        width: width * 0.85,
-        height: 30,
-        backgroundColor: colors.palette.orange,
-        marginTop: 30,
-        borderRadius: 16,
-        paddingVertical: 5,
-    },
-    policy: {
-        width: 300,
-        flexDirection: 'row',
-        alignItems: "center",
-        marginLeft: -20
+        marginRight: 16,
     },
     genderTitle: {
         width: width * 0.8,
         flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
     },
-    genderSub: {
-        color: '#9d79bc',
-        fontSize: 11,
 
+    //CHECKBOX
+    checkContainer: {
+        width: width * 0.8,
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginTop: 10,
+        marginBottom: 10,
     },
-    genderBox: {
-        width: 350,
-        flexDirection: 'row',
-        gap: -50,
-        alignItems: "center",
-        justifyContent: 'center',
-        marginLeft: 50,
+    genderCheckBox: {
+        backgroundColor: colors.palette.stepViolet,
     },
-    bottomDivider: {
-        marginTop: 1,
-        borderColor: colors.palette.pink200,
-        borderWidth: 1,
-        marginBottom: 20,
+    checkText: {
+        color: colors.palette.white,
+        fontSize: 20,
+        fontFamily: 'mulishLight',
+        marginLeft: 20,
+    },
+    checkedText: {
+        color: colors.palette.genderCheckText,
+        fontSize: 20,
+        fontFamily: 'mulishSemiBold',
+        marginLeft: 20,
+    },
+    positionBox: {
+        width: width * 0.8,
+        backgroundColor: colors.palette.genderBox,
+        borderRadius: 8,
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+    },
+    positionCheckedBox: {
+        width: width * 0.8,
+        backgroundColor: colors.palette.purple100,
+        borderRadius: 8,
+        paddingVertical: 10,
+        paddingHorizontal: 20,
     },
     controls: {
         flexDirection: 'column',
         alignItems: 'center',
-        marginTop: 40,
-    },
-    control: {
-        width: width * 0.85,
-        height: 60,
-        borderBottomWidth: 1,
-        marginBottom: 20,
-        flexDirection: 'row',
-        alignItems: 'center',
-        backgroundColor: colors.palette.ivory,
-        borderLeftWidth: 1,
-        borderLeftColor: colors.palette.darkgold,
-        borderBottomColor: colors.palette.darkgold,
-    },
-    buttonText: {
-        fontFamily: "mulishBold",
-        fontSize: 14,
-        color: colors.palette.violetBg
-    },
-    input: {
-        fontFamily: 'mulishRegular',
-        color: colors.palette.blue,
-        fontSize: 17,
-    },
-    inputText: {
-
-        fontFamily: 'mulishRegular',
-        color: colors.palette.purple200,
-        fontSize: 14,
-        marginLeft: 14,
+        marginBottom: 40,
     },
     contentTitle: {
-        fontFamily: "mulishRegular",
-        fontSize: 18,
-        color: colors.palette.violetBg,
+        fontFamily: "mulishSemiBold",
+        fontSize: 20,
+        color: colors.palette.violetClair,
         marginBottom: 20
     },
     //ERROR

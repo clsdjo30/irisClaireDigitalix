@@ -6,12 +6,15 @@ const UserStore = new GlobalStore({
     genre: '',
     lastname: '',
     email: '',
+    password: '',
     isagree: false,
     zodiacname: '',
     stone: '',
-    symbol: '',
     element: '',
-    password: ''
+    irisCoins: 0, 
+    hasSeenModal: true,
+    isEmailVerified: false,
+    isCoinAdded: false,
 });
 
 export const useUserStore = UserStore.getHook();

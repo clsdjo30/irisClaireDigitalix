@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 import {
     StyleSheet,
     Image,
@@ -7,15 +7,13 @@ import {
     Text,
     Dimensions,
     ScrollView,
-    ActivityIndicator
-
+    BackHandler
 } from 'react-native';
 import CARD_DECK from '../../../data/cards';
 import { colors } from '../../../theme';
 import { StackScreenProps } from '@react-navigation/stack';
-import { useCrossQuestionStore } from '../../../hooks/useCrossQuestionStore';
-import { useCrossQuestion } from '../../../hooks/useCrossQuestion';
-import { setDoc, doc, collection } from 'firebase/firestore';
+import { useCrossQuestionStore } from '../../../store/useCrossQuestionStore';
+import { setDoc, doc, collection, serverTimestamp } from 'firebase/firestore';
 import { firestore, getAuth } from '../../../config/firebaseConfig';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -26,14 +24,24 @@ const SCREEN_FONT_SCALE = SCREEN_SCALE * 0.5;
 const auth = getAuth();
 
 const CrossDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
-
-    const [cardImage, setCardImage] = useState(null);
-    const [value, isLoading] = useCrossQuestion(1000);
     const [questionInformations, setQuestionInformations] = useCrossQuestionStore()
     const currentUser = auth.currentUser;
     const userID = currentUser ? currentUser.uid : null;
 
-    console.log('Valeur de QuestionStore', questionInformations)
+
+    useEffect(() => {
+
+        const backAction = () => {
+            return true;
+        };
+
+        const backHandler = BackHandler.addEventListener(
+            "hardwareBackPress",
+            backAction
+        );
+
+        return () => backHandler.remove();
+    }, []);
 
 
     const firstCard = CARD_DECK.find(card => card.id === questionInformations.choosecardnumber);
@@ -55,6 +63,7 @@ const CrossDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) 
         setDoc(questionRef, {
             domain: questionInformations.domain,
             question: questionInformations.question,
+            createdAt: serverTimestamp(),
             cardpseudoone: questionInformations.choosecardpseudo,
             cardpseudotwo: questionInformations.choosecardtwopseudo,
             cardpseudothree: questionInformations.choosecardthreepseudo,
@@ -68,18 +77,9 @@ const CrossDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) 
     }
 
     const getContent = () => {
-        if (isLoading) {
-            return (
-                <View style={styles.indicatorWrapper}>
-                    <ActivityIndicator size="large" color={colors.palette.orange} style={styles.indicator} />
-                    <Text style={styles.answerText}>
-                        L'Iris Claire se concentre sur votre tirage
-                    </Text>
-                </View>
-            )
 
-        }
-        return <Text style={styles.answerText}>{questionInformations.answer}</Text>;
+        return `${questionInformations.answer}\n\nJ'espère que cette réponse vous aidera à avancer dans votre vie.\nSi vous avez d'autres questions, n'hésitez pas à revenir vers moi. \nJe vous souhaite une bonne journée.\n\n Claire, \n Votre voyante de poche.`;
+
     };
 
 
@@ -105,6 +105,7 @@ const CrossDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) 
             choosecardthreepseudo: "",
             choosecardfourpseudo: "",
             choosecardfivepseudo: "",
+            isanswered: false,
         })
         navigation.navigate('Home')
         navigation.reset({
@@ -156,7 +157,7 @@ const CrossDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) 
                                     style={styles.cardImage}
                                     source={fithCard?.frontImageUrl}
                                 />
-                                <Text style={styles.pseudoTitle}>{fourthCard?.pseudo}</Text>
+                                <Text style={styles.pseudoTitle}>{fithCard?.pseudo}</Text>
                             </View>
                         </View>
                     </View>
@@ -167,16 +168,21 @@ const CrossDrawResultScreen: React.FC<StackScreenProps<any>> = ({ navigation }) 
                         </View>
 
                         <Text style={styles.answerTitle}>Votre réponse: </Text>
-                        <Text style={styles.answerText}>
+                        <Text style={styles.answerText} numberOfLines={0} lineBreakMode='clip'>
                             {getContent()}
                         </Text>
                     </ScrollView>
                 </View>
 
                 <View style={styles.validationButton}>
-                    <Pressable style={styles.button} onPress={() => saveCrossQuestion(userID)}>
-                        <Text style={styles.buttonText}>Revenir à l'accueil</Text>
-                    </Pressable>
+                    <View style={styles.buttonGroup}>
+                        <Pressable style={styles.button} onPress={() => saveCrossQuestion(userID)}>
+                            <Text style={styles.buttonText}>Enregistrer</Text>
+                        </Pressable>
+                        <Pressable style={styles.button} onPress={questionClosed}>
+                            <Text style={styles.buttonText}>Ne Pas Enregistrer !</Text>
+                        </Pressable>
+                    </View>
                 </View>
 
             </View>
@@ -242,7 +248,7 @@ const styles = StyleSheet.create({
     cardImage: {
         width: SCREEN_WIDTH * 0.18,
         height: SCREEN_HEIGHT * 0.22,
-        
+
     },
     pseudoTitle: {
         fontFamily: "oswaldMedium",
@@ -305,21 +311,27 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         marginTop: 20,
+    },
+    buttonGroup: {
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center',
         elevation: 5,
     },
     button: {
-        width: '80%',
-        backgroundColor: "#CBA135",
+        width: '45%',
+        backgroundColor: colors.palette.orange,
         marginTop: 10,
         borderRadius: 16,
     },
     buttonText: {
-        textAlign: "center",
-        alignItems: "center",
-        paddingVertical: 10,
-        fontFamily: "oswaldMedium",
-        fontSize: 14,
-        color: colors.palette.ivory,
+        textAlign: 'center',
+        alignItems: 'center',
+        paddingVertical: 14,
+        fontFamily: 'oswaldMedium',
+        fontSize: 16,
+        color: colors.palette.white,
     },
     //Loader
     indicatorWrapper: {

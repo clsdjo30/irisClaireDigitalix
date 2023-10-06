@@ -1,43 +1,41 @@
-import React, { useState, useEffect, useRef, RefObject } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
-  Image,
-  Pressable,
   StyleSheet,
   View,
-  ImageSourcePropType,
   Text,
-  ViewStyle
 } from 'react-native';
-import Animated, {
-  useAnimatedStyle,
-  useSharedValue,
-  withTiming,
-} from 'react-native-reanimated';
 import CARD_DECK from '../../../data/cards';
 import { colors } from '../../../theme/color'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StackScreenProps } from '@react-navigation/stack';
-import {
-  useCrossQuestionStore
-} from '../../../hooks/useCrossQuestionStore';
+import { useCrossQuestionStore } from '../../../store/useCrossQuestionStore';
+import { useUserStore } from '../../../store/useUserStore';
 import CustomModal from '../../../components/reusable/CustomModal';
 import FlipCard from '../../../components/FlipCard';
 import { SCREEN_HEIGHT, SCREEN_WIDTH } from '../../../utils/constants';
-
-
+import { useUserInformation } from '../../../hooks/useUserInformations';
+import { shuffleArray } from '../../../utils/shuffleArray';
 
 const CrossDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   // on stocke les informations du tirage en croix
   const [value, setValue] = useCrossQuestionStore();
   // Ajoutez un nouvel état pour suivre la carte actuellement sélectionnée
   const [selectedCardIndex, setSelectedCardIndex] = useState<number | null>(null);
-
+  // Ajoutez un nouvel état pour suivre le nombre de cartes sélectionnées
   const [selectedCards, setSelectedCards] = useState(0);
+  // Ajoutez un nouvel état pour suivre le nombre de crédits
+  const [actualUser, setUser] = useUserStore();
+  const { user, updateUserIrisCoins } = useUserInformation();
   const [modalVisible, setModalVisible] = useState(false);
-  const [credit, setCredit] = useState(5);
+  // function pour melanger le CARD_DECK
+  const [shuffledDeck, setShuffledDeck] = useState(CARD_DECK);
 
+  const [isCardClicked, setIsCardClicked] = useState(false);
+  
 
-
+  useEffect(() => {
+    setShuffledDeck(shuffleArray([...CARD_DECK]));
+  }, []);
 
   // On utilise useEffect pour détecter quand l'utilisateur a retourné les 4 cartes.
   const handleCardFlip = (index: number) => {
@@ -45,9 +43,9 @@ const CrossDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     if (selectedCards === 0) {
       setValue({
         ...value,
-        choosecardnumber: CARD_DECK[index].id,
-        choosecardname: CARD_DECK[index].name,
-        choosecardpseudo: CARD_DECK[index].pseudo,
+        choosecardnumber: shuffledDeck[index].id,
+        choosecardname: shuffledDeck[index].name,
+        choosecardpseudo: shuffledDeck[index].pseudo,
       });
       setSelectedCards(selectedCards + 1);
       setSelectedCardIndex(index);
@@ -55,9 +53,9 @@ const CrossDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     if (selectedCards === 1) {
       setValue({
         ...value,
-        choosecardtwonumber: CARD_DECK[index].id,
-        choosecardtwoname: CARD_DECK[index].name,
-        choosecardtwopseudo: CARD_DECK[index].pseudo,
+        choosecardtwonumber: shuffledDeck[index].id,
+        choosecardtwoname: shuffledDeck[index].name,
+        choosecardtwopseudo:shuffledDeck[index].pseudo,
       });
       setSelectedCards(selectedCards + 1);
       setSelectedCardIndex(index);
@@ -65,9 +63,9 @@ const CrossDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     if (selectedCards === 2) {
       setValue({
         ...value,
-        choosecardthreenumber: CARD_DECK[index].id,
-        choosecardthreename: CARD_DECK[index].name,
-        choosecardthreepseudo: CARD_DECK[index].pseudo,
+        choosecardthreenumber: shuffledDeck[index].id,
+        choosecardthreename: shuffledDeck[index].name,
+        choosecardthreepseudo: shuffledDeck[index].pseudo,
       });
       setSelectedCards(selectedCards + 1);
       setSelectedCardIndex(index);
@@ -75,26 +73,27 @@ const CrossDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     if (selectedCards === 3) {
       setValue({
         ...value,
-        choosecardfournumber: CARD_DECK[index].id,
-        choosecardfourname: CARD_DECK[index].name,
-        choosecardfourpseudo: CARD_DECK[index].pseudo,
+        choosecardfournumber: shuffledDeck[index].id,
+        choosecardfourname: shuffledDeck[index].name,
+        choosecardfourpseudo: shuffledDeck[index].pseudo,
       })
       setSelectedCards(selectedCards + 1);
       setSelectedCardIndex(index);
 
     }
-    if (selectedCards === 4) {
+    if (selectedCards === 4 && !isCardClicked) {
       setValue({
         ...value,
-        choosecardfivenumber: CARD_DECK[index].id,
-        choosecardfivename: CARD_DECK[index].name,
-        choosecardfivepseudo: CARD_DECK[index].pseudo,
+        choosecardfivenumber: shuffledDeck[index].id,
+        choosecardfivename: shuffledDeck[index].name,
+        choosecardfivepseudo: shuffledDeck[index].pseudo,
       }
 
       );
 
       setSelectedCards(selectedCards + 1);
       setSelectedCardIndex(index);
+      setIsCardClicked(true);
       setTimeout(() => {
         setModalVisible(true);
       }, 1500);
@@ -102,8 +101,8 @@ const CrossDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
   }
  
-  function gotToResult() {
-    navigation.navigate('DrawResult');
+  function goToResult() {
+    navigation.navigate('Loading');
   }
   function cancelModal() {
     navigation.navigate('Home');
@@ -117,6 +116,40 @@ const CrossDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     })
   }
 
+  const sendQuestion = () => {
+    if (user?.irisCoins > 0
+      && value.question != null
+      && value.choosecardname != null
+      && value.choosecardnumber != null
+      && value.choosecardpseudo != null
+      && value.choosecardtwoname != null
+      && value.choosecardtwonumber != null
+      && value.choosecardtwopseudo != null
+      && value.choosecardthreename != null
+      && value.choosecardthreenumber != null
+      && value.choosecardthreepseudo != null
+      && value.choosecardfourname != null
+      && value.choosecardfournumber != null
+      && value.choosecardfourpseudo != null
+      && value.choosecardfivename != null
+      && value.choosecardfivenumber != null
+      && value.choosecardfivepseudo != null
+    ) {
+      const newIrisCoins = user.irisCoins - 3;
+
+      // Mettre à jour le state local
+      setUser({ ...user, irisCoins: newIrisCoins });
+
+      // Mettre à jour Firestore
+      updateUserIrisCoins(newIrisCoins);
+      goToResult();
+
+    }
+    else {
+      goBuyCredit()
+    }
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header} />
@@ -127,12 +160,13 @@ const CrossDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
           </Text>
         </View>
 
-        {CARD_DECK.map((card, index) => (
+        {shuffledDeck.map((card, index) => (
           <FlipCard
             key={index}
             frontImageUrl={card.frontImageUrl}
             backImageUrl={card.backImageUrl}
             onFlip={() => { handleCardFlip(index) }}
+            isClickable={!isCardClicked} 
             style={{ zIndex: selectedCardIndex === index ? 1000 : 0 }}
           />
         ))}
@@ -140,13 +174,12 @@ const CrossDrawScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
         {/* Display Modal when all cards are flipped */}
         <CustomModal
           visible={modalVisible}
-          credit={credit}
+          credit={user?.irisCoins}
           modalText='Voulez-vous utiliser 3 credits pour voir le résultat ?'
           useCreditButtonTitle='Utiliser 3 credits'
           onValidate={() => {
             setModalVisible(!modalVisible);
-            setCredit(credit - 1);
-            gotToResult();
+            sendQuestion();
           }}
           onCancel={cancelModal}
           onBuyCredit={() => {

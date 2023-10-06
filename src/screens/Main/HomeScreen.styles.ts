@@ -168,4 +168,58 @@ export const styles = StyleSheet.create({
     height: 110,
     borderRadius: 5,
   },
+  // Modal de connexion
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  modalView: {
+    width: SCREEN_WIDTH - 50,
+    alignItems: "center",
+    padding: 15,
+    margin: 30,
+    borderRadius: 20,
+    backgroundColor: "white",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  modalTextContainer: {
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 30,
+  },
+  buttonGroup: {
+    flexDirection: "row",
+    justifyContent: "center",
+    width: "100%",
+  },
+  modalTitle: {
+    fontFamily: "mulishExtraBold",
+    textAlign: "center",
+    fontSize: 20,
+    color: colors.palette.violet,
+  },
+  modalsubTitle: {
+    fontFamily: "mulishRegular",
+    textAlign: "center",
+    fontSize: 16,
+    color: colors.palette.orange,
+    marginTop: 20,
+    marginBottom: 10,
+  },
+  modalText: {
+    fontFamily: "mulishRegular",
+    textAlign: "center",
+    fontSize: 16,
+    color: colors.palette.violet,
+  
+  },
 });

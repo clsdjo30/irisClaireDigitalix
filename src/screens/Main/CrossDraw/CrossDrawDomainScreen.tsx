@@ -8,7 +8,7 @@ import {
     Dimensions
 } from 'react-native';
 import { colors } from '../../../theme';
-import { useCrossQuestionStore } from '../../../hooks/useCrossQuestionStore';
+import { useCrossQuestionStore } from '../../../store/useCrossQuestionStore';
 import { StackScreenProps } from '@react-navigation/stack';
 
 // import icons

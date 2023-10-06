@@ -1,63 +1,93 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View,  Platform, TextInput, Dimensions, Pressable } from 'react-native';
-import { Icon } from '@rneui/base'
+import { StyleSheet, Text, View, TextInput, Dimensions } from 'react-native';
+import { Icon, Input } from '@rneui/base';
 import { StackScreenProps } from '@react-navigation/stack';
-import { useUserStore } from '../../hooks/useUserStore';
-import DateTimePicker from '@react-native-community/datetimepicker';
+import { useUserStore } from '../../store/useUserStore';
 import { colors } from '../../theme';
 import NavigationButton from '../../components/NavigationButton';
+import { useUpdateUserInformation } from '../../hooks/useUpdateUserInformation';
+import { useAuthentication } from '../../hooks/useAuthentication';
+
 const width = Dimensions.get('window').width;
 
-
 const BirthdayScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
+    const [newUser, setUser] = useUserStore();
+    const [birthDate, setBirthDate] = useState(newUser.birthday || '');
+    const [error, setError] = useState('');
+    const { user } = useAuthentication();
+    const { updateUserDetails } = useUpdateUserInformation();
+    
 
-    const [user, setUser] = useUserStore();
-    const [date, setDate] = useState(new Date());
-    const [mode, setMode] = useState<'date'>('date');
-    const [show, setShow] = useState(false);
-    const [ error, setError ] = useState('');
-
-    const onChange = (event: any, selectedDate: any) => {
-        const currentDate = selectedDate || date;
-        setShow(Platform.OS === 'ios');
-        setDate(currentDate);
-        setUser({ ...user, birthday: currentDate.toLocaleDateString() })
-    };
-
-    const showMode = (currentMode: "date" | ((prevState: "date") => "date")) => {
-        setShow(true);
-        if (typeof currentMode === 'string') {
-            setMode(currentMode);
-        } else {
-            setMode(currentMode(mode));
+    
+    const handleDateChange = (text: string) => {
+        if (text.length < birthDate.length) { // Si la longueur du texte est inférieure à celle de l'état précédent, l'utilisateur supprime un caractère
+            if (birthDate[birthDate.length - 1] === '/') { // Si le dernier caractère est un '/', supprimez-le
+                setBirthDate(birthDate.slice(0, -1));
+                return;
+            }
         }
+
+        let newText = '';
+        const numbers = '0123456789';
+
+        for (let i = 0; i < text.length; i++) {
+            if (numbers.indexOf(text[i]) > -1) {
+                newText = newText + text[i];
+            }
+            if (newText.length == 2 || newText.length == 5) {
+                newText = newText + '/';
+            }
+        }
+        setBirthDate(newText);
     };
 
-    const showDatepicker = () => {
-        showMode('date');
-    };
 
-    //Verification de date
+
     function goToSignUp() {
-        if (user.birthday.length === 0) {
-            setError("Votre date de naissance ne peut pas être vide");
+        const regex = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
+
+        if (!birthDate.match(regex)) {
+            setError("Veuillez entrer une date valide au format JJ/MM/YYYY");
             return;
         }
 
+        const [day, month, year] = birthDate.split('/').map(Number);
+        const selectedDate = new Date(year, month - 1, day);
         const currentDate = new Date();
         const eighteenYearsAgo = new Date(currentDate.getFullYear() - 18, currentDate.getMonth(), currentDate.getDate());
 
-        if (date > eighteenYearsAgo) {
+        if (year < 1930) {
+            setError("L'année de naissance ne peut pas être avant 1930");
+            return;
+        }
+
+        if (selectedDate > eighteenYearsAgo) {
             setError("Vous devez avoir plus de 18 ans pour vous inscrire");
             return;
         }
 
-        navigation.navigate('Sign Up');
+        if (user) {
+            const firstName = newUser.firstname;
+            const genre = newUser.genre;
+            updateUserDetails(user.uid, {
+                firstname: firstName, // Assurez-vous que newUser contient le prénom
+                genre: genre, // Assurez-vous que newUser contient le genre
+                birthday: birthDate
+            });
+
+          // Redirigez vers le profil si l'utilisateur est connecté
+            navigation.navigate('Loading');
+            navigation.reset({
+                index: 0,
+                routes: [{ name: 'Loading' }],
+            }); 
+        } else {
+            setUser({ ...newUser, birthday: birthDate });
+            navigation.navigate('Sign Up'); // Redirigez vers l'inscription si l'utilisateur n'est pas connecté
+        }
     }
 
-
     return (
-
         <View testID='birthday-screen' style={styles.container}>
             {error !== '' && (
                 <View testID='error' style={styles.errorContainer}>
@@ -65,105 +95,72 @@ const BirthdayScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                 </View>
             )}
             <Text style={styles.contentTitle}>Quelle est votre date de naissance ?</Text>
-            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-
-                <View >
-                    <Pressable onPress={showDatepicker} style={styles.control}>
+            <View style={styles.inputContainer}>
+                <Input
+                    style={styles.input}
+                    placeholder="JJ/MM/YYYY"
+                    placeholderTextColor={colors.palette.purple200}
+                    value={birthDate}
+                    onChangeText={handleDateChange}
+                    keyboardType="numeric"
+                    maxLength={10}
+                    leftIconContainerStyle={styles.IconBox}
+                    leftIcon={
                         <Icon
-                            name="birthday-cake"
-                            type='font-awesome'
-                            size={20}
-                            color={colors.palette.golden}
-                            style={styles.icon}
+                            name="calendar"
+                            type="foundation"
+                            color={colors.palette.white}
+                            size={30}
                         />
-                        <TextInput
-                            style={styles.input}
-                            onFocus={showDatepicker}
-                            placeholder="Date de naissance"
-                            placeholderTextColor={colors.palette.purple200}
-                            value={user.birthday}
-                            editable={false}
-                        />
-                        {show && (
-                            <DateTimePicker
-                                testID="dateTimePicker"
-                                value={date}
-                                mode={mode}
-                                is24Hour={true}
-                                display="default"
-                                onChange={onChange}
-                            />)}
-
-                    </Pressable>
-
-                    <View style={styles.button}>
-                        <NavigationButton
-                            testID='goToSignUp'
-                            color={colors.palette.violetBg}
-                            backgroundColor={colors.palette.orange}
-                            width={width / 1.3}
-                            title="S'inscrire"
-                            onPress={goToSignUp}
-                        />
-
-                    </View>
-                </View>
+                    }
+                />
             </View>
+           
+            <NavigationButton
+                testID='goToSignUp'
+                color={colors.palette.violetBg}
+                backgroundColor={colors.palette.orange}
+                width={width / 1.3}
+                title={ user ? "Modifier" : "S'inscrire" }
+                onPress={goToSignUp}
+            />
         </View>
     );
 };
 
-
-
-
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        height: '100%',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: colors.palette.purple600,
+        backgroundColor: colors.palette.stepViolet,
     },
-    button: {
-        marginTop: 60,
-    },
-    buttonText: {
-        textAlign: "center",
-        padding: 3,
-        fontFamily: "oswaldMedium",
-        fontSize: 14,
-        color: colors.palette.violetBg,
-    },
-    input: {
-        color: '#8ca0d7',
-        fontSize: 14,
-        paddingLeft: 20,
-    },
-    control: {
-        width: 300,
+    inputContainer: {
+        width: width / 1.2,
         flexDirection: 'row',
         alignItems: 'center',
-        paddingBottom: 10,
-        backgroundColor: colors.palette.violetBg,
-        borderRadius: 10,
-        padding: 10,
-        borderBottomWidth: 1,
-        borderLeftWidth: 1,
-        borderLeftColor: colors.palette.golden,
-        borderBottomColor: colors.palette.golden,
+        marginBottom: 20,
     },
-    icon: {
-        marginRight: 20,
-        color: colors.palette.orange,
+    input: {
+        width: width / 1.3,
+        height: 50,
+        backgroundColor: colors.palette.stepViolet,
+        borderRadius: 16,
+        paddingLeft: 30,
+        fontFamily: "mulishRegular",
+        fontSize: 20,
+        color: colors.palette.white,
+    },
+    IconBox: {
+        width: 50,
+        height: 50,
     },
     contentTitle: {
-        fontFamily: "mulishRegular",
-        fontSize: 18,
-        color: colors.palette.violetBg,
+        fontFamily: "mulishSemiBold",
+        fontSize: 20,
+        color: colors.palette.violetClair,
         marginBottom: 20
     },
-    //ERROR
     errorContainer: {
         position: 'absolute',
         top: 0,
